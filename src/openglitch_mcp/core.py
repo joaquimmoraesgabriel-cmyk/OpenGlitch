@@ -199,6 +199,14 @@ class App:
             lines.append(h["summary"] or "(sem resumo)")
             if h.get("next_steps"):
                 lines.append(f"Próximos passos: {h['next_steps']}")
+            if h.get("verified"):
+                lines.append(f"Conferido funcionando: {h['verified']}")
+            if h.get("not_verified"):
+                lines.append(f"Feito SEM conferir: {h['not_verified']}")
+        reported = [x for x in self._problems() if x.get("project") == p["slug"]]
+        if reported:
+            lines += ["", f"## Problemas relatados: {len(reported)}",
+                      "Veja com list_problems(project)."]
         if include_brief:
             lines += ["", "## Brief", "", self._brief(p["slug"]) or "(não publicado)"]
         return "\n".join(lines)
@@ -337,6 +345,10 @@ class App:
                     out.append(h["summary"] or "(sem resumo)")
                     if h.get("next_steps"):
                         out.append(f"Próximos passos: {h['next_steps']}")
+                    if h.get("verified"):
+                        out.append(f"Conferido funcionando: {h['verified']}")
+                    if h.get("not_verified"):
+                        out.append(f"Feito SEM conferir: {h['not_verified']}")
         out += ["", "---", "", "# Sua memória agora", "", self._memory_overview(session)]
         if spec.kind == "worker":
             pending = [t for t in self._tasks_of(session, self._state()) if t["status"] != "concluida"]
@@ -345,7 +357,8 @@ class App:
                 out += [f"- {t['id']} `{t['subagent']}` ({t['status']}): {t['task'][:120]}" for t in pending]
         return "\n".join(out)
 
-    def finish_agent(self, session: str, summary: str, next_steps: str = "") -> str:
+    def finish_agent(self, session: str, summary: str, next_steps: str = "",
+                     verified: str = "", not_verified: str = "") -> str:
         with self._tx() as state:
             sess = self._session(session, state)
             if sess["role"] == "agent" and sess["mode"] == "projeto" and not summary.strip():
@@ -365,7 +378,14 @@ class App:
                 p["history"].append({
                     "agent": sess["agent"], "started": started, "finished": now_iso(),
                     "summary": summary.strip()[:4000], "next_steps": next_steps.strip()[:2000],
+                    "verified": verified.strip()[:2000], "not_verified": not_verified.strip()[:2000],
                 })
+                if not verified.strip() and not not_verified.strip():
+                    lines.append(
+                        "Aviso: você não disse o que foi conferido funcionando (`verified`) nem o "
+                        "que foi feito sem conferir (`not_verified`). O próximo agente não sabe em "
+                        "que pode confiar."
+                    )
                 if (p.get("active") or {}).get("session") == sess["token"]:
                     p["active"] = None
                 plan = p.get("plan")
@@ -867,6 +887,63 @@ class App:
             task_id, agent = task["id"], task["agent"]
         return (f"Tarefa {task_id} concluída e entregue ao agente `{agent}`. O ticket foi "
                 f"encerrado. Responda em uma linha: \"Tarefa {task_id} concluída\".")
+
+    # =============================================================== problemas
+
+    KINDS = ("bloqueou", "contornado", "nao-verificado")
+
+    def _problems(self) -> list[dict]:
+        return read_json(self.memory_dir / "problems.json", None) or []
+
+    def report_problem(self, token: str, what: str, attempted: str, kind: str = "bloqueou",
+                       error: str = "", software: str = "") -> str:
+        """Registra o que não deu certo. Aceita o session de um agente ou o ticket de um subagente."""
+        if kind not in self.KINDS:
+            raise OGError(f"`kind` é um de: {', '.join(self.KINDS)}.")
+        if len(what.strip()) < 10 or len(attempted.strip()) < 10:
+            raise OGError("Diga em `what` o que não deu certo e em `attempted` o que você tentou.")
+        token = (token or "").strip()
+        if token.startswith("tk_"):
+            who = self._task(token, running=False)
+            agent, subagent, project = who["agent"], who["subagent"], who["project"]
+        else:
+            who = self._session(token)
+            agent, subagent, project = who["agent"], None, who["project"]
+        with file_lock(self.state_dir / ".lock"):
+            problems = self._problems()
+            entry = {
+                "id": f"P{len(problems) + 1:04d}", "at": now_iso(), "agent": agent,
+                "subagent": subagent, "project": project, "kind": kind,
+                "software": software.strip()[:120], "what": what.strip()[:2000],
+                "attempted": attempted.strip()[:3000], "error": error.strip()[:4000],
+            }
+            problems.append(entry)
+            write_json_atomic(self.memory_dir / "problems.json", problems)
+        return (f"Problema {entry['id']} registrado. Agora diga isso ao usuário com clareza: o que "
+                "não deu certo, o que você tentou e o que ele pode fazer. Não siga como se "
+                "tivesse funcionado.")
+
+    def list_problems(self, project: str = "", limit: int = 30) -> str:
+        problems = self._problems()
+        if project.strip():
+            slug = slugify(project)
+            problems = [p for p in problems if p.get("project") == slug]
+        if not problems:
+            return "Nenhum problema relatado" + (f" no projeto `{project}`." if project.strip() else ".")
+        label = {"bloqueou": "BLOQUEOU", "contornado": "contornado", "nao-verificado": "não verificado"}
+        lines = [f"# Problemas relatados pelos agentes ({len(problems)})", ""]
+        for p in problems[-max(1, min(int(limit), 200)):]:
+            who = p["agent"] + (f"/{p['subagent']}" if p.get("subagent") else "")
+            where = f", projeto `{p['project']}`" if p.get("project") else ""
+            soft = f", em {p['software']}" if p.get("software") else ""
+            lines.append(f"## {p['id']} [{label[p['kind']]}] `{who}`{where}{soft}, {p['at'][:10]}")
+            lines.append(f"O que não deu certo: {p['what']}")
+            lines.append(f"O que foi tentado: {p['attempted']}")
+            if p.get("error"):
+                lines += ["Erro:", "```", p["error"], "```"]
+            lines.append("")
+        lines.append(f"Arquivo: {self.memory_dir / 'problems.json'}")
+        return "\n".join(lines)
 
     # ============================================================== pipelines
 

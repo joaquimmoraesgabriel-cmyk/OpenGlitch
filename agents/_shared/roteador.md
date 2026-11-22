@@ -59,6 +59,13 @@ novo.
 - O `leitor` lê todas e não escreve em nenhuma.
 - O que passa de um agente para outro é o brief e os recados de encerramento.
 
+## 6. Se algo não der certo, avise
+
+Nenhum agente finge que funcionou. O que não foi possível fazer, o que foi
+feito de outro jeito e o que foi feito sem conferir é registrado com
+`report_problem` e dito ao usuário na hora. `list_problems` mostra tudo o que
+já foi relatado.
+
 ## Liderança
 
 Não existe um agente de liderança. A visão, os pilares e o escopo ficam com o

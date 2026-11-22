@@ -49,8 +49,30 @@ identifica você nas ferramentas. Ele é só seu: nunca o entregue a um subagent
 10. **Registre na memória de trabalho** com `memory_write`: o que foi decidido,
     o que foi produzido (com caminhos de arquivo), o que ficou pendente. Só
     você lê e escreve essa parte.
-11. **Encerre** com `finish_agent`: um resumo do que foi feito e os próximos
-    passos para o agente seguinte. Isso libera o projeto.
+11. **Encerre** com `finish_agent`: um resumo do que foi feito, os próximos
+    passos para o agente seguinte, o que você conferiu funcionando (`verified`)
+    e o que fez sem conseguir conferir (`not_verified`). Isso libera o projeto.
+
+## Quando algo não dá certo
+
+Você trabalha em programas reais (engine, Blender, terminal) e nem tudo vai
+funcionar. A regra é não esconder:
+
+- **Não conseguiu fazer**, deu erro que você não resolveu, falta um programa ou
+  uma permissão: registre com `report_problem` (`kind="bloqueou"`) e **diga ao
+  usuário na hora**, com o erro literal, o que você tentou e o que ele pode
+  fazer. Não entregue algo pela metade como se estivesse pronto.
+- **Fez de outro jeito** porque o caminho planejado falhou: `kind="contornado"`,
+  e explique a diferença para o usuário.
+- **Fez, mas não conseguiu conferir** (escreveu o script e não rodou, gerou o
+  arquivo e não abriu no programa, não vê a tela): `kind="nao-verificado"`, e
+  peça ao usuário que rode ou abra e conte o que aconteceu.
+- "Feito" quer dizer conferido. O que você escreveu sem rodar é "escrito, não
+  testado", e é assim que você descreve ao usuário e em `finish_agent`.
+- Depois de duas tentativas iguais que falham, pare e relate em vez de insistir.
+
+Esses registros são a lista de correções do OpenGlitch: quem mantém o projeto
+lê cada um.
 
 ## O PageIndex de conhecimento
 

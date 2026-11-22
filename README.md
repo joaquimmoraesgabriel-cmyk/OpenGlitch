@@ -40,6 +40,9 @@ usuário ──> IA ──start──> roteador: analisa o pedido e escolhe o ag
   mesmo tempo que ele trabalha.
 - **Na segunda vez não se pesquisa de novo**: o agente olha a memória antes de
   delegar.
+- **Ninguém finge que funcionou.** O que o agente não conseguiu fazer, fez de
+  outro jeito ou fez sem conferir, ele avisa na hora e registra
+  (`report_problem`). `list_problems` mostra tudo o que já foi relatado.
 - **O agente `leitor`** só lê. Serve para perguntar como o projeto está e para
   descobrir que agente, ou que sequência de agentes, atende um pedido.
 
@@ -232,6 +235,7 @@ fazer e o da ferramenta para executar lá dentro.
 | Conhecimento | `knowledge_tree`, `knowledge_read`, `knowledge_search` |
 | Memória | `memory_tree`, `memory_search`, `memory_read`, `memory_write` |
 | Delegação | `delegate_research`, `task_status` |
+| Problemas | `report_problem`, `list_problems` |
 | Subagente | `research_begin`, `research_text`, `research_tables`, `research_images`, `research_view_image`, `research_complete` |
 
 ## Pastas
@@ -269,10 +273,32 @@ falham. Para acrescentar um agente, um subagente ou uma referência, siga
 
 ## Contribuir
 
-O projeto foi testado principalmente no Windows. Se você usa Linux ou macOS e
-algo falhar, abra uma issue ou mande a correção: veja
-[CONTRIBUTING.md](CONTRIBUTING.md). Toda mudança entra por pull request,
-revisada pelo mantenedor.
+O OpenGlitch melhora com uso real, e você não precisa programar para ajudar:
+
+- **Documentos novos para a IA consultar**: métodos, exemplos trabalhados,
+  receitas para Unity, Unreal e Blender, erros comuns. São arquivos Markdown
+  em `knowledge/`.
+- **Referências** novas ou corrigidas para os subagentes pesquisarem.
+- **Relatos de erro**, principalmente em Linux e macOS, onde o projeto foi
+  menos testado.
+- **Correções** no servidor, no instalador e nas skills.
+
+O passo a passo está em [CONTRIBUTING.md](CONTRIBUTING.md). Toda mudança entra
+por pull request, revisada pelo mantenedor. Se for pedir a uma IA para preparar
+a contribuição, mande-a ler o `CONTRIBUTING.md` primeiro.
+
+## Segurança
+
+O servidor roda no seu computador, não envia telemetria e só acessa a internet
+para ler as páginas das referências. O que ele faz, os riscos e como relatar
+uma falha estão em [SECURITY.md](SECURITY.md).
+
+## Licença
+
+[Apache 2.0](LICENSE): você pode usar, modificar e distribuir, inclusive em
+projetos comerciais, mantendo o aviso de licença. O OpenGlitch não tem relação
+com as ferramentas, engines e sites citados; as referências pertencem aos seus
+autores.
 
 ## Limites conhecidos
 

@@ -251,3 +251,27 @@ def test_pipeline(app):
     text = app.get_pipeline("personagem")
     assert "## 6. Rig e skinning" in text and "`animacao` (rigger)" in text
     assert "design -> arte-3d -> animacao -> engenharia" in text
+
+
+def test_problemas_relatados(app, project, helpers):
+    arte = helpers.session_of(app.activate_agent("arte-3d", project))
+    with pytest.raises(OGError, match="kind"):
+        app.report_problem(arte, "Exportar o FBX do personagem", "Rodei o Blender em segundo plano", kind="falhou")
+    out = app.report_problem(
+        arte, "Exportar o FBX do personagem", "Rodei blender --background --python exportar.py",
+        kind="bloqueou", error="blender: command not found", software="Blender")
+    assert "P0001" in out and "diga isso ao usuário" in out
+    ticket = helpers.ticket_of(app.delegate_research(
+        arte, "character-artist", "Como fazer retopologia para um personagem que dobra bem? Preciso dos loops."))
+    app.research_begin(ticket)
+    app.report_problem(ticket, "A referência recusou o acesso", "Abri a página com research_text", error="403")
+    done = app.finish_agent(arte, "Modelo low-poly escrito.", not_verified="Script de exportação escrito, não rodado.")
+    assert "Aviso" not in done
+    listed = app.list_problems(project)
+    assert "P0001" in listed and "command not found" in listed and "em Blender" in listed
+    assert "arte-3d/character-artist" in listed
+    assert "Problemas relatados: 2" in app.project_status(project)
+    nxt = app.activate_agent("animacao", project)
+    assert "Feito SEM conferir: Script de exportação escrito, não rodado." in nxt
+    assert "Aviso: você não disse" in app.finish_agent(helpers.session_of(nxt), "Rig feito.")
+    assert "Nenhum problema" in app.list_problems("outro-projeto")

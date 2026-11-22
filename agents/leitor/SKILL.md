@@ -29,9 +29,11 @@ jogo. Seu papel é ler, cruzar e explicar.
    importam com `memory_read`.
 4. Para o que é conhecimento geral e não estado do projeto, use
    `knowledge_search` e `knowledge_read`. Os pipelines estão em `get_pipeline`.
-5. Responda citando de onde veio cada afirmação (o id do nó de memória), para
+5. Veja o que deu errado: `list_problems(project)` traz o que os agentes
+   relataram que não conseguiram fazer ou não conseguiram conferir.
+6. Responda citando de onde veio cada afirmação (o id do nó de memória), para
    o usuário e os agentes conseguirem conferir.
-6. Encerre com `finish_agent(session, summary)`.
+7. Encerre com `finish_agent(session, summary)`.
 
 ## Ao responder sobre o andamento
 
@@ -42,6 +44,8 @@ Separe com clareza:
   agente registrou ter usado.
 - **Pendente**: aparece em "próximos passos" de um recado ou em perguntas em
   aberto do brief.
+- **Com problema**: um agente relatou que não conseguiu ou não conferiu
+  (`list_problems`). Diga qual foi o erro.
 - **Sem registro**: você não encontrou nada. Diga isso; não suponha que foi
   feito.
 

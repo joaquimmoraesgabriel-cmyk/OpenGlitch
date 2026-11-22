@@ -105,9 +105,30 @@ async def activate_agent(agent: str, project: str = "", mode: str = "projeto",
 
 
 @tool("Encerra o agente ativo e libera o projeto. `summary` é o recado para os próximos "
-      "agentes (o que foi feito, onde está); `next_steps` é o que falta e para quem.")
-async def finish_agent(session: str, summary: str, next_steps: str = "") -> str:
-    return await _run("finish_agent", session=session, summary=summary, next_steps=next_steps)
+      "agentes (o que foi feito, onde está); `next_steps` é o que falta e para quem; "
+      "`verified` é o que você conferiu funcionando (rodou, abriu, testou); `not_verified` é "
+      "o que foi feito mas não deu para conferir.")
+async def finish_agent(session: str, summary: str, next_steps: str = "", verified: str = "",
+                       not_verified: str = "") -> str:
+    return await _run("finish_agent", session=session, summary=summary, next_steps=next_steps,
+                      verified=verified, not_verified=not_verified)
+
+
+@tool("Agente ou subagente registra algo que NÃO deu certo: não conseguiu fazer, deu erro, ou "
+      "fez e não conseguiu conferir. `kind`: bloqueou (não foi feito), contornado (feito de "
+      "outro jeito) ou nao-verificado (feito, sem conferir). `software`: o programa envolvido "
+      "(Blender, Unity, Unreal...). `error`: a mensagem de erro literal. Depois de registrar, "
+      "avise o usuário: nunca siga como se tivesse funcionado.")
+async def report_problem(token: str, what: str, attempted: str, kind: str = "bloqueou",
+                         error: str = "", software: str = "") -> str:
+    return await _run("report_problem", token=token, what=what, attempted=attempted, kind=kind,
+                      error=error, software=software)
+
+
+@tool("Lista os problemas que os agentes relataram (o que tentaram, o erro, em que programa). "
+      "Sem `project`, lista todos. É a lista de correções a fazer.")
+async def list_problems(project: str = "", limit: int = 30) -> str:
+    return await _run("list_problems", project=project, limit=limit)
 
 
 @tool("Só o agente design: publica ou atualiza o brief do projeto, o documento que todos os "

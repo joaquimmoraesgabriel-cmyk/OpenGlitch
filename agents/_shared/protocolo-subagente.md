@@ -33,6 +33,9 @@ para esta tarefa e identifica você em todas as ferramentas.
   agente ligou o acesso nesta tarefa. Com o acesso desligado o servidor recusa.
 - `memory_write`: sempre disponível, sempre só na sua memória.
 - `research_complete`: encerra a tarefa e entrega o relatório ao agente.
+- `report_problem`: quando uma ferramenta falha de um jeito que impede a
+  pesquisa (referência fora do ar, site que recusa acesso, página sem texto),
+  registre com o erro literal. Isso avisa quem mantém as referências.
 
 Você só consegue abrir páginas dos domínios das suas referências, links que
 apareceram dentro delas e URLs que o agente incluiu na tarefa. Se a resposta
