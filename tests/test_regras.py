@@ -275,3 +275,76 @@ def test_problemas_relatados(app, project, helpers):
     assert "Feito SEM conferir: Script de exportação escrito, não rodado." in nxt
     assert "Aviso: você não disse" in app.finish_agent(helpers.session_of(nxt), "Rig feito.")
     assert "Nenhum problema" in app.list_problems("outro-projeto")
+
+
+DOC = """---
+title: Pesos do ombro
+summary: Como pintar os pesos do ombro para o braço levantar sem amassar.
+tipo: referencia
+fonte: https://docs.blender.org/manual/en/latest/
+autor: alguem
+---
+
+Um método curto.
+
+## Passo a passo
+
+Pinte a clavícula com gradiente suave até o braço.
+
+## Como conferir
+
+Levante o braço a 90 e 160 graus.
+"""
+
+
+def _copia(tmp_path):
+    import shutil
+    from conftest import ROOT
+    root = tmp_path / "raiz"
+    for name in ("agents", "knowledge", "pipelines"):
+        shutil.copytree(ROOT / name, root / name)
+    return root
+
+
+def test_documentos_locais(tmp_path, helpers):
+    from openglitch_mcp.core import App
+    root = _copia(tmp_path)
+    docs = root / "agents" / "animacao" / "subagents" / "rigger" / "docs"
+    (docs / "img").mkdir(parents=True, exist_ok=True)
+    (docs / "pesos-do-ombro.md").write_text(DOC, encoding="utf-8")
+    app = App(root, tmp_path / "dados")
+    assert validate(app) == []
+    design = helpers.session_of(app.activate_agent("design", "Docs"))
+    app.publish_project_brief(design, helpers.brief)
+    app.finish_agent(design, "Brief.", verified="brief publicado")
+    anim = helpers.session_of(app.activate_agent("animacao", "Docs"))
+    listed = app.local_docs(anim)
+    assert "`rigger/pesos-do-ombro`" in listed and "`rigger/pesos-do-ombro#passo-a-passo`" in listed
+    assert "rigger/pesos-do-ombro#como-conferir" in app.local_docs(anim, "levantar o braço graus")
+    ticket = helpers.ticket_of(app.delegate_research(anim, "rigger", "Como pintar os pesos do ombro sem amassar a malha?"))
+    assert "Documentos locais do seu domínio" in app.research_begin(ticket)
+    section = app.local_doc_read(ticket, "pesos-do-ombro#passo-a-passo")
+    assert "gradiente suave" in section and "Levante o braço" not in section
+    assert "Cite essa fonte" in section and "docs.blender.org" in section
+    outro = helpers.ticket_of(app.delegate_research(anim, "facial-animation", "Como organizar blend shapes para lip sync em português?"))
+    assert "Nenhum documento local" in app.local_docs(outro)
+    with pytest.raises(OGError, match="não encontrado"):
+        app.local_doc_read(outro, "rigger/pesos-do-ombro")
+    app.finish_agent(anim, "ok", verified="nada")
+    arte = helpers.session_of(app.activate_agent("arte-3d", "Docs"))
+    assert "pesos-do-ombro" not in app.local_docs(arte)
+
+
+def test_validador_recusa_documento_fora_das_regras(tmp_path):
+    from openglitch_mcp.core import App
+    root = _copia(tmp_path)
+    docs = root / "agents" / "animacao" / "subagents" / "rigger" / "docs"
+    (docs / "img").mkdir(parents=True, exist_ok=True)
+    (docs / "Sem Regra.md").write_text("texto solto sem cabeçalho", encoding="utf-8")
+    (docs / "copia.md").write_text(DOC.replace("fonte: https://docs.blender.org/manual/en/latest/\n", ""), encoding="utf-8")
+    (docs / "modelo.blend").write_bytes(b"x")
+    (docs / "img" / "grande.png").write_bytes(b"0" * (1024 * 1024 + 1))
+    found = "\n".join(validate(App(root, tmp_path / "dados")))
+    for expected in ("cabeçalho sem `title`", "seções `##`", "nome em minúsculas",
+                     "precisa de `fonte`", "só arquivos .md", "mais de 1 MB"):
+        assert expected in found, expected

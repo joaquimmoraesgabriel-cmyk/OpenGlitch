@@ -16,7 +16,7 @@ EXPECTED_TOOLS = {
     "publish_project_brief", "knowledge_tree", "knowledge_read", "knowledge_search",
     "memory_tree", "memory_search", "memory_read", "memory_write", "delegate_research",
     "task_status", "research_begin", "research_text", "research_tables", "research_images",
-    "research_view_image", "research_complete", "report_problem", "list_problems",
+    "research_view_image", "research_complete", "report_problem", "list_problems", "local_docs", "local_doc_read",
 }
 
 

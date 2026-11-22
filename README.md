@@ -97,6 +97,13 @@ encontrados dentro delas ou em URLs que o agente incluiu na tarefa.
   baixada temporariamente para a IA olhar e descrever; fica guardado só o link
   original e a descrição.
 
+**As referências são sites de terceiros e podem sair do ar**, mudar de
+endereço ou passar a recusar acesso. Quando isso acontece, o subagente registra
+o problema (`list_problems` mostra) e procura a resposta nos documentos locais:
+cada subagente tem uma pasta `docs/` com material contribuído por pessoas, que
+não depende da web. Se você encontrar uma referência quebrada, veja em
+[CONTRIBUTING.md](CONTRIBUTING.md) como consertar.
+
 O servidor se identifica como ferramenta ao abrir páginas. Sites que recusam
 acesso automatizado não são contornados: a referência fica marcada como não
 pesquisável. PDF e vídeo também não são lidos.
@@ -235,6 +242,7 @@ fazer e o da ferramenta para executar lá dentro.
 | Conhecimento | `knowledge_tree`, `knowledge_read`, `knowledge_search` |
 | Memória | `memory_tree`, `memory_search`, `memory_read`, `memory_write` |
 | Delegação | `delegate_research`, `task_status` |
+| Documentos locais | `local_docs`, `local_doc_read` |
 | Problemas | `report_problem`, `list_problems` |
 | Subagente | `research_begin`, `research_text`, `research_tables`, `research_images`, `research_view_image`, `research_complete` |
 
@@ -242,6 +250,7 @@ fazer e o da ferramenta para executar lá dentro.
 
 ```
 agents/      skills e referências: um agente por pasta, um subagente por subpasta
+             (cada subagente tem docs/ e docs/img/ para documentos contribuídos)
   _shared/   roteador, protocolos comuns e o contrato de formato (FORMATO.md)
 knowledge/   o PageIndex de conhecimento, em Markdown (index.json é a árvore gerada)
 pipelines/   fluxos entre agentes (personagem, animação em jogo)
@@ -277,7 +286,7 @@ O OpenGlitch melhora com uso real, e você não precisa programar para ajudar:
 
 - **Documentos novos para a IA consultar**: métodos, exemplos trabalhados,
   receitas para Unity, Unreal e Blender, erros comuns. São arquivos Markdown
-  em `knowledge/`.
+  na pasta `docs/` de cada subagente, com imagens em `docs/img/`.
 - **Referências** novas ou corrigidas para os subagentes pesquisarem.
 - **Relatos de erro**, principalmente em Linux e macOS, onde o projeto foi
   menos testado.

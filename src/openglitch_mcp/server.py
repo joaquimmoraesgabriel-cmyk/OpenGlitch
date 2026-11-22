@@ -199,6 +199,21 @@ async def memory_write(token: str, op: str, title: str = "", summary: str = "",
                       images=images, reason=reason)
 
 
+@tool("Documentos locais dos subagentes: material de pesquisa contribuído por pessoas, que "
+      "vale mesmo quando uma referência da web sai do ar. Lista títulos e resumos de cada "
+      "documento e de cada seção; com `query`, busca por termos. Subagente (ticket) vê os "
+      "seus; agente (session) vê os de todos os seus subagentes; leitor vê todos.")
+async def local_docs(token: str, query: str = "") -> str:
+    return await _run("local_docs", token=token, query=query)
+
+
+@tool("Lê um documento local ou só uma seção dele, pelo id mostrado em local_docs, ex.: "
+      "`rigger/pesos-do-ombro` ou `rigger/pesos-do-ombro#passo-a-passo`. Documento do tipo "
+      "referência traz o link da fonte, que deve ser citado.")
+async def local_doc_read(token: str, doc: str) -> str:
+    return await _run("local_doc_read", token=token, doc=doc)
+
+
 # ------------------------------------------------------------------- delegação
 
 

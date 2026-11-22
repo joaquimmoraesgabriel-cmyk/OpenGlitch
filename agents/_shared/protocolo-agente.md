@@ -76,6 +76,10 @@ lê cada um.
 
 ## O PageIndex de conhecimento
 
+`local_docs` e `local_doc_read` mostram os documentos locais dos seus
+subagentes: métodos, exemplos e receitas que pessoas contribuíram. Você pode
+ler direto, sem delegar.
+
 `knowledge_search`, `knowledge_tree` e `knowledge_read` dão acesso à base fixa
 sobre criação de jogos 3D cinematográficos: o que cada função faz e entrega, os
 fundamentos, os pipelines e as referências. Use para se situar. O que a base

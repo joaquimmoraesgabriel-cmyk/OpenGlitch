@@ -18,6 +18,8 @@ agents/
     subagents/<subagente>/
       SKILL.md                 como o subagente pesquisa
       references.json          as referências que ele pode pesquisar
+      docs/*.md                documentos locais contribuídos (ver abaixo)
+      docs/img/                imagens desses documentos
 knowledge/
   <area>/_area.md              visão da área (vira o nó-pai no PageIndex)
   <area>/<subtopico>.md        um documento por subtópico
@@ -142,3 +144,28 @@ frase; aparece na árvore do PageIndex). Corpo com seções `##`:
 Não liste as fontes no documento: o servidor gera o nó "Referências" a partir
 do `references.json`. Cada `##` vira um nó do PageIndex; mantenha cada seção
 autocontida e curta.
+
+## Documentos locais de um subagente
+
+`agents/<agente>/subagents/<subagente>/docs/<nome>.md`: material de pesquisa
+contribuído, lido pelo subagente com `local_docs` e `local_doc_read`. O modelo
+está em `agents/_shared/modelo-documento.md`.
+
+Cabeçalho obrigatório:
+
+- `title` e `summary` (uma frase, até 240 caracteres);
+- `tipo`: `original` (escrito por quem contribuiu) ou `referencia` (resumo
+  próprio de algo que existe em outro lugar);
+- `fonte`: o link completo, obrigatório quando `tipo: referencia`;
+- `autor`; `testado_em` é opcional (versão do programa).
+
+Regras que o validador aplica:
+
+- só `.md` em `docs/`; só `.png`, `.jpg`, `.jpeg` e `.webp` em `docs/img/`,
+  até 1 MB cada;
+- nomes em minúsculas, sem acento, com hífens;
+- o documento tem seções `##`, cada uma com até 80 linhas, e até 60 KB no total;
+- imagem do repositório fica em `img/` e tem descrição no texto alternativo.
+
+Texto copiado de site, livro ou curso não entra: resuma com as suas palavras e
+ponha o link em `fonte`.

@@ -12,7 +12,7 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from . import webtools
+from . import localdocs, webtools
 from .core import App
 from .util import OGError, parse_frontmatter
 
@@ -46,7 +46,12 @@ def validate(app: App) -> list[str]:
                     if sub not in agent.subagents:
                         problems.append(
                             f"pipeline {pipe['id']} etapa {stage['id']}: `{owner['agent']}` não tem `{sub}`")
-    for name in ("roteador.md", "protocolo-agente.md", "protocolo-subagente.md"):
+    for agent in app.registry.workers():
+        for sub in agent.subagents:
+            folder = localdocs.docs_dir(app.root / "agents", agent.id, sub)
+            problems += localdocs.validate_docs(folder, f"agents/{agent.id}/subagents/{sub}")
+    for name in ("roteador.md", "protocolo-agente.md", "protocolo-subagente.md",
+                 "modelo-documento.md"):
         if not (app.root / "agents" / "_shared" / name).is_file():
             problems.append(f"agents/_shared/{name}: arquivo ausente")
     if not any(a.mandatory_first for a in app.registry.agents.values()):

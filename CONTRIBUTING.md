@@ -22,57 +22,118 @@ e a versão do Python. Se o erro apareceu durante o uso, peça à sua IA
 "Usa o OpenGlitch: lista os problemas relatados" e cole o resultado: os agentes
 registram o que não conseguiram fazer.
 
-### Acrescentar um documento de conhecimento
+### Acrescentar um documento
 
-É a contribuição mais útil e não exige programar. A base de conhecimento fica
-em `knowledge/`, em Markdown. Cada arquivo e cada título `##` vira um nó que a
-IA encontra pela árvore ou pela busca.
+É a contribuição mais útil e não exige programar. Você escreve um arquivo
+Markdown e a IA passa a consultá-lo.
 
-Exemplos do que cabe:
+#### Onde vai cada coisa
 
-- **Métodos**: um passo a passo que funciona (como fazer blockout de uma fase,
-  como configurar root motion, como montar uma planilha de balanceamento).
-- **Exemplos trabalhados**: um caso do começo ao fim, com os valores usados e
-  o resultado (um moveset com dados de frame, um script de exportação do
-  Blender, a configuração de um Animator).
-- **Receitas por ferramenta**: como fazer uma tarefa na Unity, na Unreal, no
-  Blender ou em outro programa, com a versão em que você testou.
+| O que você tem | Onde vai |
+| --- | --- |
+| Método, exemplo ou receita de uma função específica (rig, combate, shaders...) | `agents/<agente>/subagents/<subagente>/docs/` |
+| Imagem de um desses documentos | `docs/img/`, ao lado do documento |
+| Conhecimento geral de uma área, que todo agente deve saber | `knowledge/<área>/` |
+| Um site bom para os subagentes pesquisarem | `references.json` do subagente |
+
+Na dúvida entre `docs/` e `knowledge/`, use `docs/` do subagente mais próximo
+do assunto. Os agentes e subagentes estão listados no README.
+
+Exemplos do que cabe em `docs/`:
+
+- **Métodos**: um passo a passo que funciona (blockout de uma fase, root
+  motion, planilha de balanceamento).
+- **Exemplos trabalhados**: um caso do começo ao fim, com os valores usados (um
+  moveset com dados de frame, um script de exportação do Blender).
+- **Receitas por ferramenta**: uma tarefa na Unity, na Unreal ou no Blender,
+  com a versão em que você testou.
 - **Erros comuns** e como se percebe cada um.
+- **Resumo de uma referência**, com as suas palavras e o link. É o que mantém o
+  conhecimento disponível quando o site original sai do ar.
 
-Como fazer:
+#### Como fazer
 
-1. Escolha a pasta da área (`knowledge/design/`, `knowledge/animacao/`...). Para
-   um tema que não cabe em nenhuma, crie uma pasta nova com um `_area.md`.
-2. Crie um arquivo `.md` com nome curto, minúsculo, sem acento, com hífens.
-3. Comece com o cabeçalho:
+1. Copie `agents/_shared/modelo-documento.md` para a pasta `docs/` do
+   subagente, com um nome curto, em minúsculas, sem acento, com hífens
+   (`pesos-do-ombro.md`).
+2. Preencha o cabeçalho:
    ```
    ---
-   title: Blockout de uma fase em uma tarde
-   summary: Passo a passo para sair do mapa 2D e chegar a uma fase jogável só com cubos.
+   title: Pesos do ombro sem amassar a malha
+   summary: Como pintar os pesos entre clavícula e braço para o ombro dobrar bem.
+   tipo: original
+   fonte:
+   autor: seu-usuario-do-github
+   testado_em: Blender 4.2
    ---
    ```
-   O `summary` é uma frase: é o que a IA lê para decidir se abre o documento.
-4. Divida em seções `##` curtas e autocontidas. Cada seção precisa fazer
-   sentido sozinha, porque a IA pode ler só ela.
-5. Escreva para uma IA que vai executar: ordem dos passos, valores concretos,
-   como conferir que deu certo. Diga a versão do programa quando importar.
-6. Diga na proposta de onde veio a informação (experiência sua, documentação
-   oficial, um artigo) e o que você testou.
+3. Escreva em seções `##` curtas.
+4. Rode os comandos de "Antes de enviar".
 
-Só entra conteúdo seu ou de fonte que permita redistribuir. Não copie trechos
-de livros, cursos pagos ou artigos: explique com as suas palavras e cite a
-fonte.
+#### Por que o formato importa
+
+O OpenGlitch não joga o documento inteiro para a IA. Ele mostra uma lista de
+títulos e resumos, a IA escolhe o que precisa e pede só aquele trecho. Por isso:
+
+- **O `summary` decide se o documento é aberto.** Uma frase que diga o que tem
+  dentro e quando serve. Resumo vago, documento ignorado.
+- **Cada título `##` vira um trecho que pode ser lido sozinho.** A seção precisa
+  fazer sentido sem as outras.
+- **O título da seção diz o que tem nela.** "Pintar os pesos do ombro" ajuda;
+  "Passo 3" não.
+- **Um assunto por arquivo.** Documento que cresce demais vira dois.
+
+#### Regras
+
+O validador confere estas regras em toda proposta e recusa o que fugir delas.
+
+- **Texto: só Markdown (`.md`).**
+- **Imagens: PNG, JPG ou WebP, até 1 MB, dentro de `docs/img/`**, sempre com a
+  descrição do que mostram: `![Pesos do ombro em três poses](img/pesos.png)`. A
+  IA encontra a imagem pela descrição.
+- **Outros arquivos não entram** (PDF, vídeo, `.blend`, `.fbx`, planilhas): o
+  servidor não os lê e eles pesam o repositório. Ponha o link e descreva.
+- **Cabeçalho obrigatório**: `title`, `summary` (até 240 caracteres), `tipo` e
+  `autor`. `testado_em` é opcional, mas ajuda muito.
+- **`tipo: original`** é o que você escreveu por conta própria.
+- **`tipo: referencia`** é um resumo de algo que existe em outro lugar. O campo
+  `fonte` com o link completo é obrigatório, e a IA cita esse link ao usar.
+- **Seções de até 80 linhas**, documento de até 60 KB.
+- **Nomes em minúsculas, sem acento, com hífens.**
+
+#### Direito autoral
+
+- **Não copie texto de sites, livros ou cursos**, nem trechos, nem traduzidos.
+  Explique com as suas palavras e ponha o link em `fonte`. Uma citação curta
+  entre aspas, com a fonte, pode.
+- **Imagem só sua, ou com licença que permita redistribuir**, com o crédito no
+  documento. Captura de tela de site, arte de jogo comercial e figura de livro
+  não entram: para essas, ponha o link e descreva o que mostram.
+- Proposta com conteúdo copiado é recusada, mesmo que o conteúdo seja bom.
+
+#### Escreva para quem vai executar
+
+Passos na ordem, valores concretos (números, nomes de menu e de opção), a versão
+do programa e como conferir que deu certo. O que você não testou, diga que não
+testou.
 
 ### Acrescentar ou corrigir uma referência
 
-As referências são as páginas que os subagentes podem pesquisar. Ficam em
-`agents/<agente>/subagents/<subagente>/references.json`.
+As referências são as páginas da web que os subagentes podem pesquisar. Ficam em
+`agents/<agente>/subagents/<subagente>/references.json`; o formato de cada campo
+está em `agents/_shared/FORMATO.md`.
 
 - A fonte precisa ser gratuita, legal e ter texto legível (não só vídeo).
 - Preencha `uso` dizendo que perguntas ela responde.
 - Use `url_origem: "inferida"` para referências que não vieram do guia original.
 - Confira que abre: `python -m openglitch_mcp.cli links`.
-- Link que parou de funcionar: corrija o endereço e explique em `nota`.
+
+**Referências caem.** São sites de terceiros: mudam de endereço, saem do ar ou
+passam a recusar acesso. Quando um subagente não consegue abrir uma, ele
+registra o problema (peça à sua IA "Usa o OpenGlitch: lista os problemas
+relatados"). Para consertar: corrija o endereço e explique em `nota`; se o site
+sumiu, marque `pesquisavel: false` e, se você conhece o conteúdo, escreva um
+documento `tipo: referencia` em `docs/` com o que ele ensinava.
 
 ### Melhorar um agente ou um subagente
 

@@ -20,12 +20,13 @@ from pathlib import Path
 from typing import Any, Iterator
 from urllib.parse import urlsplit
 
-from . import webtools
+from . import localdocs, webtools
 from .memory import MemoryStore, Partition, search_partitions
 from .pageindex import KnowledgeIndex
 from .registry import Agent, Reference, Registry
 from .util import (
-    OGError, file_lock, now_iso, read_json, slugify, write_json_atomic, write_text_atomic,
+    OGError, file_lock, now_iso, query_tokens, read_json, score_text, slugify, snippet,
+    write_json_atomic, write_text_atomic,
 )
 
 MAX_FETCHES_PER_TASK = 80
@@ -702,6 +703,12 @@ class App:
         out += [r.render() for r in refs]
         if task["extra_urls"]:
             out += ["", "URLs extras incluídas pelo agente:", *[f"- {u}" for u in task["extra_urls"]]]
+        local = localdocs.load_docs(localdocs.docs_dir(self.root / "agents", agent.id, sub.id))
+        if local:
+            out += ["", "# Documentos locais do seu domínio", "",
+                    "Material contribuído, que vale mesmo se uma referência estiver fora do ar. "
+                    "Consulte antes de abrir a web (local_docs, local_doc_read):"]
+            out += [f"- `{sub.id}/{d.name}` **{d.title}** ({d.tipo}): {d.summary}" for d in local]
         out += ["", "Conhecimento base do seu domínio: "
                 f"knowledge_read(\"{sub.knowledge_node}\")", "", "# Memória", ""]
         part = self.memory.research(agent.id, sub.id)
@@ -887,6 +894,77 @@ class App:
             task_id, agent = task["id"], task["agent"]
         return (f"Tarefa {task_id} concluída e entregue ao agente `{agent}`. O ticket foi "
                 f"encerrado. Responda em uma linha: \"Tarefa {task_id} concluída\".")
+
+    # ====================================================== documentos locais
+
+    def _doc_owners(self, token: str) -> list[tuple[str, str]]:
+        """Subagentes cujos documentos locais o token alcança."""
+        token = (token or "").strip()
+        if token.startswith("tk_"):
+            task = self._task(token, running=False)
+            return [(task["agent"], task["subagent"])]
+        sess = self._session(token)
+        agents = (self.registry.workers() if sess["role"] == "reader"
+                  else [self.registry.agent(sess["agent"])])
+        return [(a.id, s) for a in agents for s in a.subagents]
+
+    def _local_docs(self, owners: list[tuple[str, str]]):
+        for agent, sub in owners:
+            for doc in localdocs.load_docs(localdocs.docs_dir(self.root / "agents", agent, sub)):
+                yield agent, sub, doc
+
+    def local_docs(self, token: str, query: str = "") -> str:
+        owners = self._doc_owners(token)
+        found = list(self._local_docs(owners))
+        if not found:
+            return ("Nenhum documento local para " + ", ".join(f"`{s}`" for _, s in owners[:8])
+                    + ". Pesquise nas referências.")
+        if query.strip():
+            tokens = query_tokens(query)
+            hits = []
+            for agent, sub, doc in found:
+                for sec in doc.sections:
+                    score = score_text(tokens, sec.title + " " + doc.title, doc.summary, sec.text)
+                    if score > 0:
+                        hits.append((score, f"{sub}/{doc.name}#{sec.slug}", doc, sec))
+            if not hits:
+                return f"Nada nos documentos locais para \"{query}\"."
+            hits.sort(key=lambda h: (-h[0], h[1]))
+            lines = [f"# Documentos locais: resultados para \"{query}\"", ""]
+            for _, ref, doc, sec in hits[:10]:
+                lines.append(f"- `{ref}` **{doc.title}: {sec.title}**")
+                lines.append(f"  {snippet(sec.text, tokens)}")
+            return "\n".join(lines + ["", "Leia com local_doc_read(token, doc)."])
+        lines = ["# Documentos locais", ""]
+        for agent, sub, doc in found:
+            lines.append(f"- `{sub}/{doc.name}` **{doc.title}** ({doc.tipo}): {doc.summary}")
+            for sec in doc.sections:
+                lines.append(f"  - `{sub}/{doc.name}#{sec.slug}` {sec.title}: {sec.summary}")
+        return "\n".join(lines + ["", "Leia um documento ou só uma seção com local_doc_read(token, doc)."])
+
+    def local_doc_read(self, token: str, doc: str) -> str:
+        owners = self._doc_owners(token)
+        path, _, section = doc.strip().partition("#")
+        sub, _, name = path.strip("/").rpartition("/")
+        if not sub and len(owners) == 1:
+            sub = owners[0][1]
+        for agent, owner_sub, item in self._local_docs([o for o in owners if o[1] == sub]):
+            if item.name != name:
+                continue
+            head = [f"# {item.title}  `{owner_sub}/{item.name}`", item.header(), ""]
+            if section:
+                sec = next((s for s in item.sections if s.slug == section), None)
+                if sec is None:
+                    raise OGError(f"O documento `{name}` não tem a seção `{section}`.")
+                return "\n".join(head + [f"## {sec.title}", "", sec.text])
+            body = [item.intro] if item.intro else []
+            for sec in item.sections:
+                body += ["", f"## {sec.title}", "", sec.text]
+            return "\n".join(head + body)
+        raise OGError(
+            f"Documento `{doc}` não encontrado entre os que você alcança. Veja a lista com "
+            "local_docs(token)."
+        )
 
     # =============================================================== problemas
 
