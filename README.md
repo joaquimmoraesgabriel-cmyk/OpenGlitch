@@ -1,5 +1,7 @@
 # OpenGlitch
 
+[![Testes](https://github.com/joaquimmoraesgabriel-cmyk/OpenGlitch/actions/workflows/testes.yml/badge.svg)](https://github.com/joaquimmoraesgabriel-cmyk/OpenGlitch/actions/workflows/testes.yml)
+
 Um PageIndex sobre criação de jogos 3D cinematográficos e uma equipe de agentes
 de IA que o usam, servidos por MCP. Você conecta o Claude, o Codex ou outro
 cliente MCP a este servidor; a IA analisa o seu pedido, assume o agente certo
@@ -264,6 +266,13 @@ install.py   instalador: cria o ambiente e registra nos clientes de IA
 `knowledge/index.json`. `links` abre cada referência pesquisável e lista as que
 falham. Para acrescentar um agente, um subagente ou uma referência, siga
 `agents/_shared/FORMATO.md` e rode `validate`.
+
+## Contribuir
+
+O projeto foi testado principalmente no Windows. Se você usa Linux ou macOS e
+algo falhar, abra uma issue ou mande a correção: veja
+[CONTRIBUTING.md](CONTRIBUTING.md). Toda mudança entra por pull request,
+revisada pelo mantenedor.
 
 ## Limites conhecidos
 
