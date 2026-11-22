@@ -1,0 +1,37 @@
+{
+  "agent": "engenharia",
+  "subagent": "gameplay-programmer",
+  "references": [
+    {
+      "id": "gpp-gameplay",
+      "title": "Game Programming Patterns (capítulos Game Loop, State, Component, Observer)",
+      "author": "Robert Nystrom",
+      "type": "livro-online",
+      "url": "https://gameprogrammingpatterns.com/contents.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Os quatro capítulos que cobrem o loop do jogo, máquinas de estado, componentes e eventos. Base para estruturar controle, combate e sistemas."
+    },
+    {
+      "id": "catlike-basics-movement",
+      "title": "Catlike Coding (Basics e Movement)",
+      "author": "Jasper Flick",
+      "type": "site",
+      "url": "https://catlikecoding.com/unity/tutorials/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Tutoriais de fundamentos e de movimento na Unity: controle de esfera, física, rampas, escalada, gravidade. Mostram o código e as decisões."
+    },
+    {
+      "id": "fix-your-timestep",
+      "title": "Fix Your Timestep!",
+      "author": "Glenn Fiedler (Gaffer On Games)",
+      "type": "artigo",
+      "url": "https://gafferongames.com/post/fix_your_timestep/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Artigo clássico sobre atualizar a física: passo variável, passo fixo, acumulador e interpolação do estado entre dois passos.",
+      "nota": "O guia não informa o autor; o blog Gaffer On Games é de Glenn Fiedler."
+    }
+  ]
+}

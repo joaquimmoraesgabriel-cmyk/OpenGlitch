@@ -1,0 +1,61 @@
+{
+  "agent": "arte-3d",
+  "subagent": "props-hard-surface",
+  "references": [
+    {
+      "id": "polycount-hard-surface-normals",
+      "title": "Polycount: threads de hard surface e normals",
+      "author": null,
+      "type": "forum",
+      "url": "https://polycount.com/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Threads sobre hard surface, bevels, smoothing groups e normal maps, com a prática de quem trabalha na área.",
+      "nota": "O guia cita as threads sem hiperlink. Procure por hard surface e por normals dentro do site."
+    },
+    {
+      "id": "80lv-props",
+      "title": "80.lv: breakdowns de props e hard surface",
+      "author": null,
+      "type": "site",
+      "url": "https://80.lv/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Breakdowns de armas, veículos, robôs e props, com o processo passo a passo.",
+      "nota": "O guia cita 80.lv sem hiperlink próprio."
+    },
+    {
+      "id": "blender-manual-bevel-boolean-weighted-normal",
+      "title": "Manual do Blender: Bevel, Boolean e Weighted Normal",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://docs.blender.org/manual/en/latest/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Opções e comportamento dos modificadores e ferramentas de Bevel, Boolean e Weighted Normal.",
+      "nota": "O guia cita as seções sem hiperlink. A URL é a raiz do manual; procure os modificadores Bevel, Boolean e Weighted Normal na seção de modificadores."
+    },
+    {
+      "id": "toolbag-baking-tutorial-props",
+      "title": "The Toolbag Baking Tutorial",
+      "author": "Marmoset",
+      "type": "artigo",
+      "url": "https://www.marmoset.co/posts/toolbag-baking-tutorial/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Guia de bake do high para o low, válido para props.",
+      "nota": "O guia o cita na etapa de bake do personagem (4b); o fluxo de bake de props é o mesmo."
+    },
+    {
+      "id": "this-is-normal-2-props",
+      "title": "This is normal 2: Baking normal maps",
+      "author": null,
+      "type": "artigo",
+      "url": "https://typhen.artstation.com/blog/BDr6/this-is-normal-2-baking-normal-maps",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Explica as costuras de bake em normal maps, relevante para hard edges em props.",
+      "nota": "O guia o cita na etapa de bake do personagem (4b)."
+    }
+  ]
+}

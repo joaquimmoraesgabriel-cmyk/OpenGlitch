@@ -1,0 +1,101 @@
+{
+  "agent": "arte-3d",
+  "subagent": "texture-material",
+  "references": [
+    {
+      "id": "pbr-guide",
+      "title": "The PBR Guide",
+      "author": "Adobe e Allegorithmic",
+      "type": "documentacao",
+      "url": "https://www.adobe.com/learn/substance-3d-designer/web/the-pbr-guide-part-2",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Guia gratuito desde 2014: a parte 1 é teoria e a parte 2 é prática, e vale para qualquer software. Fonte principal de teoria PBR.",
+      "nota": "O hiperlink do guia leva à parte 2. A parte 1 pode ser encontrada pelos links da própria página."
+    },
+    {
+      "id": "substance-documentation",
+      "title": "Documentação do Substance",
+      "author": "Adobe",
+      "type": "documentacao",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Documentação do Substance Painter e Designer. O guia a cita sem link.",
+      "nota": "Endereço não confirmado, por isso fica sem URL. Se o agente passar a página em extra_urls, ela pode ser lida."
+    },
+    {
+      "id": "80lv-ekko-arcane-substance-blender",
+      "title": "80.lv: Ekko estilo Arcane em Substance e Blender",
+      "author": null,
+      "type": "artigo",
+      "url": "https://80.lv/articles/3d-artist-recreates-arcane-s-ekko-with-substance-3d-blender",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Processo de um personagem em estilo Arcane, com textura pintada e luz e pinceladas na própria textura."
+    },
+    {
+      "id": "80lv-texture-breakdowns",
+      "title": "80.lv: breakdowns de materiais e texturas",
+      "author": null,
+      "type": "site",
+      "url": "https://80.lv/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Breakdowns de materiais procedurais, pintura de textura e bibliotecas.",
+      "nota": "Citado pelo guia como base da área, sem hiperlink."
+    },
+    {
+      "id": "blender-manual-materials",
+      "title": "Manual do Blender: materiais e shaders",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://docs.blender.org/manual/en/latest/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Alternativa gratuita para criar materiais e texturas (o guia indica o Blender como alternativa ao Substance).",
+      "nota": "A URL é a raiz do manual; procure as seções de materiais e de shader nodes."
+    },
+    {
+      "id": "blender-manual-seams-texture",
+      "title": "Manual do Blender: Seams",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://www.blender.org/manual/en/modeling/meshes/uv/unwrapping/seams.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Fluxo de UV: marcar seams, desembrulhar, ajustar e repetir.",
+      "nota": "O endereço é o do guia, de uma versão antiga do manual; se não abrir, procure Seams em docs.blender.org/manual."
+    },
+    {
+      "id": "toolbag-baking-tutorial-texture",
+      "title": "The Toolbag Baking Tutorial",
+      "author": "Marmoset",
+      "type": "artigo",
+      "url": "https://www.marmoset.co/posts/toolbag-baking-tutorial/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "O guia de bake mais recomendado, vale mesmo para quem não usa o Toolbag."
+    },
+    {
+      "id": "this-is-normal-2-texture",
+      "title": "This is normal 2: Baking normal maps",
+      "author": null,
+      "type": "artigo",
+      "url": "https://typhen.artstation.com/blog/BDr6/this-is-normal-2-baking-normal-maps",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Explica as costuras de bake em normal maps."
+    },
+    {
+      "id": "baking-maps-reading-list-texture",
+      "title": "Baking Maps for Games Reading List",
+      "author": null,
+      "type": "artigo",
+      "url": "https://camille_meehan.artstation.com/blog/LYbj/baking-maps-for-games-reading-list",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Lista de leituras sobre bake, com foco em Unity."
+    }
+  ]
+}

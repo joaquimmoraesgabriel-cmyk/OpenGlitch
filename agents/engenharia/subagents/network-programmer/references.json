@@ -1,0 +1,38 @@
+{
+  "agent": "engenharia",
+  "subagent": "network-programmer",
+  "references": [
+    {
+      "id": "fast-paced-multiplayer",
+      "title": "Fast-Paced Multiplayer",
+      "author": "Gabriel Gambetta",
+      "type": "artigo",
+      "url": "https://www.gabrielgambetta.com/client-server-game-architecture.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Série que cobre arquitetura cliente-servidor, predição e reconciliação no cliente, interpolação de entidades, compensação de lag e uma demo ao vivo."
+    },
+    {
+      "id": "gaffer-on-games",
+      "title": "Gaffer On Games",
+      "author": "Glenn Fiedler",
+      "type": "blog",
+      "url": "https://gafferongames.com/post/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Artigos sobre física em rede, sincronização de estado, protocolos e redes de baixo nível.",
+      "nota": "O nome do autor não consta no guia. O autor agora escreve em mas-bandwidth.com, mas os artigos continuam valendo."
+    },
+    {
+      "id": "mas-bandwidth",
+      "title": "mas-bandwidth.com",
+      "author": "Glenn Fiedler",
+      "type": "blog",
+      "url": "https://mas-bandwidth.com/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Blog atual do autor do Gaffer On Games, com artigos recentes sobre rede para jogos.",
+      "nota": "O guia cita o domínio sem hiperlink."
+    }
+  ]
+}

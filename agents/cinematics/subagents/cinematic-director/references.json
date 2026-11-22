@@ -1,0 +1,39 @@
+{
+  "agent": "cinematics",
+  "subagent": "cinematic-director",
+  "references": [
+    {
+      "id": "gameanim-god-of-war-cinematography",
+      "title": "Creating a Deeper Emotional Connection: The Cinematography of God of War",
+      "author": "gameanim.com",
+      "type": "artigo",
+      "url": "https://www.gameanim.com/page/4/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Como a cinematografia de God of War constrói conexão emocional. Serve para decisões de plano, ponto de vista e ligação entre cena e gameplay.",
+      "nota": "O link do guia é a página 4 da listagem do blog; o artigo pode estar em outra página se o blog avançou."
+    },
+    {
+      "id": "virtual-production-field-guide-1",
+      "title": "Virtual Production Field Guide",
+      "author": "Epic Games",
+      "type": "livro-online",
+      "url": "https://www.cartoonbrew.com/tech/epic-games-has-created-the-ultimate-guide-to-virtual-production-177529.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Guia gratuito de 98 páginas sobre produção virtual, acessível a quem tem noção básica de cinema. A página indicada é a notícia que descreve o guia.",
+      "nota": "O guia em si é um PDF; a ferramenta de texto lê a notícia, não o PDF."
+    },
+    {
+      "id": "virtual-production-field-guide-2",
+      "title": "Virtual Production Field Guide, volume 2",
+      "author": "Epic Games",
+      "type": "livro-online",
+      "url": "https://www.cgchannel.com/tag/vpfg",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Segundo volume do guia (158 páginas). A página indicada lista as notícias sobre ele.",
+      "nota": "O guia em si é um PDF; a página indicada é uma listagem de notícias do CG Channel."
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "agent": "arte-3d",
+  "subagent": "vfx-artist",
+  "references": [
+    {
+      "id": "realtimevfx-getting-started",
+      "title": "RealTimeVFX: Getting Started in Real-Time VFX (start here)",
+      "author": "RealTimeVFX",
+      "type": "forum",
+      "url": "https://realtimevfx.com/t/getting-started-in-real-time-vfx-start-here",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Comunidade criada por devs da Riot, EA e Naughty Dog. O thread Getting Started é o ponto de entrada para iniciantes."
+    },
+    {
+      "id": "unity-vfx-ebook-unity6",
+      "title": "E-book de VFX da Unity (edição Unity 6)",
+      "author": "Unity",
+      "type": "livro",
+      "url": "https://unity.com/resources/creating-advanced-vfx-unity6",
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "E-book gratuito sobre criação de VFX avançado no Unity 6, incluindo o VFX Graph.",
+      "nota": "A página é uma entrada de download do e-book; o conteúdo está no PDF."
+    },
+    {
+      "id": "game-art-tricks-vfx",
+      "title": "Game Art Tricks",
+      "author": "Simon Schreibt",
+      "type": "artigo",
+      "url": "https://simonschreibt.de/game-art-tricks/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Como jogos famosos enganam o jogador para parecer bonitos gastando pouco, inclusive em efeitos."
+    },
+    {
+      "id": "80lv-vfx",
+      "title": "80.lv: breakdowns de efeitos",
+      "author": null,
+      "type": "site",
+      "url": "https://80.lv/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Breakdowns de efeitos de jogo: camadas, texturas e shaders usados.",
+      "nota": "Citado pelo guia como base da área, sem hiperlink."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "agent": "cinematics",
+  "subagent": "layout-camera",
+  "references": [
+    {
+      "id": "studiobinder-camera-shots",
+      "title": "Ultimate Guide to Camera Shots",
+      "author": "StudioBinder",
+      "type": "site",
+      "url": "https://studiobinder.com/blog/ultimate-guide-to-camera-shots/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Tamanhos de plano, enquadramento, movimentos de câmera, cheat-sheet e modelo de shot list. É a primeira fonte para qualquer pergunta de câmera."
+    },
+    {
+      "id": "unreal-cinematics-docs",
+      "title": "Cinematics and Movie Making in Unreal Engine",
+      "author": "Epic Games",
+      "type": "documentacao",
+      "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/cinematics-and-movie-making-in-unreal-engine",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Documentação de cinematics da Unreal, incluindo o Cine Camera Actor: sensor, lente, abertura e foco."
+    },
+    {
+      "id": "cinemachine-docs",
+      "title": "Documentação do Cinemachine",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": null,
+      "url_origem": "inferida",
+      "pesquisavel": false,
+      "uso": "Câmeras virtuais da Unity: follow, look at, dolly e composição automática.",
+      "nota": "O guia cita a documentação sem link. Sem URL por falta de certeza do endereço da versão atual."
+    }
+  ]
+}

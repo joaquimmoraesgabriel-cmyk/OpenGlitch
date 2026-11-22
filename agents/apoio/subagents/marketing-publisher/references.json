@@ -1,0 +1,94 @@
+{
+  "agent": "apoio",
+  "subagent": "marketing-publisher",
+  "references": [
+    {
+      "id": "how-to-market-a-game-guia",
+      "title": "How To Market A Game (link do guia)",
+      "author": "Chris Zukowski",
+      "type": "blog",
+      "url": "https://unitycodemonkey.com/howtomarketagame.php",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Marketing indie para Steam: a primeira decisão de marketing é o jogo que se escolhe fazer. O autor tem uma aula gratuita sobre montar a página na Steam.",
+      "nota": "No guia, o hiperlink sobre o título aponta para unitycodemonkey.com, não para o blog do autor. A página pode tratar do mesmo assunto, mas o conteúdo não foi verificado. Compare com a referência how-to-market-a-game-oficial."
+    },
+    {
+      "id": "how-to-market-a-game-oficial",
+      "title": "How To Market A Game",
+      "author": "Chris Zukowski",
+      "type": "blog",
+      "url": "https://howtomarketagame.com/",
+      "url_origem": "corrigida",
+      "pesquisavel": true,
+      "uso": "Blog de marketing de jogos mais seguido por indies sobre Steam: página da loja, wishlists, escolha de jogo e gancho.",
+      "nota": "Endereço oficial do blog, registrado porque o link do guia leva a outro site."
+    },
+    {
+      "id": "unity-blog-marketing-indie",
+      "title": "Tips and strategies for marketing indie games",
+      "author": "Unity",
+      "type": "artigo",
+      "url": "https://unity.com/vn/blog/tips-strategies-for-marketing-indie-games",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Dicas de marketing de jogos indie. O guia o indica como fonte para a ideia de que a primeira decisão de marketing é o jogo que se escolhe fazer.",
+      "nota": "O link do guia tem o código de região vn no endereço. Se a página vier em outro idioma, procure a versão em inglês ou em português do mesmo post."
+    },
+    {
+      "id": "medium-700-wishlists",
+      "title": "How my first game got 700 wishlists in its first 2 weeks",
+      "author": null,
+      "type": "artigo",
+      "url": "https://medium.com/@info_46369/how-my-first-game-got-700-wishlists-in-its-first-2-weeks-fe7190b4791e",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Relato de um caso. O guia o indica para a referência de que jogos com potencial costumam juntar mais de 150 wishlists nas primeiras 2 semanas.",
+      "nota": "É o relato de um único jogo. Use como exemplo, não como regra geral."
+    },
+    {
+      "id": "steamworks-docs",
+      "title": "Documentação do Steamworks",
+      "author": "Valve",
+      "type": "documentacao",
+      "url": "https://partner.steamgames.com/doc",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Regras oficiais de página da loja, festivais, demos e lançamento.",
+      "nota": "O guia cita partner.steamgames.com/doc sem hiperlink. Parte da documentação exige conta de parceiro."
+    },
+    {
+      "id": "unity-asset-store-publisher-docs",
+      "title": "Documentação de publisher da Unity Asset Store",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Requisitos de qualidade e documentação para vender pacotes. O guia manda ler antes de começar, no caso de venda de pacote.",
+      "nota": "O guia não dá link. Se o agente souber a URL, passe em extra_urls."
+    },
+    {
+      "id": "marco-legal-dos-jogos",
+      "title": "Marco Legal dos Jogos Eletrônicos é regulamentado no Brasil",
+      "author": null,
+      "type": "artigo",
+      "url": "https://www.educamaisbrasil.com.br/educacao/noticias/marco-legal-dos-jogos-eletronicos-e-regulamentado-no-brasil",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Notícia sobre a regulamentação do Marco Legal dos Jogos e o Rouanet Games, com orientação, cursos e oficinas para preparar projetos e buscar patrocínio pela Lei Rouanet.",
+      "nota": "O guia informa regulamentação em 14 de outubro de 2026. É notícia, não o texto da lei: confirme os detalhes antes de basear uma decisão."
+    },
+    {
+      "id": "abragames-big-gamescom-latam",
+      "title": "Abragames, BIG Festival e gamescom latam",
+      "author": null,
+      "type": "site",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Eventos e redes de contato do setor de jogos no Brasil. Servem para networking e para encontrar publishers.",
+      "nota": "O guia não dá link para estes eventos. Se o agente souber os endereços oficiais, passe em extra_urls."
+    }
+  ]
+}

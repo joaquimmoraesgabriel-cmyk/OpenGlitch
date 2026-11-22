@@ -1,0 +1,38 @@
+{
+  "agent": "apoio",
+  "subagent": "localization",
+  "references": [
+    {
+      "id": "igda-localization-best-practices",
+      "title": "IGDA Best Practices for Game Localization",
+      "author": "IGDA",
+      "type": "documentacao",
+      "url": "https://www.igda.org/resources/best-practices/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Guia gratuito de localização: culturalização, arquitetura do produto, gravação de voz e QA linguístico.",
+      "nota": "A página é um índice de recursos; o conteúdo completo costuma estar em PDF. Siga os links da página."
+    },
+    {
+      "id": "gamedeveloper-9-localization-practices",
+      "title": "9 game localization best practices",
+      "author": null,
+      "type": "artigo",
+      "url": "https://gamedeveloper.com/production/9-game-localization-best-practices",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Nove práticas objetivas: espaço extra na interface, UTF-8, kit de localização e mais."
+    },
+    {
+      "id": "unity-localization-package",
+      "title": "Pacote Localization da Unity",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Documentação do pacote que organiza strings, ativos e troca de idioma na Unity.",
+      "nota": "O guia cita o pacote sem link e o endereço exato da documentação depende da versão da Unity. Se o agente souber a URL, passe em extra_urls."
+    }
+  ]
+}

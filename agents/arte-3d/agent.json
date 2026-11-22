@@ -1,0 +1,167 @@
+{
+  "id": "arte-3d",
+  "name": "Arte 3D",
+  "kind": "worker",
+  "summary": "Define a direção de arte e constrói a parte visual: art bible, especificações de asset, scripts de Blender, materiais, luz, efeitos e shaders na engine.",
+  "when_to_use": "Depois do brief do Design, sempre que o pedido envolver o visual do jogo: estilo, personagens, cenários, props, armas, texturas e materiais, iluminação, efeitos visuais, shaders, orçamento de polígonos e texturas, ou exportação de assets para a engine.",
+  "mandatory_first": false,
+  "shared_references": [
+    {
+      "id": "blender-manual",
+      "title": "Manual do Blender",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://docs.blender.org/manual/en/latest/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Base para todos os cargos de Arte 3D: modelagem, escultura, UV, materiais, retopologia e as ferramentas do Blender, que é gratuito.",
+      "nota": "O guia cita só o domínio docs.blender.org, sem hiperlink."
+    },
+    {
+      "id": "80lv",
+      "title": "80.lv",
+      "author": null,
+      "type": "site",
+      "url": "https://80.lv/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Breakdowns: o artista mostra passo a passo como fez personagens, cenários, props, materiais e efeitos. É a fonte para ver o processo de um trabalho real e as ferramentas usadas.",
+      "nota": "O guia cita 80.lv sem hiperlink próprio."
+    },
+    {
+      "id": "polycount",
+      "title": "Polycount",
+      "author": null,
+      "type": "forum",
+      "url": "https://polycount.com/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Fórum e wiki de arte de jogos. Threads sobre topologia, hard surface, normal maps e fluxo de produção, com a prática de quem trabalha na área.",
+      "nota": "O guia avisa que o wiki teve períodos fora do ar. Se uma página do wiki não abrir, use as threads do fórum."
+    },
+    {
+      "id": "gurney-journey",
+      "title": "Gurney Journey",
+      "author": "James Gurney",
+      "type": "blog",
+      "url": "https://gurneyjourney.blogspot.com/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Cor, luz e composição explicadas por um pintor. Serve ao concept, à direção de arte e à iluminação.",
+      "nota": "O guia cita o blog sem hiperlink."
+    },
+    {
+      "id": "3d-artists-handbook",
+      "title": "3D Artist's Handbook",
+      "author": null,
+      "type": "wiki",
+      "url": "https://sidney-eliot.github.io/3d-artists-handbook/theory/topology-and-retopology",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Wiki gratuito que cobre o fluxo de personagem inteiro: topologia, retopologia, bake e texturização. O link aponta para a página de topologia; as outras páginas ficam no mesmo site."
+    },
+    {
+      "id": "color-and-light",
+      "title": "Color and Light",
+      "author": "James Gurney",
+      "type": "livro",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Livro de referência sobre cor e luz para a direção de arte. Leitura recomendada; não tem versão online legal."
+    },
+    {
+      "id": "framed-ink",
+      "title": "Framed Ink",
+      "author": "Marcos Mateu-Mestre",
+      "type": "livro",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Livro sobre composição e narrativa visual. Leitura recomendada para a direção de arte; não tem versão online legal."
+    },
+    {
+      "id": "gdc-diablo2-resurrected-art",
+      "title": "Palestra de direção de arte de Diablo 2: Resurrected",
+      "author": null,
+      "type": "palestra",
+      "url": "https://gdcvault.com/free/?&media=v",
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Palestra gratuita do GDC Vault sobre direção de arte de um jogo real. Leitura recomendada.",
+      "nota": "O hiperlink do guia leva à lista de palestras gratuitas do GDC Vault, não a uma página específica da palestra, e é vídeo."
+    },
+    {
+      "id": "gdc-street-fighter-v-art",
+      "title": "Palestra de direção de arte de Street Fighter V",
+      "author": null,
+      "type": "palestra",
+      "url": "https://gdcvault.com/free/gdc-17/?&media=as",
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Palestra gratuita do GDC Vault sobre direção de arte de um jogo de luta. Leitura recomendada.",
+      "nota": "O guia usa o mesmo hiperlink da palestra de Agile (gdc-17/?&media=as); pode não ser o link específico desta palestra. É vídeo."
+    },
+    {
+      "id": "arcane-bridging-the-rift",
+      "title": "Arcane: Bridging the Rift",
+      "author": "Riot Games",
+      "type": "video",
+      "url": "https://www.gamedeveloper.com/press-release/arcane-the-first-episode-of-bridging-the-rift-is-now-available",
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Documentário em 5 episódios do pitch aos toques finais da série. Referência de direção de arte e de luz estilizada.",
+      "nota": "O link do guia é um comunicado que anuncia o primeiro episódio; o documentário está no YouTube."
+    }
+  ],
+  "subagents": [
+    {
+      "id": "concept-artist",
+      "name": "Concept artist",
+      "purpose": "Pesquisa design de personagens e cenários, silhueta, turnaround, callouts, cor e luz, e o método de explorar um design antes de modelar.",
+      "knowledge_node": "arte-3d/concept-artist"
+    },
+    {
+      "id": "character-artist",
+      "name": "Character artist",
+      "purpose": "Pesquisa blockout, escultura high-poly, retopologia, topologia para animação, UV e bake de personagens.",
+      "knowledge_node": "arte-3d/character-artist"
+    },
+    {
+      "id": "environment-artist",
+      "name": "Environment artist",
+      "purpose": "Pesquisa kits modulares, texturas tileáveis, terreno, vegetação, composição de cena e otimização de cenários.",
+      "knowledge_node": "arte-3d/environment-artist"
+    },
+    {
+      "id": "props-hard-surface",
+      "name": "Props e hard surface",
+      "purpose": "Pesquisa modelagem de armas, veículos e máquinas: bevels, booleanas, normais, smoothing, high e low, LODs.",
+      "knowledge_node": "arte-3d/props-hard-surface"
+    },
+    {
+      "id": "texture-material",
+      "name": "Texture e material artist",
+      "purpose": "Pesquisa PBR, materiais procedurais, pintura de textura, bibliotecas de material e os fundamentos de bake que alimentam a textura.",
+      "knowledge_node": "arte-3d/texture-material"
+    },
+    {
+      "id": "lighting-artist",
+      "name": "Lighting artist",
+      "purpose": "Pesquisa luz para clima e leitura, luz em tempo real e bakeada, GI, pós-processamento e luz de cutscene.",
+      "knowledge_node": "arte-3d/lighting-artist"
+    },
+    {
+      "id": "vfx-artist",
+      "name": "VFX artist",
+      "purpose": "Pesquisa partículas, flipbooks, shaders de efeito, Niagara, VFX Graph e timing de efeitos de combate.",
+      "knowledge_node": "arte-3d/vfx-artist"
+    },
+    {
+      "id": "technical-artist",
+      "name": "Technical artist",
+      "purpose": "Pesquisa shaders, scripts de pipeline, orçamento técnico, profiling e a importação de assets na engine (escala, LODs, rig, materiais).",
+      "knowledge_node": "arte-3d/technical-artist"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "agent": "engenharia",
+  "subagent": "ai-programmer",
+  "references": [
+    {
+      "id": "redblob-pathfinding",
+      "title": "Red Blob Games: Introdução ao A* (A*, Breadth First, Dijkstra)",
+      "author": "Amit Patel",
+      "type": "site",
+      "url": "https://www.redblobgames.com/pathfinding/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Tutoriais interativos sobre busca em largura, Dijkstra e A*, com diagramas passo a passo. Fonte principal para pathfinding."
+    },
+    {
+      "id": "redblob-implementation",
+      "title": "Red Blob Games: implementação do A* em Python e C++",
+      "author": "Amit Patel",
+      "type": "site",
+      "url": "https://redblobgames.com/pathfinding/a-star/implementation.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Código de referência do A*, Dijkstra e busca em largura em Python e C++. Licença Apache 2.0, uso comercial liberado."
+    },
+    {
+      "id": "game-ai-pro",
+      "title": "Game AI Pro",
+      "author": "Steve Rabin (editor)",
+      "type": "livro-online",
+      "url": "https://www.gameaipro.com/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Coletânea de capítulos de profissionais, todos gratuitos, com casos reais de jogos comerciais: behavior trees, utility AI, percepção, coordenação de grupo, navegação.",
+      "nota": "O guia não informa o editor; Steve Rabin edita a coleção."
+    },
+    {
+      "id": "pathfinding-demystified",
+      "title": "Pathfinding Demystified",
+      "author": "Gabriel Gambetta",
+      "type": "artigo",
+      "url": "https://gabrielgambetta.com/path1.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Série de artigos que explica pathfinding passo a passo, do problema à solução, com exemplos visuais."
+    }
+  ]
+}

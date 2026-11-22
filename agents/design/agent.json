@@ -1,0 +1,94 @@
+{
+  "id": "design",
+  "name": "Design",
+  "kind": "worker",
+  "summary": "Entende o jogo com o usuário e define o que ele é: pilares, regras, combate, fases, história e interface.",
+  "when_to_use": "No começo de todo projeto, obrigatoriamente, para criar o brief. Depois, sempre que o pedido mudar ou acrescentar regras, mecânicas, combate, fases, missões, história, diálogos, menus, HUD, tutorial ou o escopo do jogo.",
+  "mandatory_first": true,
+  "shared_references": [
+    {
+      "id": "the-door-problem",
+      "title": "The Door Problem",
+      "author": "Liz England",
+      "type": "artigo",
+      "url": "https://lizengland.com/blog/2014/04/the-door-problem/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Mostra, com o exemplo de uma porta, que perguntas cada função de um estúdio precisa responder. Serve para decompor qualquer mecânica em decisões por área.",
+      "nota": "O guia cita só o domínio lizengland.com."
+    },
+    {
+      "id": "gamedeveloper-postmortems",
+      "title": "Game Developer: postmortems e artigos",
+      "author": null,
+      "type": "site",
+      "url": "https://www.gamedeveloper.com/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Postmortems de jogos reais: o que deu certo, o que deu errado, onde o escopo estourou. Serve para calibrar escopo e riscos do brief."
+    },
+    {
+      "id": "atlassian-agile",
+      "title": "Atlassian Agile Coach",
+      "author": "Atlassian",
+      "type": "site",
+      "url": "https://www.atlassian.com/agile",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Scrum, Kanban, backlog, estimativa e sprints. Serve para transformar o brief em marcos e backlog priorizado."
+    },
+    {
+      "id": "scrum-guide-ptbr",
+      "title": "Guia do Scrum em português",
+      "author": "Ken Schwaber e Jeff Sutherland",
+      "type": "documentacao",
+      "url": "https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-PortugueseBR-3.0.pdf",
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Definição oficial de Scrum. Leitura recomendada para o planejamento em sprints.",
+      "nota": "É um PDF; a ferramenta de texto lê páginas HTML."
+    },
+    {
+      "id": "a-arte-de-game-design",
+      "title": "A Arte de Game Design",
+      "author": "Jesse Schell",
+      "type": "livro",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Livro de referência sobre visão, experiência central e pilares. Sem versão online legal."
+    }
+  ],
+  "subagents": [
+    {
+      "id": "game-designer",
+      "name": "Game designer",
+      "purpose": "Pesquisa regras, mecânicas, core loop, progressão, economia e balanceamento.",
+      "knowledge_node": "design/game-designer"
+    },
+    {
+      "id": "combat-designer",
+      "name": "Combat designer",
+      "purpose": "Pesquisa movesets, dados de frame, design de inimigos, encontros e game feel do combate.",
+      "knowledge_node": "design/combat-designer"
+    },
+    {
+      "id": "level-designer",
+      "name": "Level designer",
+      "purpose": "Pesquisa estrutura de fases, fluxo, ritmo, blockout e posicionamento de inimigos, itens e checkpoints.",
+      "knowledge_node": "design/level-designer"
+    },
+    {
+      "id": "narrative-designer",
+      "name": "Narrative designer",
+      "purpose": "Pesquisa estrutura de história, personagens, diálogos ramificados, missões e narrativa pelo ambiente.",
+      "knowledge_node": "design/narrative-designer"
+    },
+    {
+      "id": "ux-ui-designer",
+      "name": "UX/UI designer",
+      "purpose": "Pesquisa menus, HUD, fluxo de telas, onboarding e acessibilidade.",
+      "knowledge_node": "design/ux-ui-designer"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "agent": "arte-3d",
+  "subagent": "environment-artist",
+  "references": [
+    {
+      "id": "80lv-environment",
+      "title": "80.lv: breakdowns de ambiente",
+      "author": null,
+      "type": "site",
+      "url": "https://80.lv/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Breakdowns de cenários: kits modulares, terrenos, vegetação e cenas montadas.",
+      "nota": "O guia cita 80.lv sem hiperlink próprio."
+    },
+    {
+      "id": "game-art-tricks",
+      "title": "Game Art Tricks",
+      "author": "Simon Schreibt",
+      "type": "artigo",
+      "url": "https://simonschreibt.de/game-art-tricks/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Como jogos famosos enganam o jogador para parecer bonitos gastando pouco. Base para economia visual de cenário."
+    },
+    {
+      "id": "level-design-book",
+      "title": "The Level Design Book",
+      "author": "Robert Yang",
+      "type": "livro-online",
+      "url": "https://book.leveldesignbook.com/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Processo, ritmo, escopo e estudos de fases reais. Serve para entender o blockout que o cenário vai vestir."
+    },
+    {
+      "id": "polycount-environment",
+      "title": "Polycount",
+      "author": null,
+      "type": "forum",
+      "url": "https://polycount.com/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Fórum de arte de jogos. Threads sobre kits modulares, texturas tileáveis e cenários.",
+      "nota": "Citada pelo guia na base da área, sem hiperlink."
+    }
+  ]
+}

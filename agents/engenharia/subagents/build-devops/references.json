@@ -1,0 +1,36 @@
+{
+  "agent": "engenharia",
+  "subagent": "build-devops",
+  "references": [
+    {
+      "id": "pro-git-devops",
+      "title": "Pro Git",
+      "author": "Scott Chacon e Ben Straub",
+      "type": "livro-online",
+      "url": "https://git-scm.com/book",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Livro gratuito de Git: fundamentos, branches, remotos, fluxos de equipe. Tem tradução para português.",
+      "nota": "O guia cita git-scm.com/book sem hiperlink."
+    },
+    {
+      "id": "gameci",
+      "title": "GameCI",
+      "author": "GameCI",
+      "type": "site",
+      "url": "https://github.com/game-ci",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "CI open source para jogos, gratuito. Ações do GitHub para build e teste de projetos Unity."
+    },
+    {
+      "id": "gameci-intro-github-actions",
+      "title": "GameCI 1: Intro to GitHub Actions for Unity",
+      "author": null,
+      "type": "artigo",
+      "url": "https://davidmfinol.github.io/gameci-1_intro.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Tutorial passo a passo de GitHub Actions com GameCI para Unity, inclusive o deploy WebGL pelo GitHub Pages."    }
+  ]
+}

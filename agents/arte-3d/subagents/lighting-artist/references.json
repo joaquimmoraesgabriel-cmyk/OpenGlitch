@@ -1,0 +1,39 @@
+{
+  "agent": "arte-3d",
+  "subagent": "lighting-artist",
+  "references": [
+    {
+      "id": "unity-hdrp-lighting-guide",
+      "title": "Guia de iluminação HDRP da Unity",
+      "author": "Unity",
+      "type": "livro",
+      "url": "https://unity.com/resources/lighting-hdrp-guide",
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "E-book gratuito sobre iluminação no pipeline HDRP.",
+      "nota": "A página é uma entrada de download do e-book; o conteúdo está no PDF, que a ferramenta de texto não lê."
+    },
+    {
+      "id": "unreal-lighting-documentation",
+      "title": "Documentação de iluminação da Unreal",
+      "author": "Epic Games",
+      "type": "documentacao",
+      "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Iluminação na Unreal, incluindo Lumen e pós-processamento.",
+      "nota": "O guia cita a documentação sem link. A URL é a raiz da documentação da Unreal; procure as seções de iluminação e de pós-processamento."
+    },
+    {
+      "id": "gurney-journey-lighting",
+      "title": "Gurney Journey",
+      "author": "James Gurney",
+      "type": "blog",
+      "url": "https://gurneyjourney.blogspot.com/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Estudos de luz, cor e composição para clima e leitura.",
+      "nota": "O guia cita o blog sem hiperlink."
+    }
+  ]
+}

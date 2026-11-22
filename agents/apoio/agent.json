@@ -1,0 +1,29 @@
+{
+  "id": "apoio",
+  "name": "Apoio",
+  "kind": "worker",
+  "summary": "Garante que o jogo funciona, fala outras línguas e é conhecido: testes, localização e marketing.",
+  "when_to_use": "Para planejar e rodar testes, escrever bug reports e roteiros de playtest; preparar o jogo e os textos para localização; e planejar a divulgação (página da loja, trailer, wishlists, comunidade, publisher). O marketing começa cedo, junto com o brief; o QA acompanha as entregas de todos os agentes.",
+  "mandatory_first": false,
+  "shared_references": [],
+  "subagents": [
+    {
+      "id": "qa",
+      "name": "QA (testes)",
+      "purpose": "Pesquisa como escrever bug reports, planos de teste, regressão, severidade e prioridade, e testes de desempenho.",
+      "knowledge_node": "apoio/qa"
+    },
+    {
+      "id": "localization",
+      "name": "Localização",
+      "purpose": "Pesquisa como preparar o jogo para vários idiomas: textos em arquivo, UTF-8, fontes, espaço na interface, kit de localização e LQA.",
+      "knowledge_node": "apoio/localization"
+    },
+    {
+      "id": "marketing-publisher",
+      "name": "Marketing e publisher",
+      "purpose": "Pesquisa página da Steam, wishlists, trailer, festivais, comunidade, publisher e os programas e eventos do Brasil.",
+      "knowledge_node": "apoio/marketing-publisher"
+    }
+  ]
+}

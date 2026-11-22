@@ -1,0 +1,47 @@
+{
+  "id": "audio",
+  "name": "Áudio",
+  "kind": "worker",
+  "summary": "Define e especifica o som do jogo: efeitos, música, vozes e a configuração do áudio na engine ou em middleware.",
+  "when_to_use": "Depois que o Design definiu as ações e o tom do jogo, e sempre que o pedido envolver efeitos sonoros, ambientes, sons de interface, trilha, música adaptativa, dublagem, mixagem, FMOD, Wwise ou o áudio nativo da engine. Também para sonorizar as cenas entregues por Cinematics.",
+  "mandatory_first": false,
+  "shared_references": [
+    {
+      "id": "designing-sound",
+      "title": "Designing Sound",
+      "author": null,
+      "type": "blog",
+      "url": "https://designingsound.org/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Cerca de 2.000 posts sobre design de som para jogos e cinema: camadas, gravação, diálogo, implementação, middleware. É a base da área e serve a todos os subagentes de áudio.",
+      "nota": "Conteúdo sob Creative Commons, segundo o guia. Mesmo assim, confira a licença da página ao citar trechos."
+    }
+  ],
+  "subagents": [
+    {
+      "id": "sound-designer",
+      "name": "Sound designer",
+      "purpose": "Pesquisa como criar efeitos sonoros em camadas, variações, ambientes, sons de interface e onde achar sons prontos com a licença certa.",
+      "knowledge_node": "audio/sound-designer"
+    },
+    {
+      "id": "composer",
+      "name": "Compositor",
+      "purpose": "Pesquisa trilha sonora, teoria musical básica e música interativa: camadas, transições, stingers e loops.",
+      "knowledge_node": "audio/composer"
+    },
+    {
+      "id": "voice-over",
+      "name": "Dublagem",
+      "purpose": "Pesquisa gravação e edição de voz, roteiro com contexto, esforços vocais e dublagem em vários idiomas.",
+      "knowledge_node": "audio/voice-over"
+    },
+    {
+      "id": "audio-programmer",
+      "name": "Audio programmer",
+      "purpose": "Pesquisa integração de som na engine: AudioSource, AudioMixer, FMOD, Wwise, som 3D, mixagem dinâmica e desempenho.",
+      "knowledge_node": "audio/audio-programmer"
+    }
+  ]
+}

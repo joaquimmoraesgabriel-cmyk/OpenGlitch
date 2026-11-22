@@ -1,0 +1,37 @@
+{
+  "agent": "apoio",
+  "subagent": "qa",
+  "references": [
+    {
+      "id": "sloperama-faq75",
+      "title": "Sloperama FAQ 75: How To Write A Game Bug Report",
+      "author": null,
+      "type": "artigo",
+      "url": "https://sloperama.com/advice/faq75.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Guia de como escrever um bug report de jogo, por um professor de QA de games da University of Southern California.",
+      "nota": "O guia não informa o nome do autor."
+    },
+    {
+      "id": "bugnet-good-bug-reports",
+      "title": "How to write good bug reports",
+      "author": "Bugnet",
+      "type": "artigo",
+      "url": "https://bugnet.io/blog/how-to-write-good-bug-reports-for-game-development",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Os campos de um bom relatório: título, passos para reproduzir, esperado versus real, ambiente, severidade e evidências."
+    },
+    {
+      "id": "kelina-cowell-bug-reports",
+      "title": "Bug Reports Developers Don't Ignore",
+      "author": "Kelina Cowell",
+      "type": "artigo",
+      "url": "https://kelinacowellqa.github.io/Manual-QA-Portfolio-Kelina-Cowell/articles/how-to-write-bug-reports.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Como escrever relatórios que o programador lê e consegue usar."
+    }
+  ]
+}

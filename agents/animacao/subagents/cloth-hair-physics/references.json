@@ -1,0 +1,50 @@
+{
+  "agent": "animacao",
+  "subagent": "cloth-hair-physics",
+  "references": [
+    {
+      "id": "blender-manual-cloth-hair",
+      "title": "Manual do Blender: Cloth e Hair",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://docs.blender.org/manual/en/latest/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Simulação de tecido e sistema de partículas de cabelo no Blender.",
+      "nota": "O guia cita o manual sem hiperlink. O endereço é a raiz do manual oficial; as seções estão em Physics e Particles."
+    },
+    {
+      "id": "unity-cloth-ragdoll-docs",
+      "title": "Documentação da Unity: Cloth, Ragdoll Wizard e Joints",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/Manual/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Componente Cloth, assistente de ragdoll e joints para física de corpo.",
+      "nota": "O guia cita a documentação sem hiperlink. O endereço é a raiz do manual oficial; as seções estão em Physics."
+    },
+    {
+      "id": "unreal-chaos-cloth-docs",
+      "title": "Documentação da Unreal: Chaos Cloth e Physics Asset",
+      "author": "Epic Games",
+      "type": "documentacao",
+      "url": "https://dev.epicgames.com/documentation/unreal-engine/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Tecido Chaos Cloth e Physics Asset para ragdoll e colisores de personagem.",
+      "nota": "O guia cita a documentação sem hiperlink. O endereço é a raiz da documentação oficial da Epic; procure por Chaos Cloth e Physics Asset."
+    },
+    {
+      "id": "unity-damped-transform",
+      "title": "Damped Transform (Unity Animation Rigging)",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/Packages/com.unity.animation.rigging@1.0/manual/index.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Constraint que dá balanço amortecido a cadeias de ossos, alternativa leve ao tecido completo.",
+      "nota": "É o hiperlink geral do pacote Animation Rigging; o constraint Damped Transform está numa página interna."
+    }
+  ]
+}

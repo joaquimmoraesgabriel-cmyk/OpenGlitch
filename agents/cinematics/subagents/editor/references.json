@@ -1,0 +1,47 @@
+{
+  "agent": "cinematics",
+  "subagent": "editor",
+  "references": [
+    {
+      "id": "studiobinder-rule-of-six",
+      "title": "The Rule of Six (Walter Murch)",
+      "author": "StudioBinder",
+      "type": "artigo",
+      "url": "https://www.studiobinder.com/blog/walter-murch-rule-of-six/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "A regra do editor Walter Murch para decidir um corte: emoção 51%, história 23%, ritmo 10%, eye-trace 7% e os critérios seguintes."
+    },
+    {
+      "id": "walter-murch-opedia",
+      "title": "The Walter Murch-opedia",
+      "author": "Jonny Elwyn",
+      "type": "artigo",
+      "url": "https://jonnyelwyn.co.uk/film-and-video-editing/the-walter-murch-opedia/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Reunião de textos, entrevistas e ideias de Walter Murch sobre edição. Aprofunda a regra dos seis e o ritmo."
+    },
+    {
+      "id": "unreal-sequencer-maya-users",
+      "title": "Using Cinematics and Sequencer in Unreal Engine for Maya Users",
+      "author": "Epic Games",
+      "type": "documentacao",
+      "url": "https://dev.epicgames.com/documentation/unreal-engine/using-cinematics-and-sequencer-in-unreal-engine-for-maya-users",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "O Sequencer visto como editor dentro da engine: shots, tracks, cortes e organização da timeline."
+    },
+    {
+      "id": "unity-timeline-docs",
+      "title": "Documentação do Timeline (Unity)",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": null,
+      "url_origem": "inferida",
+      "pesquisavel": false,
+      "uso": "O Timeline da Unity como editor de cena: trilhas, clipes, ativação de câmeras e áudio.",
+      "nota": "O guia cita a documentação sem link. Sem URL por falta de certeza do endereço da versão atual."
+    }
+  ]
+}

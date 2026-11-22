@@ -1,0 +1,69 @@
+{
+  "agent": "cinematics",
+  "subagent": "lighting-comp",
+  "references": [
+    {
+      "id": "redshark-arcane-pipeline",
+      "title": "Why Netflix's Arcane looks so good: how Fortiche ramped up the animation pipeline",
+      "author": "RedShark News",
+      "type": "artigo",
+      "url": "https://redsharknews.com/why-netflixs-arcane-looks-so-good-how-fortiche-ramped-up-the-animation-pipeline",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Pipeline da Fortiche e shaders próprios. Explica os fundos pintados em 2D projetados sobre geometria 3D simples (projection mapping)."
+    },
+    {
+      "id": "80lv-arcane-backgrounds",
+      "title": "Arcane artists show how they combine traditional art and 3D for backgrounds",
+      "author": "80.lv",
+      "type": "artigo",
+      "url": "https://80.lv/articles/arcane-artists-show-how-they-combine-traditional-art-3d-for-backgrounds",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Como a equipe monta um set 3D e projeta matte painting nele, com linhas tremidas feitas à mão."
+    },
+    {
+      "id": "80lv-ekko-substance-blender",
+      "title": "3D artist recreates Arcane's Ekko with Substance 3D and Blender",
+      "author": "80.lv",
+      "type": "artigo",
+      "url": "https://80.lv/articles/3d-artist-recreates-arcane-s-ekko-with-substance-3d-blender",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Recriação do visual do Ekko em Substance e Blender, com texturas pintadas à mão. Serve para o acabamento do personagem em cena."
+    },
+    {
+      "id": "tese-fortiche-inspired-environment",
+      "title": "Creating Fortiche-Inspired Environment",
+      "author": "HAW Hamburg (tese de mestrado)",
+      "type": "artigo",
+      "url": "https://reposit.haw-hamburg.de/bitstream/20.500.12738/16175/1/MA_Creating_Fortiche-Inspired_Environment.pdf",
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Tese gratuita que recria o estilo Fortiche na Unreal Engine 5. Leitura recomendada para quem quer o visual tipo Arcane em tempo real.",
+      "nota": "É um PDF; a ferramenta de texto lê páginas HTML."
+    },
+    {
+      "id": "blender-manual-compositor",
+      "title": "Manual do Blender (Compositor)",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://docs.blender.org/manual/en/latest/compositing/index.html",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Nós de composição, correção de cor e efeitos de lente no compositor do Blender, para o caso pré-renderizado.",
+      "nota": "O guia cita o manual sem link."
+    },
+    {
+      "id": "post-process-unreal-unity",
+      "title": "Post Process da Unreal e da Unity",
+      "author": "Epic Games e Unity",
+      "type": "documentacao",
+      "url": null,
+      "url_origem": "inferida",
+      "pesquisavel": false,
+      "uso": "Pós-processamento em tempo real: color grading, bloom, profundidade de campo e outros efeitos de lente.",
+      "nota": "O guia cita a documentação das duas engines sem link. Sem URL por falta de certeza do endereço de cada versão."
+    }
+  ]
+}

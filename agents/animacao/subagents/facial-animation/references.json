@@ -1,0 +1,37 @@
+{
+  "agent": "animacao",
+  "subagent": "facial-animation",
+  "references": [
+    {
+      "id": "facs-wikipedia",
+      "title": "Facial Action Coding System",
+      "author": "Wikipédia",
+      "type": "wiki",
+      "url": "https://en.wikipedia.org/wiki/Facial_Action_Coding_System",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Definição do FACS, lista de action units e o uso delas como pesos de blend shapes."
+    },
+    {
+      "id": "imotions-facs-guidebook",
+      "title": "iMotions: FACS Visual Guidebook",
+      "author": "iMotions",
+      "type": "blog",
+      "url": "https://imotions.com/blog/facial-expression-pictures/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Guia com imagens de expressões e das action units que as compõem."
+    },
+    {
+      "id": "blender-manual-shape-keys",
+      "title": "Manual do Blender: Shape Keys",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://docs.blender.org/manual/en/latest/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Criação e animação de shape keys, base para as blend shapes faciais.",
+      "nota": "O guia cita o manual sem hiperlink. O endereço é a raiz do manual oficial; a seção é Animation & Rigging, Shape Keys."
+    }
+  ]
+}

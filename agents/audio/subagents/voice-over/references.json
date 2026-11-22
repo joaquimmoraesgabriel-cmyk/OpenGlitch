@@ -1,0 +1,17 @@
+{
+  "agent": "audio",
+  "subagent": "voice-over",
+  "references": [
+    {
+      "id": "igda-localization-best-practices",
+      "title": "IGDA Best Practices for Game Localization",
+      "author": "IGDA",
+      "type": "documentacao",
+      "url": "https://www.igda.org/resources/best-practices/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Guia gratuito de localização. Aqui interessa a parte de gravação de voz em várias línguas.",
+      "nota": "O guia usa este mesmo link em Localização. A página é um índice de recursos; o conteúdo completo costuma estar em PDF. Siga os links da página."
+    }
+  ]
+}

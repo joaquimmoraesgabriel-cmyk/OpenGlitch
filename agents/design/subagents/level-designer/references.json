@@ -1,0 +1,37 @@
+{
+  "agent": "design",
+  "subagent": "level-designer",
+  "references": [
+    {
+      "id": "level-design-book",
+      "title": "The Level Design Book",
+      "author": "Robert Yang",
+      "type": "livro-online",
+      "url": "https://book.leveldesignbook.com/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Processo, ritmo, escopo, combate e estudos de fases reais (por exemplo Undead Burg, de Dark Souls 1). O melhor recurso gratuito da área; comece por ele."
+    },
+    {
+      "id": "unity-level-design-ebook",
+      "title": "Introduction to level design in game development and in Unity",
+      "author": "Level designers profissionais (Unity)",
+      "type": "livro",
+      "url": "https://unity.com/resources/introduction-to-level-design-in-game-development-and-in-unity",
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "E-book da Unity sobre fundamentos de level design e blockout na engine.",
+      "nota": "O e-book costuma ser entregue por formulário de download, então a ferramenta pode não ler o conteúdo. Se a página abrir só como vitrine, cite como leitura recomendada."
+    },
+    {
+      "id": "cyberpunk-quest-design-level-design-101",
+      "title": "Cyberpunk 2077 Quest Design Wiki: Level design 101",
+      "author": "CD Projekt RED (wiki de design)",
+      "type": "wiki",
+      "url": "https://cyberpunk-2077-quest-design.gitbook.io/cyberpunk-2077-design-wiki/generic-game-design/design-basics/level-design-101",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Princípios básicos de level design explicados por um estúdio de grande produção."
+    }
+  ]
+}

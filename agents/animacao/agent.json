@@ -1,0 +1,149 @@
+{
+  "id": "animacao",
+  "name": "Animação",
+  "kind": "worker",
+  "summary": "Dá movimento ao jogo: define o estilo de movimento, monta rigs, anima, limpa mocap e faz as animações funcionarem na engine.",
+  "when_to_use": "Quando o pedido envolve esqueleto e skinning de um personagem, animation list, ciclos e ações de gameplay, cenas animadas, mocap e retargeting, expressões faciais e lip sync, state machines, blend trees, IK, motion matching, roupa, cabelo e ragdoll. Entra depois do Design (e da Arte 3D, quando o personagem ainda precisa de modelo).",
+  "mandatory_first": false,
+  "shared_references": [
+    {
+      "id": "animators-survival-kit",
+      "title": "Manual de Animação (The Animator's Survival Kit)",
+      "author": "Richard Williams",
+      "type": "livro",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Livro de referência dos 12 princípios e do timing. Leitura recomendada para guia de estilo de movimento. Sem versão online legal.",
+      "nota": "O guia cita o livro sem hiperlink."
+    },
+    {
+      "id": "game-anim-livro",
+      "title": "Game Anim: Video Game Animation Explained",
+      "author": "Jonathan Cooper",
+      "type": "livro",
+      "url": "https://www.routledge.com/Game-Anim-Video-Game-Animation-Explained/Cooper/p/book/9780367707651",
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Livro pago sobre animação de jogos. A 2ª edição cobre mocap e motion matching. Leitura recomendada; o site gameanim.com tem parte do conteúdo grátis.",
+      "nota": "Página de venda do livro. Líder de animação em Assassin's Creed e Mass Effect."
+    },
+    {
+      "id": "gameanim-site",
+      "title": "gameanim.com",
+      "author": "Jonathan Cooper",
+      "type": "site",
+      "url": "https://www.gameanim.com/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Blog, tutoriais e o rig AZRI gratuito para Maya. Base para responsividade, combate, locomoção e como estúdios reais animam."
+    },
+    {
+      "id": "12-principios-jogos",
+      "title": "Os 12 princípios da animação em jogos",
+      "author": "Jonathan Cooper",
+      "type": "artigo",
+      "url": "https://www.gamedeveloper.com/production/the-12-principles-of-animation-in-video-games",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Capítulo gratuito do Game Anim: cada princípio adaptado a jogos, com exemplos de Cuphead e Shadow of the Colossus. Ponto de partida do guia de estilo de movimento."
+    },
+    {
+      "id": "epic-state-machines-motion-matching",
+      "title": "Conteúdo gratuito da Epic sobre State Machines e Motion Matching",
+      "author": "Epic Games",
+      "type": "documentacao",
+      "url": "https://www.unrealengine.com/learning/januarys-epic-learning-content-nanite-metahuman-pcg-and-more",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Página de conteúdo de aprendizado da Epic com material sobre state machines e motion matching. Serve para entender como a engine decide qual animação toca.",
+      "nota": "É uma página de listagem de conteúdo; os materiais ficam em links dentro dela."
+    },
+    {
+      "id": "orange-duck",
+      "title": "The Orange Duck",
+      "author": "Daniel Holden",
+      "type": "blog",
+      "url": "https://theorangeduck.com/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Artigos sobre motion matching, blending e springs, com uma implementação simples de Motion Matching. Base técnica para transições e blends.",
+      "nota": "O guia cita só o domínio theorangeduck.com."
+    },
+    {
+      "id": "alan-becker",
+      "title": "Alan Becker",
+      "author": "Alan Becker",
+      "type": "video",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Canal do YouTube de animação. Leitura recomendada para a noção de peso e exagero; não é lido pelas ferramentas.",
+      "nota": "O guia cita o canal sem link."
+    },
+    {
+      "id": "animation-mentor",
+      "title": "Animation Mentor",
+      "author": null,
+      "type": "curso",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Curso pago de animação. Citado como caminho de estudo."
+    },
+    {
+      "id": "ianimate",
+      "title": "iAnimate",
+      "author": null,
+      "type": "curso",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Curso pago de animação. Citado como caminho de estudo."
+    }
+  ],
+  "subagents": [
+    {
+      "id": "rigger",
+      "name": "Rigger",
+      "purpose": "Pesquisa esqueleto padronizado, hierarquia de ossos, IK/FK, weight painting e a separação entre rig de animação e esqueleto de jogo.",
+      "knowledge_node": "animacao/rigger"
+    },
+    {
+      "id": "gameplay-animator",
+      "name": "Animador de gameplay",
+      "purpose": "Pesquisa ciclos de locomoção, ações de combate, transições e responsividade, com os 12 princípios adaptados a jogos.",
+      "knowledge_node": "animacao/gameplay-animator"
+    },
+    {
+      "id": "cinematic-animator",
+      "name": "Animador de cinematic",
+      "purpose": "Pesquisa atuação, linguagem de câmera e as ferramentas de cinematic da engine (Sequencer, Timeline).",
+      "knowledge_node": "animacao/cinematic-animator"
+    },
+    {
+      "id": "mocap-cleanup",
+      "name": "Mocap e cleanup",
+      "purpose": "Pesquisa formatos de mocap, retargeting, limpeza de curvas, foot locking e licenças de bancos de movimento.",
+      "knowledge_node": "animacao/mocap-cleanup"
+    },
+    {
+      "id": "facial-animation",
+      "name": "Animação facial",
+      "purpose": "Pesquisa FACS, blend shapes, visemes, expressões base e lip sync.",
+      "knowledge_node": "animacao/facial-animation"
+    },
+    {
+      "id": "animation-td",
+      "name": "Animation TD",
+      "purpose": "Pesquisa state machines, blend trees, blend spaces, IK procedural, motion matching e a importação de animações na engine.",
+      "knowledge_node": "animacao/animation-td"
+    },
+    {
+      "id": "cloth-hair-physics",
+      "name": "Cloth, hair e physics",
+      "purpose": "Pesquisa simulação de tecido e cabelo, jiggle bones, ragdoll e os ajustes para rodar leve.",
+      "knowledge_node": "animacao/cloth-hair-physics"
+    }
+  ]
+}

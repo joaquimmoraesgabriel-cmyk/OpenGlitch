@@ -1,0 +1,27 @@
+{
+  "agent": "arte-3d",
+  "subagent": "concept-artist",
+  "references": [
+    {
+      "id": "drawabox",
+      "title": "Drawabox",
+      "author": null,
+      "type": "curso",
+      "url": "https://drawabox.com/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Lições gratuitas baseadas em exercícios, inspiradas em concept artists e designers industriais. Base para perspectiva, forma e construção. O guia estima de 5 meses a 2 anos para percorrer o curso."
+    },
+    {
+      "id": "gurney-journey-concept",
+      "title": "Gurney Journey",
+      "author": "James Gurney",
+      "type": "blog",
+      "url": "https://gurneyjourney.blogspot.com/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Cor, luz e composição na pintura, aplicáveis à pintura de cenário com clima e à paleta de um personagem.",
+      "nota": "O guia cita o blog sem hiperlink."
+    }
+  ]
+}

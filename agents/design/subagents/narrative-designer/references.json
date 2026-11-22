@@ -1,0 +1,48 @@
+{
+  "agent": "design",
+  "subagent": "narrative-designer",
+  "references": [
+    {
+      "id": "emily-short-self-training",
+      "title": "Emily Short's Interactive Storytelling: Self-Training in Narrative Design",
+      "author": "Emily Short",
+      "type": "blog",
+      "url": "https://emshort.blog/self-training-in-narrative-design",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "O blog mais respeitado sobre narrativa em jogos. O guia Self-Training in Narrative Design organiza o que estudar e em que ordem."
+    },
+    {
+      "id": "ink-web-tutorial",
+      "title": "Tutorial do ink",
+      "author": "inkle",
+      "type": "documentacao",
+      "url": "https://www.inklestudios.com/ink/web-tutorial/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Tutorial da linguagem ink para quem nunca programou: escolhas, ramificações, variáveis e fluxo de diálogo."
+    },
+    {
+      "id": "twine-docs",
+      "title": "Documentação do Twine",
+      "author": "Twine",
+      "type": "documentacao",
+      "url": "https://twinery.org/reference/en/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Referência do Twine para montar histórias interativas ramificadas.",
+      "nota": "O guia cita a documentação sem link. O endereço é a referência oficial do Twine."
+    },
+    {
+      "id": "yarn-spinner-docs",
+      "title": "Documentação do Yarn Spinner",
+      "author": "Yarn Spinner",
+      "type": "documentacao",
+      "url": "https://docs.yarnspinner.dev/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Referência do Yarn Spinner para escrever diálogo ramificado que depois roda dentro da engine.",
+      "nota": "O guia cita a documentação sem link. O endereço é a documentação oficial do Yarn Spinner."
+    }
+  ]
+}

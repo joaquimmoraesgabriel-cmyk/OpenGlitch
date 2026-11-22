@@ -1,0 +1,49 @@
+{
+  "agent": "audio",
+  "subagent": "audio-programmer",
+  "references": [
+    {
+      "id": "wwise-101",
+      "title": "Wwise-101",
+      "author": "Audiokinetic",
+      "type": "curso",
+      "url": "https://www.audiokinetic.com/courses/wwise101",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Curso introdutório de Wwise: 20 lições, 20 quizzes e 1 exame. Base para eventos, buses e integração.",
+      "nota": "A página descreve o curso; o conteúdo das lições pode exigir conta ou estar em outra página."
+    },
+    {
+      "id": "fmod-studio",
+      "title": "FMOD Studio",
+      "author": "Firelight Technologies",
+      "type": "ferramenta",
+      "url": "https://fmod.com/studio",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Página do middleware FMOD. Serve para saber o que a ferramenta oferece.",
+      "nota": "O guia diz que a licença Indie é gratuita ou custa US$ 2.000 por título, para orçamentos abaixo de US$ 600 mil. Confirme na página de licenciamento."
+    },
+    {
+      "id": "fmod-licensing",
+      "title": "FMOD licensing",
+      "author": "Firelight Technologies",
+      "type": "documentacao",
+      "url": "https://fmod.com/licensing",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Condições oficiais de licença do FMOD. Use para conferir a faixa de orçamento, o custo e as exigências antes de adotar."
+    },
+    {
+      "id": "designing-sound-learning-middleware",
+      "title": "Learning Audio Middleware Online: Where to Start",
+      "author": null,
+      "type": "artigo",
+      "url": "https://designingsound.org/2015/01/26/learning-audio-middleware-online-where-to-start/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Onde começar a aprender FMOD e Wwise e como comparar os dois.",
+      "nota": "É de 2015. O guia diz que a lógica vale; versões e telas das ferramentas mudaram."
+    }
+  ]
+}

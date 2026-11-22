@@ -1,0 +1,83 @@
+{
+  "agent": "animacao",
+  "subagent": "mocap-cleanup",
+  "references": [
+    {
+      "id": "cmu-mocap",
+      "title": "CMU Graphics Lab Motion Capture Database",
+      "author": "Carnegie Mellon University",
+      "type": "banco-de-dados",
+      "url": "https://mocap.cs.cmu.edu/resources.php",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Banco gratuito de mocap com 2.605 capturas em 6 categorias. O guia recomenda começar pelos sujeitos de número mais alto.",
+      "nota": "Licença: permite incluir os dados em produtos vendidos, mas proíbe revender os dados diretamente, mesmo convertidos. Pode ser usado dentro de um jogo; não serve para vender um pacote feito só com eles."
+    },
+    {
+      "id": "cmu-mocap-fbx",
+      "title": "Versão em FBX do CMU Mocap",
+      "author": "4TU.ResearchData",
+      "type": "banco-de-dados",
+      "url": "https://data.4tu.nl/datasets/0448aab2-3332-449f-a8e2-d208cb58c7df",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "O mesmo banco convertido para FBX, pronto para importar no Blender, na Unity ou na Unreal.",
+      "nota": "A conversão é de terceiros. A restrição de revenda do CMU continua valendo para os dados convertidos."
+    },
+    {
+      "id": "cmu-mocap-licenca",
+      "title": "CMU Motion Capture na Papers With Code",
+      "author": null,
+      "type": "site",
+      "url": "https://paperswithcode.com/dataset/cmu-motion-capture",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Página que o guia usa como referência para a licença do CMU.",
+      "nota": "Hiperlink do guia sobre o texto 'licença do CMU'. Confira também a página do CMU antes de decidir um uso comercial."
+    },
+    {
+      "id": "blender-manual-retargeting",
+      "title": "Documentação de retargeting do Blender",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://docs.blender.org/manual/en/latest/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Importação de BVH e FBX, constraints para transferir movimento entre esqueletos e ajuste de curvas no editor de animação.",
+      "nota": "O guia cita a documentação sem hiperlink. O endereço é a raiz do manual oficial; o Blender não tem uma página única de retargeting, então procure por constraints, Graph Editor e import de animação."
+    },
+    {
+      "id": "unity-humanoid-docs",
+      "title": "Documentação de retargeting da Unity (Humanoid)",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/Manual/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Avatar e rig Humanoid: como a Unity mapeia ossos para reaproveitar uma animação em personagens diferentes.",
+      "nota": "O guia cita a documentação sem hiperlink. O endereço é a raiz do manual oficial; a seção é Animation, Humanoid Avatars."
+    },
+    {
+      "id": "unreal-ik-retargeter-docs",
+      "title": "Documentação de retargeting da Unreal (IK Retargeter)",
+      "author": "Epic Games",
+      "type": "documentacao",
+      "url": "https://dev.epicgames.com/documentation/unreal-engine/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "IK Rig e IK Retargeter: como mapear e transferir animação entre esqueletos diferentes na Unreal.",
+      "nota": "O guia cita a documentação sem hiperlink. O endereço é a raiz da documentação oficial da Epic; procure por IK Retargeting."
+    },
+    {
+      "id": "mixamo",
+      "title": "Mixamo",
+      "author": "Adobe",
+      "type": "ferramenta",
+      "url": "https://www.mixamo.com/",
+      "url_origem": "inferida",
+      "pesquisavel": false,
+      "uso": "Rig automático e biblioteca de animações prontas, citados no guia para testar o jogo com rapidez.",
+      "nota": "O guia cita o Mixamo no pipeline solo sem hiperlink. O site exige login e não é lido pelas ferramentas; confira os termos de uso antes de distribuir."
+    }
+  ]
+}

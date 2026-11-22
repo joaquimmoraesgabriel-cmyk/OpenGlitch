@@ -1,0 +1,74 @@
+{
+  "id": "cinematics",
+  "name": "Cinematics",
+  "kind": "worker",
+  "summary": "Transforma o roteiro de cutscenes em cenas prontas: decupagem, câmera, animação plano a plano, edição e acabamento de luz e cor.",
+  "when_to_use": "Quando o pedido envolve cutscenes, cenas de história, abertura, trailer dentro da engine, direção de câmera, storyboard, shot list, montagem, ritmo de cena, transição entre cutscene e gameplay, luz de cena, color grading ou pós-processamento de cinematic.",
+  "mandatory_first": false,
+  "shared_references": [
+    {
+      "id": "arcane-bridging-the-rift",
+      "title": "Arcane: Bridging the Rift",
+      "author": "League of Legends",
+      "type": "video",
+      "url": "https://www.gamedeveloper.com/press-release/arcane-the-first-episode-of-bridging-the-rift-is-now-available",
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Documentário em 5 episódios, do pitch aos toques finais da série. Leitura recomendada para ver o pipeline de cinematic de ponta a ponta.",
+      "nota": "É um documentário no YouTube. O link do guia aponta para o comunicado do primeiro episódio no Game Developer."
+    },
+    {
+      "id": "pixar-in-a-box",
+      "title": "Pixar in a Box",
+      "author": "Pixar e Khan Academy",
+      "type": "curso",
+      "url": "https://pixar.com/pixar-in-a-box",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Currículo gratuito sobre como a Pixar faz filmes: storytelling, modelagem, cenário e efeitos. Serve de base para decupagem e linguagem de cena."
+    },
+    {
+      "id": "blender-studio",
+      "title": "Blender Studio (curtas abertos)",
+      "author": "Blender Studio",
+      "type": "video",
+      "url": null,
+      "url_origem": "inferida",
+      "pesquisavel": false,
+      "uso": "Curtas abertos (Sprite Fright, Charge, Wing It!) que mostram o pipeline de animação 3D. Leitura recomendada.",
+      "nota": "O guia cita o canal sem link. Os arquivos de produção completos ficam na assinatura paga. Sem URL por falta de certeza do endereço."
+    }
+  ],
+  "subagents": [
+    {
+      "id": "cinematic-director",
+      "name": "Diretor de cinematic",
+      "purpose": "Pesquisa como transformar roteiro em cenas: breakdown, objetivo emocional, storyboard, animatic e quando não fazer cutscene.",
+      "knowledge_node": "cinematics/cinematic-director"
+    },
+    {
+      "id": "layout-camera",
+      "name": "Layout e câmera",
+      "purpose": "Pesquisa tipos de plano, ângulos, lentes, movimentos de câmera, regra dos 180°, blocking, previz e câmeras virtuais na engine.",
+      "knowledge_node": "cinematics/layout-camera"
+    },
+    {
+      "id": "scene-animator",
+      "name": "Animador de cena",
+      "purpose": "Pesquisa atuação plano a plano, sincronia com a dublagem, animação para a câmera e cenas no Sequencer ou no Timeline.",
+      "knowledge_node": "cinematics/scene-animator"
+    },
+    {
+      "id": "editor",
+      "name": "Editor",
+      "purpose": "Pesquisa montagem, tipos de corte, ritmo, a regra dos seis de Walter Murch e o sequenciador da engine como editor.",
+      "knowledge_node": "cinematics/editor"
+    },
+    {
+      "id": "lighting-comp",
+      "name": "Luz e comp",
+      "purpose": "Pesquisa luz de cena, color grading, pós-processamento, composição e o caso Arcane.",
+      "knowledge_node": "cinematics/lighting-comp"
+    }
+  ]
+}

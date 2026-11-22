@@ -1,0 +1,50 @@
+{
+  "agent": "audio",
+  "subagent": "sound-designer",
+  "references": [
+    {
+      "id": "russom-weapon-sound-guide",
+      "title": "Guia de som de armas (Medal of Honor e God of War)",
+      "author": "Chuck Russom",
+      "type": "artigo",
+      "url": "https://cdm.link/?p=10910",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Como se constroem os sons de armas em camadas em jogos de ação de grande porte. Serve para especificar tiros, golpes e explosões.",
+      "nota": "O guia diz que o texto está dentro do Designing Sound, mas o hiperlink aponta para o cdm.link, não para designingsound.org. O conteúdo não foi verificado: confirme se a página trata de som de armas e, se não tratar, procure o guia pelo nome do autor dentro do Designing Sound (referência compartilhada do agente)."
+    },
+    {
+      "id": "ben-minto-interview",
+      "title": "Entrevista com Ben Minto, diretor de som de Star Wars Battlefront",
+      "author": "Ben Minto",
+      "type": "artigo",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Visão de um diretor de som sobre como organizar e mixar o áudio de um jogo de ação em escala grande.",
+      "nota": "O guia não dá link. Está dentro do Designing Sound: use a busca desse site pelo nome do entrevistado. Se achar a página, passe a URL em extra_urls."
+    },
+    {
+      "id": "freesound",
+      "title": "Freesound",
+      "author": null,
+      "type": "banco-de-dados",
+      "url": "https://freesound.org/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Banco de sons gratuito feito pela comunidade. Serve para achar efeitos e ambientes prontos.",
+      "nota": "A licença varia por som (por exemplo domínio público, atribuição, uso não comercial). Confira a licença de cada som antes de listá-lo; registre o tipo exato e se exige crédito."
+    },
+    {
+      "id": "sonniss-gdc-bundle",
+      "title": "Pacote anual gratuito da Sonniss (GDC)",
+      "author": "Sonniss",
+      "type": "banco-de-dados",
+      "url": "https://sonniss.com/gameaudiogdc/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Pacote de efeitos profissionais liberado de graça na época da GDC. Serve para ter uma biblioteca grande de base.",
+      "nota": "O guia cita o pacote sem link; este é o endereço da página do pacote. Leia os termos de licença de cada edição antes de usar."
+    }
+  ]
+}

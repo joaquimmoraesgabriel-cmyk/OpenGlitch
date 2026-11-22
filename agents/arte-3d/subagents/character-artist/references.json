@@ -1,0 +1,152 @@
+{
+  "agent": "arte-3d",
+  "subagent": "character-artist",
+  "references": [
+    {
+      "id": "80lv-character-breakdowns",
+      "title": "80.lv: breakdowns de personagens",
+      "author": null,
+      "type": "site",
+      "url": "https://80.lv/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Breakdowns de personagens: blockout, escultura e retopologia mostrados por artistas, com as ferramentas usadas em cada etapa.",
+      "nota": "O guia cita 80.lv sem hiperlink próprio."
+    },
+    {
+      "id": "polycount-character",
+      "title": "Polycount",
+      "author": null,
+      "type": "forum",
+      "url": "https://polycount.com/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Fórum e wiki de arte de jogos. Threads de personagem, topologia e bake.",
+      "nota": "O guia cita o Polycount sem hiperlink e avisa que o wiki teve períodos fora do ar."
+    },
+    {
+      "id": "blender-manual-modeling",
+      "title": "Manual do Blender: Modeling",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://docs.blender.org/manual/en/latest/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Ferramentas de modelagem para o blockout com primitivas (seção Modeling do manual).",
+      "nota": "O guia cita a seção Modeling sem hiperlink. A URL é a raiz do manual; a seção fica no menu Modeling."
+    },
+    {
+      "id": "blender-manual-sculpt-retopology",
+      "title": "Manual do Blender: Sculpt Mode e Retopology",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://docs.blender.org/manual/en/latest/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Escultura digital no Sculpt Mode e ferramentas de retopologia (snap, shrinkwrap).",
+      "nota": "O guia cita as seções Sculpting e Retopology sem hiperlink. A URL é a raiz do manual; as seções ficam em Sculpt & Paint e em Modeling."
+    },
+    {
+      "id": "blender-studio-stylized-character-workflow",
+      "title": "Blender Studio: Stylized Character Workflow",
+      "author": "Blender Studio",
+      "type": "curso",
+      "url": "https://studio.blender.org/training/stylized-character-workflow/5e5406a786994e6b58c7e54b",
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Curso de fluxo de personagem estilizado. Parte dos vídeos é aberta. Leitura recomendada para a etapa de escultura.",
+      "nota": "É um curso em vídeo; a ferramenta de texto não o lê."
+    },
+    {
+      "id": "blender-studio-live-retopology",
+      "title": "Blender Studio: Live Retopology",
+      "author": "Blender Studio",
+      "type": "artigo",
+      "url": "https://studio.blender.org/blog/live-retopology-at-bcon22",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Post gratuito sobre os loops essenciais e o edge flow em retopologia."
+    },
+    {
+      "id": "michael-vl-topology",
+      "title": "Guia de topologia de Michael VL",
+      "author": "Michael VL",
+      "type": "wiki",
+      "url": "https://michael-vl.github.io/learning-wiki/blender/topology/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Padrões de redirecionar loops e de topologia. Vale para qualquer software."
+    },
+    {
+      "id": "3d-artists-handbook-topology",
+      "title": "3D Artist's Handbook: topologia e retopologia",
+      "author": null,
+      "type": "wiki",
+      "url": "https://sidney-eliot.github.io/3d-artists-handbook/theory/topology-and-retopology",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Wiki gratuito sobre o fluxo de personagem: topologia, retopologia, bake e texturização."
+    },
+    {
+      "id": "wikipedia-retopology",
+      "title": "Retopology (Wikipedia)",
+      "author": null,
+      "type": "wiki",
+      "url": "https://en.wikipedia.org/wiki/Retopology",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Definição geral de retopologia e por que ela melhora a deformação nos movimentos e simplifica o weight painting."
+    },
+    {
+      "id": "maxon-zbrush-retopology",
+      "title": "ZBrush: Retopology (ajuda da Maxon)",
+      "author": "Maxon",
+      "type": "documentacao",
+      "url": "https://help.maxon.net/zbr/en-us/Content/html/user-guide/3d-modeling/topology/Retopo/01-retopo.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Retopologia no ZBrush, incluindo o ZRemesher."
+    },
+    {
+      "id": "blender-manual-seams",
+      "title": "Manual do Blender: Seams",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://www.blender.org/manual/en/modeling/meshes/uv/unwrapping/seams.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Fluxo de UV: marcar seams, desembrulhar, ajustar e repetir.",
+      "nota": "O endereço é o do guia, de uma versão antiga do manual; se não abrir, procure Seams em docs.blender.org/manual."
+    },
+    {
+      "id": "toolbag-baking-tutorial",
+      "title": "The Toolbag Baking Tutorial",
+      "author": "Marmoset",
+      "type": "artigo",
+      "url": "https://www.marmoset.co/posts/toolbag-baking-tutorial/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "O guia de bake mais recomendado, vale mesmo para quem não usa o Toolbag."
+    },
+    {
+      "id": "this-is-normal-2",
+      "title": "This is normal 2: Baking normal maps",
+      "author": null,
+      "type": "artigo",
+      "url": "https://typhen.artstation.com/blog/BDr6/this-is-normal-2-baking-normal-maps",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Explica as costuras de bake em normal maps."
+    },
+    {
+      "id": "baking-maps-reading-list",
+      "title": "Baking Maps for Games Reading List",
+      "author": null,
+      "type": "artigo",
+      "url": "https://camille_meehan.artstation.com/blog/LYbj/baking-maps-for-games-reading-list",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Lista de leituras sobre bake, com foco em Unity."
+    }
+  ]
+}

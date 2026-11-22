@@ -1,0 +1,38 @@
+{
+  "agent": "animacao",
+  "subagent": "rigger",
+  "references": [
+    {
+      "id": "blender-manual-rigging",
+      "title": "Manual do Blender: Armatures, Rigging e Rigify",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://docs.blender.org/manual/en/latest/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Armatures, bones, constraints, weight painting e o add-on Rigify. Fonte principal para montar o rig e gerar o esqueleto.",
+      "nota": "O guia cita o manual sem hiperlink nesta seção. O endereço é a raiz do manual oficial; as seções estão em Animation & Rigging."
+    },
+    {
+      "id": "unity-animation-rigging",
+      "title": "Unity Animation Rigging",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/Packages/com.unity.animation.rigging@1.0/manual/index.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Rigs de deformação e de interação com IK e Aim. Constraints Chain IK, Damped Transform, Multi-Aim, Twist Correction e Two Bone IK."
+    },
+    {
+      "id": "gameanim-azri",
+      "title": "gameanim.com: rig AZRI gratuito",
+      "author": "Jonathan Cooper",
+      "type": "ferramenta",
+      "url": "https://www.gameanim.com/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Rig de animação gratuito para Maya. Exemplo de como controles e esqueleto são organizados num rig profissional.",
+      "nota": "O rig é para Maya. No Blender serve como referência de organização, não como arquivo a importar."
+    }
+  ]
+}

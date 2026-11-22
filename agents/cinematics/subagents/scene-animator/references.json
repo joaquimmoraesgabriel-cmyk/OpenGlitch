@@ -1,0 +1,61 @@
+{
+  "agent": "cinematics",
+  "subagent": "scene-animator",
+  "references": [
+    {
+      "id": "gameanim-god-of-war-cinematography",
+      "title": "Creating a Deeper Emotional Connection: The Cinematography of God of War",
+      "author": "gameanim.com",
+      "type": "artigo",
+      "url": "https://www.gameanim.com/page/4/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Como câmera e atuação trabalham juntas em cenas de história. Serve para decidir o que animar em cada plano.",
+      "nota": "O link do guia é a página 4 da listagem do blog; o artigo pode estar em outra página se o blog avançou."
+    },
+    {
+      "id": "studiobinder-blog",
+      "title": "Blog da StudioBinder",
+      "author": "StudioBinder",
+      "type": "blog",
+      "url": "https://www.studiobinder.com/blog/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Artigos de linguagem de câmera, atuação e storytelling visual. Útil para pesquisar um termo específico de cena.",
+      "nota": "O guia cita o blog sem link."
+    },
+    {
+      "id": "unreal-sequencer-docs",
+      "title": "Documentação do Sequencer (Unreal)",
+      "author": "Epic Games",
+      "type": "documentacao",
+      "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/cinematics-and-movie-making-in-unreal-engine",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Como montar cenas no Sequencer: faixas, atores, câmeras, animação e áudio.",
+      "nota": "O guia cita a documentação sem link. Usada a página oficial de cinematics da Unreal, que cobre o Sequencer."
+    },
+    {
+      "id": "unity-timeline-docs",
+      "title": "Documentação do Timeline (Unity)",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": null,
+      "url_origem": "inferida",
+      "pesquisavel": false,
+      "uso": "Como montar cenas no Timeline: faixas de animação, áudio e ativação.",
+      "nota": "O guia cita a documentação sem link. Sem URL por falta de certeza do endereço da versão atual."
+    },
+    {
+      "id": "11-second-club",
+      "title": "11 Second Club",
+      "author": null,
+      "type": "site",
+      "url": "https://www.11secondclub.com/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Desafio mensal de animar um personagem falando um áudio de cerca de 10 segundos. Serve como referência do exercício de atuação com diálogo.",
+      "nota": "O guia cita o desafio sem link."
+    }
+  ]
+}

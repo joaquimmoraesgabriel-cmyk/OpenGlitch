@@ -1,0 +1,91 @@
+{
+  "agent": "animacao",
+  "subagent": "animation-td",
+  "references": [
+    {
+      "id": "orange-duck",
+      "title": "The Orange Duck",
+      "author": "Daniel Holden",
+      "type": "blog",
+      "url": "https://theorangeduck.com/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Artigos de Daniel Holden (animação e machine learning na Epic, ex-Ubisoft La Forge) sobre motion matching, blending e springs, com uma implementação simples de Motion Matching.",
+      "nota": "O guia cita só o domínio theorangeduck.com."
+    },
+    {
+      "id": "unreal-motion-matching",
+      "title": "Motion Matching na Unreal Engine",
+      "author": "Epic Games",
+      "type": "documentacao",
+      "url": "https://dev.epicgames.com/documentation/unreal-engine/motion-matching-in-unreal-engine",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "A melhor explicação escrita do conceito de motion matching, segundo o guia. Útil também para quem usa Unity."
+    },
+    {
+      "id": "game-animation-sample-project",
+      "title": "Game Animation Sample Project",
+      "author": "Epic Games",
+      "type": "documentacao",
+      "url": "https://www.unrealengine.com/tech-blog/download-the-latest-game-animation-sample-project-now-updated-for-ue-5-8",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Projeto de exemplo gratuito da Epic com locomoção completa e documentação escrita, atualizado para UE 5.8.",
+      "nota": "Licença: a Epic permite usar e fazer retargeting das animações do Sample, mas o conteúdo da Epic costuma ter licença ligada à Unreal. Leia a licença antes de usar num produto para a Unity; o mais seguro é usar só para estudar."
+    },
+    {
+      "id": "epic-state-machines-motion-matching",
+      "title": "Conteúdo gratuito da Epic sobre State Machines e Motion Matching",
+      "author": "Epic Games",
+      "type": "documentacao",
+      "url": "https://www.unrealengine.com/learning/januarys-epic-learning-content-nanite-metahuman-pcg-and-more",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Página de conteúdo de aprendizado da Epic com material sobre state machines e motion matching.",
+      "nota": "É uma página de listagem de conteúdo; os materiais ficam em links dentro dela."
+    },
+    {
+      "id": "unity-animation-docs",
+      "title": "Documentação de animação da Unity (Animator, Blend Trees, Humanoid)",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/Manual/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Animator Controller, state machines, Blend Trees e rig Humanoid na Unity.",
+      "nota": "O guia cita a documentação sem hiperlink. O endereço é a raiz do manual oficial; a seção é Animation."
+    },
+    {
+      "id": "unity-animation-rigging",
+      "title": "Unity Animation Rigging",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/Packages/com.unity.animation.rigging@1.0/manual/index.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Constraints de IK e Aim em tempo de execução: Two Bone IK, Chain IK, Multi-Aim, Damped Transform e Twist Correction."
+    },
+    {
+      "id": "unity-importing-models",
+      "title": "Unity: Importing Models",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/es/current/Manual/ImportingModelFiles.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Importação de FBX: escala e unidades (a Unity usa 1 unidade = 1 metro), tipo de rig Humanoid ou Generic e blend shapes.",
+      "nota": "O caminho 'es' é a versão em espanhol da documentação. É o hiperlink do guia; o conteúdo equivalente em inglês fica em docs.unity3d.com/Manual/."
+    },
+    {
+      "id": "unity-lod-meshes",
+      "title": "Unity: Import a mesh with LOD settings",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/Manual/importing-lod-meshes.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Como a Unity cria o LOD Group na importação quando as malhas são nomeadas _LOD0, _LOD1, _LOD2."
+    }
+  ]
+}

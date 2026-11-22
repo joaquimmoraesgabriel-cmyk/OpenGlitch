@@ -1,0 +1,61 @@
+{
+  "agent": "animacao",
+  "subagent": "cinematic-animator",
+  "references": [
+    {
+      "id": "gameanim-god-of-war",
+      "title": "gameanim.com: Creating a Deeper Emotional Connection: The Cinematography of God of War",
+      "author": "Jonathan Cooper",
+      "type": "artigo",
+      "url": "https://www.gameanim.com/page/4/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Estudo de como a câmera e a atuação constroem emoção numa cena de jogo.",
+      "nota": "O hiperlink do guia aponta para a página 4 da listagem do blog; o post pode estar em outra posição. Use o índice com links para achar o post."
+    },
+    {
+      "id": "studiobinder-blog",
+      "title": "Blog da StudioBinder",
+      "author": "StudioBinder",
+      "type": "blog",
+      "url": "https://www.studiobinder.com/blog/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Guias de linguagem de câmera: tamanhos de plano, enquadramento e movimentos de câmera.",
+      "nota": "O guia cita o blog sem hiperlink nesta seção. O endereço é o blog oficial; o guia dá links de artigos dele na seção de Cinematics."
+    },
+    {
+      "id": "unreal-sequencer-docs",
+      "title": "Documentação do Sequencer (Unreal Engine)",
+      "author": "Epic Games",
+      "type": "documentacao",
+      "url": "https://dev.epicgames.com/documentation/unreal-engine/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Como montar cenas no Sequencer: trilhas de animação, câmera e áudio.",
+      "nota": "O guia cita a documentação sem hiperlink. O endereço é a raiz da documentação oficial; a seção do Sequencer está dentro dela."
+    },
+    {
+      "id": "unity-timeline-docs",
+      "title": "Documentação do Timeline (Unity)",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/Manual/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Como montar cenas no Timeline: trilhas de animação, câmera e áudio.",
+      "nota": "O guia cita a documentação sem hiperlink. O endereço é a raiz do manual oficial da Unity; a seção do Timeline está dentro dela."
+    },
+    {
+      "id": "11-second-club",
+      "title": "11 Second Club",
+      "author": null,
+      "type": "site",
+      "url": "https://www.11secondclub.com/",
+      "url_origem": "inferida",
+      "pesquisavel": false,
+      "uso": "Desafio mensal de animar um personagem falando um áudio de 11 segundos. Serve como exercício de atuação.",
+      "nota": "O guia cita o desafio sem hiperlink. O conteúdo útil são os trabalhos enviados, em vídeo."
+    }
+  ]
+}

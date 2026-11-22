@@ -1,0 +1,57 @@
+{
+  "agent": "design",
+  "subagent": "combat-designer",
+  "references": [
+    {
+      "id": "sirlin-playing-to-win",
+      "title": "Sirlin.net / Playing to Win",
+      "author": "David Sirlin",
+      "type": "livro-online",
+      "url": "https://www.sirlin.net/ptw",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Livro gratuito e artigos sobre balanceamento multiplayer e jogo competitivo. Obrigatório para jogo de luta."
+    },
+    {
+      "id": "evozon-combat-system-design",
+      "title": "Combat System Design",
+      "author": "Evozon",
+      "type": "artigo",
+      "url": "https://www.evozon.com/combat-system-design/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Boas práticas de sistema de combate e lista de recursos. Cita 'Anatomy of a Successful Attack', de Ben Ruiz."
+    },
+    {
+      "id": "vossen-enemy-design",
+      "title": "Enemy design and enemy AI for melee combat systems",
+      "author": "Bart Vossen",
+      "type": "artigo",
+      "url": "https://gamedeveloper.com/design/enemy-design-and-enemy-ai-for-melee-combat-systems",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Série sobre level design, design de inimigos e IA em combate corpo a corpo."
+    },
+    {
+      "id": "game-combat-design-guide",
+      "title": "Game Combat Design Guide",
+      "author": "Game Design Skills",
+      "type": "artigo",
+      "url": "https://gamedesignskills.com/game-design/combat-design/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Visão geral da área e do vocabulário de combat design."
+    },
+    {
+      "id": "ruiz-anatomy-of-a-successful-attack",
+      "title": "Anatomy of a Successful Attack",
+      "author": "Ben Ruiz",
+      "type": "artigo",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Decompõe um ataque em fases e explica o que faz cada fase funcionar.",
+      "nota": "O guia não dá o link. O artigo é citado dentro de 'Combat System Design' da Evozon: abra aquela página com include_links e siga o link de lá."
+    }
+  ]
+}

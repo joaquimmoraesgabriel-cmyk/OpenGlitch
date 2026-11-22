@@ -1,0 +1,50 @@
+{
+  "agent": "design",
+  "subagent": "ux-ui-designer",
+  "references": [
+    {
+      "id": "game-ui-database",
+      "title": "Game UI Database",
+      "author": "Game UI Database",
+      "type": "banco-de-dados",
+      "url": "https://www.gameuidatabase.com/",
+      "url_origem": "corrigida",
+      "pesquisavel": true,
+      "uso": "Banco de referências com mais de 55 mil telas e 1.700 vídeos de 1.341 jogos, grátis e sem anúncios. Serve para comparar como jogos resolvem HUD, menus, inventário e tutorial.",
+      "nota": "O hiperlink do guia aponta para um artigo do gamefromscratch.com sobre o banco, não para o site dele. O domínio gameuidatabase.com aparece só no texto do guia. O valor está nas imagens: use research_images."
+    },
+    {
+      "id": "celia-hodent-blog",
+      "title": "Blog da Celia Hodent",
+      "author": "Celia Hodent",
+      "type": "blog",
+      "url": "https://celiahodent.com/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "UX de jogos e psicologia do jogador: como a cognição e a motivação afetam o que a interface precisa fazer.",
+      "nota": "O guia cita só o domínio."
+    },
+    {
+      "id": "game-accessibility-guidelines",
+      "title": "Game Accessibility Guidelines",
+      "author": "Game Accessibility Guidelines",
+      "type": "site",
+      "url": "https://gameaccessibilityguidelines.com/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Guia de acessibilidade em jogos: legendas, daltonismo, remapeamento de controles e outras opções, por nível de esforço.",
+      "nota": "O guia cita só o domínio."
+    },
+    {
+      "id": "laws-of-ux",
+      "title": "Laws of UX",
+      "author": "Jon Yablonski",
+      "type": "site",
+      "url": "https://lawsofux.com/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Coleção de princípios de UX (hierarquia, carga cognitiva, feedback) com explicação curta de cada um.",
+      "nota": "O guia cita só o domínio."
+    }
+  ]
+}

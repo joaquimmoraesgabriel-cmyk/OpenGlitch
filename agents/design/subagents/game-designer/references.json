@@ -1,0 +1,58 @@
+{
+  "agent": "design",
+  "subagent": "game-designer",
+  "references": [
+    {
+      "id": "game-design-concepts",
+      "title": "Game Design Concepts",
+      "author": "Ian Schreiber",
+      "type": "curso",
+      "url": "https://gamedesignconcepts.wordpress.com/",
+      "url_origem": "corrigida",
+      "pesquisavel": true,
+      "uso": "Curso inteiro de game design em formato de blog. Base para definições, mecânicas, loops, tipos de decisão e prototipagem.",
+      "nota": "No guia, o hiperlink deste título aponta para um post do gbgames.com que anuncia o curso Game Balance Concepts. Corrigido para o site do curso."
+    },
+    {
+      "id": "game-balance-concepts",
+      "title": "Game Balance Concepts",
+      "author": "Ian Schreiber",
+      "type": "curso",
+      "url": "https://gamebalanceconcepts.wordpress.com/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Curso em blog focado só em balanceamento: curvas de custo, relações transitivas e intransitivas, economia, probabilidade, uso de planilha.",
+      "nota": "O guia cita o curso sem hiperlink próprio."
+    },
+    {
+      "id": "lost-garden",
+      "title": "Lost Garden",
+      "author": "Daniel Cook",
+      "type": "blog",
+      "url": "https://lostgarden.com/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Ensaios sobre sistemas, loops de habilidade, economia e prototipagem. Muitos diagramas."
+    },
+    {
+      "id": "raph-koster",
+      "title": "Raph Koster's Website",
+      "author": "Raph Koster",
+      "type": "blog",
+      "url": "https://www.raphkoster.com/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Ensaios sobre sistemas, motivação e teoria da diversão."
+    },
+    {
+      "id": "gamedeveloper-design",
+      "title": "Game Developer: seção Design",
+      "author": null,
+      "type": "site",
+      "url": "https://www.gamedeveloper.com/design",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Milhares de artigos e postmortems. Use para ver como jogos reais resolveram um problema de design."
+    }
+  ]
+}

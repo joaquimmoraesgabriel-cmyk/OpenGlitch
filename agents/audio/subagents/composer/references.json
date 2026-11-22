@@ -1,0 +1,49 @@
+{
+  "agent": "audio",
+  "subagent": "composer",
+  "references": [
+    {
+      "id": "musictheory-net",
+      "title": "musictheory.net",
+      "author": null,
+      "type": "site",
+      "url": "https://musictheory.net/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Lições interativas gratuitas de teoria musical básica: notas, escalas, intervalos, acordes.",
+      "nota": "O guia cita só o domínio, sem hiperlink. Parte do conteúdo é interativo e não vira texto."
+    },
+    {
+      "id": "wwise-201",
+      "title": "Wwise-201: certificação de música interativa",
+      "author": "Audiokinetic",
+      "type": "curso",
+      "url": "https://www.audiokinetic.com/courses/wwise201",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Descrição do curso de música interativa em Wwise, com o conteúdo coberto.",
+      "nota": "Segundo o guia, o material e os quizzes são gratuitos e só o exame é pago."
+    },
+    {
+      "id": "wwise-201-material-sound-architect",
+      "title": "Material e quizzes gratuitos do Wwise-201",
+      "author": null,
+      "type": "site",
+      "url": "https://thesoundarchitect.co.uk/?p=16784",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Material de estudo e quizzes gratuitos do Wwise-201."
+    },
+    {
+      "id": "wwise-201-cras",
+      "title": "Wwise-201 certification (mais de 300 páginas passo a passo)",
+      "author": "CRAS",
+      "type": "curso",
+      "url": "https://www.cras.edu/wwise-201-certification-video-games/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Descrição da certificação com material passo a passo, jogo de exemplo e arquivos de música.",
+      "nota": "É página de apresentação; o material completo pode estar em outro lugar. Compare com a página oficial da Audiokinetic."
+    }
+  ]
+}

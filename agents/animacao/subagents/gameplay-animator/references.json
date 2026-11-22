@@ -1,0 +1,27 @@
+{
+  "agent": "animacao",
+  "subagent": "gameplay-animator",
+  "references": [
+    {
+      "id": "12-principios-jogos",
+      "title": "Os 12 princípios da animação em jogos",
+      "author": "Jonathan Cooper",
+      "type": "artigo",
+      "url": "https://www.gamedeveloper.com/production/the-12-principles-of-animation-in-video-games",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Capítulo gratuito do Game Anim, com exemplos de Cuphead e Shadow of the Colossus. Primeira leitura: cada princípio adaptado a jogos."
+    },
+    {
+      "id": "gameanim-blog",
+      "title": "gameanim.com: blog",
+      "author": "Jonathan Cooper",
+      "type": "blog",
+      "url": "https://www.gameanim.com/page/7/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Posts de quem animou em The Last of Us 2, Uncharted 4, Assassin's Creed 3 e Mass Effect. Posts citados pelo guia: The Combat Of Assassin's Creed, The Art And Animation Of Celeste, Half-Life: Alyx – AnimGraph e The Five Fundamentals Of Video Game Animation.",
+      "nota": "O hiperlink do guia aponta para a página 7 da listagem do blog; os posts citados podem estar em outras páginas. Use o índice com links para achar cada um."
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "agent": "arte-3d",
+  "subagent": "technical-artist",
+  "references": [
+    {
+      "id": "the-book-of-shaders",
+      "title": "The Book of Shaders",
+      "author": "Patricio Gonzalez Vivo e Jen Lowe",
+      "type": "livro-online",
+      "url": "https://thebookofshaders.com/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Livro online gratuito, com editor ao vivo, sobre fundamentos de shaders em GLSL."
+    },
+    {
+      "id": "unity-for-technical-artists",
+      "title": "Unity for Technical Artists",
+      "author": "Unity",
+      "type": "livro",
+      "url": "https://80.lv/articles/unity-released-a-free-book-for-technical-artists",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "E-book gratuito de 91 páginas sobre o trabalho de technical artist no Unity. O link leva ao artigo do 80.lv que apresenta o livro, com um resumo do conteúdo.",
+      "nota": "O livro em si é um PDF; a ferramenta de texto lê só o artigo que o apresenta."
+    },
+    {
+      "id": "game-art-tricks-technical",
+      "title": "Game Art Tricks (palestra sobre RenderDoc e NSight)",
+      "author": "Simon Schreibt",
+      "type": "artigo",
+      "url": "https://simonschreibt.de/game-art-tricks/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Truques de arte técnica e a palestra sobre RenderDoc e NSight para capturar e analisar frames.",
+      "nota": "Na seção de technical artist o guia não traz hiperlink para este item; o endereço vem das outras ocorrências de Game Art Tricks no guia. A palestra em si é vídeo."
+    },
+    {
+      "id": "catlike-coding-unity-tutorials",
+      "title": "Catlike Coding",
+      "author": "Jasper Flick",
+      "type": "site",
+      "url": "https://catlikecoding.com/unity/tutorials/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Tutoriais passo a passo de Unity, incluindo shaders e rendering."
+    },
+    {
+      "id": "riot-tech-blog",
+      "title": "Riot Tech Blog",
+      "author": "Riot Games",
+      "type": "blog",
+      "url": "https://technology.riotgames.com/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Soluções técnicas de um estúdio real, incluindo arte técnica e ferramentas."
+    },
+    {
+      "id": "unity-importing-models",
+      "title": "Unity: Importing Models",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/es/current/Manual/ImportingModelFiles.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Importação de modelos: escala e unidades, tipo de rig (Humanoid ou Generic), blend shapes e materiais.",
+      "nota": "O caminho \"es\" é a versão em espanhol da documentação. Se o texto estiver em espanhol, traduza o que for usado."
+    },
+    {
+      "id": "unity-import-mesh-lod",
+      "title": "Unity: Import a mesh with LOD settings",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/Manual/importing-lod-meshes.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Como nomear as malhas com _LOD0, _LOD1 e _LOD2 para o Unity criar o LOD Group na importação."
+    },
+    {
+      "id": "blender-python-api",
+      "title": "Documentação da API Python do Blender",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://docs.blender.org/api/current/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Referência da API de scripting do Blender, para scripts de exportação em lote, validação e geração de blockout.",
+      "nota": "O guia cita docs.blender.org/api no texto de Engenharia, sem hiperlink."
+    }
+  ]
+}

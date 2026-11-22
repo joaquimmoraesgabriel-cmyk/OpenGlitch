@@ -1,0 +1,100 @@
+{
+  "agent": "engenharia",
+  "subagent": "engine-graphics",
+  "references": [
+    {
+      "id": "learncpp-graficos",
+      "title": "LearnCpp",
+      "author": null,
+      "type": "curso",
+      "url": "https://www.learncpp.com/",
+      "url_origem": "corrigida",
+      "pesquisavel": true,
+      "uso": "Base de C++ que o LearnOpenGL pressupõe: ponteiros, memória, classes. Consulte quando a dúvida for da linguagem e não de gráficos.",
+      "nota": "No guia, o hiperlink sobre o texto learncpp.com aponta para learnopengl.com/Introduction. Corrigido para o site do LearnCpp; o LearnOpenGL está na referência seguinte."
+    },
+    {
+      "id": "learnopengl-introduction",
+      "title": "LearnOpenGL: Introduction",
+      "author": "Joey de Vries",
+      "type": "livro-online",
+      "url": "https://learnopengl.com/Introduction",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Página de entrada do livro. Explica o que o livro cobre, como estudar e indica o LearnCpp para a base de C++."
+    },
+    {
+      "id": "learnopengl-livro",
+      "title": "LearnOpenGL",
+      "author": "Joey de Vries",
+      "type": "livro-online",
+      "url": "https://learnopengl.com/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Livro gratuito de gráficos em tempo real: janela, triângulo, shaders, texturas, transformações, câmera, iluminação, modelos. Fonte principal para o pipeline da GPU e para a matemática.",
+      "nota": "O livro é gratuito online e há um PDF da edição impressa."
+    },
+    {
+      "id": "book-of-shaders",
+      "title": "The Book of Shaders",
+      "author": "Patricio Gonzalez Vivo e Jen Lowe",
+      "type": "livro-online",
+      "url": "https://thebookofshaders.com/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Livro online que ensina a escrever fragment shaders: formas, ruído, cores, padrões. Serve para entender a lógica de um shader antes de usar Shader Graph."
+    },
+    {
+      "id": "catlike-rendering",
+      "title": "Catlike Coding (Rendering, Advanced Rendering e shaders)",
+      "author": "Jasper Flick",
+      "type": "site",
+      "url": "https://catlikecoding.com/unity/tutorials/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Tutoriais de renderização e shaders na Unity: iluminação, sombras, materiais, efeitos. Mostram o código do shader passo a passo."
+    },
+    {
+      "id": "real-time-rendering-books",
+      "title": "Real-Time Rendering: lista de livros gratuitos",
+      "author": null,
+      "type": "site",
+      "url": "https://www.realtimerendering.com/books.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Lista de livros de gráficos em tempo real, com os que são gratuitos (como Ray Tracing Gems II). Serve para achar o livro certo para um tema avançado."
+    },
+    {
+      "id": "unity-importing-models",
+      "title": "Unity: Importing Models",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/es/current/Manual/ImportingModelFiles.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Importação de modelos na Unity: escala e unidades, tipo de rig Humanoid ou Generic, blend shapes e demais ajustes do importador.",
+      "nota": "O caminho \"es\" indica a versão em espanhol da documentação."
+    },
+    {
+      "id": "unity-import-lod",
+      "title": "Unity: Import a mesh with LOD settings",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/Manual/importing-lod-meshes.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Como a Unity cria o LOD Group na importação a partir de malhas nomeadas _LOD0, _LOD1, _LOD2."
+    },
+    {
+      "id": "unity-for-technical-artists-engine",
+      "title": "Unity for Technical Artists",
+      "author": "Unity",
+      "type": "livro-online",
+      "url": "https://80.lv/articles/unity-released-a-free-book-for-technical-artists",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Página que apresenta o e-book gratuito da Unity para technical artists: shaders, desempenho e fluxo de assets na engine.",
+      "nota": "É a página de anúncio no 80.lv; o e-book em si pode estar em outro endereço."
+    }
+  ]
+}

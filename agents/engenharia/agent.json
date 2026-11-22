@@ -1,0 +1,176 @@
+{
+  "id": "engenharia",
+  "name": "Engenharia",
+  "kind": "worker",
+  "summary": "Escreve o código do jogo e monta a base técnica: arquitetura, controles, câmera, combate, IA, ferramentas de editor, multiplayer, build e protótipos.",
+  "when_to_use": "Quando o pedido envolve programar o jogo: escolher engine, definir arquitetura, controle e câmera do personagem, combate, missões, inventário e save, IA de inimigos e NPCs, shaders e desempenho, ferramentas de editor, multiplayer, controle de versão e build, orçamento técnico com meta de FPS, ou um protótipo para testar uma regra do design.",
+  "mandatory_first": false,
+  "shared_references": [
+    {
+      "id": "microsoft-learn-csharp",
+      "title": "Documentação de C# da Microsoft",
+      "author": "Microsoft",
+      "type": "documentacao",
+      "url": "https://learn.microsoft.com/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Base da linguagem para quem programa em Unity: sintaxe, tipos, coleções, eventos, delegates e async. Tem versão em português.",
+      "nota": "O guia cita o domínio learn.microsoft.com; a seção de C# fica dentro dele."
+    },
+    {
+      "id": "learncpp",
+      "title": "LearnCpp",
+      "author": null,
+      "type": "curso",
+      "url": "https://www.learncpp.com/",
+      "url_origem": "corrigida",
+      "pesquisavel": true,
+      "uso": "Base de C++ para Unreal ou engine própria: ponteiros, memória, classes, templates e a biblioteca padrão.",
+      "nota": "No guia, o hiperlink sobre o texto learncpp.com aponta para learnopengl.com/Introduction. Corrigido para o site do LearnCpp; o LearnOpenGL está registrado à parte."
+    },
+    {
+      "id": "pro-git",
+      "title": "Pro Git",
+      "author": "Scott Chacon e Ben Straub",
+      "type": "livro-online",
+      "url": "https://git-scm.com/book",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Livro gratuito de Git: commits, branches, merge, rebase, remotos e fluxos de equipe. Tem tradução para português.",
+      "nota": "O guia cita git-scm.com/book sem hiperlink."
+    },
+    {
+      "id": "game-programming-patterns",
+      "title": "Game Programming Patterns",
+      "author": "Robert Nystrom",
+      "type": "livro-online",
+      "url": "https://gameprogrammingpatterns.com/contents.html",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Padrões de projeto aplicados a jogos: Game Loop, State, Component, Observer, Command, Object Pool, Service Locator e outros. Base para arquitetura do código e padrões da equipe."
+    },
+    {
+      "id": "game-engine-architecture",
+      "title": "Game Engine Architecture",
+      "author": "Jason Gregory",
+      "type": "livro",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Livro de referência sobre a estrutura de uma engine: loop principal, memória, recursos, renderização, animação, física. Leitura recomendada para decisões de arquitetura.",
+      "nota": "Livro pago. O guia não informa URL."
+    },
+    {
+      "id": "unreal-cursos-gratuitos",
+      "title": "Cursos gratuitos de Unreal Engine da Epic",
+      "author": "Epic Games",
+      "type": "curso",
+      "url": "https://www.unrealengine.com/news/free-professional-unreal-engine-courses-now-available-on-the-epic-developer-community",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Anúncio e lista dos cursos profissionais gratuitos da Epic Developer Community. Serve para achar o curso certo de Blueprints, C++, física, IA ou rede na Unreal."
+    },
+    {
+      "id": "unity-learn",
+      "title": "Unity Learn",
+      "author": "Unity",
+      "type": "curso",
+      "url": "https://learn.unity.com/",
+      "url_origem": "inferida",
+      "pesquisavel": false,
+      "uso": "Cursos e trilhas oficiais da Unity: scripting em C#, física, animação, UI, otimização. Leitura recomendada.",
+      "nota": "O guia cita o curso sem URL. O site é dinâmico e a ferramenta de texto pode não ler as lições."
+    },
+    {
+      "id": "cs50-game-development",
+      "title": "CS50 Game Development",
+      "author": "Harvard",
+      "type": "curso",
+      "url": "https://cs50.harvard.edu/games/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Curso de desenvolvimento de jogos que passa por vários jogos clássicos e engines. Bom para ver o mesmo problema resolvido de formas diferentes.",
+      "nota": "O guia cita o curso sem URL."
+    },
+    {
+      "id": "catlike-coding",
+      "title": "Catlike Coding",
+      "author": "Jasper Flick",
+      "type": "site",
+      "url": "https://catlikecoding.com/unity/tutorials/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Tutoriais profundos de Unity em C#: movimento, física, renderização, shaders, jobs e otimização. Cada tutorial vem com o código passo a passo."
+    },
+    {
+      "id": "red-blob-games",
+      "title": "Red Blob Games",
+      "author": "Amit Patel",
+      "type": "site",
+      "url": "https://www.redblobgames.com/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Tutoriais interativos de pathfinding, grades, mapas e matemática de jogo. Fonte geral para algoritmos com visualização.",
+      "nota": "No trecho do Diretor técnico o guia cita só o nome; os links específicos de pathfinding estão no subagente de IA."
+    },
+    {
+      "id": "learnopengl",
+      "title": "LearnOpenGL",
+      "author": "Joey de Vries",
+      "type": "livro-online",
+      "url": "https://learnopengl.com/",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Livro online gratuito de gráficos em tempo real: pipeline, shaders, iluminação, sombras, PBR. Vale para entender o custo de uma cena em qualquer engine."
+    },
+    {
+      "id": "gpu-gems",
+      "title": "GPU Gems",
+      "author": "NVIDIA",
+      "type": "livro-online",
+      "url": null,
+      "url_origem": "pdf",
+      "pesquisavel": false,
+      "uso": "Capítulos técnicos sobre efeitos e técnicas de GPU. Leitura recomendada para orçamento técnico de gráficos.",
+      "nota": "O guia cita o site da NVIDIA sem URL; o endereço exato dos capítulos não foi confirmado."
+    }
+  ],
+  "subagents": [
+    {
+      "id": "gameplay-programmer",
+      "name": "Gameplay programmer",
+      "purpose": "Pesquisa game loop, fixed update, componentes, eventos, state machines, física de jogo e o feeling de controle, câmera e combate.",
+      "knowledge_node": "engenharia/gameplay-programmer"
+    },
+    {
+      "id": "engine-graphics",
+      "name": "Engine e graphics programmer",
+      "purpose": "Pesquisa renderização, shaders, iluminação, importação de modelos, LODs, culling e profiling de desempenho.",
+      "knowledge_node": "engenharia/engine-graphics"
+    },
+    {
+      "id": "ai-programmer",
+      "name": "AI programmer",
+      "purpose": "Pesquisa pathfinding (A*), state machines, behavior trees, utility AI, percepção e IA de grupo.",
+      "knowledge_node": "engenharia/ai-programmer"
+    },
+    {
+      "id": "tools-programmer",
+      "name": "Tools programmer",
+      "purpose": "Pesquisa editor scripting da Unity, importação e validação de assets, debug dentro do jogo e scripts de Blender.",
+      "knowledge_node": "engenharia/tools-programmer"
+    },
+    {
+      "id": "network-programmer",
+      "name": "Network programmer",
+      "purpose": "Pesquisa servidor autoritativo, predição, reconciliação, interpolação, compensação de lag e bibliotecas de rede.",
+      "knowledge_node": "engenharia/network-programmer"
+    },
+    {
+      "id": "build-devops",
+      "name": "Build engineer / DevOps",
+      "purpose": "Pesquisa Git e Git LFS, CI/CD com GitHub Actions e GameCI, testes automáticos e publicação nas lojas.",
+      "knowledge_node": "engenharia/build-devops"
+    }
+  ]
+}

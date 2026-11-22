@@ -1,0 +1,39 @@
+{
+  "agent": "engenharia",
+  "subagent": "tools-programmer",
+  "references": [
+    {
+      "id": "unity-editor-scripting",
+      "title": "Unity: documentação de Editor Scripting",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/Manual/ExtendingTheEditor.html",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Como estender o editor da Unity: EditorWindow, CustomEditor, ScriptableObject, menus e inspetores. A partir dela se chega à API de scripting.",
+      "nota": "O guia cita a documentação sem URL. A página Extending the Editor é a entrada oficial."
+    },
+    {
+      "id": "blender-python-api",
+      "title": "Blender Python API",
+      "author": "Blender Foundation",
+      "type": "documentacao",
+      "url": "https://docs.blender.org/api/",
+      "url_origem": "dominio-pdf",
+      "pesquisavel": true,
+      "uso": "Referência do módulo bpy: operadores, dados, propriedades, add-ons. Base para escrever plugins e scripts de automação no Blender.",
+      "nota": "O guia cita docs.blender.org/api sem hiperlink. A API muda entre versões; confira a versão da página."
+    },
+    {
+      "id": "unity-for-technical-artists-tools",
+      "title": "Unity for Technical Artists",
+      "author": "Unity",
+      "type": "livro-online",
+      "url": "https://80.lv/articles/unity-released-a-free-book-for-technical-artists",
+      "url_origem": "pdf",
+      "pesquisavel": true,
+      "uso": "Página do e-book gratuito da Unity para technical artists: fluxo de assets e automação no editor.",
+      "nota": "É a página de anúncio no 80.lv; o e-book em si pode estar em outro endereço."
+    }
+  ]
+}
