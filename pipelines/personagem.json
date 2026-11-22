@@ -1,0 +1,90 @@
+{
+  "id": "personagem",
+  "name": "Pipeline de um personagem (do zero ao jogo)",
+  "summary": "As etapas para um personagem sair da ideia e chegar jogável na engine, com o agente dono de cada uma.",
+  "how_to_use": "É uma sequência de agentes, não o trabalho de um só. Quem orquestra registra a ordem com plan_agents e cada agente executa as etapas que são dele, lendo o que o anterior deixou no recado de encerramento. As etapas de um mesmo agente são feitas na mesma ativação.",
+  "knowledge_node": "pipelines/personagem",
+  "agent_sequence": ["design", "arte-3d", "animacao", "engenharia"],
+  "stages": [
+    {
+      "id": "0",
+      "name": "Ficha do personagem",
+      "owners": [{ "agent": "design", "subagents": ["narrative-designer", "combat-designer"] }],
+      "receives": "O brief do projeto e o pedido do usuário.",
+      "delivers": "Quem é o personagem, o que faz no jogo e a lista de ações que precisa executar."
+    },
+    {
+      "id": "1",
+      "name": "Concept",
+      "owners": [{ "agent": "arte-3d", "subagents": ["concept-artist"] }],
+      "receives": "A ficha do personagem e o estilo visual do brief.",
+      "delivers": "Design do personagem, turnaround (frente, lado, costas), callouts de detalhes e materiais, paleta.",
+      "skip_when": "Não há quem desenhe: um moodboard de referências e uma ficha escrita já servem de concept."
+    },
+    {
+      "id": "2",
+      "name": "Blockout",
+      "owners": [{ "agent": "arte-3d", "subagents": ["character-artist"] }],
+      "receives": "O concept aprovado.",
+      "delivers": "Forma bruta com primitivas nas proporções certas, com a escala testada na engine."
+    },
+    {
+      "id": "3",
+      "name": "Escultura (high-poly)",
+      "owners": [{ "agent": "arte-3d", "subagents": ["character-artist"] }],
+      "receives": "O blockout aprovado.",
+      "delivers": "Modelo de alta resolução com todo o detalhe.",
+      "skip_when": "Estilo low-poly ou estilizado: modele direto o low-poly e pule escultura e bake."
+    },
+    {
+      "id": "4a",
+      "name": "Retopologia (low-poly)",
+      "owners": [{ "agent": "arte-3d", "subagents": ["character-artist", "technical-artist"] }],
+      "receives": "A escultura e o orçamento de polígonos.",
+      "delivers": "Malha leve e limpa, com edge loops onde o corpo dobra."
+    },
+    {
+      "id": "4b",
+      "name": "UV e bake",
+      "owners": [{ "agent": "arte-3d", "subagents": ["character-artist", "texture-material"] }],
+      "receives": "O low-poly e o high-poly.",
+      "delivers": "UVs e mapas bakeados (normal, ambient occlusion, curvature).",
+      "skip_when": "Não houve escultura: não há o que bakear."
+    },
+    {
+      "id": "5",
+      "name": "Texturas",
+      "owners": [{ "agent": "arte-3d", "subagents": ["texture-material"] }],
+      "receives": "O low-poly com UV e os mapas bakeados.",
+      "delivers": "Mapas PBR ou texturas pintadas à mão, no estilo do jogo.",
+      "skip_when": "Escopo enxuto: cores chapadas ou pintura simples no lugar de PBR completo."
+    },
+    {
+      "id": "6",
+      "name": "Rig e skinning",
+      "owners": [{ "agent": "animacao", "subagents": ["rigger"] }],
+      "receives": "O modelo texturizado.",
+      "delivers": "Esqueleto padronizado, weight painting, controles de animação e o esqueleto de jogo.",
+      "skip_when": "Só para testar rápido: rig automático (Rigify, AccuRig ou Mixamo)."
+    },
+    {
+      "id": "7",
+      "name": "Animação",
+      "owners": [{ "agent": "animacao", "subagents": ["gameplay-animator", "cinematic-animator", "mocap-cleanup"] }],
+      "receives": "O rig e a lista de ações da ficha do personagem.",
+      "delivers": "A animation list completa: ciclos em loop, golpes, reações, transições.",
+      "skip_when": "Só para testar o jogo: animações prontas, trocadas depois pelas definitivas."
+    },
+    {
+      "id": "8",
+      "name": "Engine (exportação, shaders, LODs, testes)",
+      "owners": [
+        { "agent": "arte-3d", "subagents": ["technical-artist"] },
+        { "agent": "animacao", "subagents": ["animation-td"] },
+        { "agent": "engenharia", "subagents": ["gameplay-programmer", "engine-graphics"] }
+      ],
+      "receives": "O personagem animado.",
+      "delivers": "FBX importado na escala certa, materiais e shaders configurados, LODs, Animator configurado e teste de desempenho."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "leitor",
+  "name": "Leitor",
+  "kind": "reader",
+  "summary": "Lê as memórias de todos os agentes e responde sobre o projeto. Não constrói nem escreve em memória.",
+  "when_to_use": "Quando o usuário pergunta como o projeto está, pede uma análise do que já foi feito, ou quando é preciso entender o estado do projeto para escolher o agente ou a sequência de agentes de um pedido.",
+  "mandatory_first": false,
+  "shared_references": [],
+  "subagents": []
+}

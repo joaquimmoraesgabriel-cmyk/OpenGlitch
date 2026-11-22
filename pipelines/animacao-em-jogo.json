@@ -1,0 +1,61 @@
+{
+  "id": "animacao-em-jogo",
+  "name": "Pipeline de animação em jogo",
+  "summary": "Da lista de movimentos até o controle ficar bom de jogar: o caminho de cada animação de gameplay.",
+  "how_to_use": "A lista nasce no design, a produção e a implementação são da animação com a engenharia, e o playtest volta para o design. Repita as etapas 5 e 6 até o controle ficar bom.",
+  "knowledge_node": "pipelines/animacao-em-jogo",
+  "agent_sequence": ["design", "animacao", "engenharia", "design"],
+  "stages": [
+    {
+      "id": "1",
+      "name": "Animation list",
+      "owners": [
+        { "agent": "design", "subagents": ["combat-designer", "game-designer"] },
+        { "agent": "animacao", "subagents": ["gameplay-animator"] }
+      ],
+      "receives": "As mecânicas e ações definidas no brief.",
+      "delivers": "A lista de todos os movimentos necessários."
+    },
+    {
+      "id": "2",
+      "name": "Produção",
+      "owners": [{ "agent": "animacao", "subagents": ["mocap-cleanup", "gameplay-animator"] }],
+      "receives": "A animation list e o rig.",
+      "delivers": "As animações, por mocap ou keyframe manual."
+    },
+    {
+      "id": "3",
+      "name": "Cleanup e polimento",
+      "owners": [{ "agent": "animacao", "subagents": ["mocap-cleanup", "gameplay-animator"] }],
+      "receives": "As animações brutas.",
+      "delivers": "Animações limpas e polidas."
+    },
+    {
+      "id": "4",
+      "name": "Exportação pra engine",
+      "owners": [{ "agent": "animacao", "subagents": ["animation-td"] }],
+      "receives": "As animações polidas.",
+      "delivers": "Os clipes importados na engine."
+    },
+    {
+      "id": "5",
+      "name": "Implementação",
+      "owners": [
+        { "agent": "animacao", "subagents": ["animation-td"] },
+        { "agent": "engenharia", "subagents": ["gameplay-programmer"] }
+      ],
+      "receives": "Os clipes na engine.",
+      "delivers": "State machines, transições, blends e IK nos pés e mãos."
+    },
+    {
+      "id": "6",
+      "name": "Playtest",
+      "owners": [
+        { "agent": "design", "subagents": ["combat-designer"] },
+        { "agent": "apoio", "subagents": ["qa"] }
+      ],
+      "receives": "O personagem jogável.",
+      "delivers": "Ajustes de timing, repetidos até o controle ficar bom."
+    }
+  ]
+}
