@@ -7,3 +7,6 @@ __pycache__/
 # Dados de execução do servidor: memória dos agentes e estado das sessões
 /memory/
 /state/
+
+# O guia original em PDF fica só na máquina do autor
+/*.pdf

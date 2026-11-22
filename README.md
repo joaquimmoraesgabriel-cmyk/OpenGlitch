@@ -6,9 +6,12 @@ cliente MCP a este servidor; a IA analisa o seu pedido, assume o agente certo
 (design, arte 3D, animação, cinematics, engenharia, áudio ou apoio) e trabalha
 no seu jogo seguindo a skill daquele agente.
 
-O conteúdo vem do guia `Guia Equipes e estudo para um jogo 3D cinematográfico.pdf`
-(transcrito em `sources/guia-pdf.md`). O que no guia era "como estudar" virou o
-modo de trabalhar dos agentes e as referências de pesquisa dos subagentes.
+![As equipes de um jogo 3D cinematográfico: liderança, design, arte 3D, animação, cinematics, engenharia, áudio e apoio, com o pipeline de um personagem](assets/equipes-de-um-jogo-3d-cinematografico.png)
+
+Cada área do quadro é um agente, e cada função dentro dela é um subagente
+pesquisador. O conteúdo vem de um guia de estudo sobre essas equipes, transcrito
+em `sources/guia-pdf.md`. O que no guia era "como estudar" virou o modo de
+trabalhar dos agentes e as referências de pesquisa dos subagentes.
 
 ## Como funciona
 
@@ -238,7 +241,8 @@ knowledge/   o PageIndex de conhecimento, em Markdown (index.json é a árvore g
 pipelines/   fluxos entre agentes (personagem, animação em jogo)
 src/         o servidor MCP
 tests/       testes das regras, das ferramentas e do fluxo por MCP
-sources/     transcrição do guia em PDF
+sources/     transcrição do guia que deu origem ao conteúdo
+assets/      imagens do README
 install.py   instalador: cria o ambiente e registra nos clientes de IA
 ```
 
