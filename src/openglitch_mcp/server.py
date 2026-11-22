@@ -41,7 +41,9 @@ def get_app() -> App:
     if _app is None:
         root = Path(os.environ.get("OPENGLITCH_HOME") or Path(__file__).resolve().parents[2])
         data = os.environ.get("OPENGLITCH_DATA")
-        _app = App(root, Path(data) if data else None)
+        # A memória fica na pasta do usuário: atualizar ou trocar a pasta do OpenGlitch
+        # não apaga o que os agentes já aprenderam.
+        _app = App(root, Path(data) if data else Path.home() / ".openglitch")
     return _app
 
 

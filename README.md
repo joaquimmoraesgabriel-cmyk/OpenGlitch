@@ -71,8 +71,8 @@ Um agente não vê a memória de outro. O que passa de um para o outro é o brie
 do projeto e o recado de encerramento (`finish_agent`).
 
 A memória de pesquisa dos subagentes vale para todos os projetos; a memória de
-trabalho de cada agente é separada por projeto. Tudo fica em `memory/`, fora do
-git.
+trabalho de cada agente é separada por projeto. Tudo fica em `.openglitch`, na
+sua pasta de usuário.
 
 ## As três ferramentas de pesquisa
 
@@ -95,49 +95,116 @@ pesquisável. PDF e vídeo também não são lidos.
 
 ## Instalação
 
-Precisa de Python 3.11 ou mais novo.
+Você precisa de [Python 3.11 ou mais novo](https://www.python.org/downloads/) e
+de [Git](https://git-scm.com/downloads). No Windows, marque "Add Python to PATH"
+ao instalar o Python.
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
-.\.venv\Scripts\python.exe -m pytest
+### Jeito 1: peça para a sua IA instalar
+
+Funciona em clientes que rodam comandos no seu computador: Claude Code (inclusive
+a aba Code do aplicativo Claude), Codex e Cursor. Cole este pedido:
+
+```text
+Instale o OpenGlitch para mim, um servidor MCP sobre criação de jogos 3D.
+
+1. Confira se tenho Python 3.11 ou mais novo e Git. Se faltar algum, pare e me
+   diga como instalar.
+2. Clone https://github.com/joaquimmoraesgabriel-cmyk/OpenGlitch.git numa pasta
+   permanente dentro da minha pasta de usuário, chamada OpenGlitch. Se ela já
+   existir, entre nela e rode "git pull".
+3. Dentro da pasta, rode "python install.py" (ou "python3 install.py") e me
+   mostre a saída inteira.
+4. Diga em quais clientes de IA ele foi registrado e me lembre de fechar e
+   abrir o cliente de novo.
+
+Use só o install.py do repositório para instalar e registrar. Não edite
+arquivos de configuração à mão, a menos que o instalador falhe e eu autorize.
 ```
 
-## Conectar um cliente
+O chat comum, sem acesso ao terminal, não consegue instalar nada: nesse caso use
+o jeito 2. Depois de instalado, o OpenGlitch funciona no chat também.
 
-O servidor fala MCP por stdio. O comando é o Python do ambiente virtual com
-`-m openglitch_mcp`. Troque `D:\OpenGlitch` pelo caminho da pasta.
-
-**Claude Code**
+### Jeito 2: você mesmo, em três comandos
 
 ```powershell
-claude mcp add openglitch -- D:\OpenGlitch\.venv\Scripts\python.exe -m openglitch_mcp
+git clone https://github.com/joaquimmoraesgabriel-cmyk/OpenGlitch.git
 ```
 
-**Claude Desktop** (`claude_desktop_config.json`)
+```powershell
+cd OpenGlitch
+```
+
+```powershell
+python install.py
+```
+
+Sem Git, baixe o ZIP do repositório (Code → Download ZIP), extraia numa pasta
+permanente e rode `python install.py` dentro dela.
+
+### O que o instalador faz
+
+1. Cria um ambiente Python só do OpenGlitch (`.venv`, dentro da pasta) e instala
+   o servidor. Não mexe no Python do sistema.
+2. Confere o conteúdo (agentes, referências, base de conhecimento).
+3. Registra o servidor nos clientes de IA que encontrar: Claude Code, aplicativo
+   Claude (chat), Codex e Cursor. Antes de alterar um arquivo de configuração,
+   salva uma cópia ao lado com o final `.bak-openglitch`.
+
+Depois **feche o cliente de IA por completo e abra de novo**. No aplicativo
+Claude para Windows, fechar a janela não basta: clique com o botão direito no
+ícone da bandeja e escolha Sair.
+
+Outras opções: `python install.py --dry-run` mostra o que seria feito sem
+alterar nada; `--clients claude-code,codex` escolhe os clientes; `--uninstall`
+remove o registro.
+
+### Atualizar
+
+Dentro da pasta, rode `git pull` e depois `python install.py` de novo. A memória
+dos agentes fica em `.openglitch`, na sua pasta de usuário, e não é afetada.
+
+### Outro cliente MCP
+
+Qualquer cliente que aceite servidor MCP por stdio serve. O comando é o Python
+do ambiente virtual com os argumentos `-m openglitch_mcp`; o instalador mostra o
+caminho exato no final. No formato mais comum:
 
 ```json
 {
   "mcpServers": {
     "openglitch": {
-      "command": "D:\\OpenGlitch\\.venv\\Scripts\\python.exe",
+      "command": "C:\Users\voce\OpenGlitch\.venv\Scripts\python.exe",
       "args": ["-m", "openglitch_mcp"]
     }
   }
 }
 ```
 
-**Codex** (`~/.codex/config.toml`)
+Variáveis de ambiente opcionais: `OPENGLITCH_DATA` muda a pasta da memória e
+`OPENGLITCH_HOME` aponta para outra cópia de `agents/` e `knowledge/`.
 
-```toml
-[mcp_servers.openglitch]
-command = "D:\\OpenGlitch\\.venv\\Scripts\\python.exe"
-args = ["-m", "openglitch_mcp"]
-```
+### Não funcionou?
 
-Variáveis de ambiente opcionais: `OPENGLITCH_DATA` (onde ficam `memory/` e
-`state/`; o padrão é a pasta do projeto) e `OPENGLITCH_HOME` (onde estão
-`agents/` e `knowledge/`).
+- **A IA diz que não conhece o OpenGlitch.** O cliente não foi reiniciado por
+  completo, ou a conversa é antiga. Saia do cliente, abra de novo e comece uma
+  conversa nova.
+- **Não aparece na lista de plugins.** É esperado: o OpenGlitch é um servidor
+  MCP, não um plugin. Basta pedir "Usa o OpenGlitch: ...".
+- **O instalador não achou o seu cliente.** Registre à mão com o comando que ele
+  mostra no final (seção "Outro cliente MCP").
+- **Você moveu ou renomeou a pasta.** Os clientes apontam para ela. Rode
+  `python install.py` de novo no lugar novo.
+- **`python` não é reconhecido.** O Python não está instalado ou não está no
+  PATH. No Windows, tente `py install.py`.
+
+## Usar com Unity, Unreal e Blender
+
+O OpenGlitch dá à IA o conhecimento e o método; quem mexe na engine é a IA, com
+as ferramentas que o seu cliente tiver. Abra o cliente na pasta do projeto do
+jogo para ela criar e editar scripts, shaders, cenas e documentos. Se você
+tiver um servidor MCP da própria ferramenta (Blender, Unity, Unreal) conectado
+ao mesmo cliente, o agente usa os dois juntos: o OpenGlitch para saber o que
+fazer e o da ferramenta para executar lá dentro.
 
 ## Como pedir
 
@@ -172,8 +239,7 @@ pipelines/   fluxos entre agentes (personagem, animação em jogo)
 src/         o servidor MCP
 tests/       testes das regras, das ferramentas e do fluxo por MCP
 sources/     transcrição do guia em PDF
-memory/      criada em uso: memórias e projetos (fora do git)
-state/       criada em uso: sessões e tarefas (fora do git)
+install.py   instalador: cria o ambiente e registra nos clientes de IA
 ```
 
 ## Manutenção do conteúdo
