@@ -214,6 +214,8 @@ def manual_help() -> None:
 
 
 def main() -> int:
+    if not sys.stdout.isatty():  # saída capturada (por uma IA, por exemplo): sempre UTF-8
+        sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description="Instala o OpenGlitch e registra nos clientes de IA.")
     parser.add_argument("--clients", default="all",
                         help="lista separada por vírgula: " + ", ".join(CLIENTS) + " (padrão: all)")
