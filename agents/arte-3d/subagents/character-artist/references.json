@@ -18,11 +18,11 @@
       "title": "Polycount",
       "author": null,
       "type": "forum",
-      "url": "https://polycount.com/",
-      "url_origem": "inferida",
+      "url": "http://wiki.polycount.com/wiki/Polycount",
+      "url_origem": "corrigida",
       "pesquisavel": true,
       "uso": "Fórum e wiki de arte de jogos. Threads de personagem, topologia e bake.",
-      "nota": "O guia cita o Polycount sem hiperlink e avisa que o wiki teve períodos fora do ar."
+      "nota": "O guia cita o Polycount sem hiperlink e avisa que o wiki teve períodos fora do ar. O fórum (polycount.com) recusa acesso automatizado (HTTP 403); a referência aponta para o wiki, que abre."
     },
     {
       "id": "blender-manual-modeling",
@@ -112,11 +112,11 @@
       "title": "Manual do Blender: Seams",
       "author": "Blender Foundation",
       "type": "documentacao",
-      "url": "https://www.blender.org/manual/en/modeling/meshes/uv/unwrapping/seams.html",
-      "url_origem": "pdf",
+      "url": "https://docs.blender.org/manual/en/latest/modeling/meshes/uv/unwrapping/seams.html",
+      "url_origem": "corrigida",
       "pesquisavel": true,
       "uso": "Fluxo de UV: marcar seams, desembrulhar, ajustar e repetir.",
-      "nota": "O endereço é o do guia, de uma versão antiga do manual; se não abrir, procure Seams em docs.blender.org/manual."
+      "nota": "O endereço é o do guia, de uma versão antiga do manual; se não abrir, procure Seams em docs.blender.org/manual. O hiperlink do guia usa o caminho antigo do manual (blender.org/manual), que responde 403; corrigido para docs.blender.org."
     },
     {
       "id": "toolbag-baking-tutorial",
@@ -143,10 +143,11 @@
       "title": "Baking Maps for Games Reading List",
       "author": null,
       "type": "artigo",
-      "url": "https://camille_meehan.artstation.com/blog/LYbj/baking-maps-for-games-reading-list",
-      "url_origem": "pdf",
+      "url": "https://www.artstation.com/camille_meehan/blog/LYbj/baking-maps-for-games-reading-list",
+      "url_origem": "corrigida",
       "pesquisavel": true,
-      "uso": "Lista de leituras sobre bake, com foco em Unity."
+      "uso": "Lista de leituras sobre bake, com foco em Unity.",
+      "nota": "O hiperlink do guia usa o subdomínio com sublinhado, que não conecta; corrigido para o endereço equivalente em www.artstation.com."
     }
   ]
 }

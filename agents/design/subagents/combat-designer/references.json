@@ -39,8 +39,9 @@
       "type": "artigo",
       "url": "https://gamedesignskills.com/game-design/combat-design/",
       "url_origem": "pdf",
-      "pesquisavel": true,
-      "uso": "Visão geral da área e do vocabulário de combat design."
+      "pesquisavel": false,
+      "uso": "Visão geral da área e do vocabulário de combat design.",
+      "nota": "O site recusa acesso automatizado (HTTP 403 em novembro de 2026): fica como leitura recomendada."
     },
     {
       "id": "ruiz-anatomy-of-a-successful-attack",

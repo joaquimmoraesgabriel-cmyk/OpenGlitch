@@ -31,8 +31,9 @@
       "type": "site",
       "url": "https://thesoundarchitect.co.uk/?p=16784",
       "url_origem": "pdf",
-      "pesquisavel": true,
-      "uso": "Material de estudo e quizzes gratuitos do Wwise-201."
+      "pesquisavel": false,
+      "uso": "Material de estudo e quizzes gratuitos do Wwise-201.",
+      "nota": "O site não respondeu em novembro de 2026: fica como leitura recomendada."
     },
     {
       "id": "wwise-201-cras",

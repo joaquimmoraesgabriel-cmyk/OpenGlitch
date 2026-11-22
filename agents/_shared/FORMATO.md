@@ -1,7 +1,8 @@
 # Formato dos agentes, subagentes e do conhecimento
 
 Este arquivo é o contrato de dados do OpenGlitch. O servidor MCP lê estas pastas
-ao iniciar; o validador (`python scripts/validate.py`) recusa o que fugir daqui.
+ao iniciar; o validador (`python -m openglitch_mcp.cli validate`) recusa o que
+fugir daqui.
 
 ## Pastas
 

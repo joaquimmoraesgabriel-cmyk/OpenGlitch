@@ -1,0 +1,3196 @@
+{
+  "name": "OpenGlitch: criação de jogos 3D cinematográficos",
+  "node_count": 438,
+  "tree": [
+    {
+      "id": "geral",
+      "title": "Visão geral",
+      "summary": "O que é um jogo 3D cinematográfico e como esta base de conhecimento está organizada em áreas e pipelines.",
+      "kind": "area",
+      "source": "knowledge/geral/_area.md",
+      "children": [
+        {
+          "id": "geral#o-que-e-um-jogo-3d-cinematografico",
+          "title": "O que é um jogo 3D cinematográfico",
+          "summary": "É um jogo 3D que combina jogabilidade em tempo real com as disciplinas do cinema: direção, atuação, câmera e edição. Exemplos de referência do guia são God of War e The Last of Us. Séries 3D como Arcane usam quase os ...",
+          "kind": "section",
+          "source": "knowledge/geral/_area.md"
+        },
+        {
+          "id": "geral#as-8-areas",
+          "title": "As 8 áreas",
+          "summary": "O trabalho se divide em 8 áreas. Cada uma tem uma pasta de conhecimento e um agente (a liderança é a exceção, veja abaixo).",
+          "kind": "section",
+          "source": "knowledge/geral/_area.md"
+        },
+        {
+          "id": "geral#lideranca-no-openglitch",
+          "title": "Liderança no OpenGlitch",
+          "summary": "A liderança não é um agente. O papel é dividido entre o usuário, o agente Design (visão, pilares, escopo, produção) e os agentes das áreas (direção de arte na Arte 3D, direção técnica na Engenharia, direção de animaçã...",
+          "kind": "section",
+          "source": "knowledge/geral/_area.md"
+        },
+        {
+          "id": "geral#como-esta-base-esta-organizada",
+          "title": "Como esta base está organizada",
+          "summary": "geral/: panorama do projeto (fases, equipes, tamanho de equipe, ferramentas, escopo para equipe pequena, fontes gerais). - lideranca/: os cinco papéis de liderança e quem os assume. - pipelines/: os fluxos que atraves...",
+          "kind": "section",
+          "source": "knowledge/geral/_area.md"
+        },
+        {
+          "id": "geral#os-pipelines",
+          "title": "Os pipelines",
+          "summary": "Dois fluxos atravessam as áreas e dizem quem entrega o quê a quem:",
+          "kind": "section",
+          "source": "knowledge/geral/_area.md"
+        },
+        {
+          "id": "geral#como-usar",
+          "title": "Como usar",
+          "summary": "Descubra o tamanho da equipe e o escopo com o usuário (geral/equipe-pequena-ou-solo, geral/tamanho-de-equipe). 2. Descubra a fase do projeto (geral/fases-do-projeto). 3. Abra a pasta da área do pedido, ou o pipeline s...",
+          "kind": "section",
+          "source": "knowledge/geral/_area.md"
+        },
+        {
+          "id": "geral/equipe-pequena-ou-solo",
+          "title": "Equipe pequena ou solo",
+          "summary": "Orientação para dimensionar o escopo com o usuário quando a equipe é pequena ou solo: o que cortar, o que comprar pronto, prioridade por área e o erro do scope creep.",
+          "kind": "doc",
+          "source": "knowledge/geral/equipe-pequena-ou-solo.md",
+          "children": [
+            {
+              "id": "geral/equipe-pequena-ou-solo#ponto-de-partida",
+              "title": "Ponto de partida",
+              "summary": "Um jogo 3D com qualidade de série é inviável sozinho. Ao receber um pedido ambicioso de um usuário solo ou de equipe pequena, diga isso e proponha um escopo que caiba. Faça o dimensionamento junto com o usuário, não p...",
+              "kind": "section",
+              "source": "knowledge/geral/equipe-pequena-ou-solo.md"
+            },
+            {
+              "id": "geral/equipe-pequena-ou-solo#o-que-fazer-no-escopo",
+              "title": "O que fazer no escopo",
+              "summary": "Escopo pequeno: poucos personagens, poucas fases, uma mecânica principal bem feita. - Estilo simples: low-poly ou estilizado reduz muito o trabalho de modelagem e textura. - Cinematics: use a própria engine em vez de ...",
+              "kind": "section",
+              "source": "knowledge/geral/equipe-pequena-ou-solo.md"
+            },
+            {
+              "id": "geral/equipe-pequena-ou-solo#o-que-comprar-ou-reaproveitar",
+              "title": "O que comprar ou reaproveitar",
+              "summary": "Assets prontos (Unity Asset Store, Fab, Quixel), animações do Mixamo e pacotes de animação.",
+              "kind": "section",
+              "source": "knowledge/geral/equipe-pequena-ou-solo.md"
+            },
+            {
+              "id": "geral/equipe-pequena-ou-solo#tabela-de-prioridade-por-area-sendo-solo",
+              "title": "Tabela de prioridade por área sendo solo",
+              "summary": "O guia a escreve para um dev solo com foco num pacote de animação para Unity. Quatro áreas têm prioridade alta: liderança, design, animação e engenharia. Adapte ao foco do usuário.",
+              "kind": "section",
+              "source": "knowledge/geral/equipe-pequena-ou-solo.md"
+            },
+            {
+              "id": "geral/equipe-pequena-ou-solo#scope-creep",
+              "title": "Scope creep",
+              "summary": "O erro mais comum é aumentar o escopo no meio do caminho (scope creep). É o que mais mata projetos pequenos. Quando o usuário propuser uma adição:",
+              "kind": "section",
+              "source": "knowledge/geral/equipe-pequena-ou-solo.md"
+            },
+            {
+              "id": "geral/equipe-pequena-ou-solo#lideranca-sendo-solo",
+              "title": "Liderança sendo solo",
+              "summary": "Liderança quase nunca é o primeiro emprego: os diretores de estúdio grande costumam ter de 8 a 15 anos na área que lideram. Sendo solo, o usuário já ocupa os 5 cargos de liderança em escala pequena. Veja lideranca/area.",
+              "kind": "section",
+              "source": "knowledge/geral/equipe-pequena-ou-solo.md"
+            },
+            {
+              "id": "geral/equipe-pequena-ou-solo#o-que-mais-ensina",
+              "title": "O que mais ensina",
+              "summary": "Um jogo pequeno terminado ensina mais do que um jogo grande abandonado. Prefira propor um projeto que o usuário consiga terminar.",
+              "kind": "section",
+              "source": "knowledge/geral/equipe-pequena-ou-solo.md"
+            }
+          ]
+        },
+        {
+          "id": "geral/equipes",
+          "title": "Equipes e funções",
+          "summary": "As 8 áreas de um jogo 3D cinematográfico e as funções de cada uma.",
+          "kind": "doc",
+          "source": "knowledge/geral/equipes.md",
+          "children": [
+            {
+              "id": "geral/equipes#lideranca",
+              "title": "Liderança",
+              "summary": "Diretor do jogo / criativo: a visão geral. Decide o que entra e o que sai. - Produtor: prazos, orçamento, quem faz o quê. Resolve gargalos. - Diretor de arte: define o visual e aprova toda a arte. - Diretor técnico: d...",
+              "kind": "section",
+              "source": "knowledge/geral/equipes.md"
+            },
+            {
+              "id": "geral/equipes#design",
+              "title": "Design",
+              "summary": "Game designer: regras, mecânicas, progressão. - Combat designer: golpes, armas, inimigos e o \"feeling\" do combate. - Level designer: monta fases e mapas e guia o jogador. - Narrative designer / roteirista: história, d...",
+              "kind": "section",
+              "source": "knowledge/geral/equipes.md"
+            },
+            {
+              "id": "geral/equipes#arte-3d",
+              "title": "Arte 3D",
+              "summary": "Concept artist: desenha personagens, cenários, props. - Character artist: modela e esculpe os personagens. - Environment artist: cenários e terrenos. - Props / hard-surface artist: armas, veículos, objetos. - Texture ...",
+              "kind": "section",
+              "source": "knowledge/geral/equipes.md"
+            },
+            {
+              "id": "geral/equipes#animacao",
+              "title": "Animação",
+              "summary": "Rigger: monta o esqueleto e os controles de cada personagem. - Animadores de gameplay: andar, correr, pular, atirar, golpear, morrer. As animações precisam se conectar sem \"pulos\". - Animadores de cinematic: cenas com...",
+              "kind": "section",
+              "source": "knowledge/geral/equipes.md"
+            },
+            {
+              "id": "geral/equipes#cinematics",
+              "title": "Cinematics",
+              "summary": "O lado \"série\". Pode ser renderizado em tempo real na própria engine ou pré-renderizado, como no Arcane.",
+              "kind": "section",
+              "source": "knowledge/geral/equipes.md"
+            },
+            {
+              "id": "geral/equipes#engenharia",
+              "title": "Engenharia",
+              "summary": "Gameplay programmers: controles, combate, câmera, missões. - Engine / graphics programmers: renderização, performance. - AI programmers: comportamento de inimigos e NPCs. - Tools programmers: ferramentas internas para...",
+              "kind": "section",
+              "source": "knowledge/geral/equipes.md"
+            },
+            {
+              "id": "geral/equipes#audio",
+              "title": "Áudio",
+              "summary": "Sound designers: efeitos, passos, tiros. - Compositor: trilha sonora. - Dublagem: diretor de voz, atores, edição. - Audio programmer: integra o som na engine.",
+              "kind": "section",
+              "source": "knowledge/geral/equipes.md"
+            },
+            {
+              "id": "geral/equipes#apoio",
+              "title": "Apoio",
+              "summary": "QA: testam e reportam bugs. - Localização: tradução e legendas. - Marketing / comunidade / publisher: trailer, divulgação, lançamento.",
+              "kind": "section",
+              "source": "knowledge/geral/equipes.md"
+            }
+          ]
+        },
+        {
+          "id": "geral/fases-do-projeto",
+          "title": "Fases do projeto",
+          "summary": "As 7 fases de um jogo (conceito, pré-produção, vertical slice, produção, alpha, beta, lançamento e pós), a duração típica e as áreas que mais trabalham em cada uma.",
+          "kind": "doc",
+          "source": "knowledge/geral/fases-do-projeto.md",
+          "children": [
+            {
+              "id": "geral/fases-do-projeto#duracao-tipica",
+              "title": "Duração típica",
+              "summary": "Um AAA leva de 3 a 6 anos. Um indie leva de 1 a 3. Use a sequência de fases abaixo para dizer ao usuário em que ponto ele está e o que falta.",
+              "kind": "section",
+              "source": "knowledge/geral/fases-do-projeto.md"
+            },
+            {
+              "id": "geral/fases-do-projeto#fase-1-conceito",
+              "title": "Fase 1: Conceito",
+              "summary": "Ideia, público, referências e escopo. É a fase que mais define se o projeto vai dar certo. Áreas mais ativas: liderança e Design. O guia não detalha as demais.",
+              "kind": "section",
+              "source": "knowledge/geral/fases-do-projeto.md"
+            },
+            {
+              "id": "geral/fases-do-projeto#fase-2-pre-producao",
+              "title": "Fase 2: Pré-produção",
+              "summary": "História, estilo visual, protótipo jogável e lista de tudo que precisa ser feito. Áreas mais ativas, pelo que o guia descreve: Design (protótipo e história), Arte 3D (concept e estilo visual) e liderança (listas e pla...",
+              "kind": "section",
+              "source": "knowledge/geral/fases-do-projeto.md"
+            },
+            {
+              "id": "geral/fases-do-projeto#fase-3-vertical-slice",
+              "title": "Fase 3: Vertical slice",
+              "summary": "Um pedaço do jogo (uns 5 a 10 minutos) com qualidade final, para provar que dá para fazer. Serve de marco para o produtor. O guia não diz quais áreas trabalham mais, mas um trecho com qualidade final envolve Design, A...",
+              "kind": "section",
+              "source": "knowledge/geral/fases-do-projeto.md"
+            },
+            {
+              "id": "geral/fases-do-projeto#fase-4-producao",
+              "title": "Fase 4: Produção",
+              "summary": "A fase mais longa, quando a maior parte da equipe produz conteúdo. É aqui que Arte 3D, Animação, Engenharia, Áudio e Design trabalham em volume.",
+              "kind": "section",
+              "source": "knowledge/geral/fases-do-projeto.md"
+            },
+            {
+              "id": "geral/fases-do-projeto#fase-5-alpha",
+              "title": "Fase 5: Alpha",
+              "summary": "Tudo existe, mas está quebrado. O trabalho é integrar e fazer funcionar. Engenharia e QA pesam mais; o guia não detalha além disso.",
+              "kind": "section",
+              "source": "knowledge/geral/fases-do-projeto.md"
+            },
+            {
+              "id": "geral/fases-do-projeto#fase-6-beta",
+              "title": "Fase 6: Beta",
+              "summary": "Foco em corrigir bugs e polir. QA e Engenharia testam e corrigem; as demais áreas ajustam o que o teste apontar.",
+              "kind": "section",
+              "source": "knowledge/geral/fases-do-projeto.md"
+            },
+            {
+              "id": "geral/fases-do-projeto#fase-7-lancamento-e-pos-lancamento",
+              "title": "Fase 7: Lançamento e pós-lançamento",
+              "summary": "Patches, DLCs e atualizações. Entra o marketing, a comunidade e o publisher (Apoio). O guia não detalha as outras áreas nesta fase.",
+              "kind": "section",
+              "source": "knowledge/geral/fases-do-projeto.md"
+            },
+            {
+              "id": "geral/fases-do-projeto#como-usar-as-fases",
+              "title": "Como usar as fases",
+              "summary": "Pergunte ao usuário em que fase está antes de propor trabalho. - Em projeto pequeno ou solo, as fases existem do mesmo jeito. O vertical slice é a prova de que a ideia cabe no escopo. - Não pule o conceito: o escopo n...",
+              "kind": "section",
+              "source": "knowledge/geral/fases-do-projeto.md"
+            }
+          ]
+        },
+        {
+          "id": "geral/ferramentas",
+          "title": "Ferramentas",
+          "summary": "Ferramentas comuns por categoria (modelagem, texturas, engines, controle de versão, gestão) e as alternativas gratuitas ou prontas que o guia cita.",
+          "kind": "doc",
+          "source": "knowledge/geral/ferramentas.md",
+          "children": [
+            {
+              "id": "geral/ferramentas#modelagem-e-animacao",
+              "title": "Modelagem e animação",
+              "summary": "Maya, Blender, 3ds Max, ZBrush e Houdini (efeitos). O Blender é a opção gratuita citada ao longo do guia: tem Sculpt Mode para escultura, ferramentas de retopologia (snap, shrinkwrap) e Rigify para rig.",
+              "kind": "section",
+              "source": "knowledge/geral/ferramentas.md"
+            },
+            {
+              "id": "geral/ferramentas#texturas",
+              "title": "Texturas",
+              "summary": "Substance Painter e Substance Designer. Alternativas citadas: o próprio Blender e o Material Maker. Para estilo pintado, como o de Arcane, a luz e as pinceladas são pintadas na própria textura.",
+              "kind": "section",
+              "source": "knowledge/geral/ferramentas.md"
+            },
+            {
+              "id": "geral/ferramentas#engines",
+              "title": "Engines",
+              "summary": "Unreal Engine e Unity. O guia sugere, para o diretor técnico, fazer o mesmo protótipo pequeno nas duas e comparar. Programação: C# na Unity; C++ ou Blueprints na Unreal.",
+              "kind": "section",
+              "source": "knowledge/geral/ferramentas.md"
+            },
+            {
+              "id": "geral/ferramentas#controle-de-versao",
+              "title": "Controle de versão",
+              "summary": "Perforce e Git LFS.",
+              "kind": "section",
+              "source": "knowledge/geral/ferramentas.md"
+            },
+            {
+              "id": "geral/ferramentas#gestao",
+              "title": "Gestão",
+              "summary": "Jira, Trello e ShotGrid. Para o produtor, o guia cita também Notion e HacknPlan (feito para games). Trello, Notion e HacknPlan servem a projeto pequeno.",
+              "kind": "section",
+              "source": "knowledge/geral/ferramentas.md"
+            },
+            {
+              "id": "geral/ferramentas#alternativas-gratuitas-ou-prontas",
+              "title": "Alternativas gratuitas ou prontas",
+              "summary": "Rig automático: Rigify (Blender), AccuRig ou Mixamo. - Rig gratuito para animação: AZRI, em gameanim.com. - Animações prontas: Mixamo e pacotes de animação. - Banco de mocap: CMU Mocap (atenção à licença). - Assets pr...",
+              "kind": "section",
+              "source": "knowledge/geral/ferramentas.md"
+            },
+            {
+              "id": "geral/ferramentas#observacoes",
+              "title": "Observações",
+              "summary": "Controle de versão e ferramentas de gestão não têm alternativa gratuita específica no trecho do guia lido; use o que o usuário já tem. - Antes de recomendar uma ferramenta, confirme a engine e o estilo visual do projeto.",
+              "kind": "section",
+              "source": "knowledge/geral/ferramentas.md"
+            }
+          ]
+        },
+        {
+          "id": "geral/fontes-gerais",
+          "title": "Fontes gerais",
+          "summary": "Fontes gratuitas gerais do guia (documentários, cursos, livros e documentos, palestras, canais por cargo, lado série, Brasil) com tipo, o que oferecem e URL.",
+          "kind": "doc",
+          "source": "knowledge/geral/fontes-gerais.md",
+          "children": [
+            {
+              "id": "geral/fontes-gerais#documentarios",
+              "title": "Documentários",
+              "summary": "Arcane: Bridging the Rift. Tipo: documentário (YouTube, canal do League of Legends). 5 episódios grátis, do pitch aos toques finais da série. URL: https://www.gamedeveloper.com/press-release/arcane-the-first-episode-o...",
+              "kind": "section",
+              "source": "knowledge/geral/fontes-gerais.md"
+            },
+            {
+              "id": "geral/fontes-gerais#cursos",
+              "title": "Cursos",
+              "summary": "Pixar in a Box (Khan Academy). Tipo: curso. Currículo gratuito sobre como a Pixar faz filmes (storytelling, modelagem, cenário, efeitos), com legenda em português. URL: https://pixar.com/pixar-in-a-box - Cursos gratui...",
+              "kind": "section",
+              "source": "knowledge/geral/fontes-gerais.md"
+            },
+            {
+              "id": "geral/fontes-gerais#livros-e-documentos-gratuitos",
+              "title": "Livros e documentos gratuitos",
+              "summary": "Game Programming Patterns. Tipo: livro online. Livro inteiro grátis no site. URL: https://gameprogrammingpatterns.com/contents.html - Guia do Scrum em português. Tipo: documento (PDF oficial). URL: https://scrumguides...",
+              "kind": "section",
+              "source": "knowledge/geral/fontes-gerais.md"
+            },
+            {
+              "id": "geral/fontes-gerais#palestras",
+              "title": "Palestras",
+              "summary": "GDC Vault (gratuitas). Tipo: arquivo de palestras. Palestras selecionadas recentes e todo o arquivo antigo. Filtre por \"Production & Team Leadership\", \"Visual Arts\" ou \"Animation Bootcamp\". O canal da GDC no YouTube t...",
+              "kind": "section",
+              "source": "knowledge/geral/fontes-gerais.md"
+            },
+            {
+              "id": "geral/fontes-gerais#canais-do-youtube-por-cargo",
+              "title": "Canais do YouTube por cargo",
+              "summary": "Nenhuma URL no guia para estes canais (sem link no guia).",
+              "kind": "section",
+              "source": "knowledge/geral/fontes-gerais.md"
+            },
+            {
+              "id": "geral/fontes-gerais#lado-serie",
+              "title": "Lado série",
+              "summary": "Blender Studio. Tipo: canal e curtas abertos. Os curtas abertos (Sprite Fright, Charge, Wing It!) são gratuitos no YouTube e mostram o pipeline de animação 3D. Os arquivos de produção completos ficam na assinatura pag...",
+              "kind": "section",
+              "source": "knowledge/geral/fontes-gerais.md"
+            },
+            {
+              "id": "geral/fontes-gerais#brasil",
+              "title": "Brasil",
+              "summary": "Criar Jogos. Tipo: curso. Considerado o maior curso gratuito de desenvolvimento de games, com quase 5 mil certificados desde 2022. URL: https://catracalivre.com.br/educacao/curso-gratuito-de-como-criar-games-oferece-8...",
+              "kind": "section",
+              "source": "knowledge/geral/fontes-gerais.md"
+            },
+            {
+              "id": "geral/fontes-gerais#avisos",
+              "title": "Avisos",
+              "summary": "Sites que oferecem PDF de livros pagos \"de graça\" costumam ser piratas e às vezes trazem vírus. Veja se a biblioteca do IF do usuário tem acesso aos livros pagos. - A maioria do material está em inglês. O tradutor aut...",
+              "kind": "section",
+              "source": "knowledge/geral/fontes-gerais.md"
+            }
+          ]
+        },
+        {
+          "id": "geral/serie-e-jogo",
+          "title": "Série e jogo",
+          "summary": "Diferenças entre série 3D, jogo e híbrido, os blocos de equipe que eles compartilham e a diferença entre tempo real e pré-renderizado.",
+          "kind": "doc",
+          "source": "knowledge/geral/serie-e-jogo.md",
+          "children": [
+            {
+              "id": "geral/serie-e-jogo#serie-x-jogo",
+              "title": "Série x jogo",
+              "summary": "Séries (tipo Arcane) e jogos 3D (tiro, sobrevivência, luta) usam quase os mesmos blocos de equipe. A série entrega vídeo; o jogo entrega assets que rodam em tempo real.",
+              "kind": "section",
+              "source": "knowledge/geral/serie-e-jogo.md"
+            },
+            {
+              "id": "geral/serie-e-jogo#pre-producao-as-duas",
+              "title": "Pré-produção (as duas)",
+              "summary": "Direção, roteiro, storyboard: definem a história e os planos. - Concept art e direção de arte: personagens, cenários, estilo visual. - Game design (só jogos): define o que o personagem faz (atirar, rolar, bloquear), e...",
+              "kind": "section",
+              "source": "knowledge/geral/serie-e-jogo.md"
+            },
+            {
+              "id": "geral/serie-e-jogo#criacao-dos-assets-3d",
+              "title": "Criação dos assets 3D",
+              "summary": "Modelador de personagem: esculpe e faz a malha (ZBrush, Maya, Blender). - Modelador de ambiente e props: cenários, armas, veículos, objetos. - Texture / material artist: pintura e materiais (Substance Painter). - Rigg...",
+              "kind": "section",
+              "source": "knowledge/geral/serie-e-jogo.md"
+            },
+            {
+              "id": "geral/serie-e-jogo#animacao",
+              "title": "Animação",
+              "summary": "Animador de personagem (keyframe): atuação e movimento à mão. - Animador de combate / gameplay (jogos): ciclos de andar, correr, pular, golpes e recarga. Precisam encaixar e ter transições suaves. - Mocap e cleanup: c...",
+              "kind": "section",
+              "source": "knowledge/geral/serie-e-jogo.md"
+            },
+            {
+              "id": "geral/serie-e-jogo#finalizacao",
+              "title": "Finalização",
+              "summary": "Série: iluminação, render, composição (comp) e edição. O Arcane ainda tem uma camada 2D pintada à mão por cima do 3D. - Jogos: engine (Unreal ou Unity), programadores de gameplay, áudio, QA e produtores.",
+              "kind": "section",
+              "source": "knowledge/geral/serie-e-jogo.md"
+            },
+            {
+              "id": "geral/serie-e-jogo#tempo-real-x-pre-renderizado",
+              "title": "Tempo real x pré-renderizado",
+              "summary": "Série é linear e pré-renderizada: cada plano é montado e renderizado com qualidade máxima. - Jogo é interativo e roda em tempo real: tudo precisa funcionar de qualquer ângulo, com o jogador no controle. - Cutscenes de...",
+              "kind": "section",
+              "source": "knowledge/geral/serie-e-jogo.md"
+            },
+            {
+              "id": "geral/serie-e-jogo#hibrido",
+              "title": "Híbrido",
+              "summary": "O híbrido (God of War, The Last of Us) usa o pipeline de jogo, com engine em tempo real, mais as disciplinas de cinema: direção, atuação, câmera e edição. É jogabilidade em tempo real com cenas dirigidas como numa sér...",
+              "kind": "section",
+              "source": "knowledge/geral/serie-e-jogo.md"
+            }
+          ]
+        },
+        {
+          "id": "geral/tamanho-de-equipe",
+          "title": "Tamanho de equipe",
+          "summary": "Estimativas de tamanho de equipe por escala de projeto, a divisão percentual num AAA e observações sobre luta, tiro e terceirização.",
+          "kind": "doc",
+          "source": "knowledge/geral/tamanho-de-equipe.md",
+          "children": [
+            {
+              "id": "geral/tamanho-de-equipe#aviso",
+              "title": "Aviso",
+              "summary": "Todos os números são estimativas do guia e variam muito. Use-os para dar ordem de grandeza ao usuário, não como regra.",
+              "kind": "section",
+              "source": "knowledge/geral/tamanho-de-equipe.md"
+            },
+            {
+              "id": "geral/tamanho-de-equipe#tabela-1-equipe-total-e-equipe-de-3d-e-animacao",
+              "title": "Tabela 1: equipe total e equipe de 3D e animação",
+              "summary": "",
+              "kind": "section",
+              "source": "knowledge/geral/tamanho-de-equipe.md"
+            },
+            {
+              "id": "geral/tamanho-de-equipe#tabela-2-equipe-total-e-animadores",
+              "title": "Tabela 2: equipe total e animadores",
+              "summary": "",
+              "kind": "section",
+              "source": "knowledge/geral/tamanho-de-equipe.md"
+            },
+            {
+              "id": "geral/tamanho-de-equipe#divisao-percentual-num-aaa",
+              "title": "Divisão percentual num AAA",
+              "summary": "Arte: 30 a 40%. - Engenharia: 20 a 25%. - Design: 10 a 15%. - O resto é QA, áudio, produção e apoio.",
+              "kind": "section",
+              "source": "knowledge/geral/tamanho-de-equipe.md"
+            },
+            {
+              "id": "geral/tamanho-de-equipe#jogo-de-luta",
+              "title": "Jogo de luta",
+              "summary": "Os animadores são mais numerosos, porque cada personagem tem dezenas de golpes com timing exato.",
+              "kind": "section",
+              "source": "knowledge/geral/tamanho-de-equipe.md"
+            },
+            {
+              "id": "geral/tamanho-de-equipe#tiro-e-survival",
+              "title": "Tiro e survival",
+              "summary": "Pesam as animações de arma, de locomoção e de interação.",
+              "kind": "section",
+              "source": "knowledge/geral/tamanho-de-equipe.md"
+            },
+            {
+              "id": "geral/tamanho-de-equipe#terceirizacao",
+              "title": "Terceirização",
+              "summary": "Grandes estúdios terceirizam parte do trabalho, como mocap, props e cutscenes. Os totais de AAA da tabela 1 já contam os terceirizados.",
+              "kind": "section",
+              "source": "knowledge/geral/tamanho-de-equipe.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lideranca",
+      "title": "Liderança",
+      "summary": "Os cinco papéis de liderança de um jogo, quem os assume no OpenGlitch e a ordem de prioridade num projeto pequeno.",
+      "kind": "area",
+      "source": "knowledge/lideranca/_area.md",
+      "children": [
+        {
+          "id": "lideranca#o-que-a-lideranca-faz",
+          "title": "O que a liderança faz",
+          "summary": "Cinco papéis guiam o projeto: diretor criativo (visão), produtor (prazo e orçamento), diretor de arte (visual), diretor técnico (engine e arquitetura) e diretor de animação (estilo de movimento). Cada um tem um docume...",
+          "kind": "section",
+          "source": "knowledge/lideranca/_area.md"
+        },
+        {
+          "id": "lideranca#lideranca-no-openglitch",
+          "title": "Liderança no OpenGlitch",
+          "summary": "A liderança não é um agente. O papel é dividido entre:",
+          "kind": "section",
+          "source": "knowledge/lideranca/_area.md"
+        },
+        {
+          "id": "lideranca#lideranca-se-aprende-fazendo",
+          "title": "Liderança se aprende fazendo",
+          "summary": "Segundo o guia, liderança se aprende fazendo. Liderança quase nunca é o primeiro emprego: os diretores de estúdio grande costumam ter de 8 a 15 anos na área que lideram. Sendo solo, o usuário já ocupa os cinco cargos ...",
+          "kind": "section",
+          "source": "knowledge/lideranca/_area.md"
+        },
+        {
+          "id": "lideranca#ordem-de-prioridade-num-projeto-pequeno",
+          "title": "Ordem de prioridade num projeto pequeno",
+          "summary": "Produção primeiro: é o que mais faz um projeto solo terminar. 2. Visão e escopo (pilares, o que entra e o que sai), junto com a produção. 3. A direção técnica ou artística que o projeto mais exige, ou de que o usuário...",
+          "kind": "section",
+          "source": "knowledge/lideranca/_area.md"
+        },
+        {
+          "id": "lideranca#os-papeis",
+          "title": "Os papéis",
+          "summary": "lideranca/diretor-criativo - lideranca/produtor - lideranca/diretor-de-arte - lideranca/diretor-tecnico - lideranca/diretor-de-animacao",
+          "kind": "section",
+          "source": "knowledge/lideranca/_area.md"
+        },
+        {
+          "id": "lideranca/diretor-criativo",
+          "title": "Diretor criativo",
+          "summary": "Guarda a visão do jogo: pilares, pitch, GDD e decisões de corte.",
+          "kind": "doc",
+          "source": "knowledge/lideranca/diretor-criativo.md",
+          "children": [
+            {
+              "id": "lideranca/diretor-criativo#o-que-faz",
+              "title": "O que faz",
+              "summary": "Guarda a visão do jogo (Game Director). Decide a experiência central, o que entra e o que sai, e mantém todo mundo na mesma direção.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-criativo.md"
+            },
+            {
+              "id": "lideranca/diretor-criativo#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Pilares do jogo: 3 a 5 frases que definem a experiência (por exemplo, \"combate pesado e brutal\"). Toda decisão é testada contra eles. - Pitch / one-pager: o jogo explicado em uma página. - GDD: o documento vivo com me...",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-criativo.md"
+            },
+            {
+              "id": "lideranca/diretor-criativo#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Analisar jogos e anotar por que uma parte funciona. - Escrever pilares e pitch para os próprios projetos. - Dar e receber feedback e aprender a dizer \"não\" para ideias boas que não cabem.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-criativo.md"
+            },
+            {
+              "id": "lideranca/diretor-criativo#como-validar",
+              "title": "Como validar",
+              "summary": "Critério de aceite, a partir do exercício do guia (game jam de 48 horas): em pouco tempo, a visão está definida, o escopo foi cortado e algo foi entregue. Verifique se os pilares são 3 a 5 frases e se uma decisão de c...",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-criativo.md"
+            },
+            {
+              "id": "lideranca/diretor-criativo#quem-assume-no-openglitch",
+              "title": "Quem assume no OpenGlitch",
+              "summary": "O usuário, com o agente Design (visão, pilares, escopo). O Design redige pilares, pitch e GDD; o usuário aprova.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-criativo.md"
+            },
+            {
+              "id": "lideranca/diretor-criativo#referencias",
+              "title": "Referências",
+              "summary": "A Arte de Game Design. Autor: Jesse Schell (tem em português). Tipo: livro. URL: sem link no guia. - Criatividade S.A.. Autor: Ed Catmull (Pixar). Tipo: livro. URL: sem link no guia. - Game Maker's Toolkit. Tipo: cana...",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-criativo.md"
+            }
+          ]
+        },
+        {
+          "id": "lideranca/diretor-de-animacao",
+          "title": "Diretor de animação",
+          "summary": "Define como os personagens se movem e aprova as animações: guia de estilo de movimento, animation list e decisão entre mocap e keyframe.",
+          "kind": "doc",
+          "source": "knowledge/lideranca/diretor-de-animacao.md",
+          "children": [
+            {
+              "id": "lideranca/diretor-de-animacao#o-que-faz",
+              "title": "O que faz",
+              "summary": "Define como os personagens se movem (realista ou exagerado), aprova as animações e garante que fiquem bonitas e boas de jogar.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-de-animacao.md"
+            },
+            {
+              "id": "lideranca/diretor-de-animacao#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Guia de estilo de movimento: peso, timing, exagero, personalidade. - Animation list. - Decisão do que é mocap e do que é keyframe. - Revisão das animações junto com o combat designer.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-de-animacao.md"
+            },
+            {
+              "id": "lideranca/diretor-de-animacao#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Os 12 princípios da animação. - A diferença do jogo para a série: no jogo a animação precisa responder rápido ao controle. - State machines, blend spaces, IK e motion matching.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-de-animacao.md"
+            },
+            {
+              "id": "lideranca/diretor-de-animacao#como-validar",
+              "title": "Como validar",
+              "summary": "Critério de aceite, a partir do exercício do guia: um ciclo de andar, um pulo e um golpe foram animados, colocados num personagem jogável e ajustados até ficarem bons de controlar. Uma animação só está aprovada depois...",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-de-animacao.md"
+            },
+            {
+              "id": "lideranca/diretor-de-animacao#quem-assume-no-openglitch",
+              "title": "Quem assume no OpenGlitch",
+              "summary": "O agente Animação faz a direção de animação. A revisão dos golpes é feita junto com o Design (combat designer).",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-de-animacao.md"
+            },
+            {
+              "id": "lideranca/diretor-de-animacao#referencias",
+              "title": "Referências",
+              "summary": "Manual de Animação (The Animator's Survival Kit). Autor: Richard Williams. Tipo: livro. URL: sem link no guia. - Game Anim. Autor: Jonathan Cooper (líder em Assassin's Creed e Mass Effect; a 2ª edição tem mocap e moti...",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-de-animacao.md"
+            }
+          ]
+        },
+        {
+          "id": "lideranca/diretor-de-arte",
+          "title": "Diretor de arte",
+          "summary": "Define o visual do jogo inteiro: art bible, moodboards, paintovers e aprovação dos assets.",
+          "kind": "doc",
+          "source": "knowledge/lideranca/diretor-de-arte.md",
+          "children": [
+            {
+              "id": "lideranca/diretor-de-arte#o-que-faz",
+              "title": "O que faz",
+              "summary": "Define o visual do jogo inteiro e garante que tudo pareça do mesmo mundo.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-de-arte.md"
+            },
+            {
+              "id": "lideranca/diretor-de-arte#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Style guide / art bible: paleta, formas, materiais, proporções. - Moodboards. - Paintovers: pintar por cima do trabalho dos artistas para corrigir. - Aprovação dos assets.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-de-arte.md"
+            },
+            {
+              "id": "lideranca/diretor-de-arte#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Forma, cor, luz, composição e silhueta. - Escrever o style guide de jogos e séries de que se gosta. - O básico do pipeline 3D.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-de-arte.md"
+            },
+            {
+              "id": "lideranca/diretor-de-arte#como-validar",
+              "title": "Como validar",
+              "summary": "Critério de aceite, a partir do exercício do guia: existe uma art bible de 5 páginas para o projeto, com um estilo escolhido (por exemplo, estilizado tipo Arcane ou low-poly). Um asset novo é aprovado quando parece do...",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-de-arte.md"
+            },
+            {
+              "id": "lideranca/diretor-de-arte#quem-assume-no-openglitch",
+              "title": "Quem assume no OpenGlitch",
+              "summary": "O agente Arte 3D faz a direção de arte, com o usuário aprovando o estilo.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-de-arte.md"
+            },
+            {
+              "id": "lideranca/diretor-de-arte#referencias",
+              "title": "Referências",
+              "summary": "Color and Light. Autor: James Gurney. Tipo: livro. URL: sem link no guia. - Gurney Journey. Autor: James Gurney. Tipo: blog. URL: sem link no guia. - Framed Ink. Autor: Marcos Mateu-Mestre. Tipo: livro. URL: sem link ...",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-de-arte.md"
+            }
+          ]
+        },
+        {
+          "id": "lideranca/diretor-tecnico",
+          "title": "Diretor técnico",
+          "summary": "Decide como o jogo é construído: engine, arquitetura, ferramentas, orçamento técnico e riscos técnicos.",
+          "kind": "doc",
+          "source": "knowledge/lideranca/diretor-tecnico.md",
+          "children": [
+            {
+              "id": "lideranca/diretor-tecnico#o-que-faz",
+              "title": "O que faz",
+              "summary": "Decide como o jogo vai ser construído: engine, arquitetura, ferramentas, performance. Avalia o que é possível e quanto custa.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-tecnico.md"
+            },
+            {
+              "id": "lideranca/diretor-tecnico#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Escolha de engine. - Arquitetura do código e padrões da equipe. - Orçamento técnico: polígonos, texturas, personagens por cena, meta de FPS. - Pipeline de assets. - Avaliação de riscos técnicos.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-tecnico.md"
+            },
+            {
+              "id": "lideranca/diretor-tecnico#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Programação sólida (C# para Unity; C++ ou Blueprints para Unreal). - Padrões de projeto e otimização (profiler, draw calls, LODs). - O básico de arte 3D e animação.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-tecnico.md"
+            },
+            {
+              "id": "lideranca/diretor-tecnico#como-validar",
+              "title": "Como validar",
+              "summary": "Critério de aceite, a partir do exercício do guia: o mesmo protótipo pequeno foi feito nas duas engines e comparado, e uma cena pesada foi otimizada até rodar bem na meta de FPS do orçamento técnico.",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-tecnico.md"
+            },
+            {
+              "id": "lideranca/diretor-tecnico#quem-assume-no-openglitch",
+              "title": "Quem assume no OpenGlitch",
+              "summary": "O agente Engenharia faz a direção técnica, com o usuário decidindo a engine. O orçamento técnico também alimenta a Arte 3D (polígonos e texturas).",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-tecnico.md"
+            },
+            {
+              "id": "lideranca/diretor-tecnico#referencias",
+              "title": "Referências",
+              "summary": "Game Programming Patterns. Tipo: livro online grátis. URL: https://gameprogrammingpatterns.com/contents.html - Game Engine Architecture. Autor: Jason Gregory. Tipo: livro. URL: sem link no guia. - Cursos gratuitos de ...",
+              "kind": "section",
+              "source": "knowledge/lideranca/diretor-tecnico.md"
+            }
+          ]
+        },
+        {
+          "id": "lideranca/produtor",
+          "title": "Produtor",
+          "summary": "Faz o jogo sair: cronograma, marcos, backlog, orçamento e gestão de riscos.",
+          "kind": "doc",
+          "source": "knowledge/lideranca/produtor.md",
+          "children": [
+            {
+              "id": "lideranca/produtor#o-que-faz",
+              "title": "O que faz",
+              "summary": "Faz o jogo sair. Cuida de prazos, orçamento, prioridades e de quem faz o quê. Destrava gargalos e protege a equipe do caos.",
+              "kind": "section",
+              "source": "knowledge/lideranca/produtor.md"
+            },
+            {
+              "id": "lideranca/produtor#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Cronograma e marcos (vertical slice, alpha, beta). - Backlog priorizado. - Orçamento. - Gestão de riscos: o que pode atrasar e o plano B. - Reuniões curtas de alinhamento.",
+              "kind": "section",
+              "source": "knowledge/lideranca/produtor.md"
+            },
+            {
+              "id": "lideranca/produtor#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Metodologias ágeis (Scrum, Kanban). - Estimar tarefas e comparar depois com o tempo real. - Ferramentas: Trello, Notion, HacknPlan (feito para games) e Jira.",
+              "kind": "section",
+              "source": "knowledge/lideranca/produtor.md"
+            },
+            {
+              "id": "lideranca/produtor#como-validar",
+              "title": "Como validar",
+              "summary": "Critério de aceite, a partir do exercício do guia: o próximo projeto está planejado em sprints de 1 a 2 semanas e o atraso real de cada sprint é registrado. O plano está bom quando as estimativas passam a se aproximar...",
+              "kind": "section",
+              "source": "knowledge/lideranca/produtor.md"
+            },
+            {
+              "id": "lideranca/produtor#quem-assume-no-openglitch",
+              "title": "Quem assume no OpenGlitch",
+              "summary": "O usuário, com o agente Design (produção e escopo). Num projeto solo, é o papel que mais faz o projeto terminar; comece por ele.",
+              "kind": "section",
+              "source": "knowledge/lideranca/produtor.md"
+            },
+            {
+              "id": "lideranca/produtor#referencias",
+              "title": "Referências",
+              "summary": "The Game Production Toolbox. Autor: Heather Chandler. Tipo: livro. Da autora há também o Manual de Produção de Jogos Digitais, em português. URL: sem link no guia. - Agile Game Development. Autor: Clinton Keith. Tipo:...",
+              "kind": "section",
+              "source": "knowledge/lideranca/produtor.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "design",
+      "title": "Design",
+      "summary": "A área que decide o que o jogo é: regras, combate, fases, história e interface. É por onde todo projeto começa.",
+      "kind": "area",
+      "source": "knowledge/design/_area.md",
+      "children": [
+        {
+          "id": "design#o-que-a-area-faz",
+          "title": "O que a área faz",
+          "summary": "Design define o que o jogador pode fazer e por que isso é divertido. Reúne cinco funções: game designer (regras e mecânicas), combat designer (golpes, armas, inimigos e o \"feeling\" do combate), level designer (fases e...",
+          "kind": "section",
+          "source": "knowledge/design/_area.md"
+        },
+        {
+          "id": "design#por-que-vem-primeiro",
+          "title": "Por que vem primeiro",
+          "summary": "O game design dita o trabalho das outras áreas. O que o personagem faz (atirar, rolar, bloquear) define as animações necessárias; as mecânicas definem os sistemas a programar; a história define as cenas. Por isso todo...",
+          "kind": "section",
+          "source": "knowledge/design/_area.md"
+        },
+        {
+          "id": "design#ordem-de-aprofundamento",
+          "title": "Ordem de aprofundamento",
+          "summary": "Fundamentos de game design: são a base de tudo. 2. Level design, que já cobre combate e ritmo. 3. A função mais ligada ao tipo de jogo: luta pede balanceamento competitivo; tiro e ação pedem combat design; jogo de his...",
+          "kind": "section",
+          "source": "knowledge/design/_area.md"
+        },
+        {
+          "id": "design#ligacoes-com-outras-areas",
+          "title": "Ligações com outras áreas",
+          "summary": "Animação: a lista de ações vira a animation list; o combat designer revisa as animações de golpe junto com a direção de animação. - Engenharia: as mecânicas viram sistemas; protótipos testam as regras. - Arte 3D: o le...",
+          "kind": "section",
+          "source": "knowledge/design/_area.md"
+        },
+        {
+          "id": "design/game-designer",
+          "title": "Game designer",
+          "summary": "Cria as regras do jogo (o que o jogador faz, como ganha, perde e evolui) e cuida do balanceamento.",
+          "kind": "doc",
+          "source": "knowledge/design/game-designer.md",
+          "children": [
+            {
+              "id": "design/game-designer#o-que-faz",
+              "title": "O que faz",
+              "summary": "Cria as regras do jogo: o que o jogador pode fazer, como ganha, como perde e como evolui. Também cuida do balanceamento, para que nenhuma opção seja obviamente a melhor nem inútil.",
+              "kind": "section",
+              "source": "knowledge/design/game-designer.md"
+            },
+            {
+              "id": "design/game-designer#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "GDD e um documento para cada mecânica. - Core loop: o ciclo que o jogador repete. Exemplo: explorar → lutar → pegar loot → melhorar → explorar. - Planilhas de balanceamento: dano, vida, preço, XP. - Protótipos para te...",
+              "kind": "section",
+              "source": "knowledge/design/game-designer.md"
+            },
+            {
+              "id": "design/game-designer#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Ler um jogo e escrever o core loop dele: é o exercício que revela como as mecânicas se sustentam. - Planilha (Excel ou Google Sheets) como ferramenta de balanceamento: os números vivem na planilha antes de irem para o...",
+              "kind": "section",
+              "source": "knowledge/design/game-designer.md"
+            },
+            {
+              "id": "design/game-designer#como-validar",
+              "title": "Como validar",
+              "summary": "Mude uma regra e observe como o jogo muda. Em jogos simples (jogo da velha, Uno) o efeito aparece na hora; num protótipo digital, repita com a regra que está em dúvida. - O core loop está certo quando dá para descrevê...",
+              "kind": "section",
+              "source": "knowledge/design/game-designer.md"
+            },
+            {
+              "id": "design/game-designer#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "As ações que as regras permitem viram a animation list da Animação. - Cada mecânica vira um sistema para o gameplay programmer. - O combat designer detalha as regras de combate; o level designer distribui os desafios ...",
+              "kind": "section",
+              "source": "knowledge/design/game-designer.md"
+            },
+            {
+              "id": "design/game-designer#referencias",
+              "title": "Referências",
+              "summary": "10 fontes que o subagente game-designer usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/design/subagents/game-designer/references.json"
+            }
+          ]
+        },
+        {
+          "id": "design/combat-designer",
+          "title": "Combat designer",
+          "summary": "Cria o combate (golpes, armas, inimigos e a sensação de cada ataque), central em jogos de luta, tiro e ação.",
+          "kind": "doc",
+          "source": "knowledge/design/combat-designer.md",
+          "children": [
+            {
+              "id": "design/combat-designer#o-que-faz",
+              "title": "O que faz",
+              "summary": "Cria o combate: golpes, armas, inimigos e o \"feeling\" de cada ataque. É central em jogo de luta, tiro e ação.",
+              "kind": "section",
+              "source": "knowledge/design/combat-designer.md"
+            },
+            {
+              "id": "design/combat-designer#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Moveset: os golpes, cada um com dano, startup e recovery. - Design de inimigos: o que cada um faz e como avisa antes de atacar. - Encontros: combinações de inimigos. - Ajuste de game feel: hitstop, screen shake, partí...",
+              "kind": "section",
+              "source": "knowledge/design/combat-designer.md"
+            },
+            {
+              "id": "design/combat-designer#fundamentos",
+              "title": "Fundamentos",
+              "summary": "O combate é o jogo fazendo perguntas (o comportamento dos inimigos), dando ferramentas para responder (os ataques do jogador) e mudando as perguntas a cada luta. - Um ataque quase nunca é divertido na primeira versão....",
+              "kind": "section",
+              "source": "knowledge/design/combat-designer.md"
+            },
+            {
+              "id": "design/combat-designer#como-validar",
+              "title": "Como validar",
+              "summary": "O combate mínimo está pronto quando existe um personagem com 3 golpes e 1 inimigo com 2 ataques, e a luta é justa depois de ajustes. - Justa quer dizer que o jogador consegue ler cada ataque do inimigo pelo aviso e re...",
+              "kind": "section",
+              "source": "knowledge/design/combat-designer.md"
+            },
+            {
+              "id": "design/combat-designer#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O moveset e os ataques dos inimigos viram a animation list da Animação. - Os números de dano e vida vêm do balanceamento do game designer. - O level designer posiciona os encontros e dá o espaço da arena. - Hitstop, s...",
+              "kind": "section",
+              "source": "knowledge/design/combat-designer.md"
+            },
+            {
+              "id": "design/combat-designer#referencias",
+              "title": "Referências",
+              "summary": "10 fontes que o subagente combat-designer usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/design/subagents/combat-designer/references.json"
+            }
+          ]
+        },
+        {
+          "id": "design/level-designer",
+          "title": "Level designer",
+          "summary": "Monta fases e mapas, decide por onde o jogador anda e guia o jogador pelo espaço, sem seta na tela.",
+          "kind": "doc",
+          "source": "knowledge/design/level-designer.md",
+          "children": [
+            {
+              "id": "design/level-designer#o-que-faz",
+              "title": "O que faz",
+              "summary": "Monta fases e mapas. Decide por onde o jogador anda, onde ficam inimigos e segredos, e guia o jogador sem seta na tela.",
+              "kind": "section",
+              "source": "knowledge/design/level-designer.md"
+            },
+            {
+              "id": "design/level-designer#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Planta ou mapa 2D da fase. - Blockout (greybox): a fase só com cubos. - Ritmo da fase: onde há tensão e onde há descanso. - Posicionamento de inimigos, itens e checkpoints.",
+              "kind": "section",
+              "source": "knowledge/design/level-designer.md"
+            },
+            {
+              "id": "design/level-designer#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Desenhar de memória o mapa de uma fase de que se gosta e anotar por que ela funciona. - Fluxo: caminho principal, landmarks e linhas de visão são o que orienta o jogador. - Blockout na engine: ProBuilder na Unity, Mod...",
+              "kind": "section",
+              "source": "knowledge/design/level-designer.md"
+            },
+            {
+              "id": "design/level-designer#como-validar",
+              "title": "Como validar",
+              "summary": "Existe uma fase só com cubos cinza, com 5 a 10 minutos de duração. - Alguém joga sem receber explicação. O ponto onde a pessoa se perde mostra onde o fluxo falhou; ajuste o espaço (landmark, linha de visão, forma), nã...",
+              "kind": "section",
+              "source": "knowledge/design/level-designer.md"
+            },
+            {
+              "id": "design/level-designer#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O game designer define as regras e o core loop que a fase precisa sustentar. - O combat designer define os encontros que o level designer posiciona. - O blockout é a base do cenário que a Arte 3D produz depois. - O bl...",
+              "kind": "section",
+              "source": "knowledge/design/level-designer.md"
+            },
+            {
+              "id": "design/level-designer#referencias",
+              "title": "Referências",
+              "summary": "8 fontes que o subagente level-designer usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/design/subagents/level-designer/references.json"
+            }
+          ]
+        },
+        {
+          "id": "design/narrative-designer",
+          "title": "Narrative designer",
+          "summary": "Cria história, personagens, diálogos e missões e faz tudo funcionar dentro da jogabilidade.",
+          "kind": "doc",
+          "source": "knowledge/design/narrative-designer.md",
+          "children": [
+            {
+              "id": "design/narrative-designer#o-que-faz",
+              "title": "O que faz",
+              "summary": "Cria a história, os personagens, os diálogos e as missões, e faz tudo isso funcionar dentro da jogabilidade.",
+              "kind": "section",
+              "source": "knowledge/design/narrative-designer.md"
+            },
+            {
+              "id": "design/narrative-designer#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Bíblia do mundo: lore, facções, lugares e regras. - Fichas de personagem. - Roteiro de cutscenes e diálogos, com ramificações. - Estrutura de missões.",
+              "kind": "section",
+              "source": "knowledge/design/narrative-designer.md"
+            },
+            {
+              "id": "design/narrative-designer#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Fundamentos de roteiro: três atos, arco de personagem e conflito. - Ferramentas gratuitas de narrativa interativa: ink, Twine e Yarn Spinner. - Environmental storytelling: contar história pelo que o jogador encontra n...",
+              "kind": "section",
+              "source": "knowledge/design/narrative-designer.md"
+            },
+            {
+              "id": "design/narrative-designer#como-validar",
+              "title": "Como validar",
+              "summary": "Existe uma história interativa curta, de cerca de 5 minutos, feita em Twine ou ink. - Ela tem 2 ou 3 escolhas que mudam o final, e as diferenças entre finais são visíveis para quem joga. - A história roda do início ao...",
+              "kind": "section",
+              "source": "knowledge/design/narrative-designer.md"
+            },
+            {
+              "id": "design/narrative-designer#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O roteiro de cutscenes vai para Cinematics, que o transforma em planos e câmera. - Falas e diálogos pedem gravação e direção em Audio. - Os diálogos ramificados e as missões viram sistemas para Engenharia. - O mundo e...",
+              "kind": "section",
+              "source": "knowledge/design/narrative-designer.md"
+            },
+            {
+              "id": "design/narrative-designer#referencias",
+              "title": "Referências",
+              "summary": "9 fontes que o subagente narrative-designer usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/design/subagents/narrative-designer/references.json"
+            }
+          ]
+        },
+        {
+          "id": "design/ux-ui-designer",
+          "title": "UX/UI designer",
+          "summary": "Cuida do que o jogador vê e usa para entender o jogo: menus, HUD, ícones, tutoriais e acessibilidade.",
+          "kind": "doc",
+          "source": "knowledge/design/ux-ui-designer.md",
+          "children": [
+            {
+              "id": "design/ux-ui-designer#o-que-faz",
+              "title": "O que faz",
+              "summary": "Cuida do que o jogador vê e usa para entender o jogo: menus, HUD, ícones e tutoriais.",
+              "kind": "section",
+              "source": "knowledge/design/ux-ui-designer.md"
+            },
+            {
+              "id": "design/ux-ui-designer#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Wireframes e fluxo de telas. - Mockups e guia de estilo da UI. - Tutorial e onboarding. - Opções de acessibilidade: legenda, daltonismo e remapeamento.",
+              "kind": "section",
+              "source": "knowledge/design/ux-ui-designer.md"
+            },
+            {
+              "id": "design/ux-ui-designer#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Princípios de UX: hierarquia visual, legibilidade e feedback. - Figma, gratuito, para wireframes e mockups. - Estudar e copiar telas de muitos jogos para entender como cada problema de interface já foi resolvido. - Ac...",
+              "kind": "section",
+              "source": "knowledge/design/ux-ui-designer.md"
+            },
+            {
+              "id": "design/ux-ui-designer#como-validar",
+              "title": "Como validar",
+              "summary": "Dá para redesenhar o menu ou o HUD de um jogo confuso no Figma e explicar em 3 linhas o que melhorou. - A melhoria aparece nos três princípios: o que importa está em destaque (hierarquia), o texto e os ícones se leem ...",
+              "kind": "section",
+              "source": "knowledge/design/ux-ui-designer.md"
+            },
+            {
+              "id": "design/ux-ui-designer#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Os números e estados que o HUD mostra vêm das regras do game designer. - O tutorial ensina as mecânicas do game designer e os golpes do combat designer. - O texto de menus e legendas dialoga com o narrative designer. ...",
+              "kind": "section",
+              "source": "knowledge/design/ux-ui-designer.md"
+            },
+            {
+              "id": "design/ux-ui-designer#referencias",
+              "title": "Referências",
+              "summary": "9 fontes que o subagente ux-ui-designer usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/design/subagents/ux-ui-designer/references.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arte-3d",
+      "title": "Arte 3D",
+      "summary": "A área que define o visual do jogo e produz os assets 3D: concept, personagens, cenários, props, materiais, luz, efeitos e a ponte técnica com a engine.",
+      "kind": "area",
+      "source": "knowledge/arte-3d/_area.md",
+      "children": [
+        {
+          "id": "arte-3d#o-que-a-area-faz",
+          "title": "O que a área faz",
+          "summary": "Arte 3D define como o jogo se parece e produz o que roda na tela. Reúne a direção de arte e oito funções: concept artist, character artist, environment artist, props e hard-surface artist, texture e material artist, l...",
+          "kind": "section",
+          "source": "knowledge/arte-3d/_area.md"
+        },
+        {
+          "id": "arte-3d#direcao-de-arte",
+          "title": "Direção de arte",
+          "summary": "O diretor de arte entrega o style guide ou art bible (paleta, formas, materiais, proporções), moodboards, paintovers (pintar por cima do trabalho dos artistas para corrigir) e a aprovação dos assets. Os fundamentos sã...",
+          "kind": "section",
+          "source": "knowledge/arte-3d/_area.md"
+        },
+        {
+          "id": "arte-3d#pipeline-de-personagem",
+          "title": "Pipeline de personagem",
+          "summary": "Do zero ao jogo, com os donos de cada etapa:",
+          "kind": "section",
+          "source": "knowledge/arte-3d/_area.md"
+        },
+        {
+          "id": "arte-3d#por-onde-comecar-sendo-solo",
+          "title": "Por onde começar sendo solo",
+          "summary": "Blender básico e o Manual do Blender. 2. The PBR Guide. 3. Game Art Tricks, que ensina a economizar bem. 4. Unity for Technical Artists.",
+          "kind": "section",
+          "source": "knowledge/arte-3d/_area.md"
+        },
+        {
+          "id": "arte-3d#ligacoes-com-outras-areas",
+          "title": "Ligações com outras áreas",
+          "summary": "Design: o brief define o estilo visual e as listas de personagens, cenários e props. O blockout do level designer é a base do environment artist. - Animação: recebe a malha com topologia para dobrar bem; o rigger e o ...",
+          "kind": "section",
+          "source": "knowledge/arte-3d/_area.md"
+        },
+        {
+          "id": "arte-3d/concept-artist",
+          "title": "Concept artist",
+          "summary": "Desenha personagens, cenários, armas e criaturas antes de alguém modelar, e entrega silhueta, turnaround, callouts e paleta.",
+          "kind": "doc",
+          "source": "knowledge/arte-3d/concept-artist.md",
+          "children": [
+            {
+              "id": "arte-3d/concept-artist#o-que-faz",
+              "title": "O que faz",
+              "summary": "Desenha personagens, cenários, armas e criaturas antes de alguém modelar. O concept é aprovado pelo diretor de arte e é a entrada do blockout.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/concept-artist.md"
+            },
+            {
+              "id": "arte-3d/concept-artist#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Sketches de exploração do design. - Design do personagem aprovado. - Turnaround: o personagem em frente, lado e costas. - Callouts de detalhes e de materiais. - Paleta de cores. - Pinturas de cenário com clima e luz.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/concept-artist.md"
+            },
+            {
+              "id": "arte-3d/concept-artist#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Perspectiva, forma, silhueta, cor e luz, anatomia e design de formas. - Um personagem bom se reconhece só pela sombra, por isso a silhueta é o primeiro critério. - O método do guia: desenhar 20 silhuetas rápidas do me...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/concept-artist.md"
+            },
+            {
+              "id": "arte-3d/concept-artist#como-validar",
+              "title": "Como validar",
+              "summary": "Entre 20 silhuetas rápidas, uma se distingue das outras e é a escolhida. - O personagem é reconhecível só pela silhueta preta. - O turnaround tem frente, lado e costas e dá ao modelador a informação para o blockout se...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/concept-artist.md"
+            },
+            {
+              "id": "arte-3d/concept-artist#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "A ficha do personagem do Design é a entrada do concept. - O character artist parte do turnaround no blockout, comparando com a vista frontal e lateral. - O diretor de arte aprova o concept contra a art bible. - O text...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/concept-artist.md"
+            },
+            {
+              "id": "arte-3d/concept-artist#referencias",
+              "title": "Referências",
+              "summary": "12 fontes que o subagente concept-artist usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/arte-3d/subagents/concept-artist/references.json"
+            }
+          ]
+        },
+        {
+          "id": "arte-3d/character-artist",
+          "title": "Character artist",
+          "summary": "Modela e esculpe os personagens e deixa o modelo pronto para rig e animação, do blockout à retopologia, UV e bake.",
+          "kind": "doc",
+          "source": "knowledge/arte-3d/character-artist.md",
+          "children": [
+            {
+              "id": "arte-3d/character-artist#o-que-faz",
+              "title": "O que faz",
+              "summary": "Modela e esculpe os personagens e deixa o modelo pronto para rig e animação. Cuida das etapas de blockout, escultura high-poly, retopologia e, junto com o texture artist, UV e bake.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/character-artist.md"
+            },
+            {
+              "id": "arte-3d/character-artist#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Blockout: forma bruta com primitivas (cubos, cilindros, esferas) nas proporções certas, para aprovar silhueta e escala antes do detalhe. - Escultura high-poly: modelo de alta resolução com todo o detalhe (músculos, ru...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/character-artist.md"
+            },
+            {
+              "id": "arte-3d/character-artist#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Anatomia é o que mais pesa no cargo. - Blockout: proporções e escala (altura em cabeças); comparar o modelo com o concept em vista frontal e lateral; testar a escala na engine cedo. - Escultura: Sculpt Mode do Blender...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/character-artist.md"
+            },
+            {
+              "id": "arte-3d/character-artist#como-validar",
+              "title": "Como validar",
+              "summary": "Blockout em cerca de 1 hora, importado na engine ao lado de um cubo de 1 metro, com silhueta e proporção conferindo com o concept. - Uma cabeça simples esculpida primeiro; depois um personagem estilizado inteiro. - Re...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/character-artist.md"
+            },
+            {
+              "id": "arte-3d/character-artist#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O concept é a entrada do blockout. - O texture artist recebe UVs e mapas bakeados e divide com o character artist a etapa 4b. - O technical artist ajuda na retopologia e no orçamento de polígonos. - O rigger (Animação...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/character-artist.md"
+            },
+            {
+              "id": "arte-3d/character-artist#referencias",
+              "title": "Referências",
+              "summary": "24 fontes que o subagente character-artist usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/arte-3d/subagents/character-artist/references.json"
+            }
+          ]
+        },
+        {
+          "id": "arte-3d/environment-artist",
+          "title": "Environment artist",
+          "summary": "Constrói cenários bonitos e otimizados com kits modulares, terrenos, vegetação e a cena montada na engine.",
+          "kind": "doc",
+          "source": "knowledge/arte-3d/environment-artist.md",
+          "children": [
+            {
+              "id": "arte-3d/environment-artist#o-que-faz",
+              "title": "O que faz",
+              "summary": "Constrói cenários bonitos e otimizados. Veste o blockout da fase com arte final sem perder a leitura do caminho e sem estourar o orçamento.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/environment-artist.md"
+            },
+            {
+              "id": "arte-3d/environment-artist#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Kits modulares: paredes, pisos e portas que encaixam. - Terrenos e vegetação. - Set dressing: os objetos que dão vida ao espaço. - A cena montada na engine.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/environment-artist.md"
+            },
+            {
+              "id": "arte-3d/environment-artist#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Modelagem modular: peças que se repetem e se encaixam entre si. - Texturas tileáveis: texturas que se repetem sem emenda visível. - Composição de cena: o que o olho do jogador lê primeiro e como o espaço está organiza...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/environment-artist.md"
+            },
+            {
+              "id": "arte-3d/environment-artist#como-validar",
+              "title": "Como validar",
+              "summary": "Recrie um cômodo real da sua casa usando só peças modulares: as peças encaixam sem frestas e o mesmo kit monta mais de um espaço. - A textura tileável não mostra a repetição em uma visão ampla. - A cena montada na eng...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/environment-artist.md"
+            },
+            {
+              "id": "arte-3d/environment-artist#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O level designer (Design) entrega o blockout que o environment artist veste. - O texture artist fornece as texturas tileáveis e os materiais do kit. - O lighting artist ilumina a cena montada. - O technical artist val...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/environment-artist.md"
+            },
+            {
+              "id": "arte-3d/environment-artist#referencias",
+              "title": "Referências",
+              "summary": "14 fontes que o subagente environment-artist usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/arte-3d/subagents/environment-artist/references.json"
+            }
+          ]
+        },
+        {
+          "id": "arte-3d/props-hard-surface",
+          "title": "Props e hard-surface artist",
+          "summary": "Modela objetos duros como armas, veículos, robôs e máquinas, com bordas limpas, bevels corretos, versões high e low, normal maps e LODs.",
+          "kind": "doc",
+          "source": "knowledge/arte-3d/props-hard-surface.md",
+          "children": [
+            {
+              "id": "arte-3d/props-hard-surface#o-que-faz",
+              "title": "O que faz",
+              "summary": "Modela objetos duros: armas, veículos, robôs e máquinas. É central em jogo de tiro.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/props-hard-surface.md"
+            },
+            {
+              "id": "arte-3d/props-hard-surface#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Modelos com bordas limpas e bevels corretos. - Versões high e low do objeto. - Normal maps que levam o detalhe do high para o low. - LODs.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/props-hard-surface.md"
+            },
+            {
+              "id": "arte-3d/props-hard-surface#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Subdivisão e booleanas como técnicas de modelagem. - Controle de normais: smoothing groups e Weighted Normal. - Bevel correto nas bordas. - Estudo de objetos reais: o objeto é construído a partir de fotos e de referên...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/props-hard-surface.md"
+            },
+            {
+              "id": "arte-3d/props-hard-surface#como-validar",
+              "title": "Como validar",
+              "summary": "Modele uma arma ou ferramenta real a partir de fotos, do blockout até a textura. - As bordas estão limpas e o sombreamento não mostra artefatos em nenhum ângulo. - O bevel é consistente e pega luz nas bordas. - O norm...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/props-hard-surface.md"
+            },
+            {
+              "id": "arte-3d/props-hard-surface#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O texture artist texturiza o objeto a partir dos mapas bakeados. - O technical artist valida orçamento, escala e LODs na importação. - Animação recebe a arma para animações de manuseio e recarga. - Design define o pap...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/props-hard-surface.md"
+            },
+            {
+              "id": "arte-3d/props-hard-surface#referencias",
+              "title": "Referências",
+              "summary": "15 fontes que o subagente props-hard-surface usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/arte-3d/subagents/props-hard-surface/references.json"
+            }
+          ]
+        },
+        {
+          "id": "arte-3d/texture-material",
+          "title": "Texture e material artist",
+          "summary": "Pinta e cria materiais (metal, pele, couro, ferrugem), realistas ou estilizados, e entrega mapas PBR, materiais procedurais e bibliotecas.",
+          "kind": "doc",
+          "source": "knowledge/arte-3d/texture-material.md",
+          "children": [
+            {
+              "id": "arte-3d/texture-material#o-que-faz",
+              "title": "O que faz",
+              "summary": "Pinta e cria materiais como metal, pele, couro e ferrugem, realistas ou estilizados. Divide com o character artist a etapa de UV e bake.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/texture-material.md"
+            },
+            {
+              "id": "arte-3d/texture-material#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Mapas PBR: base color, roughness, metallic e normal. - Texturas pintadas à mão, no estilo do jogo, quando o estilo não é PBR. - Materiais procedurais. - Bibliotecas reutilizáveis de material.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/texture-material.md"
+            },
+            {
+              "id": "arte-3d/texture-material#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Teoria PBR primeiro. O PBR Guide (Adobe/Allegorithmic, gratuito desde 2014) tem a parte 1 de teoria e a parte 2 de prática, e vale para qualquer software. - Ferramentas: Substance Painter e Designer, ou alternativas g...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/texture-material.md"
+            },
+            {
+              "id": "arte-3d/texture-material#como-validar",
+              "title": "Como validar",
+              "summary": "O mesmo objeto em 3 materiais bem diferentes: madeira nova, metal enferrujado, plástico gasto. Cada um se lê como o que é. - O personagem texturizado com 3 materiais bem diferentes: pele, tecido e metal. - O normal ma...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/texture-material.md"
+            },
+            {
+              "id": "arte-3d/texture-material#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O character artist entrega UVs e mapas bakeados. - O props artist e o environment artist recebem materiais e texturas tileáveis. - O technical artist configura o material e o shader na engine. - O lighting artist defi...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/texture-material.md"
+            },
+            {
+              "id": "arte-3d/texture-material#referencias",
+              "title": "Referências",
+              "summary": "19 fontes que o subagente texture-material usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/arte-3d/subagents/texture-material/references.json"
+            }
+          ]
+        },
+        {
+          "id": "arte-3d/lighting-artist",
+          "title": "Lighting artist",
+          "summary": "Ilumina as cenas para criar clima e guiar o olhar sem pesar no desempenho, com luz, sombras, GI e pós-processamento.",
+          "kind": "doc",
+          "source": "knowledge/arte-3d/lighting-artist.md",
+          "children": [
+            {
+              "id": "arte-3d/lighting-artist#o-que-faz",
+              "title": "O que faz",
+              "summary": "Ilumina as cenas para criar clima e guiar o olhar do jogador sem pesar no desempenho.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/lighting-artist.md"
+            },
+            {
+              "id": "arte-3d/lighting-artist#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Iluminação de cada área do jogo. - Sombras e GI (luz rebatida). - Pós-processamento. - Luz das cutscenes.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/lighting-artist.md"
+            },
+            {
+              "id": "arte-3d/lighting-artist#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Cor e luz da fotografia e do cinema: o Gurney Journey e o livro Color and Light explicam cor e luz em pintura, e valem para cena 3D. - Luz em tempo real contra luz bakeada: a escolha muda o custo de desempenho e o que...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/lighting-artist.md"
+            },
+            {
+              "id": "arte-3d/lighting-artist#como-validar",
+              "title": "Como validar",
+              "summary": "Ilumine a mesma cena de 3 jeitos: dia feliz, noite de terror e pôr do sol melancólico. Cada versão deve passar o clima pedido apenas com luz, cor e pós-processamento. - O olhar vai para onde o design da fase quer. - A...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/lighting-artist.md"
+            },
+            {
+              "id": "arte-3d/lighting-artist#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Design define o clima desejado de cada fase e momento da história. - Cinematics usa a luz base nas cutscenes e faz o acabamento final do plano. - O environment artist entrega a cena a ser iluminada. - O texture artist...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/lighting-artist.md"
+            },
+            {
+              "id": "arte-3d/lighting-artist#referencias",
+              "title": "Referências",
+              "summary": "13 fontes que o subagente lighting-artist usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/arte-3d/subagents/lighting-artist/references.json"
+            }
+          ]
+        },
+        {
+          "id": "arte-3d/vfx-artist",
+          "title": "VFX artist",
+          "summary": "Cria efeitos como fogo, fumaça, explosões, magia, impactos e tiros, e dá peso ao combate com partículas, flipbooks e shaders de efeito.",
+          "kind": "doc",
+          "source": "knowledge/arte-3d/vfx-artist.md",
+          "children": [
+            {
+              "id": "arte-3d/vfx-artist#o-que-faz",
+              "title": "O que faz",
+              "summary": "Cria efeitos: fogo, fumaça, explosões, magia, impactos, tiros e chuva. Dá \"peso\" ao combate.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/vfx-artist.md"
+            },
+            {
+              "id": "arte-3d/vfx-artist#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Sistemas de partículas. - Flipbooks. - Shaders de efeito. - Efeitos sincronizados com a animação e o som.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/vfx-artist.md"
+            },
+            {
+              "id": "arte-3d/vfx-artist#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Ferramentas: Niagara na Unreal ou VFX Graph no Unity. - Shaders básicos, porque muito do efeito depende deles. - Timing: antecipação, impacto e dissipação. - RealTimeVFX, comunidade criada por devs da Riot, EA e Naugh...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/vfx-artist.md"
+            },
+            {
+              "id": "arte-3d/vfx-artist#como-validar",
+              "title": "Como validar",
+              "summary": "Faça o efeito de um golpe de espada: rastro, faísca no impacto e poeira no chão. - Os três tempos (antecipação, impacto, dissipação) são claros e casam com a animação e com o som de impacto. - O efeito aumenta o peso ...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/vfx-artist.md"
+            },
+            {
+              "id": "arte-3d/vfx-artist#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Combat designer (Design) define o game feel; o efeito faz parte dele. - Animação define os quadros de impacto com os quais o efeito sincroniza. - Áudio faz o som de impacto que acompanha o efeito. - Engenharia dispara...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/vfx-artist.md"
+            },
+            {
+              "id": "arte-3d/vfx-artist#referencias",
+              "title": "Referências",
+              "summary": "14 fontes que o subagente vfx-artist usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/arte-3d/subagents/vfx-artist/references.json"
+            }
+          ]
+        },
+        {
+          "id": "arte-3d/technical-artist",
+          "title": "Technical artist",
+          "summary": "Faz a ponte entre arte e programação com shaders, ferramentas de pipeline, orçamento técnico e a importação de assets na engine.",
+          "kind": "doc",
+          "source": "knowledge/arte-3d/technical-artist.md",
+          "children": [
+            {
+              "id": "arte-3d/technical-artist#o-que-faz",
+              "title": "O que faz",
+              "summary": "É a ponte entre arte e programação: shaders, ferramentas, scripts, otimização e o diagnóstico de \"por que esse asset não funciona na engine\". Em jogos o cargo é muito importante.",
+              "kind": "section",
+              "source": "knowledge/arte-3d/technical-artist.md"
+            },
+            {
+              "id": "arte-3d/technical-artist#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Shaders. - Ferramentas de pipeline: exportação e validação. - Orçamento técnico: polígonos, texturas, personagens por cena, meta de FPS. - Documentação para os artistas. - Etapa 8 do personagem: FBX importado com esca...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/technical-artist.md"
+            },
+            {
+              "id": "arte-3d/technical-artist#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Shaders: HLSL ou GLSL, ou shader graph. - Scripting: Python para o Blender, C# para o Unity. - Profiling e o básico do pipeline de arte. - Importação no Unity: 1 unidade = 1 metro (o 3ds Max usa 1 unidade = 10 cm); ti...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/technical-artist.md"
+            },
+            {
+              "id": "arte-3d/technical-artist#como-validar",
+              "title": "Como validar",
+              "summary": "Um shader de dissolver em que o personagem \"desmancha\" ao morrer, com o limiar controlável. - Um script Python que exporta todos os modelos de uma pasta, com escala e nomes corretos. - O personagem final exportado com...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/technical-artist.md"
+            },
+            {
+              "id": "arte-3d/technical-artist#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O character artist recebe ajuda na retopologia e no orçamento de polígonos. - O texture artist e o lighting artist dependem dos materiais, shaders e perfis que ele configura. - O animation TD (Animação) configura o An...",
+              "kind": "section",
+              "source": "knowledge/arte-3d/technical-artist.md"
+            },
+            {
+              "id": "arte-3d/technical-artist#referencias",
+              "title": "Referências",
+              "summary": "18 fontes que o subagente technical-artist usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/arte-3d/subagents/technical-artist/references.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "animacao",
+      "title": "Animação",
+      "summary": "A área que dá movimento ao jogo: estilo de movimento, rig, animação de gameplay e de cena, mocap, rosto, implementação na engine e física de roupa e cabelo.",
+      "kind": "area",
+      "source": "knowledge/animacao/_area.md",
+      "children": [
+        {
+          "id": "animacao#o-que-a-area-faz",
+          "title": "O que a área faz",
+          "summary": "Animação define como os personagens se movem e faz esse movimento funcionar no jogo. Reúne sete funções: rigger (esqueleto e skinning), animador de gameplay, animador de cinematic, mocap e cleanup, animação facial, an...",
+          "kind": "section",
+          "source": "knowledge/animacao/_area.md"
+        },
+        {
+          "id": "animacao#o-que-o-diretor-de-animacao-entrega",
+          "title": "O que o diretor de animação entrega",
+          "summary": "Guia de estilo de movimento: peso, timing, exagero e personalidade. - Animation list: todos os movimentos necessários. - Decisão do que é mocap e do que é keyframe. - Revisão das animações junto com o combat designer.",
+          "kind": "section",
+          "source": "knowledge/animacao/_area.md"
+        },
+        {
+          "id": "animacao#pipelines",
+          "title": "Pipelines",
+          "summary": "No pipeline de personagem, a Arte 3D entrega o modelo texturizado. A Animação faz a etapa 6 (rig e skinning) e a etapa 7 (animação), e participa da etapa 8 (engine) com a importação e o Animator configurado.",
+          "kind": "section",
+          "source": "knowledge/animacao/_area.md"
+        },
+        {
+          "id": "animacao#ordem-de-aprofundamento",
+          "title": "Ordem de aprofundamento",
+          "summary": "Os 12 princípios em jogos. 2. Rigify e rigging no Blender. 3. Documentação de animação da Unity e Animation Rigging. 4. Motion matching da Unreal e The Orange Duck.",
+          "kind": "section",
+          "source": "knowledge/animacao/_area.md"
+        },
+        {
+          "id": "animacao#ligacoes-com-outras-areas",
+          "title": "Ligações com outras áreas",
+          "summary": "Design: a lista de ações das mecânicas vira a animation list; o combat designer revisa as animações de golpe; o playtest diz se o controle ficou bom. - Arte 3D: entrega o modelo texturizado para o rig; o technical art...",
+          "kind": "section",
+          "source": "knowledge/animacao/_area.md"
+        },
+        {
+          "id": "animacao/rigger",
+          "title": "Rigger",
+          "summary": "Monta o esqueleto e os controles do animador e define como a malha deforma; entrega também o esqueleto de jogo leve.",
+          "kind": "doc",
+          "source": "knowledge/animacao/rigger.md",
+          "children": [
+            {
+              "id": "animacao/rigger#o-que-faz",
+              "title": "O que faz",
+              "summary": "Cria o esqueleto (ossos) e os controles que o animador move, e define como a malha deforma quando os ossos se movem. Na etapa 6 do pipeline de personagem, é o rigger quem pega o modelo texturizado e o deixa pronto par...",
+              "kind": "section",
+              "source": "knowledge/animacao/rigger.md"
+            },
+            {
+              "id": "animacao/rigger#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Esqueleto com nomes e hierarquia padronizados. - Skinning e weight painting (quanto cada osso puxa da malha). - Controles IK/FK. - Rig de jogo leve, compatível com a engine, separado do rig de animação.",
+              "kind": "section",
+              "source": "knowledge/animacao/rigger.md"
+            },
+            {
+              "id": "animacao/rigger#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Hierarquia de ossos, IK versus FK e constraints. - Weight painting é a parte que mais dá trabalho. - Rig de animação (cheio de controles, fica no Blender ou no Maya) é diferente do esqueleto de jogo (só os ossos de de...",
+              "kind": "section",
+              "source": "knowledge/animacao/rigger.md"
+            },
+            {
+              "id": "animacao/rigger#como-validar",
+              "title": "Como validar",
+              "summary": "Rigue um braço simples com IK, depois um personagem inteiro com o Rigify. - Gere o esqueleto de jogo a partir do rig e teste poses extremas (agachar, braço para cima): a malha não pode deformar de forma errada. - O es...",
+              "kind": "section",
+              "source": "knowledge/animacao/rigger.md"
+            },
+            {
+              "id": "animacao/rigger#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Recebe o modelo texturizado da Arte 3D (etapas 1 a 5 do pipeline de personagem). - Entrega o personagem riggado para os animadores e para o animation TD. - O rig facial é tratado em animação facial; roupa e cabelo em ...",
+              "kind": "section",
+              "source": "knowledge/animacao/rigger.md"
+            },
+            {
+              "id": "animacao/rigger#referencias",
+              "title": "Referências",
+              "summary": "12 fontes que o subagente rigger usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/animacao/subagents/rigger/references.json"
+            }
+          ]
+        },
+        {
+          "id": "animacao/gameplay-animator",
+          "title": "Animador de gameplay",
+          "summary": "Anima o que o jogador controla (andar, correr, pular, golpear) de forma que os clipes se encaixem e respondam rápido ao controle.",
+          "kind": "doc",
+          "source": "knowledge/animacao/gameplay-animator.md",
+          "children": [
+            {
+              "id": "animacao/gameplay-animator#o-que-faz",
+              "title": "O que faz",
+              "summary": "Anima o que o jogador controla: andar, correr, pular, atirar, golpear, rolar e morrer. As animações precisam encaixar umas nas outras e responder rápido ao controle.",
+              "kind": "section",
+              "source": "knowledge/animacao/gameplay-animator.md"
+            },
+            {
+              "id": "animacao/gameplay-animator#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Ciclos em loop. - Transições (parado, andando, correndo, parando). - Ações: golpes, recarga, esquiva. - Variações.",
+              "kind": "section",
+              "source": "knowledge/animacao/gameplay-animator.md"
+            },
+            {
+              "id": "animacao/gameplay-animator#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Os 12 princípios da animação adaptados a jogos. - Ciclos de locomoção: peso e contato do pé. - Responsividade: antecipação longa demais deixa o controle com cara de lento. - As animações têm de se conectar sem pulos. ...",
+              "kind": "section",
+              "source": "knowledge/animacao/gameplay-animator.md"
+            },
+            {
+              "id": "animacao/gameplay-animator#como-validar",
+              "title": "Como validar",
+              "summary": "Faça um ciclo de andar, um de correr, um pulo e um golpe e coloque num personagem jogável, ajustando até ficarem bons de controlar. - Os ciclos fecham sem pulo e os pés não escorregam. - A antecipação do golpe não faz...",
+              "kind": "section",
+              "source": "knowledge/animacao/gameplay-animator.md"
+            },
+            {
+              "id": "animacao/gameplay-animator#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O Design fornece as ações (mecânicas) e o combat designer revisa as animações de golpe. - O animation TD liga os clipes em state machines e blend trees. - O Áudio amarra som de passo e de impacto aos quadros da animação.",
+              "kind": "section",
+              "source": "knowledge/animacao/gameplay-animator.md"
+            },
+            {
+              "id": "animacao/gameplay-animator#referencias",
+              "title": "Referências",
+              "summary": "10 fontes que o subagente gameplay-animator usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/animacao/subagents/gameplay-animator/references.json"
+            }
+          ]
+        },
+        {
+          "id": "animacao/cinematic-animator",
+          "title": "Animador de cinematic",
+          "summary": "Anima as cenas de história com atuação caprichada, como numa série, e as monta no sequenciador da engine.",
+          "kind": "doc",
+          "source": "knowledge/animacao/cinematic-animator.md",
+          "children": [
+            {
+              "id": "animacao/cinematic-animator#o-que-faz",
+              "title": "O que faz",
+              "summary": "Anima as cenas de história com atuação caprichada, como numa série. Ao contrário do gameplay, a câmera é conhecida e cada plano pode ser trabalhado.",
+              "kind": "section",
+              "source": "knowledge/animacao/cinematic-animator.md"
+            },
+            {
+              "id": "animacao/cinematic-animator#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Animação plano a plano. - Atuação corporal e facial sincronizada com a dublagem. - Cenas montadas no sequenciador (Sequencer na Unreal, Timeline na Unity).",
+              "kind": "section",
+              "source": "knowledge/animacao/cinematic-animator.md"
+            },
+            {
+              "id": "animacao/cinematic-animator#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Atuação: intenção, pausa, olhar e peso emocional. - Linguagem de câmera: tamanhos de plano, enquadramento e movimentos. - Ferramentas de cinematic da engine. - A cena pode ser renderizada em tempo real na engine (mais...",
+              "kind": "section",
+              "source": "knowledge/animacao/cinematic-animator.md"
+            },
+            {
+              "id": "animacao/cinematic-animator#como-validar",
+              "title": "Como validar",
+              "summary": "Anime um personagem falando um áudio de 10 segundos (o desafio do 11 Second Club): a fala, o olhar e as pausas precisam parecer intencionais. - A atuação sincroniza com a dublagem, no corpo e no rosto. - A cena roda n...",
+              "kind": "section",
+              "source": "knowledge/animacao/cinematic-animator.md"
+            },
+            {
+              "id": "animacao/cinematic-animator#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Cinematics dirige a cena, define a câmera e edita; o animador de cinematic executa a atuação. - Animação facial fornece o rosto e a sincronia labial. - O Áudio entrega a dublagem que guia o timing.",
+              "kind": "section",
+              "source": "knowledge/animacao/cinematic-animator.md"
+            },
+            {
+              "id": "animacao/cinematic-animator#referencias",
+              "title": "Referências",
+              "summary": "14 fontes que o subagente cinematic-animator usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/animacao/subagents/cinematic-animator/references.json"
+            }
+          ]
+        },
+        {
+          "id": "animacao/mocap-cleanup",
+          "title": "Mocap e cleanup",
+          "summary": "Captura movimento de atores, limpa os dados e adapta ao esqueleto do jogo por retargeting.",
+          "kind": "doc",
+          "source": "knowledge/animacao/mocap-cleanup.md",
+          "children": [
+            {
+              "id": "animacao/mocap-cleanup#o-que-faz",
+              "title": "O que faz",
+              "summary": "Captura movimentos de atores e limpa os dados (tremedeira, pés escorregando), adaptando ao esqueleto do jogo. Também pode partir de bancos de mocap prontos.",
+              "kind": "section",
+              "source": "knowledge/animacao/mocap-cleanup.md"
+            },
+            {
+              "id": "animacao/mocap-cleanup#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Animações capturadas limpas. - Retargeting para cada personagem. - Loops e transições feitos a partir dos takes.",
+              "kind": "section",
+              "source": "knowledge/animacao/mocap-cleanup.md"
+            },
+            {
+              "id": "animacao/mocap-cleanup#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Formatos: BVH e FBX. - Retargeting: no Blender, no Humanoid da Unity e no IK Retargeter da Unreal. - Limpeza de curvas e foot locking. - O CMU Graphics Lab Motion Capture Database tem 2.605 capturas em 6 categorias; o...",
+              "kind": "section",
+              "source": "knowledge/animacao/mocap-cleanup.md"
+            },
+            {
+              "id": "animacao/mocap-cleanup#como-validar",
+              "title": "Como validar",
+              "summary": "Baixe uma animação de mocap gratuita, faça retargeting para o personagem e corrija os pés. - Os pés ficam fixos no chão durante o contato; não há tremedeira visível nas curvas. - Os loops fecham e a origem e a licença...",
+              "kind": "section",
+              "source": "knowledge/animacao/mocap-cleanup.md"
+            },
+            {
+              "id": "animacao/mocap-cleanup#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Usa o rig e os nomes de ossos do rigger. - O animation TD liga os clipes limpos na state machine. - Se o resultado for vendido como pacote, a licença do dado define o que pode ser incluído (é uma decisão de escopo do ...",
+              "kind": "section",
+              "source": "knowledge/animacao/mocap-cleanup.md"
+            },
+            {
+              "id": "animacao/mocap-cleanup#referencias",
+              "title": "Referências",
+              "summary": "16 fontes que o subagente mocap-cleanup usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/animacao/subagents/mocap-cleanup/references.json"
+            }
+          ]
+        },
+        {
+          "id": "animacao/facial-animation",
+          "title": "Animação facial",
+          "summary": "Cria expressões, olhar e lip sync com rig facial por ossos ou blend shapes, a partir do FACS e dos visemes.",
+          "kind": "doc",
+          "source": "knowledge/animacao/facial-animation.md",
+          "children": [
+            {
+              "id": "animacao/facial-animation#o-que-faz",
+              "title": "O que faz",
+              "summary": "Cria expressões, olhar e sincronia labial (lip sync).",
+              "kind": "section",
+              "source": "knowledge/animacao/facial-animation.md"
+            },
+            {
+              "id": "animacao/facial-animation#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Rig facial (ossos ou blend shapes). - Visemes (poses de fonemas). - Expressões base. - Animação facial das cenas.",
+              "kind": "section",
+              "source": "knowledge/animacao/facial-animation.md"
+            },
+            {
+              "id": "animacao/facial-animation#fundamentos",
+              "title": "Fundamentos",
+              "summary": "FACS (Facial Action Coding System): divide qualquer expressão em movimentos de músculos (action units), que servem como pesos de blend shapes. - Blend shapes (shape keys no Blender). - As formas da boca para cada som ...",
+              "kind": "section",
+              "source": "knowledge/animacao/facial-animation.md"
+            },
+            {
+              "id": "animacao/facial-animation#como-validar",
+              "title": "Como validar",
+              "summary": "Faça 6 expressões básicas num rosto simples e depois o personagem falando uma frase. - Cada expressão é reconhecível e se descreve pelas action units que usa. - A boca acompanha o áudio da frase.",
+              "kind": "section",
+              "source": "knowledge/animacao/facial-animation.md"
+            },
+            {
+              "id": "animacao/facial-animation#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "A Arte 3D entrega o rosto modelado com malha que permita as deformações. - O animador de cinematic usa o rosto na atuação das cenas. - O Áudio entrega a dublagem que guia o lip sync. - O animation TD cuida de como as ...",
+              "kind": "section",
+              "source": "knowledge/animacao/facial-animation.md"
+            },
+            {
+              "id": "animacao/facial-animation#referencias",
+              "title": "Referências",
+              "summary": "12 fontes que o subagente facial-animation usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/animacao/subagents/facial-animation/references.json"
+            }
+          ]
+        },
+        {
+          "id": "animacao/animation-td",
+          "title": "Animation TD",
+          "summary": "Faz as animações funcionarem dentro do jogo e decide qual toca e quando, com state machines, blends, IK e motion matching.",
+          "kind": "doc",
+          "source": "knowledge/animacao/animation-td.md",
+          "children": [
+            {
+              "id": "animacao/animation-td#o-que-faz",
+              "title": "O que faz",
+              "summary": "Faz as animações funcionarem dentro do jogo e decide qual toca e quando. É o coração de um pacote de animação. Participa da etapa 8 (engine) do pipeline de personagem, junto com a Arte 3D e a Engenharia.",
+              "kind": "section",
+              "source": "knowledge/animacao/animation-td.md"
+            },
+            {
+              "id": "animacao/animation-td#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Animator Controllers (Unity) ou Animation Blueprints (Unreal). - Blend spaces e blend trees. - IK de pés e mãos. - Motion matching. - Ferramentas para os animadores.",
+              "kind": "section",
+              "source": "knowledge/animacao/animation-td.md"
+            },
+            {
+              "id": "animacao/animation-td#fundamentos",
+              "title": "Fundamentos",
+              "summary": "State machines e blend trees. - IK procedural. - Motion matching. - C# (Unity) ou C++ e Blueprints (Unreal). - Importação: tipo de rig Humanoid ou Generic, escala e unidades (a Unity usa 1 unidade = 1 metro), blend sh...",
+              "kind": "section",
+              "source": "knowledge/animacao/animation-td.md"
+            },
+            {
+              "id": "animacao/animation-td#como-validar",
+              "title": "Como validar",
+              "summary": "Monte a locomoção completa (parado, andar, correr, virar) com IK nos pés subindo escada. - Depois, um motion matching simples. - As transições não deixam o controle lento e os pés não atravessam nem flutuam nos degrau...",
+              "kind": "section",
+              "source": "knowledge/animacao/animation-td.md"
+            },
+            {
+              "id": "animacao/animation-td#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "A Engenharia (gameplay programmer) controla os parâmetros que alimentam os blends. - O technical artist da Arte 3D cuida de shaders, LODs e desempenho. - Recebe os clipes dos animadores, do mocap e do rigger. - No pla...",
+              "kind": "section",
+              "source": "knowledge/animacao/animation-td.md"
+            },
+            {
+              "id": "animacao/animation-td#referencias",
+              "title": "Referências",
+              "summary": "15 fontes que o subagente animation-td usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/animacao/subagents/animation-td/references.json"
+            }
+          ]
+        },
+        {
+          "id": "animacao/cloth-hair-physics",
+          "title": "Cloth, hair e physics",
+          "summary": "Simula roupa, capa, cabelo e partes que balançam, e monta ragdolls, com ajustes para rodar leve.",
+          "kind": "doc",
+          "source": "knowledge/animacao/cloth-hair-physics.md",
+          "children": [
+            {
+              "id": "animacao/cloth-hair-physics#o-que-faz",
+              "title": "O que faz",
+              "summary": "Simula roupa, capa, cabelo, partes que balançam e ragdoll.",
+              "kind": "section",
+              "source": "knowledge/animacao/cloth-hair-physics.md"
+            },
+            {
+              "id": "animacao/cloth-hair-physics#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Configuração de tecido e cabelo. - Jiggle bones. - Ragdolls. - Ajustes para rodar leve.",
+              "kind": "section",
+              "source": "knowledge/animacao/cloth-hair-physics.md"
+            },
+            {
+              "id": "animacao/cloth-hair-physics#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Física básica: rigidbody e joints. - Simulação de tecido. - O truque de usar ossos com física simples no lugar de tecido completo. - Ferramentas: Cloth e Hair do Blender; Cloth, Ragdoll Wizard e Joints da Unity; Chaos...",
+              "kind": "section",
+              "source": "knowledge/animacao/cloth-hair-physics.md"
+            },
+            {
+              "id": "animacao/cloth-hair-physics#como-validar",
+              "title": "Como validar",
+              "summary": "Coloque uma capa e um rabo de cavalo num personagem andando e ajuste até não atravessarem o corpo. - O ragdoll não torce em ângulos impossíveis. - O custo da simulação cabe no orçamento do jogo.",
+              "kind": "section",
+              "source": "knowledge/animacao/cloth-hair-physics.md"
+            },
+            {
+              "id": "animacao/cloth-hair-physics#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Usa o rig do rigger e as animações dos animadores como entrada. - A Arte 3D (technical artist) cuida de shaders de cabelo e roupa e de LODs. - A Engenharia ajuda quando o ragdoll muda o estado do personagem no jogo.",
+              "kind": "section",
+              "source": "knowledge/animacao/cloth-hair-physics.md"
+            },
+            {
+              "id": "animacao/cloth-hair-physics#referencias",
+              "title": "Referências",
+              "summary": "13 fontes que o subagente cloth-hair-physics usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/animacao/subagents/cloth-hair-physics/references.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cinematics",
+      "title": "Cinematics",
+      "summary": "A área \"série\" do jogo: transforma o roteiro em cenas, com câmera, atuação, edição e acabamento de luz e cor.",
+      "kind": "area",
+      "source": "knowledge/cinematics/_area.md",
+      "children": [
+        {
+          "id": "cinematics#o-que-a-area-faz",
+          "title": "O que a área faz",
+          "summary": "Cinematics é a parte \"série\" de um jogo 3D cinematográfico. Reúne cinco funções: diretor de cinematic (transforma o roteiro em cenas), layout e câmera (enquadramento, movimento e ritmo), animadores de cena (atuação pl...",
+          "kind": "section",
+          "source": "knowledge/cinematics/_area.md"
+        },
+        {
+          "id": "cinematics#tempo-real-ou-pre-renderizado",
+          "title": "Tempo real ou pré-renderizado",
+          "summary": "A primeira decisão da área é como renderizar:",
+          "kind": "section",
+          "source": "knowledge/cinematics/_area.md"
+        },
+        {
+          "id": "cinematics#regra-de-escopo",
+          "title": "Regra de escopo",
+          "summary": "Cutscene é cara. Num jogo pequeno, faça poucas, curtas e na engine. Toda cena precisa mudar algo; se não muda, é candidata a corte.",
+          "kind": "section",
+          "source": "knowledge/cinematics/_area.md"
+        },
+        {
+          "id": "cinematics#ordem-de-aprofundamento",
+          "title": "Ordem de aprofundamento",
+          "summary": "Planos e câmera (guia de câmera da StudioBinder). 2. A regra dos seis, para saber quando cortar. 3. O Sequencer (Unreal) ou o Timeline (Unity). 4. O estilo Fortiche, se o visual desejado for parecido com o do Arcane.",
+          "kind": "section",
+          "source": "knowledge/cinematics/_area.md"
+        },
+        {
+          "id": "cinematics#ligacoes-com-outras-areas",
+          "title": "Ligações com outras áreas",
+          "summary": "Design: o roteiro de cutscenes e os diálogos são a entrada do diretor de cinematic. - Arte 3D: personagens, cenários e props que a câmera vê; a luz base do cenário. - Animação: rigs, animação facial e mocap limpo alim...",
+          "kind": "section",
+          "source": "knowledge/cinematics/_area.md"
+        },
+        {
+          "id": "cinematics/cinematic-director",
+          "title": "Diretor de cinematic",
+          "summary": "Transforma o roteiro em cenas: o que o público vê, em que ordem, com que emoção e como a cena se liga ao gameplay.",
+          "kind": "doc",
+          "source": "knowledge/cinematics/cinematic-director.md",
+          "children": [
+            {
+              "id": "cinematics/cinematic-director#o-que-faz",
+              "title": "O que faz",
+              "summary": "Transforma o roteiro em cenas. Decide o que o público vê, em que ordem, com que emoção e como a cena se liga ao gameplay. Também dá a aprovação final.",
+              "kind": "section",
+              "source": "knowledge/cinematics/cinematic-director.md"
+            },
+            {
+              "id": "cinematics/cinematic-director#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Breakdown do roteiro: o objetivo emocional de cada cena. - Storyboard ou animatic: os planos desenhados ou descritos e o tempo deles. - Direção de atuação para mocap, dublagem e animadores. - Aprovação final da cena.",
+              "kind": "section",
+              "source": "knowledge/cinematics/cinematic-director.md"
+            },
+            {
+              "id": "cinematics/cinematic-director#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Linguagem cinematográfica: planos, ângulos, ritmo e ponto de vista. - Toda cena precisa mudar algo. Se a cena não muda nada, não precisa existir. - Saber quando não fazer cutscene: o que o gameplay já mostra não preci...",
+              "kind": "section",
+              "source": "knowledge/cinematics/cinematic-director.md"
+            },
+            {
+              "id": "cinematics/cinematic-director#como-validar",
+              "title": "Como validar",
+              "summary": "Storyboard de uma cena de 1 minuto, plano a plano, de uma série existente. Depois, o de uma cena nova. - Cada cena tem um objetivo emocional escrito em uma frase e uma mudança identificável (de informação, de relação,...",
+              "kind": "section",
+              "source": "knowledge/cinematics/cinematic-director.md"
+            },
+            {
+              "id": "cinematics/cinematic-director#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O roteiro vem do Design (narrative designer); mudanças de cena que afetam a história voltam para ele. - A direção de atuação serve à Animação (mocap, animação facial) e ao Áudio (dublagem). - O storyboard orienta o la...",
+              "kind": "section",
+              "source": "knowledge/cinematics/cinematic-director.md"
+            },
+            {
+              "id": "cinematics/cinematic-director#referencias",
+              "title": "Referências",
+              "summary": "6 fontes que o subagente cinematic-director usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/cinematics/subagents/cinematic-director/references.json"
+            }
+          ]
+        },
+        {
+          "id": "cinematics/layout-camera",
+          "title": "Layout e câmera",
+          "summary": "Posiciona e move a câmera em cada plano e posiciona os personagens nele, com enquadramento, lente, movimento e ritmo.",
+          "kind": "doc",
+          "source": "knowledge/cinematics/layout-camera.md",
+          "children": [
+            {
+              "id": "cinematics/layout-camera#o-que-faz",
+              "title": "O que faz",
+              "summary": "Posiciona e move a câmera em cada plano: enquadramento, lente, movimento e ritmo. Posiciona também os personagens no plano (blocking).",
+              "kind": "section",
+              "source": "knowledge/cinematics/layout-camera.md"
+            },
+            {
+              "id": "cinematics/layout-camera#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Layout de cada plano. - Movimentos de câmera: dolly, pan, tracking e câmera na mão. - Previz: versão rápida dos planos para testar a câmera.",
+              "kind": "section",
+              "source": "knowledge/cinematics/layout-camera.md"
+            },
+            {
+              "id": "cinematics/layout-camera#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Tipos de plano, ângulos e movimentos de câmera. - Regra dos 180°, regra dos terços e eixo do olhar. - Lentes e o efeito de cada uma na imagem. - Ferramentas: Cine Camera na Unreal e Cinemachine na Unity. - Uma shot li...",
+              "kind": "section",
+              "source": "knowledge/cinematics/layout-camera.md"
+            },
+            {
+              "id": "cinematics/layout-camera#como-validar",
+              "title": "Como validar",
+              "summary": "A mesma conversa entre 2 personagens feita de 3 jeitos: plano e contraplano, plano-sequência e câmera na mão. Os três precisam ser legíveis. - No plano e contraplano, o eixo não pode ser cruzado sem motivo (regra dos ...",
+              "kind": "section",
+              "source": "knowledge/cinematics/layout-camera.md"
+            },
+            {
+              "id": "cinematics/layout-camera#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Recebe o storyboard do diretor de cinematic. - O animador de cena anima o que a câmera vê, então a câmera é fechada antes. - O editor usa os planos para decidir os cortes. - A Engenharia pode precisar de câmeras virtu...",
+              "kind": "section",
+              "source": "knowledge/cinematics/layout-camera.md"
+            },
+            {
+              "id": "cinematics/layout-camera#referencias",
+              "title": "Referências",
+              "summary": "6 fontes que o subagente layout-camera usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/cinematics/subagents/layout-camera/references.json"
+            }
+          ]
+        },
+        {
+          "id": "cinematics/scene-animator",
+          "title": "Animador de cena",
+          "summary": "Anima as cenas de história plano a plano, com atuação corporal e facial sincronizada à dublagem, montadas no sequenciador da engine.",
+          "kind": "doc",
+          "source": "knowledge/cinematics/scene-animator.md",
+          "children": [
+            {
+              "id": "cinematics/scene-animator#o-que-faz",
+              "title": "O que faz",
+              "summary": "Anima as cenas de história com atuação caprichada, como numa série, plano a plano. É o mesmo papel que o animador de cinematic da área de Animação.",
+              "kind": "section",
+              "source": "knowledge/cinematics/scene-animator.md"
+            },
+            {
+              "id": "cinematics/scene-animator#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Animação plano a plano. - Atuação corporal e facial, sincronizada com a dublagem. - Cenas no sequenciador: Sequencer na Unreal, Timeline na Unity.",
+              "kind": "section",
+              "source": "knowledge/cinematics/scene-animator.md"
+            },
+            {
+              "id": "cinematics/scene-animator#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Atuação: intenção, pausa, olhar e peso emocional. - Linguagem de câmera. - Ferramentas de cinematic da engine. - Dica que vem da série: anime para a câmera, não para o mundo. Se a câmera está num close do rosto, ningu...",
+              "kind": "section",
+              "source": "knowledge/cinematics/scene-animator.md"
+            },
+            {
+              "id": "cinematics/scene-animator#como-validar",
+              "title": "Como validar",
+              "summary": "Animar um personagem \"falando\" um áudio de 10 segundos, como no desafio do 11 Second Club. A atuação precisa ter intenção legível, pausas e direção do olhar, e a boca e o corpo precisam bater com o áudio. - Cada plano...",
+              "kind": "section",
+              "source": "knowledge/cinematics/scene-animator.md"
+            },
+            {
+              "id": "cinematics/scene-animator#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Os rigs e a animação facial vêm da Animação. - A dublagem e o tempo dela vêm do Áudio. - A câmera vem do layout e câmera; os cortes ficam com o editor. - Personagens e cenários vêm da Arte 3D.",
+              "kind": "section",
+              "source": "knowledge/cinematics/scene-animator.md"
+            },
+            {
+              "id": "cinematics/scene-animator#referencias",
+              "title": "Referências",
+              "summary": "8 fontes que o subagente scene-animator usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/cinematics/subagents/scene-animator/references.json"
+            }
+          ]
+        },
+        {
+          "id": "cinematics/editor",
+          "title": "Editor",
+          "summary": "Monta os planos e decide quando cortar, controlando o ritmo e a emoção das cinematics.",
+          "kind": "doc",
+          "source": "knowledge/cinematics/editor.md",
+          "children": [
+            {
+              "id": "cinematics/editor#o-que-faz",
+              "title": "O que faz",
+              "summary": "Monta os planos e decide quando cortar, controlando ritmo e emoção.",
+              "kind": "section",
+              "source": "knowledge/cinematics/editor.md"
+            },
+            {
+              "id": "cinematics/editor#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Montagem de cada cena. - Ritmo geral das cinematics. - Transição entre cutscene e gameplay.",
+              "kind": "section",
+              "source": "knowledge/cinematics/editor.md"
+            },
+            {
+              "id": "cinematics/editor#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Corte na ação, corte no olhar, match cut, J-cut e L-cut. - Quando segurar o plano e quando cortar rápido. - A regra dos seis de Walter Murch: emoção 51%, história 23%, ritmo 10%, eye-trace 7% e os demais critérios. A ...",
+              "kind": "section",
+              "source": "knowledge/cinematics/editor.md"
+            },
+            {
+              "id": "cinematics/editor#como-validar",
+              "title": "Como validar",
+              "summary": "Montar os mesmos planos em duas versões, uma calma e uma tensa. As duas precisam ser diferentes só pelo corte e pelo ritmo. - Cada corte se justifica por pelo menos um dos critérios da regra dos seis, com a emoção em ...",
+              "kind": "section",
+              "source": "knowledge/cinematics/editor.md"
+            },
+            {
+              "id": "cinematics/editor#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Os planos vêm do layout e câmera e do animador de cena. - O ritmo conversa com Áudio: música e efeitos acompanham os cortes. - A transição com o gameplay envolve a Engenharia.",
+              "kind": "section",
+              "source": "knowledge/cinematics/editor.md"
+            },
+            {
+              "id": "cinematics/editor#referencias",
+              "title": "Referências",
+              "summary": "7 fontes que o subagente editor usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/cinematics/subagents/editor/references.json"
+            }
+          ]
+        },
+        {
+          "id": "cinematics/lighting-comp",
+          "title": "Luz e comp",
+          "summary": "Acabamento final da cena: luz que cria clima e guia o olhar, color grading, efeitos de lente e composição.",
+          "kind": "doc",
+          "source": "knowledge/cinematics/lighting-comp.md",
+          "children": [
+            {
+              "id": "cinematics/lighting-comp#o-que-faz",
+              "title": "O que faz",
+              "summary": "É o acabamento final. A luz cria clima e guia o olhar; a composição junta camadas e corrige cor. Em tempo real, a \"comp\" vira pós-processamento.",
+              "kind": "section",
+              "source": "knowledge/cinematics/lighting-comp.md"
+            },
+            {
+              "id": "cinematics/lighting-comp#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Luz de cada plano. - Color grading. - Efeitos de lente. - No pré-renderizado, a imagem final composta.",
+              "kind": "section",
+              "source": "knowledge/cinematics/lighting-comp.md"
+            },
+            {
+              "id": "cinematics/lighting-comp#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Luz principal, preenchimento e contraluz. - Color grading. - Pós-processamento (engine) ou compositor do Blender (pré-renderizado). - O caso Arcane: fundos pintados em 2D projetados sobre geometria 3D simples (project...",
+              "kind": "section",
+              "source": "knowledge/cinematics/lighting-comp.md"
+            },
+            {
+              "id": "cinematics/lighting-comp#como-validar",
+              "title": "Como validar",
+              "summary": "Três gradings do mesmo plano: quente e nostálgico, frio e tenso, saturado e \"videogame\". Os três precisam passar emoções diferentes sem mudar o plano. - A luz guia o olhar para o que importa no plano. - A luz e o grad...",
+              "kind": "section",
+              "source": "knowledge/cinematics/lighting-comp.md"
+            },
+            {
+              "id": "cinematics/lighting-comp#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "A luz base do cenário vem da Arte 3D (lighting artist); aqui a luz é refinada por plano. - VFX e materiais da Arte 3D entram na imagem final. - O pós-processamento em tempo real conversa com a Engenharia em desempenho.",
+              "kind": "section",
+              "source": "knowledge/cinematics/lighting-comp.md"
+            },
+            {
+              "id": "cinematics/lighting-comp#referencias",
+              "title": "Referências",
+              "summary": "9 fontes que o subagente lighting-comp usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/cinematics/subagents/lighting-comp/references.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "engenharia",
+      "title": "Engenharia",
+      "summary": "A área que escreve o código do jogo e monta a base técnica: engine, arquitetura, desempenho, IA, ferramentas, rede e build.",
+      "kind": "area",
+      "source": "knowledge/engenharia/_area.md",
+      "children": [
+        {
+          "id": "engenharia#o-que-a-area-faz",
+          "title": "O que a área faz",
+          "summary": "Engenharia decide como o jogo é construído e o escreve. Reúne seis funções: gameplay programmer (controle, câmera, combate, sistemas), engine e graphics programmer (renderização, shaders, desempenho), AI programmer (c...",
+          "kind": "section",
+          "source": "knowledge/engenharia/_area.md"
+        },
+        {
+          "id": "engenharia#base-comum",
+          "title": "Base comum",
+          "summary": "Todo cargo parte da mesma base: C# para Unity (documentação da Microsoft, com versão em português), C++ para Unreal ou engine própria, e Git (o livro Pro Git, gratuito e traduzido). A engenharia tem o melhor material ...",
+          "kind": "section",
+          "source": "knowledge/engenharia/_area.md"
+        },
+        {
+          "id": "engenharia#ordem-de-aprofundamento",
+          "title": "Ordem de aprofundamento",
+          "summary": "Game Programming Patterns. 2. Catlike Coding: Basics e Movement. 3. Editor scripting da Unity, que pesa muito para quem vende pacote para a Unity. 4. Pro Git e GameCI.",
+          "kind": "section",
+          "source": "knowledge/engenharia/_area.md"
+        },
+        {
+          "id": "engenharia#ligacoes-com-outras-areas",
+          "title": "Ligações com outras áreas",
+          "summary": "Design: as mecânicas viram sistemas; a Engenharia entrega protótipos para testar regras e expõe parâmetros para os designers ajustarem. - Arte 3D: o orçamento técnico limita polígonos e texturas; o technical artist e ...",
+          "kind": "section",
+          "source": "knowledge/engenharia/_area.md"
+        },
+        {
+          "id": "engenharia/gameplay-programmer",
+          "title": "Gameplay programmer",
+          "summary": "Programa o que o jogador sente: controle, câmera, combate, pulo, inventário, missões e save.",
+          "kind": "doc",
+          "source": "knowledge/engenharia/gameplay-programmer.md",
+          "children": [
+            {
+              "id": "engenharia/gameplay-programmer#o-que-faz",
+              "title": "O que faz",
+              "summary": "Programa o que o jogador sente ao jogar: controle do personagem, câmera, combate, pulo, inventário e missões.",
+              "kind": "section",
+              "source": "knowledge/engenharia/gameplay-programmer.md"
+            },
+            {
+              "id": "engenharia/gameplay-programmer#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Controlador do personagem. - Câmera. - Combate, vida e dano, armas. - Inventário e missões. - Save. - Ferramentas para os designers ajustarem números sem mexer no código.",
+              "kind": "section",
+              "source": "knowledge/engenharia/gameplay-programmer.md"
+            },
+            {
+              "id": "engenharia/gameplay-programmer#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Game loop: o laço que lê input, atualiza o mundo e desenha. Entender a diferença entre update (a cada quadro) e fixed update (passo de tempo fixo, usado pela física) evita movimento que muda com o FPS. - Componentes, ...",
+              "kind": "section",
+              "source": "knowledge/engenharia/gameplay-programmer.md"
+            },
+            {
+              "id": "engenharia/gameplay-programmer#como-validar",
+              "title": "Como validar",
+              "summary": "Existe um controlador de terceira pessoa que anda, corre, pula e esquiva. - A câmera segue o personagem e não atravessa parede. - Existe um ataque com hitbox que causa dano onde deveria. - O movimento tem o mesmo resu...",
+              "kind": "section",
+              "source": "knowledge/engenharia/gameplay-programmer.md"
+            },
+            {
+              "id": "engenharia/gameplay-programmer#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O Design define as mecânicas e joga os protótipos; o timing é ajustado até o controle ficar bom. - A Animação entrega as animações; as state machines, transições, blends e IK são implementadas junto com o animation TD...",
+              "kind": "section",
+              "source": "knowledge/engenharia/gameplay-programmer.md"
+            },
+            {
+              "id": "engenharia/gameplay-programmer#referencias",
+              "title": "Referências",
+              "summary": "15 fontes que o subagente gameplay-programmer usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/engenharia/subagents/gameplay-programmer/references.json"
+            }
+          ]
+        },
+        {
+          "id": "engenharia/engine-graphics",
+          "title": "Engine e graphics programmer",
+          "summary": "Programa como o jogo é desenhado: renderização, luz, sombras, shaders e desempenho.",
+          "kind": "doc",
+          "source": "knowledge/engenharia/engine-graphics.md",
+          "children": [
+            {
+              "id": "engenharia/engine-graphics#o-que-faz",
+              "title": "O que faz",
+              "summary": "Programa como o jogo é desenhado na tela: renderização, luz, sombras, shaders e desempenho. Na etapa 8 do pipeline de personagem, junto com o technical artist e o animation TD, põe o personagem na engine.",
+              "kind": "section",
+              "source": "knowledge/engenharia/engine-graphics.md"
+            },
+            {
+              "id": "engenharia/engine-graphics#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Pipeline de renderização. - Shaders de base (pele, cabelo, água). - Otimização: draw calls, culling e LOD. - Ferramentas de profiling. - Na etapa de engine do personagem: FBX importado com escala certa, materiais e sh...",
+              "kind": "section",
+              "source": "knowledge/engenharia/engine-graphics.md"
+            },
+            {
+              "id": "engenharia/engine-graphics#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Matemática: vetores, matrizes e trigonometria. - GPU: como funciona o pipeline, com vertex shader (posição dos vértices) e fragment shader (cor de cada pixel). - Uma API gráfica: OpenGL é a mais fácil e ensina o que v...",
+              "kind": "section",
+              "source": "knowledge/engenharia/engine-graphics.md"
+            },
+            {
+              "id": "engenharia/engine-graphics#como-validar",
+              "title": "Como validar",
+              "summary": "Um triângulo em OpenGL, depois um cubo com textura e luz. - Na Unity, um shader simples de água funcionando. - O personagem final é exportado com 3 LODs, importado na Unity com a escala certa e com o Animator configur...",
+              "kind": "section",
+              "source": "knowledge/engenharia/engine-graphics.md"
+            },
+            {
+              "id": "engenharia/engine-graphics#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O technical artist da Arte 3D entrega o FBX, os materiais e os LODs; a Engenharia diz o que ajustar quando o desempenho não fecha. - O animation TD da Animação entrega o rig e o Animator; a importação do rig (Humanoid...",
+              "kind": "section",
+              "source": "knowledge/engenharia/engine-graphics.md"
+            },
+            {
+              "id": "engenharia/engine-graphics#referencias",
+              "title": "Referências",
+              "summary": "21 fontes que o subagente engine-graphics usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/engenharia/subagents/engine-graphics/references.json"
+            }
+          ]
+        },
+        {
+          "id": "engenharia/ai-programmer",
+          "title": "AI programmer",
+          "summary": "Programa o comportamento de inimigos e NPCs: ver, perseguir, atacar, fugir e agir em grupo.",
+          "kind": "doc",
+          "source": "knowledge/engenharia/ai-programmer.md",
+          "children": [
+            {
+              "id": "engenharia/ai-programmer#o-que-faz",
+              "title": "O que faz",
+              "summary": "Programa o comportamento de inimigos e NPCs: ver, perseguir, atacar, fugir e agir em grupo.",
+              "kind": "section",
+              "source": "knowledge/engenharia/ai-programmer.md"
+            },
+            {
+              "id": "engenharia/ai-programmer#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Pathfinding. - Sistemas de decisão: state machines, behavior trees e utility AI. - Percepção: visão e audição. - IA de grupo.",
+              "kind": "section",
+              "source": "knowledge/engenharia/ai-programmer.md"
+            },
+            {
+              "id": "engenharia/ai-programmer#fundamentos",
+              "title": "Fundamentos",
+              "summary": "A\\: a base do pathfinding. Vem junto com a busca em largura e o Dijkstra, que ajudam a entender quando cada um serve. - Behavior trees: estrutura de decisão em árvore, com nós de sequência, seletor e folhas de ação, b...",
+              "kind": "section",
+              "source": "knowledge/engenharia/ai-programmer.md"
+            },
+            {
+              "id": "engenharia/ai-programmer#como-validar",
+              "title": "Como validar",
+              "summary": "Um inimigo patrulha, ouve um som, investiga e persegue quando vê o jogador. - Três inimigos tentam cercar o jogador sem se bloquearem. - O inimigo não sabe onde o jogador está sem ter percebido. - O caminho encontrado...",
+              "kind": "section",
+              "source": "knowledge/engenharia/ai-programmer.md"
+            },
+            {
+              "id": "engenharia/ai-programmer#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O combat designer define o que cada inimigo faz, o telegraph dos ataques e como os inimigos se combinam num encontro. - O level designer posiciona inimigos e define as áreas navegáveis. - A Animação entrega as animaçõ...",
+              "kind": "section",
+              "source": "knowledge/engenharia/ai-programmer.md"
+            },
+            {
+              "id": "engenharia/ai-programmer#referencias",
+              "title": "Referências",
+              "summary": "16 fontes que o subagente ai-programmer usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/engenharia/subagents/ai-programmer/references.json"
+            }
+          ]
+        },
+        {
+          "id": "engenharia/tools-programmer",
+          "title": "Tools programmer",
+          "summary": "Cria ferramentas internas: editores de fase, importadores, janelas na engine e automações.",
+          "kind": "doc",
+          "source": "knowledge/engenharia/tools-programmer.md",
+          "children": [
+            {
+              "id": "engenharia/tools-programmer#o-que-faz",
+              "title": "O que faz",
+              "summary": "Cria ferramentas internas para acelerar o trabalho da equipe: editores de fase, importadores, janelas na engine e automações.",
+              "kind": "section",
+              "source": "knowledge/engenharia/tools-programmer.md"
+            },
+            {
+              "id": "engenharia/tools-programmer#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Extensões do editor: janelas e inspetores na Unity. - Importação e validação de assets. - Debug dentro do jogo. - Plugins para Blender e Maya.",
+              "kind": "section",
+              "source": "knowledge/engenharia/tools-programmer.md"
+            },
+            {
+              "id": "engenharia/tools-programmer#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Editor scripting da Unity: EditorWindow (janelas próprias), CustomEditor (inspetores personalizados) e ScriptableObject (dados do jogo guardados como assets, ideais para designers ajustarem números). - Python do Blend...",
+              "kind": "section",
+              "source": "knowledge/engenharia/tools-programmer.md"
+            },
+            {
+              "id": "engenharia/tools-programmer#como-validar",
+              "title": "Como validar",
+              "summary": "Uma janela na Unity lista todas as animações do projeto e mostra quais estão sem configuração. - A ferramenta funciona num projeto novo, sem ajuste manual. - Um designer usa a ferramenta sem ler o código. - A varredur...",
+              "kind": "section",
+              "source": "knowledge/engenharia/tools-programmer.md"
+            },
+            {
+              "id": "engenharia/tools-programmer#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Designers usam as ferramentas para ajustar números de combate, fases e missões sem programar. - O technical artist da Arte 3D e o animation TD da Animação usam validadores de assets e scripts de Blender. - O gameplay ...",
+              "kind": "section",
+              "source": "knowledge/engenharia/tools-programmer.md"
+            },
+            {
+              "id": "engenharia/tools-programmer#referencias",
+              "title": "Referências",
+              "summary": "15 fontes que o subagente tools-programmer usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/engenharia/subagents/tools-programmer/references.json"
+            }
+          ]
+        },
+        {
+          "id": "engenharia/network-programmer",
+          "title": "Network programmer",
+          "summary": "Programa o multiplayer: conexão, sincronização e como esconder o lag.",
+          "kind": "doc",
+          "source": "knowledge/engenharia/network-programmer.md",
+          "children": [
+            {
+              "id": "engenharia/network-programmer#o-que-faz",
+              "title": "O que faz",
+              "summary": "Programa o multiplayer: conexão, sincronização entre jogadores e como esconder o lag.",
+              "kind": "section",
+              "source": "knowledge/engenharia/network-programmer.md"
+            },
+            {
+              "id": "engenharia/network-programmer#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Arquitetura cliente-servidor. - Sincronização de estado. - Predição no cliente. - Compensação de lag. - Proteção contra trapaça.",
+              "kind": "section",
+              "source": "knowledge/engenharia/network-programmer.md"
+            },
+            {
+              "id": "engenharia/network-programmer#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Servidor autoritativo: o servidor tem a palavra final sobre o estado do jogo, e o cliente só envia comandos. Isso protege contra trapaça. - Predição e reconciliação: o cliente aplica o comando na hora, sem esperar o s...",
+              "kind": "section",
+              "source": "knowledge/engenharia/network-programmer.md"
+            },
+            {
+              "id": "engenharia/network-programmer#como-validar",
+              "title": "Como validar",
+              "summary": "Dois jogadores andam numa sala, com lag simulado, e o movimento fica suave. - O servidor decide o estado: um cliente alterado não consegue mudar o resultado sozinho. - Quando o servidor discorda da predição, a correçã...",
+              "kind": "section",
+              "source": "knowledge/engenharia/network-programmer.md"
+            },
+            {
+              "id": "engenharia/network-programmer#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O Design decide se o jogo é multiplayer e como as regras funcionam entre jogadores. - O gameplay programmer escreve o controle de modo que possa ser predito e refeito. - O ai-programmer define o que a IA roda no servi...",
+              "kind": "section",
+              "source": "knowledge/engenharia/network-programmer.md"
+            },
+            {
+              "id": "engenharia/network-programmer#referencias",
+              "title": "Referências",
+              "summary": "15 fontes que o subagente network-programmer usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/engenharia/subagents/network-programmer/references.json"
+            }
+          ]
+        },
+        {
+          "id": "engenharia/build-devops",
+          "title": "Build engineer / DevOps",
+          "summary": "Garante que o jogo compile, seja testado e chegue aos jogadores.",
+          "kind": "doc",
+          "source": "knowledge/engenharia/build-devops.md",
+          "children": [
+            {
+              "id": "engenharia/build-devops#o-que-faz",
+              "title": "O que faz",
+              "summary": "Garante que o jogo compile, seja testado e chegue aos jogadores.",
+              "kind": "section",
+              "source": "knowledge/engenharia/build-devops.md"
+            },
+            {
+              "id": "engenharia/build-devops#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Controle de versão com Git LFS (ou Perforce). - Build automático (CI/CD). - Testes automáticos. - Publicação na Steam, itch.io ou Asset Store.",
+              "kind": "section",
+              "source": "knowledge/engenharia/build-devops.md"
+            },
+            {
+              "id": "engenharia/build-devops#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Git e Git LFS: o Git guarda o histórico do código; o LFS guarda arquivos grandes (texturas, modelos, áudio) fora do histórico comum. Projetos de jogo precisam dele. - Perforce: alternativa para projetos com muitos arq...",
+              "kind": "section",
+              "source": "knowledge/engenharia/build-devops.md"
+            },
+            {
+              "id": "engenharia/build-devops#como-validar",
+              "title": "Como validar",
+              "summary": "Um projeto Unity no GitHub com Git LFS. - Um build automático para Windows a cada push. - O build sai do repositório limpo, sem passo manual escondido. - Os testes automáticos rodam no CI e um teste quebrado reprova o...",
+              "kind": "section",
+              "source": "knowledge/engenharia/build-devops.md"
+            },
+            {
+              "id": "engenharia/build-devops#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Todos os agentes entregam arquivos que entram no repositório; as regras de LFS e de pastas valem para a Arte 3D, a Animação e o Áudio. - O QA testa os builds gerados. - O Apoio cuida da página da loja e da divulgação....",
+              "kind": "section",
+              "source": "knowledge/engenharia/build-devops.md"
+            },
+            {
+              "id": "engenharia/build-devops#referencias",
+              "title": "Referências",
+              "summary": "15 fontes que o subagente build-devops usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/engenharia/subagents/build-devops/references.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "audio",
+      "title": "Áudio",
+      "summary": "A área do som do jogo: efeitos, música, vozes e a integração na engine. Jogo sem som bom parece barato.",
+      "kind": "area",
+      "source": "knowledge/audio/_area.md",
+      "children": [
+        {
+          "id": "audio#o-que-a-area-faz",
+          "title": "O que a área faz",
+          "summary": "Áudio cria e integra tudo o que se ouve no jogo. Reúne quatro funções: sound designer (efeitos, ambientes, interface), compositor (trilha e música que reage ao jogo), dublagem (vozes) e audio programmer (integração na...",
+          "kind": "section",
+          "source": "knowledge/audio/_area.md"
+        },
+        {
+          "id": "audio#por-que-entra-depois-do-design",
+          "title": "Por que entra depois do Design",
+          "summary": "O Design define as ações do jogo, e cada ação e cada golpe pede som. O game feel do combate depende do som de impacto. Por isso o Áudio parte da lista de ações e das cenas já definidas e entrega os eventos sonoros par...",
+          "kind": "section",
+          "source": "knowledge/audio/_area.md"
+        },
+        {
+          "id": "audio#ordem-de-aprofundamento",
+          "title": "Ordem de aprofundamento",
+          "summary": "Sound designer: efeitos e ambientes são o que o jogador mais ouve. Jogue sem música, só prestando atenção nos efeitos. 2. Audio programmer: o som precisa tocar na hora certa e com a distância certa. Para começar sozin...",
+          "kind": "section",
+          "source": "knowledge/audio/_area.md"
+        },
+        {
+          "id": "audio#em-equipe-pequena",
+          "title": "Em equipe pequena",
+          "summary": "Som pronto mais o áudio nativo da engine resolve a maior parte. Cada som baixado precisa ter a licença conferida, porque bancos gratuitos têm regras diferentes por som.",
+          "kind": "section",
+          "source": "knowledge/audio/_area.md"
+        },
+        {
+          "id": "audio#ligacoes-com-outras-areas",
+          "title": "Ligações com outras áreas",
+          "summary": "Design: a lista de ações e o tom do jogo definem o que precisa de som. - Animação: golpes, passos e recuperações pedem som sincronizado com o momento do impacto. - Cinematics: as cenas são sonorizadas com efeitos, amb...",
+          "kind": "section",
+          "source": "knowledge/audio/_area.md"
+        },
+        {
+          "id": "audio/sound-designer",
+          "title": "Sound designer",
+          "summary": "Cria os efeitos sonoros do jogo (passos, tiros, golpes, explosões, interface, ambientes) em camadas e variações.",
+          "kind": "doc",
+          "source": "knowledge/audio/sound-designer.md",
+          "children": [
+            {
+              "id": "audio/sound-designer#o-que-faz",
+              "title": "O que faz",
+              "summary": "Cria os efeitos sonoros: passos, tiros, golpes, explosões, interface e ambientes. O som dá peso ao que acontece na tela.",
+              "kind": "section",
+              "source": "knowledge/audio/sound-designer.md"
+            },
+            {
+              "id": "audio/sound-designer#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Biblioteca de efeitos organizada por evento do jogo. - Variações: por exemplo 5 versões do mesmo passo, para o som não cansar. - Ambientes em loop. - Sons de interface.",
+              "kind": "section",
+              "source": "knowledge/audio/sound-designer.md"
+            },
+            {
+              "id": "audio/sound-designer#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Gravação, mesmo com celular, e edição em Audacity ou Reaper. - Camadas: um tiro tem estalo, corpo, cauda e eco. Cada camada cumpre uma função e pode ser trocada separadamente para gerar variações. - Jogar sem música, ...",
+              "kind": "section",
+              "source": "knowledge/audio/sound-designer.md"
+            },
+            {
+              "id": "audio/sound-designer#como-validar",
+              "title": "Como validar",
+              "summary": "Refaça todo o áudio de um vídeo de gameplay sem som. Se um evento visível ficou sem som, a lista de eventos está incompleta. - Cada ação do jogo deve ser reconhecível só pelo som, com a música desligada. - Um som que ...",
+              "kind": "section",
+              "source": "knowledge/audio/sound-designer.md"
+            },
+            {
+              "id": "audio/sound-designer#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Cada ação do Design e cada golpe do combat designer pede um evento sonoro. - A Animação define o frame do impacto e do passo, que é o momento em que o som deve tocar. - A Engenharia dispara os eventos; o audio program...",
+              "kind": "section",
+              "source": "knowledge/audio/sound-designer.md"
+            },
+            {
+              "id": "audio/sound-designer#referencias",
+              "title": "Referências",
+              "summary": "5 fontes que o subagente sound-designer usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/audio/subagents/sound-designer/references.json"
+            }
+          ]
+        },
+        {
+          "id": "audio/composer",
+          "title": "Compositor",
+          "summary": "Cria a trilha sonora e faz a música reagir ao jogo (combate, tensão, exploração).",
+          "kind": "doc",
+          "source": "knowledge/audio/composer.md",
+          "children": [
+            {
+              "id": "audio/composer#o-que-faz",
+              "title": "O que faz",
+              "summary": "Cria a trilha sonora e faz a música reagir ao que acontece no jogo: combate, tensão, exploração.",
+              "kind": "section",
+              "source": "knowledge/audio/composer.md"
+            },
+            {
+              "id": "audio/composer#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Temas principais. - Trilhas de cada área. - Música adaptativa em camadas. - Stingers: trechos curtos que marcam um momento. - Loops.",
+              "kind": "section",
+              "source": "knowledge/audio/composer.md"
+            },
+            {
+              "id": "audio/composer#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Teoria musical básica: escalas, acordes, tonalidade e andamento. - Uma DAW para produzir: Reaper, FL Studio ou Cakewalk. - Música interativa: a música é dividida em camadas e estados, e o jogo decide quais tocam. O Ww...",
+              "kind": "section",
+              "source": "knowledge/audio/composer.md"
+            },
+            {
+              "id": "audio/composer#como-validar",
+              "title": "Como validar",
+              "summary": "Uma música com 3 camadas (exploração, tensão, combate) que troca dentro da engine, sem corte audível, e volta ao estado anterior quando o combate termina. - O loop não tem emenda audível na repetição. - Cada estado do...",
+              "kind": "section",
+              "source": "knowledge/audio/composer.md"
+            },
+            {
+              "id": "audio/composer#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O Design define os estados do jogo e o tom emocional de cada um. - Cinematics pede música por cena e pontos de sincronia. - O audio programmer implementa as transições e os parâmetros. - A Engenharia dispara as mudanç...",
+              "kind": "section",
+              "source": "knowledge/audio/composer.md"
+            },
+            {
+              "id": "audio/composer#referencias",
+              "title": "Referências",
+              "summary": "5 fontes que o subagente composer usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/audio/subagents/composer/references.json"
+            }
+          ]
+        },
+        {
+          "id": "audio/voice-over",
+          "title": "Dublagem",
+          "summary": "Grava as vozes do jogo, com direção de voz, atores e edição, e entrega falas e esforços vocais nomeados.",
+          "kind": "doc",
+          "source": "knowledge/audio/voice-over.md",
+          "children": [
+            {
+              "id": "audio/voice-over#o-que-faz",
+              "title": "O que faz",
+              "summary": "Grava as vozes do jogo. Envolve diretor de voz, atores e edição: limpar, cortar e padronizar o volume.",
+              "kind": "section",
+              "source": "knowledge/audio/voice-over.md"
+            },
+            {
+              "id": "audio/voice-over#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Roteiro de gravação com o contexto de cada fala. - Gravações editadas e nomeadas. - Esforços: gritos, golpes, respiração, morte.",
+              "kind": "section",
+              "source": "knowledge/audio/voice-over.md"
+            },
+            {
+              "id": "audio/voice-over#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Gravação básica: microfone, sala sem eco, ganho. - Dar contexto ao ator. Em jogo as falas são gravadas soltas, fora de ordem, então o roteiro precisa dizer a situação, a emoção e o que acabou de acontecer. - Organizaç...",
+              "kind": "section",
+              "source": "knowledge/audio/voice-over.md"
+            },
+            {
+              "id": "audio/voice-over#como-validar",
+              "title": "Como validar",
+              "summary": "10 falas de um personagem gravadas, editadas e colocadas no jogo com legenda. - Cada fala do roteiro tem personagem, contexto, emoção e nome de arquivo. - O volume é o mesmo entre as falas do mesmo personagem e entre ...",
+              "kind": "section",
+              "source": "knowledge/audio/voice-over.md"
+            },
+            {
+              "id": "audio/voice-over#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O narrative designer escreve os diálogos que viram o roteiro. - A Localização traduz as falas e organiza a gravação em outros idiomas. - Cinematics usa as falas nas cenas. - A Engenharia toca as falas e mostra a legenda.",
+              "kind": "section",
+              "source": "knowledge/audio/voice-over.md"
+            },
+            {
+              "id": "audio/voice-over#referencias",
+              "title": "Referências",
+              "summary": "2 fontes que o subagente voice-over usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/audio/subagents/voice-over/references.json"
+            }
+          ]
+        },
+        {
+          "id": "audio/audio-programmer",
+          "title": "Audio programmer",
+          "summary": "Integra o som na engine: quando cada som toca, distância, oclusão, mixagem dinâmica e desempenho, com FMOD, Wwise ou áudio nativo.",
+          "kind": "doc",
+          "source": "knowledge/audio/audio-programmer.md",
+          "children": [
+            {
+              "id": "audio/audio-programmer#o-que-faz",
+              "title": "O que faz",
+              "summary": "Integra o som na engine. Define quando cada som toca, como ele soa conforme a distância, a oclusão, a mixagem dinâmica e o desempenho.",
+              "kind": "section",
+              "source": "knowledge/audio/audio-programmer.md"
+            },
+            {
+              "id": "audio/audio-programmer#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Integração com FMOD ou Wwise. - Som 3D. - Regras de mixagem e prioridade. - Ferramentas para os sound designers trabalharem sem depender de código.",
+              "kind": "section",
+              "source": "knowledge/audio/audio-programmer.md"
+            },
+            {
+              "id": "audio/audio-programmer#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Áudio nativo da Unity: AudioSource e AudioMixer. Para começar sozinho, é suficiente. - Um middleware: FMOD ou Wwise. O Wwise-101 tem 20 lições, 20 quizzes e 1 exame. O FMOD tem licença Indie gratuita ou US$ 2.000 por ...",
+              "kind": "section",
+              "source": "knowledge/audio/audio-programmer.md"
+            },
+            {
+              "id": "audio/audio-programmer#como-validar",
+              "title": "Como validar",
+              "summary": "Passos que mudam conforme o chão (madeira, pedra, grama). - Música que muda quando o combate começa e volta quando termina. - Um som 3D some gradualmente com a distância, e o reverb muda ao entrar numa área fechada. -...",
+              "kind": "section",
+              "source": "knowledge/audio/audio-programmer.md"
+            },
+            {
+              "id": "audio/audio-programmer#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Recebe do sound designer, do compositor e da dublagem os arquivos e a lista de eventos. - A Engenharia chama os eventos no código do jogo. - A Animação fornece os pontos em que passos e golpes devem soar. - QA testa p...",
+              "kind": "section",
+              "source": "knowledge/audio/audio-programmer.md"
+            },
+            {
+              "id": "audio/audio-programmer#referencias",
+              "title": "Referências",
+              "summary": "5 fontes que o subagente audio-programmer usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/audio/subagents/audio-programmer/references.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apoio",
+      "title": "Apoio",
+      "summary": "Testes, localização e marketing: o que decide se um jogo bom funciona, fala a língua do jogador e é descoberto.",
+      "kind": "area",
+      "source": "knowledge/apoio/_area.md",
+      "children": [
+        {
+          "id": "apoio#o-que-a-area-faz",
+          "title": "O que a área faz",
+          "summary": "Apoio reúne três funções: QA (testes), localização e marketing com comunidade e publisher. Jogo com bug ou sem divulgação não vende, mesmo sendo bom. Essas três funções são as que mais aparecem nas avaliações ruins.",
+          "kind": "section",
+          "source": "knowledge/apoio/_area.md"
+        },
+        {
+          "id": "apoio#em-equipe-pequena",
+          "title": "Em equipe pequena",
+          "summary": "Em projeto solo, o desenvolvedor é o próprio QA e joga do jeito certo. Chamar amigos para jogar e observar sem ajudar revela o que o desenvolvedor não vê. A vantagem na localização é lançar com português do Brasil e i...",
+          "kind": "section",
+          "source": "knowledge/apoio/_area.md"
+        },
+        {
+          "id": "apoio#ordem-de-aprofundamento",
+          "title": "Ordem de aprofundamento",
+          "summary": "QA: escrever bom bug report é a habilidade principal e serve a todo projeto. 2. Localização: preparar o jogo desde o início custa pouco; refazer depois custa muito. 3. Marketing: o marketing começa na escolha do jogo ...",
+          "kind": "section",
+          "source": "knowledge/apoio/_area.md"
+        },
+        {
+          "id": "apoio#brasil",
+          "title": "Brasil",
+          "summary": "O guia cita cursos gratuitos, eventos (Abragames, BIG Festival, gamescom latam) e o Marco Legal dos Jogos, regulamentado em 14 de outubro de 2026, que prevê o Rouanet Games, com orientação, cursos e oficinas para prep...",
+          "kind": "section",
+          "source": "knowledge/apoio/_area.md"
+        },
+        {
+          "id": "apoio#ligacoes-com-outras-areas",
+          "title": "Ligações com outras áreas",
+          "summary": "Design: QA testa as regras e o balanceamento e roda o playtest; a localização depende dos textos de diálogo e de interface; o gancho do jogo alimenta o marketing. - Animação: o playtest da etapa 6 do pipeline de anima...",
+          "kind": "section",
+          "source": "knowledge/apoio/_area.md"
+        },
+        {
+          "id": "apoio/qa",
+          "title": "QA (testes)",
+          "summary": "Joga para quebrar o jogo e reporta bugs, travamentos, partes confusas e problemas de desempenho de forma que o programador consiga corrigir.",
+          "kind": "doc",
+          "source": "knowledge/apoio/qa.md",
+          "children": [
+            {
+              "id": "apoio/qa#o-que-faz",
+              "title": "O que faz",
+              "summary": "Joga para quebrar o jogo: procura bugs, travamentos, partes confusas e problemas de desempenho. Reporta de um jeito que o programador consiga corrigir.",
+              "kind": "section",
+              "source": "knowledge/apoio/qa.md"
+            },
+            {
+              "id": "apoio/qa#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Bug reports claros. - Planos de teste. - Testes de regressão. - Relatórios de desempenho em máquinas diferentes.",
+              "kind": "section",
+              "source": "knowledge/apoio/qa.md"
+            },
+            {
+              "id": "apoio/qa#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Escrever bom bug report é a habilidade principal. Os campos que as fontes citam: título, passos para reproduzir, esperado versus real, ambiente, severidade e evidências. - Pensar como quem quer quebrar o jogo. - Sever...",
+              "kind": "section",
+              "source": "knowledge/apoio/qa.md"
+            },
+            {
+              "id": "apoio/qa#como-validar",
+              "title": "Como validar",
+              "summary": "Ache 5 bugs num jogo indie gratuito e escreva um report bem feito de cada um. - Um bug report está bom quando outra pessoa reproduz o problema só lendo o texto, sem perguntar nada. - Cada relatório traz severidade e p...",
+              "kind": "section",
+              "source": "knowledge/apoio/qa.md"
+            },
+            {
+              "id": "apoio/qa#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Valida as entregas de todos os agentes e devolve bugs a quem construiu. - Roda o playtest da etapa 6 do pipeline de animação junto com o Design. - Testa as regras e o balanceamento do game designer. - Testa a integraç...",
+              "kind": "section",
+              "source": "knowledge/apoio/qa.md"
+            },
+            {
+              "id": "apoio/qa#referencias",
+              "title": "Referências",
+              "summary": "3 fontes que o subagente qa usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/apoio/subagents/qa/references.json"
+            }
+          ]
+        },
+        {
+          "id": "apoio/localization",
+          "title": "Localização",
+          "summary": "Adapta o jogo para outras línguas e culturas: tradução, fontes, tamanho do texto, cores e símbolos, e o teste do jogo traduzido.",
+          "kind": "doc",
+          "source": "knowledge/apoio/localization.md",
+          "children": [
+            {
+              "id": "apoio/localization#o-que-faz",
+              "title": "O que faz",
+              "summary": "Adapta o jogo para outras línguas e culturas. Cobre tradução, piadas, referências, fontes, tamanho do texto na tela, cores e símbolos.",
+              "kind": "section",
+              "source": "knowledge/apoio/localization.md"
+            },
+            {
+              "id": "apoio/localization#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Textos traduzidos e revisados. - Kit de localização: contexto, glossário e guia de estilo. - Teste do jogo traduzido (LQA). - Página da loja traduzida.",
+              "kind": "section",
+              "source": "knowledge/apoio/localization.md"
+            },
+            {
+              "id": "apoio/localization#fundamentos",
+              "title": "Fundamentos",
+              "summary": "Preparar o jogo desde o início: todo texto em arquivo separado, nada no código e nada dentro de imagem. - UTF-8 e fontes com acento e com os caracteres de cada idioma. - Interface que aguenta textos maiores: reservar ...",
+              "kind": "section",
+              "source": "knowledge/apoio/localization.md"
+            },
+            {
+              "id": "apoio/localization#como-validar",
+              "title": "Como validar",
+              "summary": "O jogo roda em português e inglês, com troca de idioma no menu. - Nenhum texto está no código nem em imagem: trocar o idioma muda tudo o que o jogador lê. - Nenhum texto fica cortado ou sobreposto na interface, em nen...",
+              "kind": "section",
+              "source": "knowledge/apoio/localization.md"
+            },
+            {
+              "id": "apoio/localization#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "Depende dos textos do Design: diálogos do narrative designer e interface do UX/UI designer. - A Engenharia monta a arquitetura que permite trocar idioma. - O Áudio (dublagem) segue as regras de gravação em vários idio...",
+              "kind": "section",
+              "source": "knowledge/apoio/localization.md"
+            },
+            {
+              "id": "apoio/localization#referencias",
+              "title": "Referências",
+              "summary": "3 fontes que o subagente localization usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/apoio/subagents/localization/references.json"
+            }
+          ]
+        },
+        {
+          "id": "apoio/marketing-publisher",
+          "title": "Marketing, comunidade e publisher",
+          "summary": "Faz as pessoas saberem que o jogo existe e quererem comprar: página da loja, trailer, wishlists, festivais, comunidade e publisher.",
+          "kind": "doc",
+          "source": "knowledge/apoio/marketing-publisher.md",
+          "children": [
+            {
+              "id": "apoio/marketing-publisher#o-que-faz",
+              "title": "O que faz",
+              "summary": "Faz as pessoas saberem que o jogo existe e quererem comprar. O publisher financia ou divulga o jogo em troca de parte da receita.",
+              "kind": "section",
+              "source": "knowledge/apoio/marketing-publisher.md"
+            },
+            {
+              "id": "apoio/marketing-publisher#o-que-entrega",
+              "title": "O que entrega",
+              "summary": "Página na Steam (ou na Asset Store, no caso de pacote). - Trailer e capturas. - Wishlists. - Festivais, como o Steam Next Fest. - Comunidade (Discord). - Contato com imprensa e criadores.",
+              "kind": "section",
+              "source": "knowledge/apoio/marketing-publisher.md"
+            },
+            {
+              "id": "apoio/marketing-publisher#fundamentos",
+              "title": "Fundamentos",
+              "summary": "O marketing começa na escolha do jogo: gênero e gancho. A ideia central do blog How To Market A Game é que a primeira decisão de marketing é o jogo que se escolhe fazer. - O algoritmo da Steam: wishlists, festivais e ...",
+              "kind": "section",
+              "source": "knowledge/apoio/marketing-publisher.md"
+            },
+            {
+              "id": "apoio/marketing-publisher#como-validar",
+              "title": "Como validar",
+              "summary": "Crie a página da loja do projeto cedo e acompanhe as wishlists com números. - O gancho do jogo cabe em uma frase e aparece na página e no trailer. - Os primeiros segundos do trailer mostram o gameplay. - Existe um cal...",
+              "kind": "section",
+              "source": "knowledge/apoio/marketing-publisher.md"
+            },
+            {
+              "id": "apoio/marketing-publisher#ligacoes-com-outras-areas",
+              "title": "Ligações com outras áreas",
+              "summary": "O Design define gênero, gancho e pilares, e o marketing os devolve como teste de interesse. - Arte 3D e Cinematics fornecem imagens, capturas e cenas para capsule art e trailer. - A Localização traduz a página da loja...",
+              "kind": "section",
+              "source": "knowledge/apoio/marketing-publisher.md"
+            },
+            {
+              "id": "apoio/marketing-publisher#referencias",
+              "title": "Referências",
+              "summary": "8 fontes que o subagente marketing-publisher usa para pesquisar.",
+              "kind": "section",
+              "source": "agents/apoio/subagents/marketing-publisher/references.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pipelines",
+      "title": "Pipelines",
+      "summary": "O que é um pipeline e os dois que existem na base: o de um personagem (do concept à engine) e o de animação em jogo.",
+      "kind": "area",
+      "source": "knowledge/pipelines/_area.md",
+      "children": [
+        {
+          "id": "pipelines#o-que-e-um-pipeline",
+          "title": "O que é um pipeline",
+          "summary": "Um pipeline é a sequência de etapas pela qual um asset passa até chegar ao jogo. Cada etapa tem um responsável, recebe algo da etapa anterior e entrega algo à seguinte. Ele atravessa várias áreas, por isso é descrito ...",
+          "kind": "section",
+          "source": "knowledge/pipelines/_area.md"
+        },
+        {
+          "id": "pipelines#os-dois-pipelines",
+          "title": "Os dois pipelines",
+          "summary": "Personagem (pipelines/personagem): concept, blockout, escultura, retopologia, UV e bake, texturas, rig e skinning, animação, engine. Inclui uma etapa 0 (a ficha do personagem, entregue pelo Design) e um pipeline solo ...",
+          "kind": "section",
+          "source": "knowledge/pipelines/_area.md"
+        },
+        {
+          "id": "pipelines#como-usar",
+          "title": "Como usar",
+          "summary": "Descubra em que etapa o usuário está e o que a etapa anterior entregou. 2. Entre no documento da etapa: ele diz quem faz, o que recebe, o que entrega e como validar. 3. Consulte o agente e o subagente responsáveis ind...",
+          "kind": "section",
+          "source": "knowledge/pipelines/_area.md"
+        },
+        {
+          "id": "pipelines#para-equipe-pequena",
+          "title": "Para equipe pequena",
+          "summary": "O pipeline de personagem tem uma versão enxuta (## Pipeline solo enxuto em pipelines/personagem). Veja também geral/equipe-pequena-ou-solo.",
+          "kind": "section",
+          "source": "knowledge/pipelines/_area.md"
+        },
+        {
+          "id": "pipelines/animacao-em-jogo",
+          "title": "Pipeline de animação em jogo",
+          "summary": "As 6 etapas da animação em jogo, da animation list ao playtest, com os donos de cada uma no OpenGlitch.",
+          "kind": "doc",
+          "source": "knowledge/pipelines/animacao-em-jogo.md",
+          "children": [
+            {
+              "id": "pipelines/animacao-em-jogo#etapa-1-animation-list",
+              "title": "Etapa 1: Animation list",
+              "summary": "O que é: a lista de todos os movimentos necessários. - Dono: o agente design define as ações (o que o personagem faz); o agente animacao organiza a lista. - Recebe: a ficha do personagem e as mecânicas. - Entrega: a l...",
+              "kind": "section",
+              "source": "knowledge/pipelines/animacao-em-jogo.md"
+            },
+            {
+              "id": "pipelines/animacao-em-jogo#etapa-2-producao",
+              "title": "Etapa 2: Produção",
+              "summary": "O que é: mocap ou keyframe manual. - Dono: animacao, com mocap-cleanup e gameplay-animator. - Recebe: a animation list. - Entrega: as animações brutas de cada item da lista. - Como validar: cada item da lista tem uma ...",
+              "kind": "section",
+              "source": "knowledge/pipelines/animacao-em-jogo.md"
+            },
+            {
+              "id": "pipelines/animacao-em-jogo#etapa-3-cleanup-e-polimento",
+              "title": "Etapa 3: Cleanup e polimento",
+              "summary": "Dono: animacao. - Recebe: as animações brutas. - Entrega: animações limpas, que se conectam sem \"pulos\", com transições suaves. - Como validar: ciclos fecham em loop e as transições não mostram saltos.",
+              "kind": "section",
+              "source": "knowledge/pipelines/animacao-em-jogo.md"
+            },
+            {
+              "id": "pipelines/animacao-em-jogo#etapa-4-exportacao",
+              "title": "Etapa 4: Exportação",
+              "summary": "O que é: levar as animações para a engine. - Dono: animacao / animation-td. - Recebe: as animações polidas. - Entrega: os arquivos exportados para a engine. - Como validar: as animações abrem na engine sem perder timi...",
+              "kind": "section",
+              "source": "knowledge/pipelines/animacao-em-jogo.md"
+            },
+            {
+              "id": "pipelines/animacao-em-jogo#etapa-5-implementacao",
+              "title": "Etapa 5: Implementação",
+              "summary": "O que é: state machines, transições, blends, IK nos pés e nas mãos. - Dono: animacao / animation-td, com engenharia / gameplay-programmer. - Recebe: as animações exportadas e as mecânicas. - Entrega: o personagem cont...",
+              "kind": "section",
+              "source": "knowledge/pipelines/animacao-em-jogo.md"
+            },
+            {
+              "id": "pipelines/animacao-em-jogo#etapa-6-playtest",
+              "title": "Etapa 6: Playtest",
+              "summary": "O que é: ajustar o timing até o controle ficar bom. - Dono: design, com apoio de apoio / qa. - Recebe: o personagem controlável. - Entrega: ajustes de timing devolvidos às etapas anteriores. - Como validar: quem testa...",
+              "kind": "section",
+              "source": "knowledge/pipelines/animacao-em-jogo.md"
+            }
+          ]
+        },
+        {
+          "id": "pipelines/personagem",
+          "title": "Pipeline de personagem",
+          "summary": "Do zero ao jogo: ficha, concept, blockout, escultura, retopologia, UV e bake, texturas, rig, animação e engine, com donos, entregas, validação e atalhos solo.",
+          "kind": "doc",
+          "source": "knowledge/pipelines/personagem.md",
+          "children": [
+            {
+              "id": "pipelines/personagem#etapa-0-ficha-do-personagem",
+              "title": "Etapa 0: Ficha do personagem",
+              "summary": "Quem faz: não é uma etapa do guia. É o Design que define o personagem antes do concept. - No OpenGlitch: agente design. - Recebe: os pilares e o escopo do jogo. - Entrega: a ficha do personagem: quem ele é, o que faz ...",
+              "kind": "section",
+              "source": "knowledge/pipelines/personagem.md"
+            },
+            {
+              "id": "pipelines/personagem#etapa-1-concept",
+              "title": "Etapa 1: Concept",
+              "summary": "Quem faz (guia): concept artist, aprovado pelo diretor de arte. - No OpenGlitch: arte-3d / concept-artist. - Recebe: a ficha do personagem e o estilo visual da art bible. - Entrega: design do personagem, turnaround (f...",
+              "kind": "section",
+              "source": "knowledge/pipelines/personagem.md"
+            },
+            {
+              "id": "pipelines/personagem#etapa-2-blockout",
+              "title": "Etapa 2: Blockout",
+              "summary": "Quem faz (guia): character artist. - No OpenGlitch: arte-3d / character-artist. - Recebe: o concept (ou o moodboard e a ficha). - Entrega: forma bruta com primitivas (cubos, cilindros, esferas) nas proporções certas, ...",
+              "kind": "section",
+              "source": "knowledge/pipelines/personagem.md"
+            },
+            {
+              "id": "pipelines/personagem#etapa-3-escultura-high-poly",
+              "title": "Etapa 3: Escultura (high-poly)",
+              "summary": "Quem faz (guia): character artist. - No OpenGlitch: arte-3d / character-artist. - Recebe: o blockout aprovado. - Entrega: modelo de alta resolução com todo o detalhe (músculos, rugas, costuras, peças de roupa), que de...",
+              "kind": "section",
+              "source": "knowledge/pipelines/personagem.md"
+            },
+            {
+              "id": "pipelines/personagem#etapa-4a-retopologia-low-poly",
+              "title": "Etapa 4a: Retopologia (low-poly)",
+              "summary": "Quem faz (guia): character artist, às vezes com o technical artist. - No OpenGlitch: arte-3d / character-artist, com technical-artist. - Recebe: a escultura high-poly e o orçamento técnico de polígonos. - Entrega: mal...",
+              "kind": "section",
+              "source": "knowledge/pipelines/personagem.md"
+            },
+            {
+              "id": "pipelines/personagem#etapa-4b-uv-e-bake",
+              "title": "Etapa 4b: UV e bake",
+              "summary": "Quem faz (guia): character artist ou texture artist. - No OpenGlitch: arte-3d / character-artist e texture-material. - Recebe: o low-poly e o high-poly. - Entrega: UVs (a malha \"desembrulhada\" em 2D) e mapas \"bakeados...",
+              "kind": "section",
+              "source": "knowledge/pipelines/personagem.md"
+            },
+            {
+              "id": "pipelines/personagem#etapa-5-texturas",
+              "title": "Etapa 5: Texturas",
+              "summary": "Quem faz (guia): texture / material artist. - No OpenGlitch: arte-3d / texture-material. - Recebe: o low-poly com UV e os mapas do bake. - Entrega: mapas PBR (base color, roughness, metallic, normal) ou texturas pinta...",
+              "kind": "section",
+              "source": "knowledge/pipelines/personagem.md"
+            },
+            {
+              "id": "pipelines/personagem#etapa-6-rig-e-skinning",
+              "title": "Etapa 6: Rig e skinning",
+              "summary": "Quem faz (guia): rigger. - No OpenGlitch: animacao / rigger. - Recebe: o low-poly texturizado, com topologia que deforma bem. - Entrega: esqueleto padronizado, weight painting (quanto cada osso puxa da malha), control...",
+              "kind": "section",
+              "source": "knowledge/pipelines/personagem.md"
+            },
+            {
+              "id": "pipelines/personagem#etapa-7-animacao",
+              "title": "Etapa 7: Animação",
+              "summary": "Quem faz (guia): animadores de gameplay e de cinematic, mocap e cleanup. - No OpenGlitch: animacao / gameplay-animator, cinematic-animator e mocap-cleanup. - Recebe: o personagem rigado e a animation list vinda da fic...",
+              "kind": "section",
+              "source": "knowledge/pipelines/personagem.md"
+            },
+            {
+              "id": "pipelines/personagem#etapa-8-engine",
+              "title": "Etapa 8: Engine",
+              "summary": "Quem faz (guia): technical artist, animation TD e programadores. - No OpenGlitch: arte-3d / technical-artist, animacao / animation-td e o agente engenharia. - Recebe: o personagem texturizado, rigado e animado. - Entr...",
+              "kind": "section",
+              "source": "knowledge/pipelines/personagem.md"
+            },
+            {
+              "id": "pipelines/personagem#pipeline-solo-enxuto",
+              "title": "Pipeline solo enxuto",
+              "summary": "Para um primeiro personagem jogável, dá para pular etapas sem perder muito:",
+              "kind": "section",
+              "source": "knowledge/pipelines/personagem.md"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

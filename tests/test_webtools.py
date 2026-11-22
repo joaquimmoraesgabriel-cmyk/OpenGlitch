@@ -33,6 +33,8 @@ golpes pesados têm antecipação longa, e é isso que permite reagir a eles. Ve
 <p>O recovery é o preço do golpe: enquanto ele dura o personagem não pode agir. Um recovery
 longo num golpe forte é o que mantém o risco proporcional à recompensa no combate.</p>
 </article>
+<div class="related-posts"><img src="/img/outro-post.png" width="800" height="600" alt="Outro post"></div>
+<h3>Related Posts</h3><div><img src="/img/mais-um.png" width="800" height="600" alt="Mais um post"></div>
 <footer><img src="/img/rodape.png" width="800" height="400" alt="Parceiros"></footer>
 </body></html>"""
 
@@ -85,7 +87,7 @@ def test_imagens_filtra_icones_logos_e_banners():
     assert (first["width"], first["height"]) == (1200, 600)
     assert page["images"][1]["width"] == 1600  # tamanho descoberto ao sondar o arquivo
     stats = page["stats"]
-    assert stats["chrome"] == 2 and stats["small"] == 1 and stats["decorative"] == 2
+    assert stats["chrome"] == 4 and stats["small"] == 1 and stats["decorative"] == 2
     assert stats["banner"] == 1 and stats["svg"] == 1
 
 

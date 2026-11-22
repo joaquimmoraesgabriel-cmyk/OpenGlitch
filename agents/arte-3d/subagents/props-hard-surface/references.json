@@ -7,11 +7,11 @@
       "title": "Polycount: threads de hard surface e normals",
       "author": null,
       "type": "forum",
-      "url": "https://polycount.com/",
-      "url_origem": "inferida",
+      "url": "http://wiki.polycount.com/wiki/Polycount",
+      "url_origem": "corrigida",
       "pesquisavel": true,
       "uso": "Threads sobre hard surface, bevels, smoothing groups e normal maps, com a prática de quem trabalha na área.",
-      "nota": "O guia cita as threads sem hiperlink. Procure por hard surface e por normals dentro do site."
+      "nota": "O guia cita as threads sem hiperlink. Procure por hard surface e por normals dentro do site. O fórum (polycount.com) recusa acesso automatizado (HTTP 403); a referência aponta para o wiki, que abre."
     },
     {
       "id": "80lv-props",

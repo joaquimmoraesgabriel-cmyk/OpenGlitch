@@ -29,8 +29,9 @@ divertido na primeira versão; o que falta costuma ser game feel.
 
 ## Como pesquisar
 
-- **Visão geral e vocabulário**: *Game Combat Design Guide*.
-- **Boas práticas e lista de recursos**: *Combat System Design* (Evozon). Abra
+- **Visão geral, boas práticas e lista de recursos**: *Combat System Design*
+  (Evozon). É por onde começar: o *Game Combat Design Guide* recusa acesso
+  automatizado e fica só como leitura recomendada. Abra
   com `include_links=true`: a página cita outros textos, entre eles "Anatomy of
   a Successful Attack" de Ben Ruiz, que você pode seguir a partir dali.
 - **Inimigos e IA em combate corpo a corpo**: a série de Bart Vossen no *Game

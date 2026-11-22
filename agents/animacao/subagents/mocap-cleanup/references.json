@@ -7,11 +7,11 @@
       "title": "CMU Graphics Lab Motion Capture Database",
       "author": "Carnegie Mellon University",
       "type": "banco-de-dados",
-      "url": "https://mocap.cs.cmu.edu/resources.php",
-      "url_origem": "pdf",
+      "url": "http://mocap.cs.cmu.edu/resources.php",
+      "url_origem": "corrigida",
       "pesquisavel": true,
       "uso": "Banco gratuito de mocap com 2.605 capturas em 6 categorias. O guia recomenda começar pelos sujeitos de número mais alto.",
-      "nota": "Licença: permite incluir os dados em produtos vendidos, mas proíbe revender os dados diretamente, mesmo convertidos. Pode ser usado dentro de um jogo; não serve para vender um pacote feito só com eles."
+      "nota": "Licença: permite incluir os dados em produtos vendidos, mas proíbe revender os dados diretamente, mesmo convertidos. Pode ser usado dentro de um jogo; não serve para vender um pacote feito só com eles. O hiperlink do guia usa https, que não conecta; o site só responde em http."
     },
     {
       "id": "cmu-mocap-fbx",

@@ -38,11 +38,11 @@
       "title": "Polycount",
       "author": null,
       "type": "forum",
-      "url": "https://polycount.com/",
-      "url_origem": "inferida",
+      "url": "http://wiki.polycount.com/wiki/Polycount",
+      "url_origem": "corrigida",
       "pesquisavel": true,
       "uso": "Fórum de arte de jogos. Threads sobre kits modulares, texturas tileáveis e cenários.",
-      "nota": "Citada pelo guia na base da área, sem hiperlink."
+      "nota": "Citada pelo guia na base da área, sem hiperlink. O fórum (polycount.com) recusa acesso automatizado (HTTP 403); a referência aponta para o wiki, que abre."
     }
   ]
 }

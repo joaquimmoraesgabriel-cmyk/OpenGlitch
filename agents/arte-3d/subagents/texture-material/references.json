@@ -61,11 +61,11 @@
       "title": "Manual do Blender: Seams",
       "author": "Blender Foundation",
       "type": "documentacao",
-      "url": "https://www.blender.org/manual/en/modeling/meshes/uv/unwrapping/seams.html",
-      "url_origem": "pdf",
+      "url": "https://docs.blender.org/manual/en/latest/modeling/meshes/uv/unwrapping/seams.html",
+      "url_origem": "corrigida",
       "pesquisavel": true,
       "uso": "Fluxo de UV: marcar seams, desembrulhar, ajustar e repetir.",
-      "nota": "O endereço é o do guia, de uma versão antiga do manual; se não abrir, procure Seams em docs.blender.org/manual."
+      "nota": "O endereço é o do guia, de uma versão antiga do manual; se não abrir, procure Seams em docs.blender.org/manual. O hiperlink do guia usa o caminho antigo do manual (blender.org/manual), que responde 403; corrigido para docs.blender.org."
     },
     {
       "id": "toolbag-baking-tutorial-texture",
@@ -92,10 +92,11 @@
       "title": "Baking Maps for Games Reading List",
       "author": null,
       "type": "artigo",
-      "url": "https://camille_meehan.artstation.com/blog/LYbj/baking-maps-for-games-reading-list",
-      "url_origem": "pdf",
+      "url": "https://www.artstation.com/camille_meehan/blog/LYbj/baking-maps-for-games-reading-list",
+      "url_origem": "corrigida",
       "pesquisavel": true,
-      "uso": "Lista de leituras sobre bake, com foco em Unity."
+      "uso": "Lista de leituras sobre bake, com foco em Unity.",
+      "nota": "O hiperlink do guia usa o subdomínio com sublinhado, que não conecta; corrigido para o endereço equivalente em www.artstation.com."
     }
   ]
 }

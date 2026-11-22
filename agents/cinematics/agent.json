@@ -22,10 +22,11 @@
       "title": "Pixar in a Box",
       "author": "Pixar e Khan Academy",
       "type": "curso",
-      "url": "https://pixar.com/pixar-in-a-box",
-      "url_origem": "pdf",
+      "url": "https://www.pixar.com/pixar-in-a-box",
+      "url_origem": "corrigida",
       "pesquisavel": true,
-      "uso": "Currículo gratuito sobre como a Pixar faz filmes: storytelling, modelagem, cenário e efeitos. Serve de base para decupagem e linguagem de cena."
+      "uso": "Currículo gratuito sobre como a Pixar faz filmes: storytelling, modelagem, cenário e efeitos. Serve de base para decupagem e linguagem de cena.",
+      "nota": "O hiperlink do guia vem sem www e não resolve; o endereço com www abre. As aulas ficam na Khan Academy."
     },
     {
       "id": "blender-studio",

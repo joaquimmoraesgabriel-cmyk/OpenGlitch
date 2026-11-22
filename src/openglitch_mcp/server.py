@@ -219,9 +219,10 @@ async def research_text(ticket: str, url: str, include_links: bool = False, offs
 
 
 @tool("Subagente: devolve só as tabelas de uma página das suas referências, convertidas "
-      "para Markdown (| Coluna A | Coluna B |). Use para números, comparações e parâmetros.")
-async def research_tables(ticket: str, url: str) -> str:
-    return await _run("research_tables", ticket=ticket, url=url)
+      "para Markdown (| Coluna A | Coluna B |). Use para números, comparações e parâmetros. "
+      "`table` traz só a tabela de número N; `max_rows` limita as linhas de cada uma.")
+async def research_tables(ticket: str, url: str, table: int = 0, max_rows: int = 60) -> str:
+    return await _run("research_tables", ticket=ticket, url=url, table=table, max_rows=max_rows)
 
 
 @tool("Subagente: lista só as imagens de conteúdo de uma página (diagramas, arte, capturas), "

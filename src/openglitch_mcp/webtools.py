@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import io
 import ipaddress
+import os
 import re
 import socket
 import tempfile
@@ -27,7 +28,9 @@ import httpx
 
 from .util import OGError
 
-USER_AGENT = "Mozilla/5.0 (compatible; OpenGlitchResearch/1.0)"
+# O servidor se identifica como ferramenta. Sites que recusam acesso automatizado ficam
+# como lacuna; não se disfarça de navegador para passar por bloqueio.
+USER_AGENT = os.environ.get("OPENGLITCH_USER_AGENT") or "Mozilla/5.0 (compatible; OpenGlitchResearch/1.0)"
 TIMEOUT = httpx.Timeout(25.0, connect=10.0)
 MAX_HTML_BYTES = 6 * 1024 * 1024
 MAX_IMAGE_BYTES = 12 * 1024 * 1024
@@ -41,6 +44,16 @@ _BAD_IMAGE_HINT = re.compile(
     re.IGNORECASE,
 )
 _CHROME_TAGS = ("header", "nav", "footer", "aside", "form", "button")
+_SIDE_BLOCK = re.compile(
+    r"(related|sidebar|widget|comment|promo|newsletter|recommend|popular|share|author|byline|"
+    r"post-nav|pagination|breadcrumb|cookie|advert|carousel-nav)",
+    re.IGNORECASE,
+)
+_SIDE_HEADING = re.compile(
+    r"^(related|you may also|recommended|popular|more (from|posts|articles)|comments?|"
+    r"leia tamb|relacionad|veja tamb)",
+    re.IGNORECASE,
+)
 _MD_LINK = re.compile(r"\[([^\]\n]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 
 
@@ -100,6 +113,11 @@ def fetch(url: str, max_bytes: int = MAX_HTML_BYTES, accept: str = "text/html,*/
                             raise OGError(f"Redirecionamento sem destino em {current}.")
                         current = check_public_url(urljoin(current, target))
                         continue
+                    if resp.status_code in (401, 403, 429):
+                        raise OGError(
+                            f"O site recusou o acesso automatizado ({resp.status_code}) em {current}. "
+                            "Não insista: use outra referência e registre a lacuna."
+                        )
                     if resp.status_code >= 400:
                         raise OGError(
                             f"A página respondeu {resp.status_code} ({current}). "
@@ -277,7 +295,7 @@ def _table_title(table) -> str:
     return heading.get_text(" ", strip=True) if heading else ""
 
 
-def extract_tables(url: str, max_tables: int = 20) -> dict:
+def extract_tables(url: str, max_tables: int = 20, max_rows: int = 60) -> dict:
     import pandas as pd
 
     final_url, html = fetch_html(url)
@@ -308,7 +326,7 @@ def extract_tables(url: str, max_tables: int = 20) -> dict:
             continue
         tables_out.append({
             "title": _table_title(table), "rows": len(df), "columns": len(df.columns),
-            "markdown": dataframe_to_markdown(df),
+            "markdown": dataframe_to_markdown(df, max_rows),
         })
         if len(tables_out) >= max_tables:
             break
@@ -340,6 +358,18 @@ def _best_src(img) -> str | None:
         if value and not value.startswith("data:"):
             return best if best_width > 0 and best else value
     return best
+
+
+def _in_side_block(img) -> bool:
+    """Imagem em bloco lateral da página: posts relacionados, comentários, autor."""
+    for depth, parent in enumerate(img.parents):
+        if depth > 8 or parent.name in (None, "body", "html"):
+            break
+        ident = " ".join(parent.get("class") or []) + " " + (parent.get("id") or "")
+        if _SIDE_BLOCK.search(ident):
+            return True
+    heading = img.find_previous(["h1", "h2", "h3", "h4"])
+    return bool(heading and _SIDE_HEADING.match(heading.get_text(" ", strip=True)))
 
 
 def _probe_size(url: str) -> tuple[int, int] | None:
@@ -377,7 +407,7 @@ def extract_images(url: str, min_width: int = 300, min_height: int = 300,
         if urlsplit(absolute).scheme not in ("http", "https") or absolute in seen:
             continue
         seen.add(absolute)
-        if img.find_parent(_CHROME_TAGS):
+        if img.find_parent(_CHROME_TAGS) or _in_side_block(img):
             stats["chrome"] += 1
             continue
         hint = " ".join([

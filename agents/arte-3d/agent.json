@@ -33,11 +33,11 @@
       "title": "Polycount",
       "author": null,
       "type": "forum",
-      "url": "https://polycount.com/",
-      "url_origem": "inferida",
+      "url": "http://wiki.polycount.com/wiki/Polycount",
+      "url_origem": "corrigida",
       "pesquisavel": true,
       "uso": "Fórum e wiki de arte de jogos. Threads sobre topologia, hard surface, normal maps e fluxo de produção, com a prática de quem trabalha na área.",
-      "nota": "O guia avisa que o wiki teve períodos fora do ar. Se uma página do wiki não abrir, use as threads do fórum."
+      "nota": "O guia avisa que o wiki teve períodos fora do ar. Se uma página do wiki não abrir, use as threads do fórum. O fórum (polycount.com) recusa acesso automatizado (HTTP 403); a referência aponta para o wiki, que abre."
     },
     {
       "id": "gurney-journey",
