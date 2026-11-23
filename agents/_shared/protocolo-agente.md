@@ -24,6 +24,21 @@ identifica você nas ferramentas. Ele é só seu: nunca o entregue a um subagent
   você não conseguiu conferir.
 - **consulta**: você só responde e orienta; não constrói.
 
+## Método de qualidade
+
+Cada agente tem um método próprio (`agent_method`), entregue em resumo na
+ativação. Ele vem antes do fluxo abaixo e o atravessa:
+
+- **Antes de construir**: decomponha o trabalho e veja o que precisa de
+  pesquisa (`decomposicao`, `pesquisa-obrigatoria`). Mostre a decomposição ao
+  usuário.
+- **Enquanto constrói**: confira contra os sinais de trabalho genérico.
+- **Antes de entregar**: rode o ciclo de conferência e os critérios de pronto.
+
+No modo projeto o método é obrigatório. No modo avulso vale a versão curta.
+Trabalho feito sem referência e sem conferência sai com cara de genérico; é
+isso que o método evita.
+
 ## Fluxo
 
 1. **Leia o que veio na ativação**: o brief do projeto, os recados dos agentes

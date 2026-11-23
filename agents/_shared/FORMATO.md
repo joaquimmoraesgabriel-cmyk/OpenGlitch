@@ -15,6 +15,7 @@ agents/
   <agente>/
     agent.json                 identidade, subagentes, referências compartilhadas
     SKILL.md                   como o agente trabalha e quando chama cada subagente
+    METODO.md                  método de qualidade: decompor, pesquisar, conferir
     subagents/<subagente>/
       SKILL.md                 como o subagente pesquisa
       references.json          as referências que ele pode pesquisar
@@ -169,3 +170,22 @@ Regras que o validador aplica:
 
 Texto copiado de site, livro ou curso não entra: resuma com as suas palavras e
 ponha o link em `fonte`.
+
+## METODO.md do agente
+
+O método de qualidade de cada agente que trabalha. Frontmatter com `name`
+(`openglitch-<agente>-metodo`) e `description`. O corpo tem exatamente estas
+seções `##`, nesta ordem:
+
+1. `## Como usar este método`
+2. `## Versão curta` (três a cinco verificações para tarefa avulsa)
+3. `## Decomposição` (em que dimensões quebrar o trabalho antes de construir)
+4. `## Pesquisa obrigatória` (um item por subagente, com o id entre crases)
+5. `## Sinais de trabalho genérico` (o que denuncia trabalho sem referência)
+6. `## Ciclo de conferência` (capturar, comparar, corrigir, repetir)
+7. `## Critérios de pronto`
+
+O agente recebe o índice na ativação e lê cada seção com `agent_method`; no
+modo avulso recebe a versão curta inteira. Cada seção precisa fazer sentido
+sozinha. O validador confere os títulos, a ordem e se todo subagente aparece
+em "Pesquisa obrigatória".

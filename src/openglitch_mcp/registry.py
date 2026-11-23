@@ -15,6 +15,10 @@ REF_TYPES = {
     "forum", "palestra", "video", "ferramenta", "banco-de-dados",
 }
 URL_ORIGINS = {"pdf", "dominio-pdf", "corrigida", "inferida"}
+METHOD_SECTIONS = [
+    "Como usar este método", "Versão curta", "Decomposição", "Pesquisa obrigatória",
+    "Sinais de trabalho genérico", "Ciclo de conferência", "Critérios de pronto",
+]
 AGENT_ORDER = ["design", "arte-3d", "animacao", "cinematics", "engenharia", "audio", "apoio", "leitor"]
 
 
@@ -75,6 +79,7 @@ class Agent:
     skill: str = ""
     shared_references: list[Reference] = field(default_factory=list)
     subagents: dict[str, Subagent] = field(default_factory=dict)
+    method: list[tuple[str, str, str]] = field(default_factory=list)  # (slug, título, texto)
 
     def subagent(self, sub_id: str) -> Subagent:
         try:
@@ -186,7 +191,38 @@ class Registry:
                     )
         if agent.kind == "worker" and not agent.subagents:
             self.problems.append(f"{where}: agente worker sem subagentes")
+        if agent.kind == "worker":
+            self._load_method(folder, agent)
         return agent
+
+    def _load_method(self, folder: Path, agent: Agent) -> None:
+        """METODO.md: o método de qualidade do agente, uma seção `##` por etapa."""
+        from .pageindex import _split_sections
+        from .util import slugify
+
+        path = folder / "METODO.md"
+        if not path.is_file():
+            self.problems.append(f"{agent.id}: falta METODO.md")
+            return
+        meta, body = parse_frontmatter(path.read_text(encoding="utf-8"))
+        if not meta.get("name") or not meta.get("description"):
+            self.problems.append(f"{agent.id}: METODO.md sem frontmatter name/description")
+        _, sections = _split_sections(body)
+        agent.method = [(slugify(title), title, text) for title, text in sections]
+        titles = [title for _, title, _ in agent.method]
+        if titles != METHOD_SECTIONS:
+            missing = [t for t in METHOD_SECTIONS if t not in titles]
+            extra = [t for t in titles if t not in METHOD_SECTIONS]
+            detail = (f"faltam {missing}" if missing else "") + (f" sobram {extra}" if extra else "")
+            self.problems.append(
+                f"{agent.id}: METODO.md precisa ter as seções {METHOD_SECTIONS}, nessa ordem "
+                f"({detail.strip() or 'ordem diferente'})"
+            )
+        for sub_id in agent.subagents:
+            research = next((text for slug, _, text in agent.method if slug == "pesquisa-obrigatoria"), "")
+            if research and f"`{sub_id}`" not in research:
+                self.problems.append(
+                    f"{agent.id}: METODO.md não diz o que pesquisar com o subagente `{sub_id}`")
 
     def _load_subagent(self, folder: Path, agent_id: str, item: dict) -> Subagent | None:
         where = f"{agent_id}/{item.get('id', '?')}"

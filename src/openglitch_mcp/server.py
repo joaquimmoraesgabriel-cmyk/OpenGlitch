@@ -108,6 +108,14 @@ async def activate_agent(agent: str, project: str = "", mode: str = "projeto",
                       takeover=takeover, existing=existing)
 
 
+@tool("Método de qualidade do agente ativo: como decompor o trabalho, o que pesquisar com "
+      "cada subagente antes de construir, os sinais de trabalho genérico a evitar e o ciclo de "
+      "conferência antes de entregar. Sem `section`, mostra o índice; com `section` (ex.: "
+      "decomposicao, pesquisa-obrigatoria, ciclo-de-conferencia), devolve só aquela parte.")
+async def agent_method(session: str, section: str = "") -> str:
+    return await _run("agent_method", session=session, section=section)
+
+
 @tool("Encerra o agente ativo e libera o projeto. `summary` é o recado para os próximos "
       "agentes (o que foi feito, onde está); `next_steps` é o que falta e para quem; "
       "`verified` é o que você conferiu funcionando (rodou, abriu, testou); `not_verified` é "

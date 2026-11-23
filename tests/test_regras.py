@@ -376,3 +376,26 @@ def test_entrada_rapida_de_projeto_existente(app, helpers):
     app.publish_project_brief(design, helpers.brief)
     app.finish_agent(design, "Brief do projeto existente.", verified="brief publicado")
     assert "Brief (versão 1)" in app.activate_agent("engenharia", "Jogo Pronto")
+
+
+def test_metodo_de_qualidade(app, project, helpers):
+    from openglitch_mcp.registry import METHOD_SECTIONS
+    for agent in app.registry.workers():
+        assert [title for _, title, _ in agent.method] == METHOD_SECTIONS, agent.id
+    text = app.activate_agent("arte-3d", project)
+    sess = helpers.session_of(text)
+    assert "# Seu método de qualidade" in text and "`decomposicao` **Decomposição**" in text
+    assert "o método é obrigatório" in text and "## Versão curta" not in text
+    index = app.agent_method(sess)
+    assert "`ciclo-de-conferencia`" in index
+    section = app.agent_method(sess, "pesquisa-obrigatoria")
+    assert "`technical-artist`" in section and "Simetria perfeita" not in section
+    assert "Simetria perfeita" in app.agent_method(sess, "Sinais de trabalho genérico")
+    with pytest.raises(OGError, match="não existe"):
+        app.agent_method(sess, "inventada")
+    app.finish_agent(sess, "ok", verified="nada")
+    avulso = app.activate_agent("arte-3d", mode="avulso")
+    assert "siga a versão curta" in avulso and "## Versão curta" in avulso
+    leitor = helpers.session_of(app.activate_agent("leitor", project))
+    with pytest.raises(OGError, match="só lê memórias"):
+        app.agent_method(leitor)

@@ -25,7 +25,7 @@ from .memory import MemoryStore, Partition, search_partitions
 from .pageindex import KnowledgeIndex
 from .registry import Agent, Reference, Registry
 from .util import (
-    OGError, file_lock, now_iso, query_tokens, read_json, score_text, slugify, snippet,
+    OGError, file_lock, first_paragraph, now_iso, query_tokens, read_json, score_text, slugify, snippet,
     write_json_atomic, write_text_atomic,
 )
 
@@ -353,6 +353,7 @@ class App:
                 out += [r.render() for r in spec.shared_references]
                 out.append("")
             out += ["---", "", self._shared("protocolo-agente.md")]
+            out += self._method_block(spec, session["mode"])
         if slug:
             p = self._project(slug) or {}
             out += ["", "---", "", f"# Projeto {p.get('name', slug)}", ""]
@@ -453,6 +454,46 @@ class App:
             self._save_project(p)
         return (f"Brief do projeto `{p['slug']}` publicado (versão {version}). "
                 "Os outros agentes já podem ser ativados neste projeto.")
+
+    # ================================================================= método
+
+    def _method_block(self, spec: Agent, mode: str) -> list[str]:
+        if not spec.method:
+            return []
+        out = ["", "---", "", "# Seu método de qualidade", "",
+               "A skill diz o que você constrói; o método diz como construir bem: com "
+               "referência, pesquisa e conferência, sem cara de trabalho genérico. Leia cada "
+               "seção com agent_method(session, section)."]
+        for slug, title, text in spec.method:
+            out.append(f"- `{slug}` **{title}**: {first_paragraph(text, 160)}")
+        if mode == "avulso":
+            short = next((text for slug, _, text in spec.method if slug == "versao-curta"), "")
+            out += ["", "Você está em modo avulso: siga a versão curta, que é esta.", "",
+                    "## Versão curta", "", short]
+        elif mode == "projeto":
+            out += ["", "Neste modo o método é obrigatório: leia `decomposicao` e "
+                    "`pesquisa-obrigatoria` antes de construir, e `ciclo-de-conferencia` e "
+                    "`criterios-de-pronto` antes de dizer que terminou."]
+        return out
+
+    def agent_method(self, session: str, section: str = "") -> str:
+        sess = self._worker_session(session)
+        spec = self.registry.agent(sess["agent"])
+        if not spec.method:
+            raise OGError(f"O agente `{spec.id}` não tem método registrado.")
+        wanted = section.strip().lower()
+        if not wanted:
+            lines = [f"# Método de qualidade: {spec.name}", ""]
+            lines += [f"- `{slug}` **{title}**: {first_paragraph(text, 200)}"
+                      for slug, title, text in spec.method]
+            return "\n".join(lines + ["", "Leia uma seção com agent_method(session, section)."])
+        if wanted in ("tudo", "all"):
+            return "\n\n".join(f"## {title}\n\n{text}" for _, title, text in spec.method)
+        for slug, title, text in spec.method:
+            if wanted in (slug, title.lower(), slugify(wanted)):
+                return f"# Método de qualidade: {spec.name}\n\n## {title}\n\n{text}"
+        raise OGError(
+            f"Seção `{section}` não existe. Seções: " + ", ".join(s for s, _, _ in spec.method))
 
     # ========================================================== conhecimento
 

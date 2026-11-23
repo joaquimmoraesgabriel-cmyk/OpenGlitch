@@ -45,6 +45,9 @@ usuário ──> IA ──start──> roteador: analisa o pedido e escolhe o ag
   mesmo tempo que ele trabalha.
 - **Na segunda vez não se pesquisa de novo**: o agente olha a memória antes de
   delegar.
+- **Cada agente tem um método de qualidade** (`METODO.md`): decompor o trabalho,
+  pesquisar com os subagentes antes de construir, evitar os sinais de trabalho
+  genérico e conferir o resultado por capturas e testes antes de entregar.
 - **Ninguém finge que funcionou.** O que o agente não conseguiu fazer, fez de
   outro jeito ou fez sem conferir, ele avisa na hora e registra
   (`report_problem`). `list_problems` mostra tudo o que já foi relatado.
@@ -248,7 +251,7 @@ fazer e o da ferramenta para executar lá dentro.
 | Grupo | Ferramentas |
 | --- | --- |
 | Roteamento | `start`, `project_status`, `plan_agents`, `get_pipeline` |
-| Agente | `activate_agent`, `finish_agent`, `publish_project_brief` |
+| Agente | `activate_agent`, `agent_method`, `finish_agent`, `publish_project_brief` |
 | Conhecimento | `knowledge_tree`, `knowledge_read`, `knowledge_search` |
 | Memória | `memory_tree`, `memory_search`, `memory_read`, `memory_write` |
 | Delegação | `delegate_research`, `task_status` |
@@ -262,6 +265,7 @@ fazer e o da ferramenta para executar lá dentro.
 agents/      skills e referências: um agente por pasta, um subagente por subpasta
              (cada subagente tem docs/ e docs/img/ para documentos contribuídos)
   _shared/   roteador, protocolos comuns e o contrato de formato (FORMATO.md)
+  <agente>/  SKILL.md (o que faz), METODO.md (como fazer bem), agent.json
 knowledge/   o PageIndex de conhecimento, em Markdown (index.json é a árvore gerada)
 pipelines/   fluxos entre agentes (personagem, animação em jogo)
 src/         o servidor MCP
