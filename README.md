@@ -48,6 +48,9 @@ usuário ──> IA ──start──> roteador: analisa o pedido e escolhe o ag
 - **Cada agente tem um método de qualidade** (`METODO.md`): decompor o trabalho,
   pesquisar com os subagentes antes de construir, evitar os sinais de trabalho
   genérico e conferir o resultado por capturas e testes antes de entregar.
+- **O servidor anota como o trabalho foi feito**: se o agente registrou a
+  decomposição antes de construir, quantas pesquisas delegou e que partes do
+  método leu. Fica no histórico do projeto (`project_status`).
 - **Ninguém finge que funcionou.** O que o agente não conseguiu fazer, fez de
   outro jeito ou fez sem conferir, ele avisa na hora e registra
   (`report_problem`). `list_problems` mostra tudo o que já foi relatado.
@@ -85,6 +88,11 @@ fontes e histórico. O servidor decide quem acessa o quê:
 
 Um agente não vê a memória de outro. O que passa de um para o outro é o brief
 do projeto e o recado de encerramento (`finish_agent`).
+
+Cada agente tem ainda uma memória de **lições**, que vale para todos os
+projetos: quando ele resolve um erro (uma opção de importação que não funciona
+como o nome diz, por exemplo), grava o sintoma, a causa e a solução, e recebe
+essa lista ao ser ativado em qualquer projeto seguinte.
 
 A memória de pesquisa dos subagentes vale para todos os projetos; a memória de
 trabalho de cada agente é separada por projeto. Tudo fica em `.openglitch`, na
@@ -251,7 +259,7 @@ fazer e o da ferramenta para executar lá dentro.
 | Grupo | Ferramentas |
 | --- | --- |
 | Roteamento | `start`, `project_status`, `plan_agents`, `get_pipeline` |
-| Agente | `activate_agent`, `agent_method`, `finish_agent`, `publish_project_brief` |
+| Agente | `activate_agent`, `agent_method`, `register_decomposition`, `finish_agent`, `publish_project_brief` |
 | Conhecimento | `knowledge_tree`, `knowledge_read`, `knowledge_search` |
 | Memória | `memory_tree`, `memory_search`, `memory_read`, `memory_write` |
 | Delegação | `delegate_research`, `task_status` |

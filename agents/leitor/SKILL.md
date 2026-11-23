@@ -44,6 +44,9 @@ Separe com clareza:
   agente registrou ter usado.
 - **Pendente**: aparece em "próximos passos" de um recado ou em perguntas em
   aberto do brief.
+- **Como foi feito**: o histórico mostra, para cada agente, se ele registrou a
+  decomposição, quantas pesquisas delegou e que seções do método leu. Trabalho
+  sem decomposição e sem pesquisa saiu do que a IA já sabia; diga isso.
 - **Com problema**: um agente relatou que não conseguiu ou não conferiu
   (`list_problems`). Diga qual foi o erro.
 - **Sem registro**: você não encontrou nada. Diga isso; não suponha que foi

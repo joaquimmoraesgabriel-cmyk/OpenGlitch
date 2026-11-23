@@ -116,6 +116,14 @@ async def agent_method(session: str, section: str = "") -> str:
     return await _run("agent_method", session=session, section=section)
 
 
+@tool("Agente registra a decomposição do trabalho ANTES de construir: uma linha por dimensão "
+      "do método (seção `decomposicao`), dizendo o que já sabe, o que vai pesquisar e com qual "
+      "subagente, e o que precisa perguntar ao usuário. Fica gravada na memória de trabalho e "
+      "no histórico do projeto. Depois de registrar, mostre-a ao usuário.")
+async def register_decomposition(session: str, subject: str, content: str) -> str:
+    return await _run("register_decomposition", session=session, subject=subject, content=content)
+
+
 @tool("Encerra o agente ativo e libera o projeto. `summary` é o recado para os próximos "
       "agentes (o que foi feito, onde está); `next_steps` é o que falta e para quem; "
       "`verified` é o que você conferiu funcionando (rodou, abriu, testou); `not_verified` é "
@@ -196,7 +204,9 @@ async def memory_read(token: str, node: str) -> str:
 
 
 @tool("Escreve na memória do dono do `token`. Subagente (ticket): só na própria memória de "
-      "pesquisa. Agente (session): só na própria memória de trabalho. `op`: add (title, "
+      "pesquisa. Agente (session): na memória de trabalho do projeto (`to=\"work\"`, padrão) "
+      "ou nas suas lições, que valem para todos os projetos (`to=\"lessons\"`: erro resolvido, "
+      "contorno, atalho, com sintoma, causa e solução). `op`: add (title, "
       "summary, content), update (node + campos a trocar), append (node + content a "
       "acrescentar), correct (node + content corrigido + reason), remove (node + reason). "
       "`sources`: [{\"ref_id\": ..., \"url\": ..., \"title\": ...}]. `images`: "
@@ -205,10 +215,11 @@ async def memory_write(token: str, op: str, title: str = "", summary: str = "",
                        content: str = "", node: str = "", parent: str = "",
                        tags: list[str] | None = None,
                        sources: list[dict[str, str]] | None = None,
-                       images: list[dict[str, str]] | None = None, reason: str = "") -> str:
+                       images: list[dict[str, str]] | None = None, reason: str = "",
+                       to: str = "work") -> str:
     return await _run("memory_write", token=token, op=op, title=title, summary=summary,
                       content=content, node=node, parent=parent, tags=tags, sources=sources,
-                      images=images, reason=reason)
+                      images=images, reason=reason, to=to)
 
 
 @tool("Documentos locais dos subagentes: material de pesquisa contribuído por pessoas, que "

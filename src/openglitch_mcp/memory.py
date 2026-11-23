@@ -3,6 +3,7 @@
 Uma partição é a memória de um dono:
   <agente>/research/<subagente>   memória de pesquisa de um subagente (global)
   <agente>/work                   memória de trabalho do agente (por projeto)
+  <agente>/lessons                lições do agente, válidas em todos os projetos
 
 Quem pode ler e escrever cada partição é decidido em `core.py`. Este módulo só
 guarda e recupera. Cada partição tem `index.json` (títulos, resumos, fontes,
@@ -244,6 +245,10 @@ class MemoryStore:
     def research(self, agent: str, subagent: str) -> Partition:
         return Partition(self.base, f"{agent}/research/{subagent}",
                          self.base / "agents" / agent / "research" / subagent)
+
+    def lessons(self, agent: str) -> Partition:
+        return Partition(self.base, f"{agent}/lessons",
+                         self.base / "agents" / agent / "lessons")
 
     def work(self, agent: str, project: str) -> Partition:
         return Partition(self.base, f"{agent}/work",

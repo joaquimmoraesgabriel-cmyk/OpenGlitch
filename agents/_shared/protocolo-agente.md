@@ -29,13 +29,17 @@ identifica você nas ferramentas. Ele é só seu: nunca o entregue a um subagent
 Cada agente tem um método próprio (`agent_method`), entregue em resumo na
 ativação. Ele vem antes do fluxo abaixo e o atravessa:
 
-- **Antes de construir**: decomponha o trabalho e veja o que precisa de
-  pesquisa (`decomposicao`, `pesquisa-obrigatoria`). Mostre a decomposição ao
-  usuário.
+- **Antes de construir**: leia `decomposicao` e `pesquisa-obrigatoria`,
+  escreva a decomposição do trabalho e registre com `register_decomposition`.
+  Para cada dimensão diga o que você já sabe, o que vai pesquisar e com qual
+  subagente, e o que o usuário precisa decidir. Mostre ao usuário e delegue as
+  pesquisas das lacunas. Você não sabe o que não sabe até decompor.
 - **Enquanto constrói**: confira contra os sinais de trabalho genérico.
 - **Antes de entregar**: rode o ciclo de conferência e os critérios de pronto.
 
-No modo projeto o método é obrigatório. No modo avulso vale a versão curta.
+No modo projeto o método é obrigatório, e o servidor anota no histórico do
+projeto as seções que você leu, se registrou a decomposição e quantas
+pesquisas delegou. No modo avulso vale a versão curta.
 Trabalho feito sem referência e sem conferência sai com cara de genérico; é
 isso que o método evita.
 
@@ -77,6 +81,18 @@ isso que o método evita.
 11. **Encerre** com `finish_agent`: um resumo do que foi feito, os próximos
     passos para o agente seguinte, o que você conferiu funcionando (`verified`)
     e o que fez sem conseguir conferir (`not_verified`). Isso libera o projeto.
+
+## Lições que valem para todo projeto
+
+Além da memória de trabalho, que é de um projeto, você tem a memória de
+lições (`<agente>/lessons`), que vale em todos. Elas chegam listadas na
+ativação: leia as que tocam no que você vai fazer antes de repetir o caminho.
+
+Grave uma lição com `memory_write(..., to="lessons")` sempre que resolver algo
+que outro projeto vai encontrar de novo: um erro de importação e a causa dele,
+uma opção da engine que não faz o que o nome diz, um comando que só funciona
+de um jeito. Escreva o sintoma (como se percebe), a causa, a solução e a
+versão do programa. Não grave o que é específico deste jogo.
 
 ## Quando algo não dá certo
 

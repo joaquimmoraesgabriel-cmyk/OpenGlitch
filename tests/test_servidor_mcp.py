@@ -12,7 +12,7 @@ from mcp import Client, StdioServerParameters
 ROOT = Path(__file__).resolve().parents[1]
 
 EXPECTED_TOOLS = {
-    "start", "project_status", "plan_agents", "get_pipeline", "activate_agent", "agent_method", "finish_agent",
+    "start", "project_status", "plan_agents", "get_pipeline", "activate_agent", "agent_method", "register_decomposition", "finish_agent",
     "publish_project_brief", "knowledge_tree", "knowledge_read", "knowledge_search",
     "memory_tree", "memory_search", "memory_read", "memory_write", "delegate_research",
     "task_status", "research_begin", "research_text", "research_tables", "research_images",

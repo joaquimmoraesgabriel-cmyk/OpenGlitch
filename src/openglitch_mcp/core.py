@@ -204,6 +204,12 @@ class App:
                 lines.append(f"Conferido funcionando: {h['verified']}")
             if h.get("not_verified"):
                 lines.append(f"Feito SEM conferir: {h['not_verified']}")
+            if h.get("method"):
+                m = h["method"]
+                lines.append(
+                    f"Método: {m['decompositions']} decomposição(ões) registrada(s), "
+                    f"{m['research']} pesquisa(s) delegada(s), seções lidas: "
+                    + (", ".join(m["read"]) or "nenhuma") + ".")
         reported = [x for x in self._problems() if x.get("project") == p["slug"]]
         if reported:
             lines += ["", f"## Problemas relatados: {len(reported)}",
@@ -374,6 +380,14 @@ class App:
                         out.append(f"Conferido funcionando: {h['verified']}")
                     if h.get("not_verified"):
                         out.append(f"Feito SEM conferir: {h['not_verified']}")
+        if spec.kind == "worker":
+            lessons = self.memory.lessons(spec.id)
+            if lessons.count():
+                out += ["", "---", "", "# Lições de trabalhos anteriores", "",
+                        "Erros já resolvidos e atalhos descobertos por este agente em outros "
+                        "projetos. Leia as que tocam no que você vai fazer (memory_read) antes de "
+                        "repetir o caminho:"]
+                lessons.outline(out)
         out += ["", "---", "", "# Sua memória agora", "", self._memory_overview(session)]
         if spec.kind == "worker":
             pending = [t for t in self._tasks_of(session, self._state()) if t["status"] != "concluida"]
@@ -397,6 +411,31 @@ class App:
                     f"Atenção: ficaram tarefas de pesquisa em aberto ({ids}). Os subagentes ainda "
                     "podem concluí-las; o resultado fica na memória para a próxima ativação."
                 )
+            usage = None
+            if sess["role"] == "agent" and sess["mode"] in ("projeto", "avulso"):
+                usage = {
+                    "read": sess.get("method_read", []),
+                    "decompositions": len(sess.get("decompositions", [])),
+                    "research": sum(1 for t in state["tasks"].values()
+                                    if t["session"] == sess["token"]),
+                }
+            if usage and sess["mode"] == "projeto" and not self.registry.agent(
+                    sess["agent"]).mandatory_first:
+                gaps = []
+                if not usage["decompositions"]:
+                    gaps.append("não registrou a decomposição do trabalho (register_decomposition)")
+                if "decomposicao" not in usage["read"]:
+                    gaps.append("não leu a seção `decomposicao` do método")
+                if "ciclo-de-conferencia" not in usage["read"]:
+                    gaps.append("não leu a seção `ciclo-de-conferencia`")
+                if not usage["research"]:
+                    gaps.append("não delegou nenhuma pesquisa")
+                if gaps:
+                    lines.append(
+                        "Método: nesta ativação você " + "; ".join(gaps) + ". Isso fica no "
+                        "histórico do projeto. Diga ao usuário, com honestidade, que o trabalho "
+                        "saiu do que você já sabia, sem a pesquisa e a conferência do método."
+                    )
             if sess["role"] == "agent" and sess["mode"] == "projeto":
                 p = self._project(sess["project"])
                 started = (p.get("active") or {}).get("since", sess["created"])
@@ -404,6 +443,7 @@ class App:
                     "agent": sess["agent"], "started": started, "finished": now_iso(),
                     "summary": summary.strip()[:4000], "next_steps": next_steps.strip()[:2000],
                     "verified": verified.strip()[:2000], "not_verified": not_verified.strip()[:2000],
+                    "method": usage,
                 })
                 if not verified.strip() and not not_verified.strip():
                     lines.append(
@@ -472,9 +512,38 @@ class App:
                     "## Versão curta", "", short]
         elif mode == "projeto":
             out += ["", "Neste modo o método é obrigatório: leia `decomposicao` e "
-                    "`pesquisa-obrigatoria` antes de construir, e `ciclo-de-conferencia` e "
-                    "`criterios-de-pronto` antes de dizer que terminou."]
+                    "`pesquisa-obrigatoria`, escreva a decomposição do trabalho e registre com "
+                    "register_decomposition ANTES de construir; mostre-a ao usuário. Leia "
+                    "`ciclo-de-conferencia` e `criterios-de-pronto` antes de dizer que terminou. "
+                    "O servidor anota o que foi lido, se houve decomposição e quantas pesquisas "
+                    "você delegou; isso aparece no histórico do projeto."]
         return out
+
+    def register_decomposition(self, session: str, subject: str, content: str) -> str:
+        """O agente registra a decomposição do trabalho antes de construir."""
+        if len(subject.strip()) < 3:
+            raise OGError("Diga em `subject` o que está sendo decomposto (ex.: \"casa de toras\").")
+        if len(content.strip()) < 300:
+            raise OGError(
+                "Decomposição curta demais. Siga a seção `decomposicao` do seu método: uma linha "
+                "por dimensão, marcando o que você já sabe, o que vai pesquisar (e com qual "
+                "subagente) e o que precisa perguntar ao usuário."
+            )
+        sess = self._worker_session(session)
+        ref = None
+        if sess["project"]:
+            part = self.memory.work(sess["agent"], sess["project"])
+            ref = part.write("add", title=f"Decomposição: {subject.strip()}"[:140],
+                             summary="Decomposição do trabalho feita antes de construir.",
+                             content=content.strip(), tags=["decomposicao"],
+                             by=f"{sess['agent']} (agente)")["ref"]
+        with self._tx() as state:
+            state["sessions"][sess["token"]].setdefault("decompositions", []).append(
+                {"subject": subject.strip()[:140], "at": now_iso(), "ref": ref})
+        where = f" e gravada em `{ref}`" if ref else ""
+        return (f"Decomposição registrada{where}. Agora mostre-a ao usuário em poucas linhas (o "
+                "que você vai pesquisar e o que precisa que ele decida), delegue as pesquisas das "
+                "lacunas e só então construa.")
 
     def agent_method(self, session: str, section: str = "") -> str:
         sess = self._worker_session(session)
@@ -482,6 +551,12 @@ class App:
         if not spec.method:
             raise OGError(f"O agente `{spec.id}` não tem método registrado.")
         wanted = section.strip().lower()
+        if wanted:
+            read = ([s for s, _, _ in spec.method] if wanted in ("tudo", "all")
+                    else [slugify(wanted)])
+            with self._tx() as state:
+                seen = state["sessions"][sess["token"]].setdefault("method_read", [])
+                seen += [s for s in read if s not in seen]
         if not wanted:
             lines = [f"# Método de qualidade: {spec.name}", ""]
             lines += [f"- `{slug}` **{title}**: {first_paragraph(text, 200)}"
@@ -508,7 +583,8 @@ class App:
 
     # =============================================================== memória
 
-    def _partitions(self, token: str, for_write: bool = False) -> tuple[str, list[Partition], dict]:
+    def _partitions(self, token: str, for_write: bool = False,
+                    to: str = "work") -> tuple[str, list[Partition], dict]:
         """Resolve o token e devolve (papel, partições acessíveis, registro)."""
         token = (token or "").strip()
         if token.startswith("tk_"):
@@ -527,18 +603,23 @@ class App:
             parts: list[Partition] = []
             for agent in self.registry.workers():
                 parts += [self.memory.research(agent.id, s) for s in agent.subagents]
+                parts.append(self.memory.lessons(agent.id))
                 if sess["project"]:
                     parts.append(self.memory.work(agent.id, sess["project"]))
             return "reader", parts, sess
         agent = self.registry.agent(sess["agent"])
+        if for_write and to == "lessons":
+            return "agent", [self.memory.lessons(agent.id)], sess
         if for_write:
             if not sess["project"]:
                 raise OGError(
                     "Sem projeto não há memória de trabalho para escrever (modos avulso e "
-                    "consulta). Diga ao usuário o que foi feito e onde está."
+                    "consulta). Diga ao usuário o que foi feito e onde está. Uma lição que "
+                    "vale para outros trabalhos pode ser gravada com to=\"lessons\"."
                 )
             return "agent", [self.memory.work(agent.id, sess["project"])], sess
         parts = [self.memory.research(agent.id, s) for s in agent.subagents]
+        parts.append(self.memory.lessons(agent.id))
         if sess["project"]:
             parts.append(self.memory.work(agent.id, sess["project"]))
         return "agent", parts, sess
@@ -609,8 +690,12 @@ class App:
     def memory_write(self, token: str, op: str, title: str = "", summary: str = "",
                      content: str = "", node: str = "", parent: str = "",
                      tags: list[str] | None = None, sources: Any = None, images: Any = None,
-                     reason: str = "") -> str:
-        role, parts, record = self._partitions(token, for_write=True)
+                     reason: str = "", to: str = "work") -> str:
+        if to not in ("work", "lessons"):
+            raise OGError("`to` é \"work\" (memória de trabalho do projeto) ou \"lessons\" (lições).")
+        if any(v.rpartition("#")[0].endswith("/lessons") for v in (node, parent)):
+            to = "lessons"
+        role, parts, record = self._partitions(token, for_write=True, to=to)
         part = parts[0]
         for value in (node, parent):
             key = value.rpartition("#")[0]
@@ -1064,9 +1149,15 @@ class App:
             }
             problems.append(entry)
             write_json_atomic(self.memory_dir / "problems.json", problems)
+        lesson = ""
+        if kind == "contornado" and not subagent:
+            lesson = (" Como você achou um contorno, grave a lição para os próximos projetos não "
+                      "tropeçarem no mesmo ponto: memory_write(token, \"add\", to=\"lessons\", "
+                      "title=o problema em poucas palavras, summary=a solução em uma frase, "
+                      "content=sintoma, causa e solução, com a versão do programa).")
         return (f"Problema {entry['id']} registrado. Agora diga isso ao usuário com clareza: o que "
                 "não deu certo, o que você tentou e o que ele pode fazer. Não siga como se "
-                "tivesse funcionado.")
+                "tivesse funcionado." + lesson)
 
     def list_problems(self, project: str = "", limit: int = 30) -> str:
         problems = self._problems()

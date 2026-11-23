@@ -399,3 +399,68 @@ def test_metodo_de_qualidade(app, project, helpers):
     leitor = helpers.session_of(app.activate_agent("leitor", project))
     with pytest.raises(OGError, match="só lê memórias"):
         app.agent_method(leitor)
+
+
+DECOMP = "Função no jogo: cenário principal, visto de perto. " * 10
+
+
+def test_licoes_valem_entre_projetos(app, helpers):
+    for name in ("Jogo A", "Jogo B"):
+        d = helpers.session_of(app.activate_agent("design", name))
+        app.publish_project_brief(d, helpers.brief)
+        app.finish_agent(d, "Brief.", verified="brief publicado")
+    eng = helpers.session_of(app.activate_agent("engenharia", "Jogo A"))
+    out = app.report_problem(eng, "Importar FBX animado com bakeAxisConversion", "Liguei a opção no importador", kind="contornado", software="Unity 6")
+    assert 'to="lessons"' in out
+    wrote = app.memory_write(eng, "add", to="lessons", title="bakeAxisConversion não converte animação",
+                             summary="Deixe desligado e use um pai fixo.", content="Sintoma: porta deitada. Causa: curvas não convertidas. Solução: pai fixo.")
+    assert "engenharia/lessons#0001" in wrote
+    app.memory_write(eng, "add", title="Arquitetura do Jogo A", summary="Só deste jogo.", content="Detalhe.")
+    app.finish_agent(eng, "Montado.", verified="compilou")
+
+    text = app.activate_agent("engenharia", "Jogo B")
+    eng_b = helpers.session_of(text)
+    assert "# Lições de trabalhos anteriores" in text and "bakeAxisConversion não converte" in text
+    assert "Arquitetura do Jogo A" not in app.memory_tree(eng_b)
+    assert "porta deitada" in app.memory_read(eng_b, "engenharia/lessons#0001")
+    app.memory_write(eng_b, "append", node="engenharia/lessons#0001", content="Confirmado na 6000.6.")
+    app.finish_agent(eng_b, "ok", verified="nada")
+
+    avulso = helpers.session_of(app.activate_agent("engenharia", mode="avulso"))
+    assert "Confirmado na 6000.6" in app.memory_read(avulso, "engenharia/lessons#0001")
+    app.memory_write(avulso, "add", to="lessons", title="Outra lição", summary="s", content="c")
+    arte = helpers.session_of(app.activate_agent("arte-3d", "Jogo B"))
+    assert "bakeAxisConversion" not in app.memory_tree(arte)
+    with pytest.raises(OGError, match="não tem acesso"):
+        app.memory_read(arte, "engenharia/lessons#0001")
+    app.finish_agent(arte, "ok", verified="nada")
+    leitor = helpers.session_of(app.activate_agent("leitor", "Jogo B"))
+    assert "bakeAxisConversion" in app.memory_tree(leitor)
+    ticket = helpers.ticket_of(app.delegate_research(avulso, "build-devops", "Como configurar Git LFS para um projeto Unity com FBX grandes?"))
+    app.research_begin(ticket)
+    with pytest.raises(OGError):
+        app.memory_write(ticket, "add", to="lessons", node="engenharia/lessons#0001", title="x", summary="y", content="z")
+
+
+def test_servidor_anota_o_uso_do_metodo(app, project, helpers):
+    arte = helpers.session_of(app.activate_agent("arte-3d", project))
+    done = app.finish_agent(arte, "Casa feita.", verified="renders")
+    for expected in ("não registrou a decomposição", "não leu a seção `decomposicao`",
+                     "não delegou nenhuma pesquisa"):
+        assert expected in done
+    assert "0 decomposição(ões) registrada(s), 0 pesquisa(s)" in app.project_status(project)
+
+    arte = helpers.session_of(app.activate_agent("arte-3d", project))
+    with pytest.raises(OGError, match="curta demais"):
+        app.register_decomposition(arte, "casa de toras", "Função: cenário.")
+    reg = app.register_decomposition(arte, "casa de toras", DECOMP)
+    assert "arte-3d/work#0001" in reg and "mostre-a ao usuário" in reg
+    assert "Decomposição: casa de toras" in app.memory_tree(arte, scope="work")
+    app.agent_method(arte, "decomposicao")
+    app.agent_method(arte, "Ciclo de conferência")
+    app.delegate_research(arte, "environment-artist", "Como dividir uma cabana de toras em peças modulares que encaixam?")
+    done = app.finish_agent(arte, "Casa refeita.", verified="renders")
+    assert "Método: nesta ativação" not in done
+    status = app.project_status(project)
+    assert "1 decomposição(ões) registrada(s), 1 pesquisa(s) delegada(s)" in status
+    assert "decomposicao, ciclo-de-conferencia" in status
