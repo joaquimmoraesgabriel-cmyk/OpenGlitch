@@ -490,7 +490,7 @@ class App:
         if wanted in ("tudo", "all"):
             return "\n\n".join(f"## {title}\n\n{text}" for _, title, text in spec.method)
         for slug, title, text in spec.method:
-            if wanted in (slug, title.lower(), slugify(wanted)):
+            if slugify(wanted) == slug:
                 return f"# Método de qualidade: {spec.name}\n\n## {title}\n\n{text}"
         raise OGError(
             f"Seção `{section}` não existe. Seções: " + ", ".join(s for s, _, _ in spec.method))
