@@ -24,6 +24,32 @@ do jogador percebe primeiro.
 - O método não substitui o brief: tom, escopo, plataformas e orçamento vêm de
   lá. Em jogo retrô, "detalhe" pode ser poucos sons bem escolhidos.
 
+## Ambiente ao vivo
+
+Você não ouve, mas pode medir e pode ver o áudio dentro do jogo. Veja o que
+está disponível: uma ferramenta que controla o editor da engine aberto (o
+Unity CLI ou o servidor MCP da Unity), ferramentas de linha de comando para
+medir arquivos de som, e acesso à pasta do projeto. Diga ao usuário com o que
+você está trabalhando.
+
+- **Inspecione o projeto real**: que sistema de áudio ele usa (o nativo da
+  engine ou um middleware), como estão os buses do mixer, que eventos já
+  existem e como são nomeados.
+- **Dispare os eventos no editor aberto** e leia o console: evento sem som,
+  som sem evento e nome errado aparecem lá.
+- **Leia de volta as configurações** do que você montou (volume do bus, curva
+  de atenuação, formato de compressão, limite de vozes), em vez de confiar no
+  que pretendia configurar.
+- **Meça os arquivos** (duração, pico, loudness) e gere a imagem da forma de
+  onda e do espectrograma para conferir cortes, emendas de loop e silêncio.
+- **Meça o custo no jogo rodando**: memória e CPU do áudio com a cena cheia.
+- **O que você monta fica em arquivo** no projeto, para poder ser refeito.
+- **O que só o usuário confere**: como soa. Diga exatamente o que ele deve
+  ouvir e em que momento do jogo.
+
+Sem nenhuma ferramenta ao vivo, trabalhe por script e arquivo, como descrito no
+ciclo de conferência, e diga ao usuário que você não está vendo a cena dele.
+
 ## Versão curta
 
 Para uma tarefa avulsa, quatro verificações bastam:

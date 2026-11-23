@@ -23,6 +23,40 @@ sai da média do que você já viu, e é isso que dá a "cara de IA".
   Em estilo low-poly ou estilizado, "detalhe" quer dizer forma, proporção e cor
   bem escolhidas, e não mais polígonos.
 
+## Ambiente ao vivo
+
+Antes de modelar, veja com o que você pode trabalhar. Se o seu cliente tem uma
+ferramenta que executa código no Blender aberto e captura a tela dele (o
+servidor MCP oficial do Blender, por exemplo), ou uma que controla o editor da
+engine (o Unity CLI ou o servidor MCP da Unity), use-a. Diga ao usuário, em uma
+linha, com o que você está trabalhando.
+
+- **O script continua sendo a fonte.** Escreva o gerador em arquivo e execute-o
+  dentro do Blender aberto, em vez de rodar o Blender em segundo plano. Assim o
+  trabalho pode ser refeito com um comando e o usuário vê a cena mudar.
+- **Olhe antes de supor.** Inspecione a cena real (objetos, unidades, coleções,
+  materiais, modificadores) antes de criar ou alterar. Não presuma que a cena
+  está vazia nem que as unidades são as que você espera.
+- **Capture a cada etapa**, e não só no fim: depois do blockout, das formas
+  médias, dos materiais e da luz. Erro visto cedo custa uma linha; visto no
+  fim, custa a etapa.
+- **Confira o objeto, não a intenção.** Depois de gerar, leia de volta as
+  dimensões, a contagem de triângulos e os materiais do objeto que ficou na
+  cena, e compare com a decomposição.
+- **Consulte a documentação que a ferramenta traz** (a referência da API e o
+  manual do Blender vêm com o servidor oficial) quando não tiver certeza de um
+  operador ou de um parâmetro, em vez de tentar de memória.
+- **Ajuste feito à mão na cena volta para o script** antes de você encerrar.
+  O que só existe na cena aberta se perde quando o programa fecha.
+- **Não destrua o que é do usuário.** A cena aberta pode ter trabalho dele:
+  não apague, não renomeie e não salve por cima sem perguntar. Trabalhe numa
+  coleção própria e diga qual.
+- **Na engine**, importe, monte e capture pelo editor aberto, com a luz do
+  jogo. É lá que se vê se a escala, os eixos e os materiais chegaram certos.
+
+Sem nenhuma ferramenta ao vivo, trabalhe por script e arquivo, como descrito no
+ciclo de conferência, e diga ao usuário que você não está vendo a cena dele.
+
 ## Versão curta
 
 Para uma tarefa avulsa, quatro verificações bastam:

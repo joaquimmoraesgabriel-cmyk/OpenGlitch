@@ -26,6 +26,37 @@ interpolação automática e tudo se mexendo ao mesmo tempo, e é isso que dá a
   exagerado, "bom" quer dizer pose clara e timing marcado, e não fidelidade ao
   movimento real.
 
+## Ambiente ao vivo
+
+Antes de animar, veja com o que você pode trabalhar. Se o seu cliente tem uma
+ferramenta que executa código no Blender aberto e captura a tela dele, ou uma
+que controla o editor da engine (o Unity CLI ou o servidor MCP da Unity),
+use-a. Diga ao usuário, em uma linha, com o que você está trabalhando.
+
+- **O script continua sendo a fonte.** Gere o rig e as animações por script em
+  arquivo e execute-o dentro do Blender aberto. Animação criada só na cena
+  aberta se perde quando o programa fecha.
+- **Inspecione o rig real** antes de animar: nomes e hierarquia dos ossos,
+  eixos, escala, restrições, quadros por segundo da cena. Não presuma a
+  convenção de nomes.
+- **Capture quadros-chave ao vivo.** Leve a linha do tempo a cada pose-chave e
+  capture a viewport, de lado e de frente. Monte a tira de quadros a partir
+  dessas capturas para ver antecipação, contato e assentamento.
+- **Meça no objeto.** Leia de volta a posição dos pés por quadro, a duração do
+  clipe e os valores do primeiro e do último quadro do loop, em vez de confiar
+  no que o script pretendia.
+- **Confira na engine aberta.** Importe o clipe, toque no personagem dentro do
+  editor e capture. Eixos, escala e curvas mudam na importação; a rotação da
+  raiz e a posição animada da raiz são os erros mais comuns.
+- **Leia o console da engine** depois de importar e de montar o controlador de
+  animação: clipe sem curva, osso não encontrado e avatar inválido aparecem lá.
+- **Ajuste feito à mão volta para o script** antes de encerrar.
+- **Não destrua o que é do usuário.** Não apague ações, não renomeie ossos e
+  não salve por cima de um arquivo existente sem perguntar.
+
+Sem nenhuma ferramenta ao vivo, trabalhe por script e arquivo, como descrito no
+ciclo de conferência, e diga ao usuário que você não está vendo a cena dele.
+
 ## Versão curta
 
 Para uma tarefa avulsa, quatro verificações bastam:

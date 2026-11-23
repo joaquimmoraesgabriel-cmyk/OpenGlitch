@@ -231,7 +231,11 @@ Variáveis de ambiente opcionais: `OPENGLITCH_DATA` muda a pasta da memória e
 ## Usar com Unity, Unreal e Blender
 
 O OpenGlitch dá à IA o conhecimento e o método; quem mexe na engine é a IA, com
-as ferramentas que o seu cliente tiver. Abra o cliente na pasta do projeto do
+as ferramentas que o seu cliente tiver. Sem nada além dele, os agentes trabalham
+por script (o Blender em segundo plano, arquivos no projeto da engine). Com o
+servidor MCP oficial do Blender ou o Unity CLI conectados ao mesmo cliente, o
+método de cada agente manda preferir o programa aberto: rodar o script na cena
+que você está vendo e conferir pela captura da tela. Abra o cliente na pasta do projeto do
 jogo para ela criar e editar scripts, shaders, cenas e documentos. Se você
 tiver um servidor MCP da própria ferramenta (Blender, Unity, Unreal) conectado
 ao mesmo cliente, o agente usa os dois juntos: o OpenGlitch para saber o que

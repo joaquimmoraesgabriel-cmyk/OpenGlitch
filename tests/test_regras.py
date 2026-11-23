@@ -387,7 +387,9 @@ def test_metodo_de_qualidade(app, project, helpers):
     assert "# Seu método de qualidade" in text and "`decomposicao` **Decomposição**" in text
     assert "o método é obrigatório" in text and "## Versão curta" not in text
     index = app.agent_method(sess)
-    assert "`ciclo-de-conferencia`" in index
+    assert "`ciclo-de-conferencia`" in index and "`ambiente-ao-vivo`" in index
+    assert "O script continua sendo a fonte" in app.agent_method(sess, "ambiente-ao-vivo")
+    assert "## Ambiente de trabalho" in text
     section = app.agent_method(sess, "pesquisa-obrigatoria")
     assert "`technical-artist`" in section and "Simetria perfeita" not in section
     assert "Simetria perfeita" in app.agent_method(sess, "Sinais de trabalho genérico")

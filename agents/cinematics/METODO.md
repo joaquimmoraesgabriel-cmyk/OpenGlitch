@@ -25,6 +25,36 @@ distância, cortes em ritmo igual e personagens parados explicando a história.
   mais barata é poucas cenas, curtas e na engine. Se a cena não muda nada,
   proponha cortá-la antes de decupar.
 
+## Ambiente ao vivo
+
+Câmera, luz e ritmo só se julgam vendo. Antes de montar, veja com o que você
+pode trabalhar: uma ferramenta que controla o editor da engine aberto (o Unity
+CLI ou o servidor MCP da Unity) ou uma que executa código e captura a tela no
+Blender aberto. Diga ao usuário, em uma linha, com o que você está trabalhando.
+
+- **A sequência fica em arquivo.** Monte a cena por script ou por asset de
+  sequência salvo no projeto, e não só mexendo no editor aberto, para poder
+  refazer.
+- **Inspecione a cena real** antes de posicionar câmeras: onde estão os
+  personagens, a escala, a direção da luz principal, o que já existe na linha
+  do tempo.
+- **Capture pela câmera do plano**, e não pela câmera livre do editor. Um
+  quadro por plano no início, no meio e no fim, na proporção de tela final.
+- **Monte a tira de planos** com as capturas em ordem e confira a continuidade
+  entre vizinhos: eixo de ação, direção do olhar, posição dos personagens.
+- **Meça o tempo de cada plano** lendo a linha do tempo, em vez de confiar na
+  duração que você planejou.
+- **Confira luz e pós-processamento na captura**, com os efeitos ligados como
+  no jogo. O que parece certo sem pós-processamento muda com ele.
+- **Ajuste feito à mão volta para o arquivo da sequência** antes de encerrar.
+- **Não destrua o que é do usuário.** Não mova nem apague câmeras, luzes e
+  objetos que não são da sua cena sem perguntar.
+- **O que só o usuário confere**: assistir a sequência em movimento e dizer se
+  o ritmo e a emoção funcionam. Peça isso de forma específica.
+
+Sem nenhuma ferramenta ao vivo, trabalhe por script e arquivo, como descrito no
+ciclo de conferência, e diga ao usuário que você não está vendo a cena dele.
+
 ## Versão curta
 
 Para uma tarefa avulsa, cinco verificações bastam:

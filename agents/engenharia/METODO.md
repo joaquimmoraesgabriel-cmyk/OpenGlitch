@@ -23,6 +23,39 @@ quebra na primeira situação que ninguém previu. É isso que dá a "cara de IA
 - O método não substitui o brief: engine, plataforma, escopo e meta de FPS
   vêm de lá. Protótipo do Design pode ser simples, mas é executado.
 
+## Ambiente ao vivo
+
+Antes de programar, veja com o que você pode trabalhar. Se o seu cliente tem
+uma ferramenta que controla o editor da engine aberto (o Unity CLI ou o
+servidor MCP da Unity, por exemplo), use-a para compilar, ler o console, rodar
+código e capturar a tela. Diga ao usuário, em uma linha, com o que você está
+trabalhando.
+
+- **Inspecione o projeto real** antes de escrever: versão da engine, pipeline
+  de render, sistema de input, pacotes instalados, cenas e convenções de pasta.
+  Uma API que você conhece pode ter mudado ou ficado obsoleta nesta versão;
+  quando a versão é nova para você, delegue uma pesquisa curta em vez de
+  confiar na memória.
+- **Compile e leia o console depois de cada mudança**, e não só no fim. Erro e
+  aviso novo se resolvem na hora.
+- **Execute de verdade.** Rode o sistema no editor aberto, em modo de jogo ou
+  por um teste, e leia o resultado. Código que compila e nunca rodou não está
+  conferido.
+- **Capture a tela do jogo** para conferir o que o código produz na cena, e
+  compare dois quadros quando o que importa é movimento.
+- **Meça com as ferramentas da engine** (tempo de quadro, triângulos, chamadas
+  de desenho) antes e depois de otimizar, desligando uma coisa de cada vez
+  para achar o que pesa.
+- **O que você monta por ferramenta fica em arquivo.** Cena, prefab e
+  configuração criados pelo editor precisam de um script de montagem ou de um
+  asset salvo no projeto, para poderem ser refeitos.
+- **Não destrua o que é do usuário.** Não apague assets, não troque
+  configurações do projeto e não instale pacotes sem dizer o que e por quê; o
+  que mudar nas configurações, liste ao entregar.
+
+Sem nenhuma ferramenta ao vivo, trabalhe por script e arquivo, como descrito no
+ciclo de conferência, e diga ao usuário que você não está vendo a cena dele.
+
 ## Versão curta
 
 Para uma tarefa avulsa, cinco verificações bastam:

@@ -16,7 +16,7 @@ REF_TYPES = {
 }
 URL_ORIGINS = {"pdf", "dominio-pdf", "corrigida", "inferida"}
 METHOD_SECTIONS = [
-    "Como usar este método", "Versão curta", "Decomposição", "Pesquisa obrigatória",
+    "Como usar este método", "Ambiente ao vivo", "Versão curta", "Decomposição", "Pesquisa obrigatória",
     "Sinais de trabalho genérico", "Ciclo de conferência", "Critérios de pronto",
 ]
 AGENT_ORDER = ["design", "arte-3d", "animacao", "cinematics", "engenharia", "audio", "apoio", "leitor"]

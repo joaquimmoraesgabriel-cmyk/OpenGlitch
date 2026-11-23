@@ -178,12 +178,14 @@ O método de qualidade de cada agente que trabalha. Frontmatter com `name`
 seções `##`, nesta ordem:
 
 1. `## Como usar este método`
-2. `## Versão curta` (três a cinco verificações para tarefa avulsa)
-3. `## Decomposição` (em que dimensões quebrar o trabalho antes de construir)
-4. `## Pesquisa obrigatória` (um item por subagente, com o id entre crases)
-5. `## Sinais de trabalho genérico` (o que denuncia trabalho sem referência)
-6. `## Ciclo de conferência` (capturar, comparar, corrigir, repetir)
-7. `## Critérios de pronto`
+2. `## Ambiente ao vivo` (como usar ferramentas que controlam o programa
+   aberto, quando houver, e o que fazer quando não houver)
+3. `## Versão curta` (três a cinco verificações para tarefa avulsa)
+4. `## Decomposição` (em que dimensões quebrar o trabalho antes de construir)
+5. `## Pesquisa obrigatória` (um item por subagente, com o id entre crases)
+6. `## Sinais de trabalho genérico` (o que denuncia trabalho sem referência)
+7. `## Ciclo de conferência` (capturar, comparar, corrigir, repetir)
+8. `## Critérios de pronto`
 
 O agente recebe o índice na ativação e lê cada seção com `agent_method`; no
 modo avulso recebe a versão curta inteira. Cada seção precisa fazer sentido

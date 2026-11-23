@@ -25,6 +25,35 @@ e de página de loja, e é isso que dá a "cara de IA".
 - O método não substitui o brief: plataformas, idiomas, data e orçamento vêm
   de lá. Em projeto solo, o usuário é o QA e o plano precisa caber no tempo dele.
 
+## Ambiente ao vivo
+
+Testar, localizar e divulgar dependem de ver o jogo como ele está. Veja o que
+está disponível: uma ferramenta que controla o editor da engine aberto (o
+Unity CLI ou o servidor MCP da Unity), a execução de testes automáticos, o
+navegador para conferir a página da loja, e a pasta do projeto. Diga ao
+usuário com o que você está trabalhando.
+
+- **QA: execute, não suponha.** Rode os testes automáticos e os casos de teste
+  no editor aberto, leia o console e capture a tela de cada falha. Um bug só é
+  relatado depois de reproduzido.
+- **QA: capture a evidência.** Passos, resultado esperado, resultado obtido,
+  captura e trecho do log, tirados da execução real.
+- **Localização: confira cada texto na tela em que aparece**, por captura, em
+  cada idioma: texto cortado, sobreposto, fonte sem o caractere.
+- **Localização: extraia os textos do projeto real**, e não de uma lista
+  lembrada; texto escrito direto no código também conta.
+- **Marketing: leia a página publicada** como um visitante, e confira os
+  números (metas, datas, preços) contra a fonte.
+- **Marketing: capturas e trechos do jogo saem do jogo rodando**, não de
+  montagem.
+- **Você não corrige o jogo.** Encontrou o problema: registre e encaminhe ao
+  agente da área.
+- **O que só o usuário confere**: jogar com teclado, mouse ou controle em tela
+  cheia, e a decisão de publicar.
+
+Sem nenhuma ferramenta ao vivo, trabalhe por script e arquivo, como descrito no
+ciclo de conferência, e diga ao usuário que você não está vendo a cena dele.
+
 ## Versão curta
 
 Para uma tarefa avulsa, quatro verificações bastam:

@@ -508,10 +508,13 @@ class App:
             out.append(f"- `{slug}` **{title}**: {first_paragraph(text, 160)}")
         if mode == "avulso":
             short = next((text for slug, _, text in spec.method if slug == "versao-curta"), "")
-            out += ["", "Você está em modo avulso: siga a versão curta, que é esta.", "",
-                    "## Versão curta", "", short]
+            out += ["", "Você está em modo avulso: siga a versão curta, que é esta. Se houver "
+                    "uma ferramenta que controla o programa aberto (Blender, engine), leia também "
+                    "`ambiente-ao-vivo`.", "", "## Versão curta", "", short]
         elif mode == "projeto":
-            out += ["", "Neste modo o método é obrigatório: leia `decomposicao` e "
+            out += ["", "Neste modo o método é obrigatório: veja em `ambiente-ao-vivo` com que "
+                    "ferramentas trabalhar (programa aberto ou script) e diga isso ao usuário; leia "
+                    "`decomposicao` e "
                     "`pesquisa-obrigatoria`, escreva a decomposição do trabalho e registre com "
                     "register_decomposition ANTES de construir; mostre-a ao usuário. Leia "
                     "`ciclo-de-conferencia` e `criterios-de-pronto` antes de dizer que terminou. "
