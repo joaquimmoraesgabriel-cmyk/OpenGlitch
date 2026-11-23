@@ -348,3 +348,31 @@ def test_validador_recusa_documento_fora_das_regras(tmp_path):
     for expected in ("cabeçalho sem `title`", "seções `##`", "nome em minúsculas",
                      "precisa de `fonte`", "só arquivos .md", "mais de 1 MB"):
         assert expected in found, expected
+
+
+def test_modo_avulso_constroi_sem_projeto_nem_design(app, helpers):
+    text = app.activate_agent("animacao", mode="avulso")
+    sess = helpers.session_of(text)
+    assert "Modo avulso" in text and "# Agente Animação" in text and "Sem brief" not in text
+    assert "T0001" in app.delegate_research(sess, "gameplay-animator", "Como fazer um ciclo de caminhada em loop sem o pé escorregar?")
+    assert "P0001" in app.report_problem(sess, "Exportar o FBX da caminhada", "Rodei o Blender em segundo plano", software="Blender")
+    with pytest.raises(OGError, match="memória de trabalho"):
+        app.memory_write(sess, "add", title="x", summary="y", content="z")
+    # Não trava nem depende de projeto: outro agente avulso entra ao mesmo tempo.
+    app.activate_agent("arte-3d", mode="avulso")
+    assert "encerrado" in app.finish_agent(sess, "")
+    with pytest.raises(OGError, match="avulso"):
+        app.activate_agent("animacao", "Projeto Que Nao Existe")
+    with pytest.raises(OGError, match="mode"):
+        app.activate_agent("animacao", mode="livre")
+
+
+def test_entrada_rapida_de_projeto_existente(app, helpers):
+    text = app.activate_agent("design", "Jogo Pronto", existing=True)
+    assert "ENTRADA RÁPIDA" in text and "Projeto que já existe: entrada rápida" in text
+    novo = app.activate_agent("design", "Jogo Do Zero")
+    assert "Não faça a entrevista completa" not in novo and "Projeto novo: comece pela entrevista" in novo
+    design = helpers.session_of(text)
+    app.publish_project_brief(design, helpers.brief)
+    app.finish_agent(design, "Brief do projeto existente.", verified="brief publicado")
+    assert "Brief (versão 1)" in app.activate_agent("engenharia", "Jogo Pronto")

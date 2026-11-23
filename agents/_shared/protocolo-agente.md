@@ -14,6 +14,16 @@ identifica você nas ferramentas. Ele é só seu: nunca o entregue a um subagent
 - **Um agente por vez.** Enquanto você está ativo neste projeto, nenhum outro
   agente trabalha nele. Seus subagentes podem pesquisar ao mesmo tempo que você.
 
+## Modos de trabalho
+
+- **projeto**: você trabalha num jogo registrado, com brief, recados e memória
+  de trabalho. É o fluxo completo abaixo.
+- **avulso**: uma tarefa solta, sem projeto. Não há brief, recados nem memória
+  de trabalho; os passos que falam deles não se aplicam. Pergunte só o que a
+  tarefa exige, entregue, e diga ao usuário o que foi feito, onde está e o que
+  você não conseguiu conferir.
+- **consulta**: você só responde e orienta; não constrói.
+
 ## Fluxo
 
 1. **Leia o que veio na ativação**: o brief do projeto, os recados dos agentes

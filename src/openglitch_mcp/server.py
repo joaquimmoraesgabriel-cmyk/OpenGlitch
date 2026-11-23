@@ -96,12 +96,16 @@ async def get_pipeline(name: str = "") -> str:
 
 @tool("Assume um agente: design, arte-3d, animacao, cinematics, engenharia, audio, apoio ou "
       "leitor. Devolve o `session`, a skill do agente, os subagentes com as referências, o "
-      "brief e os recados do projeto e o estado da memória. `mode`: \"projeto\" para construir "
-      "(exige `project`; projeto novo só nasce com o agente design) ou \"consulta\" para só "
-      "responder dúvidas. `takeover=true` assume um projeto preso por uma sessão abandonada.")
+      "brief e os recados do projeto e o estado da memória. `mode`: \"projeto\" constrói num "
+      "jogo registrado (exige `project`; o projeto nasce com o agente design); \"avulso\" "
+      "constrói uma tarefa solta, sem projeto nem brief (um asset, uma animação, um script); "
+      "\"consulta\" só responde dúvidas. `existing=true`, com o agente design num projeto "
+      "novo, registra um jogo que já existe por uma entrada rápida, sem a entrevista "
+      "completa. `takeover=true` assume um projeto preso por uma sessão abandonada.")
 async def activate_agent(agent: str, project: str = "", mode: str = "projeto",
-                         takeover: bool = False) -> str:
-    return await _run("activate_agent", agent=agent, project=project, mode=mode, takeover=takeover)
+                         takeover: bool = False, existing: bool = False) -> str:
+    return await _run("activate_agent", agent=agent, project=project, mode=mode,
+                      takeover=takeover, existing=existing)
 
 
 @tool("Encerra o agente ativo e libera o projeto. `summary` é o recado para os próximos "

@@ -237,10 +237,13 @@ class App:
     # ================================================================ agentes
 
     def activate_agent(self, agent: str, project: str = "", mode: str = "projeto",
-                       takeover: bool = False) -> str:
+                       takeover: bool = False, existing: bool = False) -> str:
         spec = self.registry.agent(agent.strip())
-        if mode not in ("projeto", "consulta"):
-            raise OGError("`mode` é \"projeto\" (constrói num projeto) ou \"consulta\" (só responde).")
+        if mode not in ("projeto", "avulso", "consulta"):
+            raise OGError(
+                "`mode` é \"projeto\" (constrói num projeto, com brief), \"avulso\" (constrói "
+                "uma tarefa solta, sem projeto) ou \"consulta\" (só responde)."
+            )
         token = "ss_" + secrets.token_urlsafe(18)
         notes: list[str] = []
         slug: str | None = None
@@ -249,13 +252,14 @@ class App:
             if spec.kind == "reader":
                 slug = self._require_project(project)["slug"] if project.strip() else None
                 mode = "leitura"
-            elif mode == "consulta":
+            elif mode in ("consulta", "avulso"):
                 slug = None
             else:
                 if not project.strip():
                     raise OGError(
-                        "Para trabalhar é preciso dizer o projeto. Para só responder uma dúvida, "
-                        "sem construir, use mode=\"consulta\"."
+                        "Para trabalhar num jogo é preciso dizer o projeto. Para uma tarefa solta "
+                        "(um asset, uma animação, um script) use mode=\"avulso\"; para só responder "
+                        "uma dúvida, mode=\"consulta\"."
                     )
                 slug = slugify(project)
                 p = self._project(slug)
@@ -263,11 +267,21 @@ class App:
                     if not spec.mandatory_first:
                         raise OGError(
                             f"O projeto `{project}` ainda não existe. Todo projeto começa pelo agente "
-                            f"`design`, que entende o jogo com o usuário e publica o brief. Ative "
-                            f"primeiro: activate_agent(agent=\"design\", project=\"{project}\")."
+                            f"`design`, que publica o brief. Jogo novo: activate_agent(agent=\"design\", "
+                            f"project=\"{project}\"). Jogo que já existe: o mesmo, com existing=true, "
+                            "para uma entrada rápida sem entrevista. Tarefa solta, sem projeto: "
+                            f"activate_agent(agent=\"{spec.id}\", mode=\"avulso\")."
                         )
                     p = self._new_project(project)
-                    notes.append("Projeto novo: comece pela entrevista com o usuário e publique o brief.")
+                    if existing:
+                        notes.append(
+                            "ENTRADA RÁPIDA: o jogo já existe. Não faça a entrevista completa. Siga "
+                            "a seção \"Projeto que já existe\" da sua skill: leia a pasta do projeto, "
+                            "escreva um brief curto com o que encontrou, confirme com o usuário em "
+                            "poucas perguntas e publique."
+                        )
+                    else:
+                        notes.append("Projeto novo: comece pela entrevista com o usuário e publique o brief.")
                 if not p["brief"]["version"] and not spec.mandatory_first:
                     raise OGError(
                         f"O projeto `{slug}` ainda não tem brief. O agente `design` precisa "
@@ -311,6 +325,15 @@ class App:
                f"session: `{session['token']}`",
                f"modo: {session['mode']}" + (f", projeto: `{slug}`" if slug else "")]
         out += [f"- {n}" for n in notes]
+        if session["mode"] == "avulso":
+            out.append(
+                "- Modo avulso: construa a tarefa que o usuário pediu, sem projeto e sem brief. "
+                "Pergunte só o que a tarefa exige (engine, versão, estilo, formato de arquivo, onde "
+                "salvar). Você pode consultar a memória de pesquisa e delegar; não há memória de "
+                "trabalho. Como você não conhece o jogo, o resultado pode não combinar com o resto "
+                "dele: avise disso ao entregar. Se perceber que há um jogo por trás e que virão "
+                "mais tarefas, sugira registrar o projeto pela entrada rápida do design."
+            )
         if session["mode"] == "consulta":
             out.append(
                 "- Modo consulta: responda e oriente. Não há projeto, então não há brief nem "
@@ -413,7 +436,7 @@ class App:
                 "mudar, diga isso em next_steps ao encerrar com finish_agent."
             )
         if sess["mode"] != "projeto":
-            raise OGError("No modo consulta não há projeto para receber brief.")
+            raise OGError("Sem projeto não há onde publicar brief (modos avulso e consulta).")
         if len(content.strip()) < 200:
             raise OGError("Brief curto demais para orientar os outros agentes. Siga a estrutura da skill.")
         with file_lock(self.state_dir / ".lock"):
@@ -469,7 +492,10 @@ class App:
         agent = self.registry.agent(sess["agent"])
         if for_write:
             if not sess["project"]:
-                raise OGError("No modo consulta não há memória de trabalho para escrever.")
+                raise OGError(
+                    "Sem projeto não há memória de trabalho para escrever (modos avulso e "
+                    "consulta). Diga ao usuário o que foi feito e onde está."
+                )
             return "agent", [self.memory.work(agent.id, sess["project"])], sess
         parts = [self.memory.research(agent.id, s) for s in agent.subagents]
         if sess["project"]:

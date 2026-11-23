@@ -34,8 +34,13 @@ usuário ──> IA ──start──> roteador: analisa o pedido e escolhe o ag
 
 - **Agente constrói, subagente pesquisa.** O agente não abre as referências; o
   subagente não constrói, não escreve código e não fala com o usuário.
-- **Todo projeto começa pelo Design**, que conversa com você até entender o jogo
-  e publica o brief. Sem brief o servidor não ativa nenhum outro agente.
+- **Três jeitos de usar**, conforme o que você tem:
+  - *Jogo novo*: o Design conversa com você até entender o jogo e publica o
+    brief. É obrigatório, porque todas as áreas trabalham a partir dele.
+  - *Jogo que já existe*: o Design lê a pasta do projeto, escreve um brief
+    curto com o que encontrou e confirma em poucas perguntas. Sem entrevista.
+  - *Tarefa solta* (um objeto, uma animação, um shader, um script): o agente da
+    área trabalha direto, sem Design e sem brief.
 - **Um agente por vez** em cada projeto. Os subagentes dele podem pesquisar ao
   mesmo tempo que ele trabalha.
 - **Na segunda vez não se pesquisa de novo**: o agente olha a memória antes de
@@ -230,6 +235,11 @@ fazer e o da ferramenta para executar lá dentro.
 - "Usa o OpenGlitch: como está o projeto?" A IA assume o `leitor`.
 - "Usa o OpenGlitch: quero o primeiro personagem jogável." A IA monta a
   sequência do pipeline de personagem e segue um agente de cada vez.
+- "Usa o OpenGlitch: já tenho um jogo na Unity nesta pasta e quero continuar.
+  Preciso de um sistema de inventário." A IA faz a entrada rápida e passa para
+  a engenharia.
+- "Usa o OpenGlitch: só quero um ciclo de caminhada para este personagem no
+  Blender." A IA assume a animação em modo avulso.
 - "Usa o OpenGlitch, agente de engenharia em modo consulta: qual a diferença
   entre state machine e behavior tree?"
 
