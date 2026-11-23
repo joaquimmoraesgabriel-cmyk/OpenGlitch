@@ -14,6 +14,7 @@ Permissões de memória (aplicadas aqui, não pela boa vontade da IA):
 
 from __future__ import annotations
 
+import re
 import secrets
 from contextlib import contextmanager
 from pathlib import Path
@@ -35,8 +36,11 @@ TEXT_PART = 12_000
 
 
 class App:
-    def __init__(self, root: Path, data_dir: Path | None = None):
+    def __init__(self, root: Path, data_dir: Path | None = None, strict_method: bool = True):
         self.root = Path(root)
+        # Com strict_method, um agente que constrói não encerra sem ter lido o ciclo de
+        # conferência do método (ou sem justificar).
+        self.strict_method = strict_method
         data = Path(data_dir) if data_dir else self.root
         self.memory_dir = data / "memory"
         self.state_dir = data / "state"
@@ -209,7 +213,10 @@ class App:
                 lines.append(
                     f"Método: {m['decompositions']} decomposição(ões) registrada(s), "
                     f"{m['research']} pesquisa(s) delegada(s), seções lidas: "
-                    + (", ".join(m["read"]) or "nenhuma") + ".")
+                    + (", ".join(m["read"]) or "nenhuma") + "."
+                    + (f" Ambiente declarado: {m['environment'][0]}" if m.get("environment") else "")
+                    + (f" Encerrou sem conferência: {m['skipped_check']}"
+                       if m.get("skipped_check") else ""))
         reported = [x for x in self._problems() if x.get("project") == p["slug"]]
         if reported:
             lines += ["", f"## Problemas relatados: {len(reported)}",
@@ -397,9 +404,23 @@ class App:
         return "\n".join(out)
 
     def finish_agent(self, session: str, summary: str, next_steps: str = "",
-                     verified: str = "", not_verified: str = "") -> str:
+                     verified: str = "", not_verified: str = "",
+                     skip_check_reason: str = "") -> str:
         with self._tx() as state:
             sess = self._session(session, state)
+            builds = (sess["role"] == "agent" and sess["mode"] == "projeto"
+                      and not self.registry.agent(sess["agent"]).mandatory_first)
+            if (self.strict_method and builds
+                    and "ciclo-de-conferencia" not in sess.get("method_read", [])
+                    and len(skip_check_reason.strip()) < 20):
+                raise OGError(
+                    "Você ainda não passou pelo ciclo de conferência do seu método. Leia com "
+                    "agent_method(session, \"ciclo-de-conferencia\"), confira o que construiu "
+                    "(capturas, medições, execução) e só então encerre, dizendo em `verified` o "
+                    "que conferiu. Se nesta ativação não houve nada a conferir (só planejamento ou "
+                    "documento, por exemplo), encerre com skip_check_reason explicando por quê; "
+                    "isso fica no histórico do projeto."
+                )
             if sess["role"] == "agent" and sess["mode"] == "projeto" and not summary.strip():
                 raise OGError("Diga em `summary` o que foi feito: é o recado para o próximo agente.")
             sess["active"] = False
@@ -414,6 +435,9 @@ class App:
             usage = None
             if sess["role"] == "agent" and sess["mode"] in ("projeto", "avulso"):
                 usage = {
+                    "skipped_check": skip_check_reason.strip()[:400],
+                    "environment": [d.get("environment", "") for d in sess.get("decompositions", [])
+                                    if d.get("environment")][-1:],
                     "read": sess.get("method_read", []),
                     "decompositions": len(sess.get("decompositions", [])),
                     "research": sum(1 for t in state["tasks"].values()
@@ -427,7 +451,9 @@ class App:
                 if "decomposicao" not in usage["read"]:
                     gaps.append("não leu a seção `decomposicao` do método")
                 if "ciclo-de-conferencia" not in usage["read"]:
-                    gaps.append("não leu a seção `ciclo-de-conferencia`")
+                    gaps.append("encerrou sem o ciclo de conferência"
+                                + (f" (motivo dado: {usage['skipped_check']})"
+                                   if usage["skipped_check"] else ""))
                 if not usage["research"]:
                     gaps.append("não delegou nenhuma pesquisa")
                 if gaps:
@@ -522,7 +548,8 @@ class App:
                     "você delegou; isso aparece no histórico do projeto."]
         return out
 
-    def register_decomposition(self, session: str, subject: str, content: str) -> str:
+    def register_decomposition(self, session: str, subject: str, content: str,
+                               environment: str = "") -> str:
         """O agente registra a decomposição do trabalho antes de construir."""
         if len(subject.strip()) < 3:
             raise OGError("Diga em `subject` o que está sendo decomposto (ex.: \"casa de toras\").")
@@ -532,8 +559,19 @@ class App:
                 "por dimensão, marcando o que você já sabe, o que vai pesquisar (e com qual "
                 "subagente) e o que precisa perguntar ao usuário."
             )
+        if len(environment.strip()) < 30:
+            raise OGError(
+                "Diga em `environment` com que ferramentas você vai trabalhar, depois de "
+                "verificar o que o seu cliente tem conectado: há uma ferramenta que executa "
+                "código e captura a tela num programa aberto (o servidor MCP do Blender, por "
+                "exemplo)? Há uma que controla o editor da engine (Unity CLI, servidor MCP da "
+                "Unity)? Para cada programa que o trabalho usa, escreva se vai trabalhar na "
+                "cena aberta ou por script em segundo plano, e por quê. Havendo ferramenta ao "
+                "vivo, o método manda preferi-la (seção `ambiente-ao-vivo`)."
+            )
         sess = self._worker_session(session)
         ref = None
+        content = content.strip() + "\n\nAmbiente de trabalho: " + environment.strip()
         if sess["project"]:
             part = self.memory.work(sess["agent"], sess["project"])
             ref = part.write("add", title=f"Decomposição: {subject.strip()}"[:140],
@@ -542,9 +580,15 @@ class App:
                              by=f"{sess['agent']} (agente)")["ref"]
         with self._tx() as state:
             state["sessions"][sess["token"]].setdefault("decompositions", []).append(
-                {"subject": subject.strip()[:140], "at": now_iso(), "ref": ref})
+                {"subject": subject.strip()[:140], "at": now_iso(), "ref": ref,
+                 "environment": environment.strip()[:500]})
         where = f" e gravada em `{ref}`" if ref else ""
-        return (f"Decomposição registrada{where}. Agora mostre-a ao usuário em poucas linhas (o "
+        live = ""
+        if re.search(r"segundo plano|background|sem ferramenta|n[aã]o h[aá]", environment, re.I):
+            live = (" Você declarou trabalho por script em segundo plano: se existe uma "
+                    "ferramenta que executa código no programa aberto e você não vai usá-la, "
+                    "diga ao usuário por quê.")
+        return (f"Decomposição registrada{where}.{live} Agora mostre-a ao usuário em poucas linhas (o "
                 "que você vai pesquisar e o que precisa que ele decida), delegue as pesquisas das "
                 "lacunas e só então construa.")
 

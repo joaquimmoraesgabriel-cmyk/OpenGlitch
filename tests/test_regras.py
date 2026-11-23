@@ -312,7 +312,7 @@ def test_documentos_locais(tmp_path, helpers):
     docs = root / "agents" / "animacao" / "subagents" / "rigger" / "docs"
     (docs / "img").mkdir(parents=True, exist_ok=True)
     (docs / "pesos-do-ombro.md").write_text(DOC, encoding="utf-8")
-    app = App(root, tmp_path / "dados")
+    app = App(root, tmp_path / "dados", strict_method=False)
     assert validate(app) == []
     design = helpers.session_of(app.activate_agent("design", "Docs"))
     app.publish_project_brief(design, helpers.brief)
@@ -344,7 +344,7 @@ def test_validador_recusa_documento_fora_das_regras(tmp_path):
     (docs / "copia.md").write_text(DOC.replace("fonte: https://docs.blender.org/manual/en/latest/\n", ""), encoding="utf-8")
     (docs / "modelo.blend").write_bytes(b"x")
     (docs / "img" / "grande.png").write_bytes(b"0" * (1024 * 1024 + 1))
-    found = "\n".join(validate(App(root, tmp_path / "dados")))
+    found = "\n".join(validate(App(root, tmp_path / "dados", strict_method=False)))
     for expected in ("cabeçalho sem `title`", "seções `##`", "nome em minúsculas",
                      "precisa de `fonte`", "só arquivos .md", "mais de 1 MB"):
         assert expected in found, expected
@@ -404,6 +404,7 @@ def test_metodo_de_qualidade(app, project, helpers):
 
 
 DECOMP = "Função no jogo: cenário principal, visto de perto. " * 10
+AMB = "Blender aberto pelo servidor MCP: rodo o script na cena aberta. Unity: editor aberto pelo CLI."
 
 
 def test_licoes_valem_entre_projetos(app, helpers):
@@ -454,8 +455,10 @@ def test_servidor_anota_o_uso_do_metodo(app, project, helpers):
 
     arte = helpers.session_of(app.activate_agent("arte-3d", project))
     with pytest.raises(OGError, match="curta demais"):
-        app.register_decomposition(arte, "casa de toras", "Função: cenário.")
-    reg = app.register_decomposition(arte, "casa de toras", DECOMP)
+        app.register_decomposition(arte, "casa de toras", "Função: cenário.", AMB)
+    with pytest.raises(OGError, match="environment"):
+        app.register_decomposition(arte, "casa de toras", DECOMP)
+    reg = app.register_decomposition(arte, "casa de toras", DECOMP, AMB)
     assert "arte-3d/work#0001" in reg and "mostre-a ao usuário" in reg
     assert "Decomposição: casa de toras" in app.memory_tree(arte, scope="work")
     app.agent_method(arte, "decomposicao")
@@ -466,3 +469,30 @@ def test_servidor_anota_o_uso_do_metodo(app, project, helpers):
     status = app.project_status(project)
     assert "1 decomposição(ões) registrada(s), 1 pesquisa(s) delegada(s)" in status
     assert "decomposicao, ciclo-de-conferencia" in status
+    assert "Ambiente declarado: Blender aberto pelo servidor MCP" in status
+
+
+def test_trava_do_ciclo_de_conferencia(tmp_path, helpers):
+    from conftest import ROOT
+    from openglitch_mcp.core import App
+    app = App(ROOT, tmp_path)  # como o servidor roda de verdade
+    design = helpers.session_of(app.activate_agent("design", "Trava"))
+    app.publish_project_brief(design, helpers.brief)
+    app.finish_agent(design, "Brief.", verified="brief publicado")  # o design não é travado
+
+    arte = helpers.session_of(app.activate_agent("arte-3d", "Trava"))
+    with pytest.raises(OGError, match="ciclo de conferência"):
+        app.finish_agent(arte, "Casa feita.", verified="renders")
+    with pytest.raises(OGError, match="ciclo de conferência"):
+        app.finish_agent(arte, "Casa feita.", skip_check_reason="curto")
+    app.agent_method(arte, "ciclo-de-conferencia")
+    assert "encerrado" in app.finish_agent(arte, "Casa feita.", verified="renders")
+
+    eng = helpers.session_of(app.activate_agent("engenharia", "Trava"))
+    done = app.finish_agent(eng, "Só planejei a arquitetura.",
+                            skip_check_reason="Nesta ativação só escrevi o plano; nada foi construído.")
+    assert "encerrou sem o ciclo de conferência (motivo dado: Nesta ativação" in done
+    assert "Encerrou sem conferência: Nesta ativação só escrevi o plano" in app.project_status("Trava")
+    # Modo avulso não é travado.
+    solto = helpers.session_of(app.activate_agent("arte-3d", mode="avulso"))
+    assert "encerrado" in app.finish_agent(solto, "")

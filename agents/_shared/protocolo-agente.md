@@ -50,12 +50,18 @@ Cada agente tem um método próprio (`agent_method`), entregue em resumo na
 ativação. Ele vem antes do fluxo abaixo e o atravessa:
 
 - **Antes de construir**: leia `decomposicao` e `pesquisa-obrigatoria`,
-  escreva a decomposição do trabalho e registre com `register_decomposition`.
+  escreva a decomposição do trabalho e registre com `register_decomposition`,
+  declarando em `environment` com que ferramentas vai trabalhar (cena aberta
+  ou script em segundo plano, para cada programa).
   Para cada dimensão diga o que você já sabe, o que vai pesquisar e com qual
   subagente, e o que o usuário precisa decidir. Mostre ao usuário e delegue as
   pesquisas das lacunas. Você não sabe o que não sabe até decompor.
 - **Enquanto constrói**: confira contra os sinais de trabalho genérico.
 - **Antes de entregar**: rode o ciclo de conferência e os critérios de pronto.
+  O servidor não deixa um agente que constrói encerrar sem ter lido o ciclo de
+  conferência. Se o seu trabalho passa para outro agente antes de chegar ao
+  destino (o modelo que ainda vai para a engine), confira o que é seu até onde
+  dá e diga em `not_verified` o que o próximo precisa conferir.
 
 No modo projeto o método é obrigatório, e o servidor anota no histórico do
 projeto as seções que você leu, se registrou a decomposição e quantas

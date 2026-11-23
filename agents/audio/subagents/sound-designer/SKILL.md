@@ -21,6 +21,8 @@ monta a lista de sons.
 - Gravação caseira (até com celular) e edição (Audacity, Reaper).
 - Bancos de som gratuitos e as regras de licença de cada um.
 - Como diretores de som de jogos grandes organizam e priorizam o áudio.
+- Síntese de som por código (ruído filtrado, bolhas, grãos), para ambiente de
+  vento, vegetação e água quando não há gravação ou quando o som reage ao jogo.
 
 ## Como pesquisar
 
@@ -35,6 +37,12 @@ monta a lista de sons.
   (Star Wars Battlefront), publicada no Designing Sound. Procure pelo nome.
 - **Som pronto**: *Freesound* e o pacote anual gratuito da Sonniss. Para
   qualquer som citado, traga a licença: no Freesound ela varia por som.
+
+- **Som sintetizado por código**: veja primeiro o documento local sobre
+  ambiente de vento e água (`local_docs`). Para a técnica por trás, os livros
+  online de Julius O. Smith (filtros e modelo físico) e de Miller Puckette
+  (envelopes, ruído, granulação). São textos densos: procure o capítulo pelo
+  índice e traga só a técnica e os valores que a tarefa pede.
 
 Quando a tarefa pedir um som de um tipo, traga o que as fontes dizem sobre as
 camadas, o que cada uma contribui e quantas variações usar. Valores sem fonte

@@ -119,19 +119,27 @@ async def agent_method(session: str, section: str = "") -> str:
 @tool("Agente registra a decomposição do trabalho ANTES de construir: uma linha por dimensão "
       "do método (seção `decomposicao`), dizendo o que já sabe, o que vai pesquisar e com qual "
       "subagente, e o que precisa perguntar ao usuário. Fica gravada na memória de trabalho e "
-      "no histórico do projeto. Depois de registrar, mostre-a ao usuário.")
-async def register_decomposition(session: str, subject: str, content: str) -> str:
-    return await _run("register_decomposition", session=session, subject=subject, content=content)
+      "no histórico do projeto. `environment` (obrigatório): com que ferramentas você vai "
+      "trabalhar, depois de verificar o que está conectado. Para cada programa (Blender, "
+      "engine), diga se vai trabalhar na cena aberta, por uma ferramenta ao vivo, ou por "
+      "script em segundo plano, e por quê. Depois de registrar, mostre-a ao usuário.")
+async def register_decomposition(session: str, subject: str, content: str,
+                                 environment: str = "") -> str:
+    return await _run("register_decomposition", session=session, subject=subject,
+                      content=content, environment=environment)
 
 
 @tool("Encerra o agente ativo e libera o projeto. `summary` é o recado para os próximos "
       "agentes (o que foi feito, onde está); `next_steps` é o que falta e para quem; "
       "`verified` é o que você conferiu funcionando (rodou, abriu, testou); `not_verified` é "
-      "o que foi feito mas não deu para conferir.")
+      "o que foi feito mas não deu para conferir. Um agente que constrói só encerra depois de "
+      "ler o ciclo de conferência do método; `skip_check_reason` explica por que não havia o "
+      "que conferir, quando for o caso.")
 async def finish_agent(session: str, summary: str, next_steps: str = "", verified: str = "",
-                       not_verified: str = "") -> str:
+                       not_verified: str = "", skip_check_reason: str = "") -> str:
     return await _run("finish_agent", session=session, summary=summary, next_steps=next_steps,
-                      verified=verified, not_verified=not_verified)
+                      verified=verified, not_verified=not_verified,
+                      skip_check_reason=skip_check_reason)
 
 
 @tool("Agente ou subagente registra algo que NÃO deu certo: não conseguiu fazer, deu erro, ou "

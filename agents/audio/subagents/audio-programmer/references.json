@@ -44,6 +44,28 @@
       "pesquisavel": true,
       "uso": "Onde começar a aprender FMOD e Wwise e como comparar os dois.",
       "nota": "É de 2015. O guia diz que a lógica vale; versões e telas das ferramentas mudaram."
+    },
+    {
+      "id": "unity-audio-manual",
+      "title": "Unity Manual: Audio",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/Manual/Audio.html",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Áudio nativo da Unity: AudioSource, atenuação 3D, mixer, filtros, formatos de compressão e de carregamento. Use quando o projeto não tem middleware.",
+      "nota": "Não vem do guia original. Acrescentada depois de um teste que usou só o áudio nativo."
+    },
+    {
+      "id": "unity-onaudiofilterread",
+      "title": "Unity Scripting API: MonoBehaviour.OnAudioFilterRead",
+      "author": "Unity",
+      "type": "documentacao",
+      "url": "https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnAudioFilterRead.html",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Como gerar ou processar áudio por código em tempo real na Unity.",
+      "nota": "Não vem do guia original."
     }
   ]
 }

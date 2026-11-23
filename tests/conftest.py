@@ -12,7 +12,7 @@ BRIEF = "# Jogo de teste\n\n## Visão\n" + "Um jogo de ação em terceira pessoa
 
 @pytest.fixture
 def app(tmp_path):
-    return App(ROOT, tmp_path)
+    return App(ROOT, tmp_path, strict_method=False)
 
 
 def session_of(text: str) -> str:

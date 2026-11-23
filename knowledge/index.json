@@ -2660,7 +2660,7 @@
             {
               "id": "audio/sound-designer#referencias",
               "title": "Referências",
-              "summary": "5 fontes que o subagente sound-designer usa para pesquisar.",
+              "summary": "8 fontes que o subagente sound-designer usa para pesquisar.",
               "kind": "section",
               "source": "agents/audio/subagents/sound-designer/references.json"
             }
@@ -2813,7 +2813,7 @@
             {
               "id": "audio/audio-programmer#referencias",
               "title": "Referências",
-              "summary": "5 fontes que o subagente audio-programmer usa para pesquisar.",
+              "summary": "7 fontes que o subagente audio-programmer usa para pesquisar.",
               "kind": "section",
               "source": "agents/audio/subagents/audio-programmer/references.json"
             }

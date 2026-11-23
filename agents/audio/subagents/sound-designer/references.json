@@ -45,6 +45,39 @@
       "pesquisavel": true,
       "uso": "Pacote de efeitos profissionais liberado de graça na época da GDC. Serve para ter uma biblioteca grande de base.",
       "nota": "O guia cita o pacote sem link; este é o endereço da página do pacote. Leia os termos de licença de cada edição antes de usar."
+    },
+    {
+      "id": "jos-physical-audio",
+      "title": "Physical Audio Signal Processing",
+      "author": "Julius O. Smith III",
+      "type": "livro-online",
+      "url": "https://ccrma.stanford.edu/~jos/pasp/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Livro online sobre síntese por modelo físico: ruído filtrado, ressonadores, cordas e tubos. Use para saber como construir um som por código quando não há gravação.",
+      "nota": "Não vem do guia original. Acrescentada depois de um teste em que nenhuma referência cobria síntese de som. É texto técnico e denso: abra o índice com include_links."
+    },
+    {
+      "id": "jos-filters",
+      "title": "Introduction to Digital Filters",
+      "author": "Julius O. Smith III",
+      "type": "livro-online",
+      "url": "https://ccrma.stanford.edu/~jos/filters/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Filtros digitais: passa-baixa, passa-banda, ressonância. Use para definir as faixas de frequência de cada camada de um som sintetizado.",
+      "nota": "Não vem do guia original."
+    },
+    {
+      "id": "puckette-electronic-music",
+      "title": "The Theory and Technique of Electronic Music",
+      "author": "Miller Puckette",
+      "type": "livro-online",
+      "url": "http://msp.ucsd.edu/techniques/latest/book-html/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Livro online sobre síntese: osciladores, envelopes, ruído, modulação, granulação. Use para técnicas de variação e de textura sonora.",
+      "nota": "Não vem do guia original. O site só responde em http."
     }
   ]
 }
