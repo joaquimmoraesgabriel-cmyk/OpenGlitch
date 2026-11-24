@@ -289,9 +289,10 @@ personagem em vez de só usar clipes prontos ou animar por script.
   clipes seus. Leia as [licenças](https://github.com/NVlabs/motionbricks#license).
 
 Estado atual: testado numa máquina, uma RTX 4050 de notebook com 6 GB, no
-Windows. O teste gera uma caminhada de 3,2 s, grava o BVH e converte para FBX
-no Blender. Ainda não foram testados um plano com posições e giros próprios,
-a importação na Unity e outros sistemas. Rode o teste que o instalador mostra
+Windows. O teste gera uma caminhada de 3,2 s, grava o BVH, converte para FBX
+no Blender e a Unity 6 importa como Humanoid válido. Ainda não foram testados
+um plano com posições e giros próprios, o retargeting para outro personagem e
+outros sistemas. Rode o teste que o instalador mostra
 e, se falhar, abra uma issue com o erro. Os arquivos ficam em
 `extras/motionbricks/`.
 

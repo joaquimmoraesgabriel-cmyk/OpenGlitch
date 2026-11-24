@@ -1265,8 +1265,9 @@ class App:
             "- A saída é no esqueleto SOMA; outro personagem precisa de retargeting (Humanoid na Unity).",
             "- Os clipes de exemplo têm licença só de avaliação interna: animação feita a partir "
             "deles não entra em jogo publicado. Para produção, use clipes do usuário (--clipes).",
-            "- O teste do gerador foi validado numa máquina (RTX 4050, Windows). Plano com "
-            "posições e giros próprios e a importação na Unity ainda não foram testados: se "
+            "- O teste foi validado numa máquina (RTX 4050, Windows) até a importação Humanoid "
+            "na Unity. Plano com posições e giros próprios e o retargeting para outro "
+            "personagem ainda não foram testados: se "
             "algo falhar, registre com report_problem e mostre o erro ao usuário.",
             "",
             "Leia o método completo: local_doc_read(token, \"animation-td/motionbricks-gerar-animacao\").",

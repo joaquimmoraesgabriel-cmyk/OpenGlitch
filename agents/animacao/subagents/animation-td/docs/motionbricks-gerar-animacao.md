@@ -4,7 +4,7 @@ summary: O que o MotionBricks faz e não faz, como planejar poses de destino, o 
 tipo: referencia
 fonte: https://github.com/NVlabs/motionbricks
 autor: openglitch
-testado_em: MotionBricks de novembro de 2026, RTX 4050 de notebook (6 GB), Windows, Blender 5.3
+testado_em: MotionBricks de novembro de 2026, RTX 4050 de notebook (6 GB), Windows, Blender 5.3, Unity 6000.6.10f1
 ---
 
 O MotionBricks é um modelo da NVIDIA que gera o movimento entre poses. No
@@ -14,9 +14,10 @@ OpenGlitch ele é um componente opcional: só existe se a pessoa instalou com
 
 O que está aqui vem da documentação oficial. O teste do gerador foi executado
 numa máquina: uma caminhada de 3,2 s em duas gerações encadeadas, gravada em
-BVH e convertida para FBX, com o esqueleto em pé, os pés no chão e o contato
-dos pés alternando. Um plano com posições e giros próprios e a importação na
-Unity ainda não foram testados. Rode o teste primeiro.
+BVH, convertida para FBX e importada na Unity como Humanoid, com o esqueleto
+em pé, os pés no chão e o contato dos pés alternando. Um plano com posições e
+giros próprios e o retargeting para outro personagem ainda não foram testados.
+Rode o teste primeiro.
 
 ## O que ele é e o que não é
 
@@ -75,8 +76,16 @@ O formato do plano está no cabeçalho de `extras/motionbricks/gerar.py`.
 4. **Aplicar** no personagem: o retargeting Humanoid da Unity leva a animação
    do esqueleto SOMA para o avatar do personagem.
 
-Os passos 3 e 4 não foram testados pelo autor. Um personagem com outro
-esqueleto sempre precisa de retargeting, como a documentação do modelo diz.
+O passo 3 foi testado na Unity 6000.6: com `animationType = Human` e o avatar
+criado a partir do próprio modelo, o avatar saiu válido, com 55 ossos humanoides
+mapeados sem ajuste manual, e o clipe com movimento humano e a duração certa. As
+posições do quadril, da cabeça e dos pés bateram com o relatório do gerador (o
+eixo X vem espelhado, pela troca de mão entre o Blender e a Unity). O passo 4,
+aplicar num personagem com outro esqueleto, não foi testado.
+
+No mapeamento automático, a coxa do SOMA (`LeftLeg`) vira `LeftUpperLeg` e a
+coluna usa `Spine1`. Confira o mapa na configuração do avatar se o personagem
+de destino ficar com a perna ou a coluna torta.
 
 ## Contato dos pés
 

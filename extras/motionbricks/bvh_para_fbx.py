@@ -12,6 +12,7 @@ conferir que a conversão não deitou nem escalou o esqueleto.
 """
 
 import json
+import os
 import sys
 
 import bpy
@@ -36,6 +37,10 @@ def main() -> None:
     armature.name = "SOMA"
     scene = bpy.context.scene
     # A duração da cena nem sempre acompanha o clipe importado: use a da própria animação.
+    # O nome da ação vira o nome do clipe na engine; sem isso ele chega como "Scene".
+    clip_name = os.path.splitext(os.path.basename(target))[0]
+    armature.animation_data.action.name = clip_name
+    scene.name = clip_name
     start, end = armature.animation_data.action.frame_range
     scene.frame_start, scene.frame_end = int(round(start)), int(round(end))
 
