@@ -15,8 +15,8 @@ caminhos desta máquina.
 
 Testado numa máquina: geração a partir de poses próprias, ciclos em loop,
 BVH, conversão para FBX, importação Humanoid na Unity e um personagem com
-malha (X Bot do Mixamo) andando para a frente e para trás. Não testado:
-movimentos difíceis (golpe, salto, queda) e o andar de lado num personagem.
+malha (X Bot do Mixamo) andando para a frente, para trás e de lado. Não
+testado: movimentos difíceis (golpe, salto, queda).
 
 ## O que ele é e o que não é
 
@@ -205,7 +205,11 @@ por apoio e o de trás cerca de 8 cm. O plano é o `AndarLado`.
   devagar.
 - **Para o outro lado, espelhe o clipe** na importação Humanoid.
 - Passo cruzado, agachado e três poses por ciclo não melhoraram o pé de trás.
-- Não foi conferido num personagem com malha.
+- Conferido num personagem com malha (X Bot) na Unity 6: o clipe importou a
+  1,2 m/s em linha reta, o espelhado serviu para a direita, e numa blend tree
+  2D com parado, frente, trás, esquerda e direita o personagem andou de lado e
+  na diagonal. Conferido por posição e por captura de tela, não assistindo: o
+  pé de trás que deriva pode aparecer como um leve deslize.
 
 ## Contato dos pés
 

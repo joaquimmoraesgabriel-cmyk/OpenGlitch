@@ -1,5 +1,5 @@
 {
- "_descricao": "Passo lateral para a esquerda em loop, olhando para a frente, cerca de 1,2 m/s. Duas poses por ciclo: 'abre' (pé esquerdo no ar abrindo, direito de apoio) e 'fecha' (esquerdo plantado, direito no ar fechando). Só funciona como passo apressado: abaixo de cerca de 1 m/s o modelo arrasta o pé de trás em vez de dar o passo. Para um andar de lado mais lento, toque este clipe em velocidade menor na engine; para a direita, espelhe o clipe. O pé de trás ainda deriva cerca de 8 cm por passo. Testado numa RTX 4050; não conferido num personagem com malha.",
+ "_descricao": "Passo lateral para a esquerda em loop, olhando para a frente, cerca de 1,2 m/s. Duas poses por ciclo: 'abre' (pé esquerdo no ar abrindo, direito de apoio) e 'fecha' (esquerdo plantado, direito no ar fechando). Só funciona como passo apressado: abaixo de cerca de 1 m/s o modelo arrasta o pé de trás em vez de dar o passo. Para um andar de lado mais lento, toque este clipe em velocidade menor na engine; para a direita, espelhe o clipe. O pé de trás ainda deriva cerca de 8 cm por passo. Testado numa RTX 4050 e conferido num personagem com malha na Unity 6.",
  "transicao_antecipada": 5,
  "periodo": 26,
  "ignorar_geracoes": 3,

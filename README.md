@@ -299,7 +299,7 @@ Estado atual: testado numa máquina, uma RTX 4050 de notebook com 6 GB, no
 Windows. Com poses próprias, gerou agachar, levantar e erguer os braços, e
 ciclos em loop de parado, andar para a frente e andar para trás, que foram
 conferidos num personagem Humanoid com malha na Unity 6. Andar de lado só sai
-como passo apressado. Ainda não foram testados movimentos difíceis (golpe,
+como passo apressado, também conferido no personagem. Ainda não foram testados movimentos difíceis (golpe,
 salto, queda) e outros sistemas. Há planos de exemplo em
 `extras/motionbricks/planos/`. Rode o teste que o instalador mostra
 e, se falhar, abra uma issue com o erro. Os arquivos ficam em
