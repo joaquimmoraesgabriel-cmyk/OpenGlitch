@@ -13,3 +13,4 @@ __pycache__/
 
 # Imagens de testes manuais
 /teste_*.png
+.trt-cache/

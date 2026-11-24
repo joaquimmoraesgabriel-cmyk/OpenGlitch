@@ -16,7 +16,8 @@ caminhos desta máquina.
 Testado numa máquina: geração a partir de poses próprias, ciclos em loop,
 BVH, conversão para FBX, importação Humanoid na Unity e um personagem com
 malha (X Bot do Mixamo) andando para a frente, para trás e de lado. Não
-testado: movimentos difíceis (golpe, salto, queda).
+testado: movimentos difíceis (golpe, salto, queda). Obstáculos: um caso testado, subir num
+bloco de 0,6 m; veja a seção de obstáculos.
 
 ## O que ele é e o que não é
 
@@ -210,6 +211,66 @@ por apoio e o de trás cerca de 8 cm. O plano é o `AndarLado`.
   2D com parado, frente, trás, esquerda e direita o personagem andou de lado e
   na diagonal. Conferido por posição e por captura de tela, não assistindo: o
   pé de trás que deriva pode aparecer como um leve deslize.
+
+## Obstáculos: subir, pular, apoiar
+
+Testado numa máquina (RTX 4050, Blender 5.3) com um caso: subir andando num bloco de 0,6 m.
+Não testado: parede alta, pular por cima, apoiar as mãos, obstáculo girado.
+
+O modelo **não enxerga a cena**. Ele só vê as poses pedidas, e o corpo passa por onde o
+caminho entre elas for mais natural, inclusive por dentro de uma parede. Não existe
+parâmetro que resolva isso; o que resolve é um ciclo de conferir e corrigir.
+
+O que o modelo consegue quando as poses são boas: a cena de exemplo dele (`teste_cena.py`
+roda sozinha e grava capturas) sobe numa caixa de 0,4 m, salta um muro de 0,8 m apoiando a
+mão e abaixa para passar numa barra. Os Smart Primitives e clipes dessa cena têm licença só
+de avaliação: servem para ver o teto de qualidade, não para um jogo.
+
+### O ciclo
+
+1. **Descreva o obstáculo no plano**, em medida real, em `"obstaculos"` (caixas).
+2. **Monte as poses contando com ele.** `lugar` põe o quadril no ponto da cena, `altura`
+   sobe o quadril, e `alcancar` leva o pé ou a mão ao ponto exato da superfície por IK.
+   O tornozelo do esqueleto fica 7,2 cm acima da sola: pé em cima de um bloco de 0,6 m é
+   `y = 0.672`.
+3. **Confira só as poses**, sem gastar geração: `gerar.py plano.json --so-poses`. Sai um BVH
+   com um quadro por pose, a tira com os obstáculos e se alguma pose já nasce dentro de um.
+4. **Veja no Blender**: `blender -b -P blender_cena.py -- --plano plano.json --bvh x.poses.bvh
+   --saida pasta`. Renderiza cada pose de lado e de quina com o obstáculo e salva o `.blend`.
+   Se ajustar as poses lá (à mão ou com IK), `blender_exportar.py` leva de volta para um
+   plano, com cada pose como posições de juntas.
+5. **Gere** e leia `"obstaculos"` no relatório: penetração máxima, que ossos, que quadros e
+   em que destino. `"passou": false` quer dizer que atravessou mais que a folga (3 cm).
+6. **Corrija só o destino afetado** e gere de novo. Repita até passar.
+7. **Confira a animação no Blender** com o mesmo `blender_cena.py`, agora com o BVH gerado
+   e `--quadros` escolhidos. Número sozinho não mostra pose feia.
+
+### O que corrige cada defeito
+
+No caso do bloco, a primeira geração deixou o pé 30 cm dentro dele. Foram quatro rodadas:
+
+| Defeito no relatório | Causa | Correção |
+| --- | --- | --- |
+| Pé de apoio afunda no obstáculo no meio do trecho | O modelo não sabe que o pé está apoiado e o baixa para o chão | `"fixar": ["LeftFoot"]` no destino: o pé fica parado no mundo e a perna é refeita por IK |
+| Ponta do pé corta a quina ao subir | O arco do pé passa pela quina | Uma pose intermediária com o pé alto, acima e antes da quina |
+| Ponta do pé entra no topo ao descer | O pé aponta para baixo no ar | `"nivelar": ["LeftFoot"]`: o pé se move, mas guarda a orientação do começo do trecho |
+| Salto no fim de um trecho com `fixar` | A pose de destino tem a junta em outro ponto | Ponha a junta fixada no mesmo ponto na pose de destino |
+| Perna de trás roça a face do obstáculo | Pose com o pé ou o quadril perto demais | Afaste o pé e recue o quadril na pose daquele destino |
+
+`fixar` não é remendo: a cena de exemplo do próprio MotionBricks aplica IK nas poses-alvo
+pelo mesmo motivo.
+
+### Limites do que saiu
+
+- **Lento e em degraus.** O plano do bloco tem seis destinos e dura 9 s, porque cada pose
+  de destino é uma parada. Um movimento de jogo precisa de menos paradas; não foi tentado.
+- **A folga de 3 cm é do esqueleto**, que não tem espessura. Com malha, pé e canela podem
+  encostar onde o esqueleto passou. Confira com o personagem.
+- **Só caixas**, com giro em volta do eixo vertical.
+- **A animação vale para aquela altura.** Encaixar num obstáculo de outra altura dentro do
+  jogo (detectar, alinhar, esticar) é trabalho na engine e não existe aqui.
+
+Plano de exemplo: `extras/motionbricks/planos/SubirBloco.json`.
 
 ## Contato dos pés
 

@@ -46,6 +46,24 @@ Um destino também pode vir de um CLIPE BVH no esqueleto SOMA:
 
     {"clipe": "locomotion/idle/idle_loop_001__A268", "tempo": 0.5, "posicao": [0, 2], "giro": 0}
 
+OBSTÁCULOS. O modelo não enxerga a cena: quem pega um corpo atravessando uma parede é a
+conferência depois de gerar. Liste as caixas no plano e o relatório traz, em "obstaculos",
+quanto cada osso entrou em cada uma, em que quadros e em que destino, e a que distância
+mãos e pés ficaram das superfícies no fim de cada destino. A tira desenha as caixas.
+
+    "obstaculos": [{"nome": "bloco", "centro": [0, 0.5, 1.5], "tamanho": [1.2, 1.0, 1.0]}]
+
+Se atravessou, acrescente uma pose intermediária no destino afetado e gere de novo.
+
+APOIOS. Num destino, "fixar": ["LeftFoot"] segura o pé (ou a mão) parado no mundo durante
+aquele trecho, onde estava no começo dele, refazendo a perna por IK em cada quadro. Use para
+o pé ou a mão que está apoiado num obstáculo enquanto o corpo se move: o modelo não sabe do
+apoio e costuma baixar o pé para o chão. O relatório diz, em "fixado", quanto faltou para a
+perna alcançar. A pose de destino deve ter a junta fixada no mesmo ponto, senão há um salto.
+"nivelar": ["LeftFoot"] deixa o pé se mover, mas com a orientação que tinha no começo do
+trecho: é para o pé que sobe e desce sem apontar a ponta para baixo e cortar a quina. Uma
+pose também pode vir do Blender, posada contra o obstáculo: veja blender_exportar.py.
+
 `tempo` é o instante de onde saem as quatro poses. Sem --clipes, os clipes são
 os de exemplo do MotionBricks, com licença só de avaliação interna: animação
 feita a partir deles não pode ser distribuída. Um plano só com poses próprias
@@ -70,7 +88,8 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from bvh_writer import write_bvh, write_contacts  # noqa: E402
-from poses import Skeleton, build_poses  # noqa: E402
+from poses import Skeleton, build_poses, pin  # noqa: E402
+import obstaculo  # noqa: E402
 import tira  # noqa: E402
 
 AVISO_LICENCA = (
@@ -162,7 +181,45 @@ def check_plan(plan: dict) -> None:
             raise SystemExit(f"{where}: a pose \"{spec['pose']}\" não está em \"poses\"")
 
 
-def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joints: bool = False) -> dict:
+def key_poses(plan, built, boxes, skeleton, names, parents, rest, out_dir: Path, name: str) -> dict:
+    """Grava só as poses-chave do plano, sem gerar: um quadro por pose, do início ao último destino.
+
+    É a conferência barata antes de gastar geração: a tira mostra cada pose ao lado dos
+    obstáculos e o relatório diz se alguma pose já nasce dentro de um deles. O BVH abre no
+    Blender (blender_cena.py) para ver e ajustar as poses contra a cena.
+    """
+    specs = [plan["inicio"], *plan["destinos"]]
+    if any("clipe" in spec for spec in specs):
+        raise SystemExit("--so-poses só vale para planos com poses próprias, sem \"clipe\"")
+    frames = np.concatenate([
+        place_window(built[spec["pose"]].array()[None], spec.get("posicao"), float(spec.get("giro", 0.0)))
+        for spec in specs])
+    labels = ["inicio"] + [spec.get("nome") or f"destino_{i}" for i, spec in enumerate(plan["destinos"], 1)]
+    marks = [{"nome": label, "inicio": i, "fim": i} for i, label in enumerate(labels)]
+    world = skeleton.world_positions(frames)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    summary = write_bvh(out_dir / f"{name}.poses.bvh", names, parents, rest, frames, fps=1.0)
+    summary.pop("juntas_com_posicao", None)
+    index = {n: i for i, n in enumerate(names)}
+    ends = [n for n in ("Hips", "LeftHand", "RightHand", "LeftFoot", "RightFoot") if n in index]
+    summary.update({
+        "poses": [{"quadro": i, "nome": label, "pose": spec["pose"],
+                   "no_mundo_m": {n: [round(float(v), 3) for v in world[i, index[n]]] for n in ends}}
+                  for i, (label, spec) in enumerate(zip(labels, specs))],
+        "tira": tira.draw(out_dir / f"{name}.poses.png", world, names, parents,
+                          [{"nome": "poses-chave", "inicio": 0, "fim": len(frames) - 1}],
+                          columns=len(frames), boxes=boxes),
+        "esqueleto": "SOMA", "espaco": "Y para cima, +Z para a frente, +X para a esquerda; metros",
+    })
+    if boxes:
+        summary["obstaculos"] = obstaculo.check(world, names, parents, boxes, marks,
+                                                tolerance=float(plan.get("folga_obstaculo", 0.03)))
+    (out_dir / f"{name}.poses.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return summary
+
+
+def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joints: bool = False,
+        only_poses: bool = False) -> dict:
     import warp as wp
     from motionbricks.io.bvh import load_bvh
     from motionbricks.io.usd import load_skeleton_from_usd
@@ -189,6 +246,9 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
 
     check_plan(plan)
     built = build_poses(skeleton, plan.get("poses", {}))
+    boxes = obstaculo.load(plan.get("obstaculos"))
+    if only_poses:
+        return key_poses(plan, built, boxes, skeleton, names, parents, rest, out_dir, name)
     repo = Path(motionbricks.__file__).resolve().parents[1]
     base = Path(clips_dir) if clips_dir else repo / "assets" / "motions" / "soma"
     uses_clips = any("clipe" in s for s in [plan["inicio"], *plan["destinos"]])
@@ -242,6 +302,10 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
             frames = int(output.num_frames)
             poses = output.poses.numpy()[:frames].astype(np.float64).reshape(frames, -1, 7)
             feet = output.foot_contacts.numpy()[:frames].astype(np.float64)
+            pinned = None
+            if spec.get("fixar") or spec.get("nivelar"):
+                # O contexto da geração seguinte sai dos quadros já corrigidos.
+                poses, pinned = pin(skeleton, poses, list(spec.get("fixar", [])), list(spec.get("nivelar", [])))
             # Cada geração começa na última pose do contexto: não repita esse quadro.
             keep = slice(1, None) if segments else slice(None)
             segments.append(poses[keep])
@@ -261,6 +325,8 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
                     n: round(float(np.linalg.norm(end_world[skeleton.index[n]] - goal_world[skeleton.index[n]])) * 100, 1)
                     for n in ends},
             })
+            if pinned:
+                report[-1]["fixado"] = pinned
             context_poses = poses[-MODEL_POSES_PER_TOKEN:]
 
     motion = np.concatenate(segments, axis=0)
@@ -273,12 +339,15 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
     summary.update({
         "geracoes": report,
         "medidas": tira.measure(world, feet, names, MODEL_SAMPLE_RATE, rest_foot),
-        "tira": tira.draw(out_dir / f"{name}.tira.png", world, names, parents, marks),
+        "tira": tira.draw(out_dir / f"{name}.tira.png", world, names, parents, marks, boxes=boxes),
         "esqueleto": "SOMA", "espaco": "Y para cima, metros no modelo, centímetros no BVH",
         "poses_de": ("clipes de exemplo do MotionBricks (somente avaliação)" if uses_samples
                      else (str(base) if uses_clips else "poses próprias do plano")),
         "usou_clipes_de_exemplo": uses_samples,
     })
+    if boxes:
+        summary["obstaculos"] = obstaculo.check(world, names, parents, boxes, marks,
+                                                tolerance=float(plan.get("folga_obstaculo", 0.03)))
     summary.pop("juntas_com_posicao", None)
     (out_dir / f"{name}.relatorio.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -299,6 +368,8 @@ def main() -> int:
     parser.add_argument("--teste", action="store_true", help="caminhada curta a partir dos clipes de exemplo")
     parser.add_argument("--teste-poses", action="store_true", help="agachar, levantar e andar só com poses próprias")
     parser.add_argument("--listar-juntas", action="store_true", help="mostra as juntas do esqueleto e sai")
+    parser.add_argument("--so-poses", action="store_true",
+                        help="não gera: grava as poses-chave em <nome>.poses.bvh e confere contra os obstáculos")
     args = parser.parse_args()
     if args.listar_juntas:
         print(json.dumps(run({}, Path(args.saida), None, args.nome, list_joints=True), ensure_ascii=False, indent=1))
@@ -312,11 +383,12 @@ def main() -> int:
     else:
         parser.error("informe o arquivo do plano, ou use --teste, --teste-poses ou --listar-juntas")
     try:
-        summary = run(plan, Path(args.saida), Path(args.clipes) if args.clipes else None, args.nome)
+        summary = run(plan, Path(args.saida), Path(args.clipes) if args.clipes else None, args.nome,
+                      only_poses=args.so_poses)
     except ValueError as exc:
         raise SystemExit(f"plano inválido: {exc}") from None
     print(json.dumps(summary, ensure_ascii=False, indent=2))
-    if summary["usou_clipes_de_exemplo"]:
+    if summary.get("usou_clipes_de_exemplo"):
         print("\n" + AVISO_LICENCA, file=sys.stderr)
     return 0
 

@@ -81,12 +81,14 @@ def stance_drift(world: np.ndarray, names: list[str], fps: float, tolerance: flo
 
 
 def draw(path, world: np.ndarray, names: list[str], parents: list[int], segments: list[dict],
-         columns: int = 8, scale: float = 150.0) -> str:
+         columns: int = 8, scale: float = 150.0, boxes=None) -> str:
     """Grava um PNG com `columns` quadros por segmento, em duas linhas: de lado e de frente.
 
     segments: [{"nome": ..., "inicio": quadro, "fim": quadro}]. Vermelho é o lado esquerdo
     do personagem, azul o direito. Cada figura é centrada no quadril; quando o personagem
     se desloca, a posição dele à frente (z) vai escrita em cima de cada quadro.
+    `boxes` são os obstáculos (obstaculo.Box): saem desenhados em verde no lugar em que
+    estão em relação ao personagem de cada quadro.
     """
     from PIL import Image, ImageDraw
 
@@ -101,6 +103,14 @@ def draw(path, world: np.ndarray, names: list[str], parents: list[int], segments
         def xy(p):
             return cx + (p[axis] - origin) * scale, base - p[1] * scale
         pen.line([(cx - 95, base), (cx + 95, base)], fill=(175, 175, 175), width=1)
+        for box in boxes or ():
+            c = box.corners()
+            for a in range(8):
+                for b in range(a + 1, 8):
+                    if bin(a ^ b).count("1") == 1:          # arestas: cantos que diferem num eixo
+                        (x0, y0), (x1, y1) = xy(c[a]), xy(c[b])
+                        if max(abs(x0 - cx), abs(x1 - cx)) < 2.5 * 95:
+                            pen.line([(x0, y0), (x1, y1)], fill=(40, 150, 70), width=2)
         for i, parent in bones:
             color = (40, 40, 40)
             if names[i].startswith("Left"):

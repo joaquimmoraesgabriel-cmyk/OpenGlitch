@@ -1,0 +1,341 @@
+{
+ "_descricao": "Subir num bloco de 0,6 m de altura: chega, levanta o pé esquerdo acima da quina, apoia em cima, passa o peso, traz o pé direito por cima da quina e fica em pé no topo. O bloco tem a face da frente em z = 1,0 e o topo em y = 0,6. As poses contam com o bloco (o pé vai ao topo por alcancar), as duas poses de pé alto existem para o pé não cortar a quina, e o pé de apoio é fixado em cada trecho: sem isso o modelo baixa o pé de cima do bloco para dentro dele. Testado numa RTX 4050.",
+ "obstaculos": [
+  {
+   "nome": "bloco",
+   "centro": [
+    0,
+    0.3,
+    1.6
+   ],
+   "tamanho": [
+    1.4,
+    0.6,
+    1.2
+   ]
+  }
+ ],
+ "poses": {
+  "em_pe": {
+   "lugar": [
+    0,
+    0
+   ],
+   "mirar": [
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.16,
+      -1,
+      0.02
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.16,
+      -1,
+      0.02
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      0.1,
+      -1,
+      0.15
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      -0.1,
+      -1,
+      0.15
+     ]
+    ]
+   ]
+  },
+  "diante_do_bloco": {
+   "base": "em_pe",
+   "lugar": [
+    0,
+    0.55
+   ]
+  },
+  "levanta_o_pe": {
+   "base": "em_pe",
+   "lugar": [
+    0,
+    0.58
+   ],
+   "mirar": [
+    [
+     "Hips",
+     "Spine1",
+     [
+      0,
+      1,
+      0.1
+     ]
+    ]
+   ],
+   "alcancar": [
+    [
+     "LeftFoot",
+     [
+      0.1,
+      0.88,
+      0.9
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ],
+    [
+     "RightFoot",
+     [
+      -0.1,
+      0.072,
+      0.572
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ]
+   ],
+   "pe_plano": [
+    "LeftFoot",
+    "RightFoot"
+   ]
+  },
+  "pe_em_cima": {
+   "base": "em_pe",
+   "lugar": [
+    0,
+    0.62
+   ],
+   "altura": -0.03,
+   "mirar": [
+    [
+     "Hips",
+     "Spine1",
+     [
+      0,
+      1,
+      0.18
+     ]
+    ]
+   ],
+   "alcancar": [
+    [
+     "LeftFoot",
+     [
+      0.1,
+      0.672,
+      1.18
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ],
+    [
+     "RightFoot",
+     [
+      -0.1,
+      0.072,
+      0.572
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ]
+   ],
+   "pe_plano": [
+    "LeftFoot",
+    "RightFoot"
+   ]
+  },
+  "passa_o_peso": {
+   "base": "em_pe",
+   "lugar": [
+    0,
+    1.0
+   ],
+   "altura": 0.36,
+   "mirar": [
+    [
+     "Hips",
+     "Spine1",
+     [
+      0,
+      1,
+      0.3
+     ]
+    ]
+   ],
+   "alcancar": [
+    [
+     "LeftFoot",
+     [
+      0.1,
+      0.672,
+      1.18
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ],
+    [
+     "RightFoot",
+     [
+      -0.1,
+      0.5,
+      0.42
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ]
+   ],
+   "pe_plano": [
+    "LeftFoot",
+    "RightFoot"
+   ]
+  },
+  "traz_o_pe": {
+   "base": "em_pe",
+   "lugar": [
+    0,
+    1.14
+   ],
+   "altura": 0.5,
+   "mirar": [
+    [
+     "Hips",
+     "Spine1",
+     [
+      0,
+      1,
+      0.2
+     ]
+    ]
+   ],
+   "alcancar": [
+    [
+     "LeftFoot",
+     [
+      0.1,
+      0.672,
+      1.18
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ],
+    [
+     "RightFoot",
+     [
+      -0.1,
+      1.02,
+      0.82
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ]
+   ],
+   "pe_plano": [
+    "LeftFoot",
+    "RightFoot"
+   ]
+  },
+  "em_cima": {
+   "base": "em_pe",
+   "lugar": [
+    0,
+    1.16
+   ],
+   "altura": 0.6
+  }
+ },
+ "inicio": {
+  "pose": "em_pe"
+ },
+ "destinos": [
+  {
+   "nome": "chega",
+   "pose": "diante_do_bloco"
+  },
+  {
+   "nome": "levanta_o_pe",
+   "pose": "levanta_o_pe",
+   "fixar": [
+    "RightFoot"
+   ],
+   "nivelar": [
+    "LeftFoot"
+   ]
+  },
+  {
+   "nome": "apoia_o_pe",
+   "pose": "pe_em_cima",
+   "fixar": [
+    "RightFoot"
+   ],
+   "nivelar": [
+    "LeftFoot"
+   ]
+  },
+  {
+   "nome": "passa_o_peso",
+   "pose": "passa_o_peso",
+   "fixar": [
+    "LeftFoot"
+   ],
+   "nivelar": [
+    "RightFoot"
+   ]
+  },
+  {
+   "nome": "traz_o_pe",
+   "pose": "traz_o_pe",
+   "fixar": [
+    "LeftFoot"
+   ],
+   "nivelar": [
+    "RightFoot"
+   ]
+  },
+  {
+   "nome": "em_cima",
+   "pose": "em_cima",
+   "fixar": [
+    "LeftFoot"
+   ],
+   "nivelar": [
+    "RightFoot"
+   ]
+  }
+ ]
+}
