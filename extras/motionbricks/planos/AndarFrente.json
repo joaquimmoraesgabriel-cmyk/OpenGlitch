@@ -1,0 +1,234 @@
+{
+ "_descricao": "Andar para a frente em loop, cerca de 1,1 m/s. Uma pose-chave (contato do calcanhar esquerdo), destino em movimento, transição antecipada de 8 quadros e ciclo de 34 quadros recortado da parte estável da cadeia. Testado numa RTX 4050 e conferido num personagem Humanoid na Unity.",
+ "transicao_antecipada": 8,
+ "velocidade_alvo": [
+  0,
+  1.076
+ ],
+ "periodo": 34,
+ "ignorar_geracoes": 2,
+ "direcao": [
+  0,
+  1
+ ],
+ "travar_pes": true,
+ "poses": {
+  "em_pe": {
+   "mirar": [
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.16,
+      -1,
+      0.02
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      0.1,
+      -1,
+      0.18
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.16,
+      -1,
+      0.02
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      -0.1,
+      -1,
+      0.18
+     ]
+    ]
+   ],
+   "pes_no_chao": true
+  },
+  "contato_E": {
+   "mirar": [
+    [
+     "Hips",
+     "Spine1",
+     [
+      0,
+      1,
+      0.04
+     ]
+    ],
+    [
+     "LeftLeg",
+     "LeftShin",
+     [
+      0,
+      -0.94,
+      0.342
+     ]
+    ],
+    [
+     "LeftShin",
+     "LeftFoot",
+     [
+      0,
+      -0.966,
+      0.259
+     ]
+    ],
+    [
+     "LeftFoot",
+     "LeftToeBase",
+     [
+      0,
+      0.0,
+      1
+     ]
+    ],
+    [
+     "RightLeg",
+     "RightShin",
+     [
+      0,
+      -0.966,
+      -0.259
+     ]
+    ],
+    [
+     "RightShin",
+     "RightFoot",
+     [
+      0,
+      -0.819,
+      -0.574
+     ]
+    ],
+    [
+     "RightFoot",
+     "RightToeBase",
+     [
+      0,
+      -0.72,
+      0.69
+     ]
+    ],
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.12,
+      -1,
+      -0.25
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      0.07,
+      -1,
+      -0.05
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.12,
+      -1,
+      0.28
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      -0.07,
+      -0.85,
+      0.5
+     ]
+    ]
+   ],
+   "pes_no_chao": true
+  }
+ },
+ "inicio": {
+  "pose": "em_pe",
+  "posicao": [
+   0,
+   0
+  ]
+ },
+ "destinos": [
+  {
+   "nome": "arranque",
+   "pose": "contato_E",
+   "posicao": [
+    0,
+    0.355
+   ],
+   "tokens": 10
+  },
+  {
+   "nome": "ciclo_1",
+   "pose": "contato_E",
+   "posicao": [
+    0,
+    1.575
+   ],
+   "tokens": 12
+  },
+  {
+   "nome": "ciclo_2",
+   "pose": "contato_E",
+   "posicao": [
+    0,
+    2.795
+   ],
+   "tokens": 12
+  },
+  {
+   "nome": "ciclo_3",
+   "pose": "contato_E",
+   "posicao": [
+    0,
+    4.015
+   ],
+   "tokens": 12
+  },
+  {
+   "nome": "ciclo_4",
+   "pose": "contato_E",
+   "posicao": [
+    0,
+    5.235
+   ],
+   "tokens": 12
+  },
+  {
+   "nome": "ciclo_5",
+   "pose": "contato_E",
+   "posicao": [
+    0,
+    6.455
+   ],
+   "tokens": 12
+  },
+  {
+   "nome": "ciclo_6",
+   "pose": "contato_E",
+   "posicao": [
+    0,
+    7.675
+   ],
+   "tokens": 12
+  }
+ ]
+}

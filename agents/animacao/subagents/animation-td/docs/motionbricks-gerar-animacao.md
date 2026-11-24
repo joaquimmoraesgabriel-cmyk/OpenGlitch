@@ -13,9 +13,10 @@ OpenGlitch ele é opcional: só existe se a pessoa instalou com
 `motionbricks_info` para saber se está instalado e pegar os comandos com os
 caminhos desta máquina.
 
-Testado numa máquina: geração a partir de poses próprias, BVH, conversão para
-FBX e importação Humanoid na Unity. Não testado: aplicar num personagem com
-malha e esqueleto diferente, e movimentos difíceis (golpe, salto, queda).
+Testado numa máquina: geração a partir de poses próprias, ciclos em loop,
+BVH, conversão para FBX, importação Humanoid na Unity e um personagem com
+malha (X Bot do Mixamo) andando para a frente e para trás. Não testado:
+movimentos difíceis (golpe, salto, queda) e o andar de lado num personagem.
 
 ## O que ele é e o que não é
 
@@ -40,8 +41,9 @@ malha e esqueleto diferente, e movimentos difíceis (golpe, salto, queda).
 3. **Veja o esqueleto**: rode o gerador com `--listar-juntas` para ter os nomes
    das juntas e a posição de repouso de cada uma.
 4. **Escreva o plano** em JSON, com as poses, o início e os destinos.
-5. **Gere** com `gerar.py`. Saem o BVH, o contato dos pés, o relatório e a tira
-   de quadros.
+5. **Gere**: `gerar.py` para um movimento com começo e fim (agachar, pegar
+   algo, acenar); `gerar_ciclo.py` para o que se repete (parado, andar). Saem o
+   BVH, o contato dos pés, o relatório e a tira de quadros.
 6. **Confira** a tira e as medidas, corrija as poses e gere de novo. É normal
    repetir este passo algumas vezes.
 7. **Converta** o BVH em FBX com `bvh_para_fbx.py`, no Blender em segundo plano.
@@ -104,8 +106,12 @@ Você não assiste à animação. Seus olhos são a tira de quadros e os número
   frente; vermelho é o lado esquerdo, azul o direito. Veja se cada pose final é
   a que você quis e se o caminho até ela faz sentido.
 - **Leia o relatório**: `distancia_ate_a_pose_pedida_cm` deve ficar perto de
-  zero; `pe_afunda_cm` diz quanto o pé passa do chão; o deslize do pé plantado
-  diz se ele escorrega; a velocidade máxima denuncia um salto entre quadros.
+  zero; `pe_afunda_cm` diz quanto o pé passa do chão; `deriva_por_apoio_cm` diz
+  quanto cada ponto do pé anda enquanto deveria estar parado; a velocidade
+  máxima denuncia um salto entre quadros.
+- **Deslize se mede por altura, não pelo rótulo de contato.** O deslize
+  acontece justamente nos quadros que o modelo não rotula como apoio. Andar
+  para a frente ficou em 2 a 3 cm por passo na ponta do pé.
 - **Referência do teste**: pé afundando 2,3 cm e deslize de 7 a 8 cm/s numa
   sequência de agachar, levantar e andar 1 m. Bem acima disso, revise o plano.
 - **O que só o usuário confere**: peso, ritmo e naturalidade, assistindo no
@@ -128,6 +134,23 @@ var avatar = AssetDatabase.LoadAllAssetsAtPath(path).OfType<Avatar>().First();
 // avatar.isValid e avatar.isHuman precisam ser verdadeiros
 ```
 
+**O avatar do SOMA precisa vir de uma pose T.** O FBX de uma animação tem
+como pose padrão o primeiro quadro dela. Se o avatar for criado a partir desse
+arquivo, a Unity toma uma passada como se fosse a pose T: o avatar sai
+"válido", nada avisa, e no personagem um pé afunda cerca de 5 cm e o outro não
+encosta no chão. O jeito certo:
+
+1. Gere o BVH da pose T: `gerar_ciclo.py --pose-t <pasta>/SOMA_PoseT.bvh`, e
+   converta para FBX.
+2. Importe esse FBX como Humanoid com `CreateFromThisModel`.
+3. Em todo FBX de animação, use `avatarSetup = CopyFromOther` com
+   `sourceAvatar` igual ao avatar da pose T.
+
+Se o clipe andar em diagonal, corrija o `rotationOffset` do clipe na
+importação até a velocidade média apontar na direção certa. O aviso de que a
+rotação de `Neck2` é descartada é esperado: o SOMA tem dois ossos de pescoço e
+o Humanoid usa um.
+
 No teste, o avatar saiu válido, com 55 ossos humanoides mapeados sem ajuste
 manual, e as posições do quadril, da cabeça e dos pés bateram com o relatório
 do gerador. O eixo X vem espelhado, pela troca de mão entre o Blender e a
@@ -136,6 +159,53 @@ Unity; é esperado.
 Para usar num personagem do jogo, o personagem também precisa ser Humanoid: o
 clipe do SOMA toca no avatar dele pelo retargeting da engine. Confira por
 captura; perna ou coluna torta costuma ser mapeamento do avatar.
+
+## Ciclos em loop: andar, correr, ficar parado
+
+Para um ciclo use `gerar_ciclo.py`, não `gerar.py`. Um destino de uma pose só
+faz o personagem frear em cada destino: no teste a velocidade caía de 1,1 para
+0,27 m/s, o tronco inclinava para trás e o pé deslizava 30 cm/s. O que resolve
+é o que o próprio runtime do MotionBricks faz:
+
+- **Destino em movimento** (`velocidade_alvo: [vx, vz]` no plano): o destino
+  vira quatro poses iguais em que só a raiz avança. O modelo chega andando.
+- **Transição antecipada** (`transicao_antecipada`): de cada geração entram só
+  os quadros até alguns antes do fim, e a seguinte parte dali. A parte final,
+  onde o modelo força a chegada na pose, fica de fora.
+- **Duração fixa** (`tokens` em cada destino): quadros gerados = tokens × 4 − 6.
+  O mínimo é 6 tokens, 18 quadros.
+- **Recorte por período** (`periodo`): o gerador encadeia vários ciclos e
+  recorta, da parte estável, o trecho em que o fim mais se parece com o começo.
+- **Limpeza da emenda**: fecha o resto da diferença e suaviza só perto das
+  emendas. Sem ela, cada emenda de geração tem um tranco de um quadro.
+- **Travar os pés** (`travar_pes: true`): prende no chão o ponto apoiado e
+  ajusta a perna por IK.
+
+Um ciclo de andar é uma pose-chave só (o contato do calcanhar) repetida a cada
+passo duplo. Planos que funcionaram estão em `extras/motionbricks/planos/`:
+`Parado`, `AndarFrente`, `AndarTras` e `AndarLado`. Parta deles.
+
+Confira no relatório: a pose na emenda deve fechar em zero depois da limpeza, e
+a aceleração na emenda deve ficar igual ou abaixo da do próprio ciclo. Acima
+disso há tranco ao recomeçar.
+
+## Andar de lado
+
+O modelo arrasta os pés de lado quando o passo é lento. Com poses de pernas
+abertas a 0,45 m/s, os pés nunca saíam do chão e escorregavam 25 a 47 cm por
+apoio, em seis variações de pose, de destino e de duração.
+
+O que funciona é um passo lateral apressado: duas poses por ciclo ("abre", com
+o pé da frente no ar e aberto, e "fecha", com o de trás no ar vindo fechar), a
+cerca de 1,2 m/s, em ciclo de 26 quadros. O pé da frente deriva menos de 1 cm
+por apoio e o de trás cerca de 8 cm. O plano é o `AndarLado`.
+
+- **Abaixo de cerca de 1 m/s o pé de trás volta a arrastar.** Para um andar de
+  lado mais lento, toque o clipe em velocidade menor na engine em vez de gerar
+  devagar.
+- **Para o outro lado, espelhe o clipe** na importação Humanoid.
+- Passo cruzado, agachado e três poses por ciclo não melhoraram o pé de trás.
+- Não foi conferido num personagem com malha.
 
 ## Contato dos pés
 
@@ -158,6 +228,7 @@ pé plantados no chão. Use para travar o pé com IK na engine onde o valor é a
 - A primeira execução de cada modelo monta o plano do TensorRT e leva alguns
   minutos; depois fica em cache.
 - Ocupa cerca de 8,5 GB de disco.
-- Poses simples (agachar, erguer os braços, andar) saíram plausíveis. Golpe,
-  salto e queda não foram testados.
+- Poses simples e ciclos de andar para a frente e para trás saíram bem. Andar
+  de lado só funciona apressado. Golpe, salto e queda não foram testados.
+- Não há animação de virar: girando o personagem pelo controle, os pés deslizam.
 - O modelo usa as proporções do esqueleto SOMA.

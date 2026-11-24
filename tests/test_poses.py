@@ -95,6 +95,13 @@ def test_medidas_e_tira(sk, tmp_path):
     assert m["deslize_do_pe_plantado_cm_s"]["esquerdo"] == pytest.approx(155.2, abs=1.0)
     assert m["deslize_do_pe_plantado_cm_s"]["direito"] is None
     assert m["fracao_com_algum_pe_plantado"] == 1.0
+    # A medida por altura não depende do rótulo de contato: um pé parado deriva zero,
+    # e um que desliza devagar aparece mesmo sem rótulo.
+    parado = np.repeat(sk.rest_world_pos[None], frames, axis=0).copy()
+    assert tira.stance_drift(parado, NAMES, 30.0)["esquerdo"]["tornozelo"] == [0.0]
+    lento = parado.copy()
+    lento[:, sk.index["RightFoot"], 0] += np.linspace(0, 0.3, frames)   # 30 cm em 1 s
+    assert tira.stance_drift(lento, NAMES, 30.0)["direito"]["tornozelo"] == [30.0]
     out = tira.draw(tmp_path / "t.png", world, NAMES, PARENTS, [{"nome": "andar", "inicio": 0, "fim": 29}])
     from PIL import Image
     with Image.open(out) as img:

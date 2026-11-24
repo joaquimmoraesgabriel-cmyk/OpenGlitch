@@ -29,6 +29,9 @@ def measure(world: np.ndarray, contacts: np.ndarray | None, names: list[str], fp
         lowest = float(world[:, feet, 1].min())
         out["pe_mais_baixo_m"] = round(lowest, 3)
         out["pe_afunda_cm"] = round(max(0.0, rest_foot_height - lowest) * 100, 1)
+    drift = stance_drift(world, names, fps)
+    if drift:
+        out["deriva_por_apoio_cm"] = drift
     if contacts is not None and len(feet) == 2 and len(world) > 1:
         slide = []
         for foot, column in zip(feet, (0, 2)):
@@ -37,6 +40,43 @@ def measure(world: np.ndarray, contacts: np.ndarray | None, names: list[str], fp
             slide.append(round(float(v[planted].mean()) * 100, 1) if planted.any() else None)
         out["deslize_do_pe_plantado_cm_s"] = {"esquerdo": slide[0], "direito": slide[1]}
         out["fracao_com_algum_pe_plantado"] = round(float((contacts[:, [0, 2]].max(axis=1) > 0.5).mean()), 2)
+    return out
+
+
+def stance_drift(world: np.ndarray, names: list[str], fps: float, tolerance: float = 0.015,
+                 max_speed: float = 0.8) -> dict:
+    """Quanto cada ponto do pé anda no chão enquanto deveria estar parado, por apoio.
+
+    Um ponto (tornozelo ou base dos dedos) conta como apoiado enquanto está a até
+    `tolerance` metros do próprio ponto mais baixo e abaixo de `max_speed` m/s. Medir pelo
+    rótulo de contato do modelo esconde o deslize, que acontece nos quadros não rotulados;
+    medir o tornozelo o apoio inteiro infla o número, porque ele avança quando o pé rola
+    sobre a ponta.
+    """
+    index = {n: i for i, n in enumerate(names)}
+    out: dict = {}
+    for side, label in (("Left", "esquerdo"), ("Right", "direito")):
+        for joint, part in ((f"{side}Foot", "tornozelo"), (f"{side}ToeBase", "dedos")):
+            if joint not in index or len(world) < 3:
+                continue
+            p = world[:, index[joint]]
+            speed = np.zeros(len(p))
+            speed[1:-1] = np.linalg.norm(p[2:, [0, 2]] - p[:-2, [0, 2]], axis=1) * fps / 2
+            speed[0], speed[-1] = speed[1], speed[-2]
+            down = (p[:, 1] < p[:, 1].min() + tolerance) & (speed < max_speed)
+            drifts, i = [], 0
+            while i < len(p):
+                if not down[i]:
+                    i += 1
+                    continue
+                j = i
+                while j + 1 < len(p) and down[j + 1]:
+                    j += 1
+                if j > i:
+                    drifts.append(round(float(np.linalg.norm((p[j] - p[i])[[0, 2]])) * 100, 1))
+                i = j + 1
+            if drifts:
+                out.setdefault(label, {})[part] = drifts
     return out
 
 

@@ -263,13 +263,16 @@ Quando estiver instalado, o processo é este, e o documento local
    só preenche o caminho entre as poses que você escrever. Cada transição dura
    até 1,9 s.
 3. **Escreva o plano** com as poses descritas por direções dos ossos. Poses
-   próprias são do usuário e podem ir para o jogo; é o caminho padrão.
+   próprias são do usuário e podem ir para o jogo; é o caminho padrão. Para o
+   que se repete (parado, andar) use o gerador de ciclos e parta dos planos de
+   exemplo: ciclo pede destino em movimento, e sem isso o personagem freia a
+   cada passo.
 4. **Gere, abra a tira de quadros e leia as medidas.** Corrija as poses e gere
    de novo até a tira mostrar o que foi pedido. Não diga que ficou bom sem ter
    olhado a imagem.
 5. **Converta para FBX** no Blender em segundo plano.
-6. **Importe na engine como Humanoid** e confira o avatar e o clipe por script
-   e por captura.
+6. **Importe na engine como Humanoid**, com o avatar do SOMA criado a partir da
+   pose T e copiado para os clipes, e confira por script e por captura.
 7. **Aplique no personagem do jogo** pelo retargeting da engine e peça ao
    usuário que assista: peso e naturalidade só ele confere.
 
@@ -278,6 +281,9 @@ Cuidados:
 - **Não use os clipes de exemplo da NVIDIA para algo que vá ao jogo.** A
   licença deles é só de avaliação. Use-os apenas se o usuário quiser
   experimentar, e diga isso.
+- **Andar de lado** só sai como passo apressado; devagar, o modelo arrasta os
+  pés. Não gaste tentativas repetindo: use o plano de exemplo e reduza a
+  velocidade na engine.
 - **Movimentos difíceis** (golpe, salto, queda) não foram testados. Comece
   simples e avise o usuário quando o resultado não convencer.
 - **Use o contato dos pés** que vem com a saída para travar os pés com IK.

@@ -1257,7 +1257,12 @@ class App:
             "Teste com poses próprias (rode primeiro; a primeira execução monta o plano do "
             "TensorRT e leva minutos):",
             f"  uv run --project \"{repo}\" python \"{extras / 'gerar.py'}\" --teste-poses --saida <pasta>",
-            "Gerar a partir de um plano:",
+            "Gerar um ciclo em loop (parado, andar), a partir de um plano; exemplos em "
+            f"{extras / 'planos'}:",
+            f"  uv run --project \"{repo}\" python \"{extras / 'gerar_ciclo.py'}\" plano.json --saida <pasta> --nome <nome>",
+            "Gravar a pose T do SOMA, que serve de avatar de origem na Unity:",
+            f"  uv run --project \"{repo}\" python \"{extras / 'gerar_ciclo.py'}\" --pose-t <pasta>/SOMA_PoseT.bvh",
+            "Gerar um movimento com começo e fim, a partir de um plano:",
             f"  uv run --project \"{repo}\" python \"{extras / 'gerar.py'}\" plano.json --saida <pasta> --nome <nome>",
             "Converter o BVH em FBX (Blender em segundo plano):",
             f"  blender -b --factory-startup --python \"{extras / 'bvh_para_fbx.py'}\" -- <entrada.bvh> <saida.fbx>",
@@ -1267,6 +1272,12 @@ class App:
             "- O plano descreve cada pose por direções dos ossos (formato no cabeçalho de "
             "gerar.py e no documento local). Poses próprias são do usuário e podem ir para o jogo.",
             "- Cada geração dura de 0,6 a 1,9 s; movimento longo é uma cadeia de destinos.",
+            "- Ciclo de andar precisa de destino em movimento e transição antecipada: use "
+            "gerar_ciclo.py e parta dos planos de exemplo. Com gerar.py o personagem freia a cada passo.",
+            "- Na Unity, crie o avatar do SOMA a partir da pose T e copie-o para os clipes; criado "
+            "a partir de um clipe, ele sai torto e o pé afunda sem nenhum aviso.",
+            "- Andar de lado só funciona como passo apressado (cerca de 1,2 m/s); mais lento, "
+            "toque o clipe devagar na engine.",
             "- A saída traz a tira de quadros (<nome>.tira.png) e as medidas: abra a imagem e "
             "leia o relatório antes de dizer que ficou bom.",
             "- A saída é no esqueleto SOMA; outro personagem precisa de retargeting (Humanoid na Unity).",

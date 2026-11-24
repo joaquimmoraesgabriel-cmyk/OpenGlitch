@@ -1,0 +1,219 @@
+{
+ "_descricao": "Parado em loop, com troca de peso suave. Destinos que chegam parados; o ciclo é recortado entre destinos iguais e a emenda é limpa. Testado numa RTX 4050 e conferido num personagem Humanoid na Unity.",
+ "segmentos_no_ciclo": 2,
+ "direcao": "parado",
+ "poses": {
+  "parado_A": {
+   "mirar": [
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.16,
+      -1,
+      0.02
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      0.1,
+      -1,
+      0.18
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.16,
+      -1,
+      0.02
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      -0.1,
+      -1,
+      0.18
+     ]
+    ]
+   ],
+   "pes_no_chao": true
+  },
+  "parado_B": {
+   "base": "parado_A",
+   "mirar": [
+    [
+     "Hips",
+     "Spine1",
+     [
+      0.02,
+      1,
+      0.0
+     ]
+    ],
+    [
+     "LeftLeg",
+     "LeftShin",
+     [
+      0.035,
+      -1,
+      0.0
+     ]
+    ],
+    [
+     "LeftShin",
+     "LeftFoot",
+     [
+      0.035,
+      -1,
+      0.0
+     ]
+    ],
+    [
+     "RightLeg",
+     "RightShin",
+     [
+      0.035,
+      -1,
+      0.0
+     ]
+    ],
+    [
+     "RightShin",
+     "RightFoot",
+     [
+      0.035,
+      -1,
+      0.0
+     ]
+    ],
+    [
+     "Chest",
+     "Neck1",
+     [
+      -0.01,
+      1,
+      -0.004
+     ]
+    ],
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.17,
+      -1,
+      0.03
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      0.11,
+      -1,
+      0.17
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.15,
+      -1,
+      0.03
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      -0.09,
+      -1,
+      0.19
+     ]
+    ]
+   ],
+   "pe_plano": [
+    "LeftFoot",
+    "RightFoot"
+   ],
+   "pes_no_chao": true
+  }
+ },
+ "inicio": {
+  "pose": "parado_A",
+  "posicao": [
+   0,
+   0
+  ]
+ },
+ "destinos": [
+  {
+   "nome": "peso_dir_1",
+   "pose": "parado_B",
+   "posicao": [
+    -0.03,
+    0
+   ],
+   "tokens": 14,
+   "parar": true
+  },
+  {
+   "nome": "volta_1",
+   "pose": "parado_A",
+   "posicao": [
+    0,
+    0
+   ],
+   "tokens": 14,
+   "parar": true
+  },
+  {
+   "nome": "peso_dir_2",
+   "pose": "parado_B",
+   "posicao": [
+    -0.03,
+    0
+   ],
+   "tokens": 14,
+   "parar": true
+  },
+  {
+   "nome": "volta_2",
+   "pose": "parado_A",
+   "posicao": [
+    0,
+    0
+   ],
+   "tokens": 14,
+   "parar": true,
+   "candidato": true
+  },
+  {
+   "nome": "peso_dir_3",
+   "pose": "parado_B",
+   "posicao": [
+    -0.03,
+    0
+   ],
+   "tokens": 14,
+   "parar": true
+  },
+  {
+   "nome": "volta_3",
+   "pose": "parado_A",
+   "posicao": [
+    0,
+    0
+   ],
+   "tokens": 14,
+   "parar": true,
+   "candidato": true
+  }
+ ]
+}

@@ -1,0 +1,279 @@
+{
+ "_descricao": "Passo lateral para a esquerda em loop, olhando para a frente, cerca de 1,2 m/s. Duas poses por ciclo: 'abre' (pé esquerdo no ar abrindo, direito de apoio) e 'fecha' (esquerdo plantado, direito no ar fechando). Só funciona como passo apressado: abaixo de cerca de 1 m/s o modelo arrasta o pé de trás em vez de dar o passo. Para um andar de lado mais lento, toque este clipe em velocidade menor na engine; para a direita, espelhe o clipe. O pé de trás ainda deriva cerca de 8 cm por passo. Testado numa RTX 4050; não conferido num personagem com malha.",
+ "transicao_antecipada": 5,
+ "periodo": 26,
+ "ignorar_geracoes": 3,
+ "direcao": [
+  1,
+  0
+ ],
+ "travar_pes": true,
+ "poses": {
+  "em_pe": {
+   "mirar": [
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.16,
+      -1,
+      0.02
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      0.1,
+      -1,
+      0.18
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.16,
+      -1,
+      0.02
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      -0.1,
+      -1,
+      0.18
+     ]
+    ]
+   ],
+   "pes_no_chao": true
+  },
+  "abre": {
+   "base": "em_pe",
+   "mirar": [
+    [
+     "RightLeg",
+     "RightShin",
+     [
+      -0.1,
+      -0.99,
+      0
+     ]
+    ],
+    [
+     "RightShin",
+     "RightFoot",
+     [
+      -0.1,
+      -0.99,
+      0
+     ]
+    ],
+    [
+     "LeftLeg",
+     "LeftShin",
+     [
+      0.5,
+      -0.8,
+      0.33
+     ]
+    ],
+    [
+     "LeftShin",
+     "LeftFoot",
+     [
+      0.25,
+      -0.93,
+      -0.27
+     ]
+    ]
+   ],
+   "pe_plano": [
+    "LeftFoot",
+    "RightFoot"
+   ],
+   "pes_no_chao": true
+  },
+  "fecha": {
+   "base": "em_pe",
+   "mirar": [
+    [
+     "LeftLeg",
+     "LeftShin",
+     [
+      0.3,
+      -0.95,
+      0
+     ]
+    ],
+    [
+     "LeftShin",
+     "LeftFoot",
+     [
+      0.3,
+      -0.95,
+      0
+     ]
+    ],
+    [
+     "RightLeg",
+     "RightShin",
+     [
+      0.1,
+      -0.85,
+      0.52
+     ]
+    ],
+    [
+     "RightShin",
+     "RightFoot",
+     [
+      0.05,
+      -0.85,
+      -0.52
+     ]
+    ]
+   ],
+   "pe_plano": [
+    "LeftFoot",
+    "RightFoot"
+   ],
+   "pes_no_chao": true
+  }
+ },
+ "inicio": {
+  "pose": "em_pe",
+  "posicao": [
+   0,
+   0
+  ]
+ },
+ "destinos": [
+  {
+   "nome": "abre_1",
+   "pose": "abre",
+   "posicao": [
+    0.238,
+    0
+   ],
+   "tokens": 6,
+   "apoio": "Right"
+  },
+  {
+   "nome": "fecha_1",
+   "pose": "fecha",
+   "posicao": [
+    0.715,
+    0
+   ],
+   "tokens": 6,
+   "apoio": "Left"
+  },
+  {
+   "nome": "abre_2",
+   "pose": "abre",
+   "posicao": [
+    1.192,
+    0
+   ],
+   "tokens": 6,
+   "apoio": "Right"
+  },
+  {
+   "nome": "fecha_2",
+   "pose": "fecha",
+   "posicao": [
+    1.668,
+    0
+   ],
+   "tokens": 6,
+   "apoio": "Left"
+  },
+  {
+   "nome": "abre_3",
+   "pose": "abre",
+   "posicao": [
+    2.145,
+    0
+   ],
+   "tokens": 6,
+   "apoio": "Right"
+  },
+  {
+   "nome": "fecha_3",
+   "pose": "fecha",
+   "posicao": [
+    2.622,
+    0
+   ],
+   "tokens": 6,
+   "apoio": "Left"
+  },
+  {
+   "nome": "abre_4",
+   "pose": "abre",
+   "posicao": [
+    3.098,
+    0
+   ],
+   "tokens": 6,
+   "apoio": "Right"
+  },
+  {
+   "nome": "fecha_4",
+   "pose": "fecha",
+   "posicao": [
+    3.575,
+    0
+   ],
+   "tokens": 6,
+   "apoio": "Left"
+  },
+  {
+   "nome": "abre_5",
+   "pose": "abre",
+   "posicao": [
+    4.052,
+    0
+   ],
+   "tokens": 6,
+   "apoio": "Right"
+  },
+  {
+   "nome": "fecha_5",
+   "pose": "fecha",
+   "posicao": [
+    4.528,
+    0
+   ],
+   "tokens": 6,
+   "apoio": "Left"
+  },
+  {
+   "nome": "abre_6",
+   "pose": "abre",
+   "posicao": [
+    5.005,
+    0
+   ],
+   "tokens": 6,
+   "apoio": "Right"
+  },
+  {
+   "nome": "fecha_6",
+   "pose": "fecha",
+   "posicao": [
+    5.482,
+    0
+   ],
+   "tokens": 6,
+   "apoio": "Left"
+  }
+ ],
+ "velocidade_alvo": [
+  1.1,
+  0
+ ]
+}
