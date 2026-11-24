@@ -5,6 +5,7 @@
     python install.py --dry-run    mostra o que faria, sem alterar nada
     python install.py --clients claude-code,codex
     python install.py --uninstall  remove o registro dos clientes
+    python install.py --motionbricks   instala também o MotionBricks (só com GPU NVIDIA)
 
 O que faz:
   1. cria o ambiente virtual `.venv` nesta pasta e instala o servidor;
@@ -199,6 +200,78 @@ def client_codex(remove: bool, dry: bool) -> str | None:
     return ("removido de " if remove else "registrado em ") + str(path)
 
 
+
+# -------------------------------------------------------------- MotionBricks
+
+MOTIONBRICKS_REPO = "https://github.com/NVlabs/motionbricks.git"
+MOTIONBRICKS_NOTICE = """
+  O MotionBricks é da NVIDIA e tem licenças próprias. Leia antes de usar:
+    - código: Apache 2.0
+    - modelos: NVIDIA Open Model Agreement
+    - clipes de exemplo: NVIDIA Sample Data Evaluation License, só para avaliar e
+      testar, em uso interno. Animação feita a partir deles NÃO pode ser
+      distribuída nem entrar num jogo publicado.
+  Detalhes em https://github.com/NVlabs/motionbricks#license
+"""
+
+
+def data_dir() -> Path:
+    return Path(os.environ.get("OPENGLITCH_DATA") or HOME / ".openglitch")
+
+
+def nvidia_gpu() -> str | None:
+    smi = shutil.which("nvidia-smi")
+    if not smi:
+        return None
+    done = run([smi, "--query-gpu=name,memory.total", "--format=csv,noheader"])
+    lines = [line.strip() for line in (done.stdout or "").splitlines() if line.strip()]
+    return lines[0] if done.returncode == 0 and lines else None
+
+
+def install_motionbricks(dry: bool) -> bool:
+    """Componente opcional: baixa o MotionBricks oficial e prepara o ambiente dele."""
+    gpu = nvidia_gpu()
+    if not gpu:
+        say("  Nenhuma GPU NVIDIA encontrada (o comando nvidia-smi não respondeu).")
+        say("  O MotionBricks usa TensorRT e só roda em GPU NVIDIA. O OpenGlitch continua")
+        say("  funcionando sem ele; a animação segue por script, clipes prontos ou mocap.")
+        return False
+    say(f"  GPU: {gpu}")
+    missing = []
+    if not shutil.which("git"):
+        missing.append("Git: https://git-scm.com/downloads")
+    elif run(["git", "lfs", "version"]).returncode != 0:
+        missing.append("Git LFS: https://git-lfs.com/")
+    if not shutil.which("uv"):
+        missing.append("uv: https://docs.astral.sh/uv/getting-started/installation/")
+    if missing:
+        say("  Falta instalar antes:")
+        for item in missing:
+            say(f"    - {item}")
+        return False
+    say(MOTIONBRICKS_NOTICE)
+    base = data_dir() / "motionbricks"
+    repo = base / "repo"
+    if dry:
+        say(f"  baixaria {MOTIONBRICKS_REPO} para {repo} (alguns GB) e rodaria git lfs pull e uv sync")
+        return True
+    base.mkdir(parents=True, exist_ok=True)
+    steps = ([["git", "-C", str(repo), "pull", "--ff-only"]] if (repo / ".git").is_dir()
+             else [["git", "clone", MOTIONBRICKS_REPO, str(repo)]])
+    steps += [["git", "-C", str(repo), "lfs", "pull"], ["uv", "sync", "--project", str(repo)]]
+    for step in steps:
+        say("  " + " ".join(step[:4]) + " ... (pode demorar)")
+        done = subprocess.run(step, text=True)
+        if done.returncode != 0:
+            say("  ERRO neste passo. O OpenGlitch em si está instalado; só o MotionBricks ficou de fora.")
+            return False
+    (base / "instalado.json").write_text(
+        json.dumps({"repo": str(repo), "gpu": gpu}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    test = f'uv run --project "{repo}" python "{ROOT / "extras" / "motionbricks" / "gerar.py"}" --teste --saida "{base / "teste"}"'
+    say("  MotionBricks instalado. Para testar (a primeira vez monta o plano do TensorRT e leva minutos):")
+    say("    " + test)
+    return True
+
 CLIENTS = {
     "claude-code": ("Claude Code (terminal e aba Code)", client_claude_code),
     "claude-desktop": ("Aplicativo Claude (chat)", client_claude_desktop),
@@ -221,6 +294,8 @@ def main() -> int:
                         help="lista separada por vírgula: " + ", ".join(CLIENTS) + " (padrão: all)")
     parser.add_argument("--dry-run", action="store_true", help="só mostra o que faria")
     parser.add_argument("--uninstall", action="store_true", help="remove o registro dos clientes")
+    parser.add_argument("--motionbricks", action="store_true",
+                        help="instala também o MotionBricks, gerador de movimento da NVIDIA (só GPU NVIDIA)")
     args = parser.parse_args()
 
     if sys.version_info < MIN_PYTHON:
@@ -249,6 +324,10 @@ def main() -> int:
         else:
             registered += 1
             say(f"  {label}: {result}")
+
+    if args.motionbricks and not args.uninstall:
+        say("\n3. MotionBricks (opcional)")
+        install_motionbricks(args.dry_run)
 
     if args.uninstall:
         say("\nRegistro removido. A pasta e a memória (~/.openglitch) continuam no lugar.")

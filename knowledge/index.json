@@ -1369,7 +1369,7 @@
             {
               "id": "arte-3d/texture-material#referencias",
               "title": "Referências",
-              "summary": "19 fontes que o subagente texture-material usa para pesquisar.",
+              "summary": "22 fontes que o subagente texture-material usa para pesquisar.",
               "kind": "section",
               "source": "agents/arte-3d/subagents/texture-material/references.json"
             }
@@ -1872,7 +1872,7 @@
             {
               "id": "animacao/animation-td#referencias",
               "title": "Referências",
-              "summary": "15 fontes que o subagente animation-td usa para pesquisar.",
+              "summary": "17 fontes que o subagente animation-td usa para pesquisar.",
               "kind": "section",
               "source": "agents/animacao/subagents/animation-td/references.json"
             }

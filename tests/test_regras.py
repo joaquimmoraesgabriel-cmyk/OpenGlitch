@@ -1,5 +1,7 @@
 """Regras que o servidor precisa garantir, independente do que a IA tente fazer."""
 
+import json
+
 import pytest
 
 from openglitch_mcp.cli import validate
@@ -496,3 +498,14 @@ def test_trava_do_ciclo_de_conferencia(tmp_path, helpers):
     # Modo avulso não é travado.
     solto = helpers.session_of(app.activate_agent("arte-3d", mode="avulso"))
     assert "encerrado" in app.finish_agent(solto, "")
+
+
+def test_motionbricks_opcional(app, tmp_path):
+    assert "NÃO instalado" in app.motionbricks_info() and "--motionbricks" in app.motionbricks_info()
+    repo = tmp_path / "motionbricks" / "repo"
+    repo.mkdir(parents=True)
+    (tmp_path / "motionbricks" / "instalado.json").write_text(
+        '{"repo": ' + json.dumps(str(repo)) + ', "gpu": "NVIDIA GeForce RTX 4050"}', encoding="utf-8")
+    info = app.motionbricks_info()
+    assert "Instalado em" in info and "gerar.py" in info and "bvh_para_fbx.py" in info
+    assert "RTX 4050" in info and "só de avaliação" in info

@@ -132,6 +132,12 @@ ao instalar o Python.
 
 ### Jeito 1: peça para a sua IA instalar
 
+Há dois prompts. O primeiro instala o OpenGlitch e serve para qualquer
+computador. O segundo instala também o MotionBricks e é só para quem tem placa
+NVIDIA.
+
+**Instalação padrão**
+
 Funciona em clientes que rodam comandos no seu computador: Claude Code (inclusive
 a aba Code do aplicativo Claude), Codex e Cursor. Cole este pedido:
 
@@ -147,6 +153,42 @@ Instale o OpenGlitch para mim, um servidor MCP sobre criação de jogos 3D.
    mostre a saída inteira.
 4. Diga em quais clientes de IA ele foi registrado e me lembre de fechar e
    abrir o cliente de novo.
+
+Use só o install.py do repositório para instalar e registrar. Não edite
+arquivos de configuração à mão, a menos que o instalador falhe e eu autorize.
+```
+
+### Instalação completa, com o MotionBricks (só com GPU NVIDIA)
+
+O [MotionBricks](https://github.com/NVlabs/motionbricks) é um modelo da NVIDIA
+que gera o movimento de um personagem entre poses. No OpenGlitch ele é um
+componente opcional do agente de animação. Só instale se o computador tiver
+uma placa NVIDIA (a NVIDIA testou os exemplos numa RTX 4090; em placas menores
+o desempenho não está documentado). Sem placa NVIDIA, use o prompt de cima: o
+OpenGlitch funciona inteiro sem o MotionBricks.
+
+Precisa, além de Python e Git, de [Git LFS](https://git-lfs.com/) e de
+[uv](https://docs.astral.sh/uv/getting-started/installation/), e de alguns GB
+de disco.
+
+```text
+Instale o OpenGlitch completo para mim, com o MotionBricks. Meu computador tem
+placa NVIDIA.
+
+1. Confira se tenho Python 3.11 ou mais novo, Git, Git LFS e uv, e se o comando
+   "nvidia-smi" mostra a minha placa. Se faltar algo, pare e me diga como
+   instalar.
+2. Clone https://github.com/joaquimmoraesgabriel-cmyk/OpenGlitch.git numa pasta
+   permanente dentro da minha pasta de usuário, chamada OpenGlitch. Se ela já
+   existir, entre nela e rode "git pull".
+3. Dentro da pasta, rode "python install.py --motionbricks" (ou "python3") e me
+   mostre a saída inteira. O download do MotionBricks é grande e demora.
+4. Me mostre o aviso de licenças do MotionBricks que o instalador imprime.
+5. Rode o comando de teste que o instalador mostra no final. A primeira vez
+   leva alguns minutos. Me diga se gerou o arquivo de animação ou qual foi o
+   erro, sem tentar contornar.
+6. Diga em quais clientes de IA o OpenGlitch foi registrado e me lembre de
+   fechar e abrir o cliente de novo.
 
 Use só o install.py do repositório para instalar e registrar. Não edite
 arquivos de configuração à mão, a menos que o instalador falhe e eu autorize.
@@ -228,6 +270,34 @@ Variáveis de ambiente opcionais: `OPENGLITCH_DATA` muda a pasta da memória e
 - **`python` não é reconhecido.** O Python não está instalado ou não está no
   PATH. No Windows, tente `py install.py`.
 
+## MotionBricks (opcional)
+
+Com o MotionBricks instalado, o agente de animação pode gerar movimento de
+personagem em vez de só usar clipes prontos ou animar por script.
+
+- **O que ele faz**: gera o movimento entre quatro poses de contexto e até
+  quatro poses de destino. Cada geração dura de 0,6 a 1,9 s, e movimento longo
+  é uma sequência de destinos que a IA planeja.
+- **O que ele não faz**: não entende texto ("faça o personagem pular"). A IA
+  dirige, escolhendo as poses de destino, onde ficam e em que ordem.
+- **Como chega ao jogo**: o gerador grava um BVH no esqueleto SOMA, o Blender
+  converte para FBX e a engine faz o retargeting para o seu personagem. Tudo
+  acontece na sua máquina; o jogo recebe os arquivos de animação prontos.
+- **Licença, importante**: os clipes de exemplo que acompanham o MotionBricks
+  só podem ser usados para avaliar e testar. Animação gerada a partir deles
+  não pode entrar num jogo publicado. Para produção, as poses precisam vir de
+  clipes seus. Leia as [licenças](https://github.com/NVlabs/motionbricks#license).
+
+Estado atual: a gravação do BVH e a conversão para FBX no Blender estão
+testadas. A chamada ao modelo foi escrita a partir da documentação oficial e
+ainda não foi executada pelos mantenedores; rode o teste que o instalador
+mostra e, se falhar, abra uma issue com o erro. Os arquivos ficam em
+`extras/motionbricks/`.
+
+Para instalar depois, numa instalação que já existe: `python install.py
+--motionbricks`. O agente consulta `motionbricks_info` para saber se o
+componente está disponível.
+
 ## Usar com Unity, Unreal e Blender
 
 O OpenGlitch dá à IA o conhecimento e o método; quem mexe na engine é a IA, com
@@ -268,6 +338,7 @@ fazer e o da ferramenta para executar lá dentro.
 | Memória | `memory_tree`, `memory_search`, `memory_read`, `memory_write` |
 | Delegação | `delegate_research`, `task_status` |
 | Documentos locais | `local_docs`, `local_doc_read` |
+| MotionBricks (opcional) | `motionbricks_info` |
 | Problemas | `report_problem`, `list_problems` |
 | Subagente | `research_begin`, `research_text`, `research_tables`, `research_images`, `research_view_image`, `research_complete` |
 
@@ -285,6 +356,7 @@ tests/       testes das regras, das ferramentas e do fluxo por MCP
 sources/     transcrição do guia que deu origem ao conteúdo
 assets/      imagens do README
 install.py   instalador: cria o ambiente e registra nos clientes de IA
+extras/      componentes opcionais (motionbricks/: gerador de movimento, só GPU NVIDIA)
 ```
 
 ## Manutenção do conteúdo

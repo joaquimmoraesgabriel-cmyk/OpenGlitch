@@ -245,6 +245,14 @@ async def local_doc_read(token: str, doc: str) -> str:
     return await _run("local_doc_read", token=token, doc=doc)
 
 
+@tool("MotionBricks, componente OPCIONAL de geração de movimento (modelo da NVIDIA, só em "
+      "GPU NVIDIA): diz se está instalado nesta máquina, os comandos para gerar animação e "
+      "converter para FBX, o que ele faz e não faz, e os limites de licença. Chame antes de "
+      "propor gerar movimento com ele.")
+async def motionbricks_info() -> str:
+    return await _run("motionbricks_info")
+
+
 # ------------------------------------------------------------------- delegação
 
 

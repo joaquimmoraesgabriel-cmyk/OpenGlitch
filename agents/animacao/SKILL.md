@@ -247,6 +247,29 @@ Mixamo) e animações prontas para testar o jogo, trocando depois pelas suas.
 - Os resultados do playtest e o que foi ajustado.
 - Pendências e a quem pertencem.
 
+## Geração de movimento com o MotionBricks (opcional)
+
+Algumas instalações têm o MotionBricks, um modelo da NVIDIA que gera o
+movimento entre poses e só roda em GPU NVIDIA. Antes de contar com ele, chame
+`motionbricks_info`: se não estiver instalado, siga o caminho normal (keyframe
+por script, clipes prontos ou mocap) e não prometa geração de movimento.
+
+Quando estiver instalado:
+
+- **Você é o diretor, não o modelo.** Ele não entende texto. Você decide as
+  poses de destino, onde ficam e em que ordem, e escreve o plano. Cada geração
+  dura de 0,6 a 1,9 s; movimento longo é uma cadeia de destinos.
+- **Leia o método** no documento local `animation-td/motionbricks-gerar-animacao`
+  antes de escrever o primeiro plano.
+- **Rode o teste primeiro.** O script de geração foi escrito a partir da
+  documentação e ainda pode precisar de ajuste.
+- **Avise sobre a licença.** Animação feita a partir dos clipes de exemplo da
+  NVIDIA serve para testar, não para um jogo publicado. Pergunte ao usuário se
+  ele tem clipes próprios antes de produzir algo que vá para o jogo.
+- **A saída é no esqueleto SOMA.** Para o personagem do jogo, converta para
+  FBX e use o retargeting Humanoid da engine. Confira por captura.
+- **Use o contato dos pés** que vem com a saída para travar os pés com IK.
+
 ## Limites
 
 - A modelagem, a texturização e o personagem pronto são da Arte 3D. Você parte

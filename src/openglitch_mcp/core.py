@@ -1228,6 +1228,50 @@ class App:
         lines.append(f"Arquivo: {self.memory_dir / 'problems.json'}")
         return "\n".join(lines)
 
+    # ============================================================= motionbricks
+
+    def motionbricks_info(self) -> str:
+        """Diz se o componente opcional do MotionBricks está instalado e como usá-lo."""
+        extras = self.root / "extras" / "motionbricks"
+        marker = read_json(self.memory_dir.parent / "motionbricks" / "instalado.json", None)
+        lines = ["# MotionBricks (componente opcional)", ""]
+        if not marker or not Path(marker.get("repo", "")).is_dir():
+            return "\n".join(lines + [
+                "NÃO instalado nesta máquina. Não tente gerar animação com ele.",
+                "",
+                "É um modelo da NVIDIA que gera o movimento entre poses e só roda em GPU NVIDIA. "
+                "Para instalar, o usuário roda na pasta do OpenGlitch:",
+                f"  python install.py --motionbricks      (pasta: {self.root})",
+                "",
+                "Sem ele, a animação segue o caminho normal: keyframe por script, clipes prontos "
+                "ou mocap. Diga isso ao usuário em vez de prometer geração de movimento.",
+            ])
+        repo = marker["repo"]
+        lines += [
+            f"Instalado em: {repo}",
+            f"GPU registrada na instalação: {marker.get('gpu', 'não registrada')}",
+            "",
+            "## Comandos",
+            "Teste (rode primeiro; a primeira execução monta o plano do TensorRT e leva minutos):",
+            f"  uv run --project \"{repo}\" python \"{extras / 'gerar.py'}\" --teste --saida <pasta>",
+            "Gerar a partir de um plano:",
+            f"  uv run --project \"{repo}\" python \"{extras / 'gerar.py'}\" plano.json --saida <pasta> --nome <nome>",
+            "Converter o BVH em FBX (Blender em segundo plano):",
+            f"  blender -b --factory-startup --python \"{extras / 'bvh_para_fbx.py'}\" -- <entrada.bvh> <saida.fbx>",
+            "",
+            "## O que saber antes de usar",
+            "- Não é texto para movimento: você escolhe as poses de destino, a posição e a ordem.",
+            "- Cada geração dura de 0,6 a 1,9 s; movimento longo é uma cadeia de destinos.",
+            "- A saída é no esqueleto SOMA; outro personagem precisa de retargeting (Humanoid na Unity).",
+            "- Os clipes de exemplo têm licença só de avaliação interna: animação feita a partir "
+            "deles não entra em jogo publicado. Para produção, use clipes do usuário (--clipes).",
+            "- O script de geração foi escrito a partir da documentação oficial e pode precisar "
+            "de ajuste: se falhar, registre com report_problem e mostre o erro ao usuário.",
+            "",
+            "Leia o método completo: local_doc_read(token, \"animation-td/motionbricks-gerar-animacao\").",
+        ]
+        return "\n".join(lines)
+
     # ============================================================== pipelines
 
     def _pipelines(self) -> list[dict]:

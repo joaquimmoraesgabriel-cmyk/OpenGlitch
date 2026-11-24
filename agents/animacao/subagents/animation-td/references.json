@@ -86,6 +86,28 @@
       "url_origem": "pdf",
       "pesquisavel": true,
       "uso": "Como a Unity cria o LOD Group na importação quando as malhas são nomeadas _LOD0, _LOD1, _LOD2."
+    },
+    {
+      "id": "motionbricks-repo",
+      "title": "MotionBricks: repositório oficial",
+      "author": "NVIDIA (NVlabs)",
+      "type": "documentacao",
+      "url": "https://github.com/NVlabs/motionbricks",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "O que o MotionBricks é, como instalar, os demos e as licenças do código, dos modelos e dos clipes de exemplo.",
+      "nota": "Não vem do guia original. Componente opcional do OpenGlitch, só para GPU NVIDIA."
+    },
+    {
+      "id": "motionbricks-runtime-api",
+      "title": "MotionBricks: Runtime API",
+      "author": "NVIDIA (NVlabs)",
+      "type": "documentacao",
+      "url": "https://github.com/NVlabs/motionbricks/blob/main/docs/runtime_api.md",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Como integrar: engines, formato das poses, colocação das poses na cena, duração de uma geração, contato dos pés e encadeamento de gerações.",
+      "nota": "Não vem do guia original."
     }
   ]
 }
