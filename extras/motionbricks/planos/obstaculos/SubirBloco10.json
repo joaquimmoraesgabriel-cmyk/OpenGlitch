@@ -1,0 +1,618 @@
+{
+ "_descricao": "Subir num bloco de 1.0 m com as mãos na borda: mãos em cima, o corpo sobe nos braços com a perna direita aberta para o lado, o pé direito apoia em cima, o peso passa para ele, a outra perna vem e fica em pé.",
+ "obstaculos": [
+  {
+   "nome": "bloco",
+   "centro": [
+    0,
+    0.5,
+    1.6
+   ],
+   "tamanho": [
+    1.4,
+    1.0,
+    1.2
+   ]
+  }
+ ],
+ "poses": {
+  "em_pe": {
+   "mirar": [
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.16,
+      -1.0,
+      0.02
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      0.08,
+      -1.0,
+      0.15
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.16,
+      -1.0,
+      0.02
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      -0.08,
+      -1.0,
+      0.15
+     ]
+    ]
+   ]
+  },
+  "diante": {
+   "base": "em_pe",
+   "lugar": [
+    0,
+    0.56
+   ]
+  },
+  "maos_na_borda": {
+   "base": "em_pe",
+   "lugar": [
+    0.0,
+    0.62
+   ],
+   "mirar": [
+    [
+     "Hips",
+     "Spine1",
+     [
+      0,
+      1,
+      0.24
+     ]
+    ],
+    [
+     "Spine1",
+     "Spine2",
+     [
+      0,
+      1,
+      0.36000000000000004
+     ]
+    ],
+    [
+     "Spine2",
+     "Chest",
+     [
+      0,
+      1,
+      0.4
+     ]
+    ],
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.16,
+      -1.0,
+      0.02
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      0.08,
+      -1.0,
+      0.15
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.16,
+      -1.0,
+      0.02
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      -0.08,
+      -1.0,
+      0.15
+     ]
+    ]
+   ],
+   "altura": -0.08,
+   "alcancar": [
+    [
+     "LeftHand",
+     [
+      0.21,
+      1.04,
+      1.1
+     ]
+    ],
+    [
+     "RightHand",
+     [
+      -0.21,
+      1.04,
+      1.12
+     ]
+    ],
+    [
+     "LeftFoot",
+     [
+      0.1,
+      0.072,
+      0.56
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ],
+    [
+     "RightFoot",
+     [
+      -0.1,
+      0.072,
+      0.46
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ]
+   ],
+   "pe_plano": [
+    "LeftFoot",
+    "RightFoot"
+   ]
+  },
+  "impulso": {
+   "base": "em_pe",
+   "lugar": [
+    0.0,
+    0.8
+   ],
+   "mirar": [
+    [
+     "Hips",
+     "Spine1",
+     [
+      0,
+      1,
+      0.6
+     ]
+    ],
+    [
+     "Spine1",
+     "Spine2",
+     [
+      0,
+      1,
+      0.9
+     ]
+    ],
+    [
+     "Spine2",
+     "Chest",
+     [
+      0,
+      1,
+      1.0
+     ]
+    ],
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.16,
+      -1.0,
+      0.02
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      0.08,
+      -1.0,
+      0.15
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.16,
+      -1.0,
+      0.02
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      -0.08,
+      -1.0,
+      0.15
+     ]
+    ],
+    [
+     "RightLeg",
+     "RightShin",
+     [
+      -0.9,
+      -0.12,
+      0.35
+     ]
+    ],
+    [
+     "RightShin",
+     "RightFoot",
+     [
+      0.2,
+      -0.02,
+      -0.97
+     ]
+    ]
+   ],
+   "altura": 0.20799999999999996,
+   "alcancar": [
+    [
+     "LeftHand",
+     [
+      0.21,
+      1.04,
+      1.1
+     ]
+    ],
+    [
+     "RightHand",
+     [
+      -0.21,
+      1.04,
+      1.12
+     ]
+    ],
+    [
+     "LeftFoot",
+     [
+      0.1,
+      0.33999999999999997,
+      0.76
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ]
+   ]
+  },
+  "pe_em_cima": {
+   "base": "em_pe",
+   "lugar": [
+    0.0,
+    0.9
+   ],
+   "mirar": [
+    [
+     "Hips",
+     "Spine1",
+     [
+      0,
+      1,
+      0.54
+     ]
+    ],
+    [
+     "Spine1",
+     "Spine2",
+     [
+      0,
+      1,
+      0.81
+     ]
+    ],
+    [
+     "Spine2",
+     "Chest",
+     [
+      0,
+      1,
+      0.9
+     ]
+    ],
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.16,
+      -1.0,
+      0.02
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      0.08,
+      -1.0,
+      0.15
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.16,
+      -1.0,
+      0.02
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      -0.08,
+      -1.0,
+      0.15
+     ]
+    ]
+   ],
+   "altura": 0.258,
+   "alcancar": [
+    [
+     "LeftHand",
+     [
+      0.21,
+      1.04,
+      1.1
+     ]
+    ],
+    [
+     "RightHand",
+     [
+      -0.21,
+      1.04,
+      1.12
+     ]
+    ],
+    [
+     "RightFoot",
+     [
+      -0.16,
+      1.072,
+      1.18
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ],
+    [
+     "LeftFoot",
+     [
+      0.1,
+      0.37,
+      0.86
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ]
+   ],
+   "pe_plano": [
+    "RightFoot"
+   ]
+  },
+  "passa_o_peso": {
+   "base": "em_pe",
+   "lugar": [
+    -0.1,
+    1.0
+   ],
+   "mirar": [
+    [
+     "Hips",
+     "Spine1",
+     [
+      0,
+      1,
+      0.27
+     ]
+    ],
+    [
+     "Spine1",
+     "Spine2",
+     [
+      0,
+      1,
+      0.405
+     ]
+    ],
+    [
+     "Spine2",
+     "Chest",
+     [
+      0,
+      1,
+      0.45
+     ]
+    ],
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.16,
+      -1.0,
+      0.224
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      0.08,
+      -0.79,
+      0.6
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.16,
+      -1.0,
+      0.12200000000000001
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      -0.08,
+      -0.895,
+      0.375
+     ]
+    ],
+    [
+     "LeftLeg",
+     "LeftShin",
+     [
+      0.82,
+      -0.42,
+      0.2
+     ]
+    ],
+    [
+     "LeftShin",
+     "LeftFoot",
+     [
+      -0.1,
+      -0.3,
+      -0.95
+     ]
+    ]
+   ],
+   "altura": 0.5680000000000001,
+   "alcancar": [
+    [
+     "RightFoot",
+     [
+      -0.16,
+      1.072,
+      1.18
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ]
+   ],
+   "pe_plano": [
+    "RightFoot"
+   ]
+  },
+  "em_cima": {
+   "base": "em_pe",
+   "lugar": [
+    -0.04,
+    1.158
+   ],
+   "altura": 1.0
+  }
+ },
+ "inicio": {
+  "pose": "diante"
+ },
+ "destinos": [
+  {
+   "nome": "maos_na_borda",
+   "pose": "maos_na_borda",
+   "tokens": 8,
+   "antecipar": 4,
+   "fixar": [
+    "LeftFoot",
+    "RightFoot"
+   ],
+   "levar": [
+    "LeftHand",
+    "RightHand"
+   ]
+  },
+  {
+   "nome": "impulso",
+   "pose": "impulso",
+   "tokens": 7,
+   "antecipar": 4,
+   "fixar": [
+    "LeftHand",
+    "RightHand"
+   ],
+   "levar": [
+    "RightFoot"
+   ]
+  },
+  {
+   "nome": "pe_em_cima",
+   "pose": "pe_em_cima",
+   "tokens": 6,
+   "antecipar": 4,
+   "fixar": [
+    "LeftHand",
+    "RightHand"
+   ],
+   "nivelar": [
+    "RightFoot"
+   ],
+   "levar": [
+    "RightFoot"
+   ]
+  },
+  {
+   "nome": "passa_o_peso",
+   "pose": "passa_o_peso",
+   "tokens": 7,
+   "antecipar": 5,
+   "fixar": [
+    "RightFoot"
+   ],
+   "levar": [
+    "LeftFoot"
+   ]
+  },
+  {
+   "nome": "em_cima",
+   "pose": "em_cima",
+   "tokens": 8,
+   "fixar": [
+    "RightFoot"
+   ],
+   "levar": [
+    "LeftFoot"
+   ]
+  }
+ ]
+}

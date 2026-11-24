@@ -83,6 +83,43 @@ class Box:
         return float(self.center[1] + self.half[1])
 
 
+def support_height(boxes: list, point) -> float:
+    """Altura do apoio embaixo de um ponto: o topo da caixa mais alta que fica embaixo dele
+    (o ponto não pode estar mais de 15 cm abaixo desse topo), ou zero, que é o chão."""
+    point = np.asarray(point, dtype=float)
+    height = 0.0
+    for box in boxes:
+        local = box.local(point)
+        top = float(box.center[1] + box.half[1])
+        if abs(local[0]) <= box.half[0] and abs(local[2]) <= box.half[2] and point[1] >= top - 0.15:
+            height = max(height, top)
+    return height
+
+
+def feet_on_support(world: np.ndarray, names: list[str], boxes: list, rest_ankle: float, tolerance: float = 0.03) -> dict:
+    """Os pés estão apoiados no começo e no fim? Por pé, quanto o tornozelo está acima do apoio
+    (chão ou topo de caixa) e quanto a ponta do pé está abaixo dele, em centímetros. Uma
+    animação de obstáculo começa e termina em pé: pé no ar ou com a ponta enterrada é defeito
+    que a medida de penetração não mostra (a correção automática tira o pé de dentro da caixa
+    levantando-o)."""
+    out = {"passou": True}
+    for label, frame in (("inicio", 0), ("fim", len(world) - 1)):
+        entry = {}
+        for side in ("Left", "Right"):
+            if f"{side}Foot" not in names:
+                continue
+            ankle = world[frame, names.index(f"{side}Foot")]
+            floor = support_height(boxes, ankle)
+            above = float(ankle[1] - floor - rest_ankle)
+            toe_name = f"{side}ToeEnd" if f"{side}ToeEnd" in names else f"{side}ToeBase"
+            below = max(0.0, floor - float(world[frame, names.index(toe_name)][1])) if toe_name in names else 0.0
+            entry[f"{side}Foot"] = {"tornozelo_acima_do_apoio_cm": round(above * 100, 1), "ponta_abaixo_do_apoio_cm": round(below * 100, 1)}
+            if abs(above) > tolerance or below > tolerance:
+                out["passou"] = False
+        out[label] = entry
+    return out
+
+
 def load(specs) -> list[Box]:
     boxes = [Box(s) for s in (specs or [])]
     names = [b.name for b in boxes]

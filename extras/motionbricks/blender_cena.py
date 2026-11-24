@@ -15,7 +15,9 @@ O que faz:
     gerada), em metros, com o eixo do personagem convertido para o do Blender;
   - cria uma caixa por obstáculo do plano, na coleção "Obstaculos", e o chão;
   - renderiza cada quadro pedido de lado e de três quartos, com o obstáculo, em
-    <saida>/<nome>_q<quadro>_<vista>.png, e uma folha com todos;
+    <saida>/<nome>_q<quadro>_<vista>.png, e uma folha com todos. `--vistas lado,frente,cima`
+    escolhe os ângulos (lado, quina, frente, tras, outro_lado, cima) e `--zoom 2` aproxima a
+    câmera, para ver de perto a mão na borda e o pé na quina;
   - salva <saida>/<nome>.blend, para abrir, olhar e ajustar as poses à mão.
 
 Depois de ajustar as poses no Blender, `blender_exportar.py` leva tudo de volta para um plano.
@@ -147,7 +149,14 @@ def joint_positions(armature, frame: int) -> dict:
     return {b.name: armature.matrix_world @ b.head for b in armature.pose.bones}
 
 
-def render_views(armature, frames: list[int], out_dir: Path, name: str, resolution=(640, 480)) -> list[str]:
+# No Blender o personagem olha para -Y. Deslocamento da câmera a partir do foco (o quadril).
+VIEWS = {"lado": (5.0, 0.0, 0.3), "quina": (3.6, -3.6, 1.6), "frente": (0.0, -5.0, 0.3), "tras": (0.0, 5.0, 0.6),
+         "outro_lado": (-5.0, 0.0, 0.3), "cima": (0.01, -0.6, 5.5)}
+
+
+def render_views(armature, frames: list[int], out_dir: Path, name: str, resolution=(640, 480),
+                 view_names=("lado", "quina"), zoom: float = 1.0) -> list[str]:
+    """Captura cada quadro pedido de cada vista. `zoom` aproxima a câmera (2 = metade da distância)."""
     scene = bpy.context.scene
     scene.render.engine = "BLENDER_WORKBENCH"
     scene.display.shading.light = "STUDIO"
@@ -160,8 +169,7 @@ def render_views(armature, frames: list[int], out_dir: Path, name: str, resoluti
     scene.collection.objects.link(camera)
     scene.camera = camera
     written = []
-    # No Blender o personagem olha para -Y. "lado": câmera em +X; "quina": de frente e de lado.
-    views = {"lado": Vector((5.0, 0.0, 0.3)), "quina": Vector((3.6, -3.6, 1.6))}
+    views = {v: Vector(VIEWS[v]) / max(zoom, 0.1) for v in view_names}
     for frame in frames:
         hips = joint_positions(armature, frame).get("Hips", Vector((0, 0, 1)))
         focus = Vector((hips.x, hips.y, max(0.9, hips.z * 0.75)))
@@ -208,7 +216,14 @@ def main() -> None:
     parser.add_argument("--quadros", default="todos",
                         help="\"todos\", ou uma lista 1,5,9, ou \"cada:N\" para um a cada N quadros")
     parser.add_argument("--sem-render", action="store_true")
+    parser.add_argument("--vistas", default="lado,quina",
+                        help="vistas, separadas por vírgula: " + ", ".join(VIEWS))
+    parser.add_argument("--zoom", type=float, default=1.0, help="aproxima a câmera: 2 = metade da distância")
     args = parser.parse_args(argv)
+    view_names = [v.strip() for v in args.vistas.split(",") if v.strip()]
+    unknown = [v for v in view_names if v not in VIEWS]
+    if unknown:
+        raise SystemExit(f"vista desconhecida: {unknown}. Existem: {', '.join(VIEWS)}")
     args.saida.mkdir(parents=True, exist_ok=True)
 
     plan = json.loads(args.plano.read_text(encoding="utf-8"))
@@ -225,7 +240,8 @@ def main() -> None:
         frames = list(range(first, last + 1, int(args.quadros[5:])))
     else:
         frames = [int(v) for v in args.quadros.split(",")]
-    images = [] if args.sem_render else render_views(armature, frames, args.saida, args.nome)
+    images = [] if args.sem_render else render_views(armature, frames, args.saida, args.nome,
+                                                     view_names=view_names, zoom=args.zoom)
     blend = args.saida / f"{args.nome}.blend"
     if bpy.app.background:
         bpy.ops.wm.save_as_mainfile(filepath=str(blend))

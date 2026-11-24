@@ -1,0 +1,301 @@
+{
+ "_descricao": "Levantar de uma caixa de 0.45 m: inclina o tronco para a frente, tira o quadril do assento e fica em pé.",
+ "obstaculos": [
+  {
+   "nome": "caixa",
+   "centro": [
+    0,
+    0.225,
+    -0.435
+   ],
+   "tamanho": [
+    0.9,
+    0.45,
+    0.63
+   ]
+  }
+ ],
+ "poses": {
+  "em_pe": {
+   "mirar": [
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.16,
+      -1.0,
+      0.02
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      0.08,
+      -1.0,
+      0.15
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.16,
+      -1.0,
+      0.02
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      -0.08,
+      -1.0,
+      0.15
+     ]
+    ]
+   ]
+  },
+  "sentado": {
+   "base": "em_pe",
+   "lugar": [
+    0,
+    -0.3
+   ],
+   "altura": -0.46199999999999997,
+   "mirar": [
+    [
+     "Hips",
+     "Spine1",
+     [
+      0,
+      1,
+      0.06
+     ]
+    ],
+    [
+     "Spine1",
+     "Spine2",
+     [
+      0,
+      1,
+      0.09000000000000001
+     ]
+    ],
+    [
+     "Spine2",
+     "Chest",
+     [
+      0,
+      1,
+      0.1
+     ]
+    ],
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.2,
+      -0.85,
+      0.4
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      -0.1,
+      -0.35,
+      0.93
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.2,
+      -0.85,
+      0.4
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      0.1,
+      -0.35,
+      0.93
+     ]
+    ]
+   ],
+   "alcancar": [
+    [
+     "LeftFoot",
+     [
+      0.1,
+      0.072,
+      0.072
+     ],
+     [
+      0,
+      0.4,
+      1
+     ]
+    ],
+    [
+     "RightFoot",
+     [
+      -0.1,
+      0.072,
+      0.072
+     ],
+     [
+      0,
+      0.4,
+      1
+     ]
+    ]
+   ],
+   "pe_plano": [
+    "LeftFoot",
+    "RightFoot"
+   ]
+  },
+  "sobe": {
+   "base": "em_pe",
+   "lugar": [
+    0.0,
+    -0.14
+   ],
+   "mirar": [
+    [
+     "Hips",
+     "Spine1",
+     [
+      0,
+      1,
+      0.33
+     ]
+    ],
+    [
+     "Spine1",
+     "Spine2",
+     [
+      0,
+      1,
+      0.49500000000000005
+     ]
+    ],
+    [
+     "Spine2",
+     "Chest",
+     [
+      0,
+      1,
+      0.55
+     ]
+    ],
+    [
+     "LeftArm",
+     "LeftForeArm",
+     [
+      0.16,
+      -1.0,
+      0.224
+     ]
+    ],
+    [
+     "LeftForeArm",
+     "LeftHand",
+     [
+      0.08,
+      -0.79,
+      0.6
+     ]
+    ],
+    [
+     "RightArm",
+     "RightForeArm",
+     [
+      -0.16,
+      -1.0,
+      0.224
+     ]
+    ],
+    [
+     "RightForeArm",
+     "RightHand",
+     [
+      -0.08,
+      -0.79,
+      0.6
+     ]
+    ]
+   ],
+   "altura": -0.3,
+   "alcancar": [
+    [
+     "LeftFoot",
+     [
+      0.1,
+      0.072,
+      0.072
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ],
+    [
+     "RightFoot",
+     [
+      -0.1,
+      0.072,
+      0.072
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ]
+   ],
+   "pe_plano": [
+    "LeftFoot",
+    "RightFoot"
+   ]
+  },
+  "de_pe": {
+   "base": "em_pe",
+   "lugar": [
+    0,
+    0.05
+   ]
+  }
+ },
+ "inicio": {
+  "pose": "sentado"
+ },
+ "destinos": [
+  {
+   "nome": "sobe",
+   "pose": "sobe",
+   "tokens": 8,
+   "antecipar": 6,
+   "fixar": [
+    "LeftFoot",
+    "RightFoot"
+   ]
+  },
+  {
+   "nome": "de_pe",
+   "pose": "de_pe",
+   "tokens": 9,
+   "fixar": [
+    "LeftFoot",
+    "RightFoot"
+   ]
+  }
+ ]
+}

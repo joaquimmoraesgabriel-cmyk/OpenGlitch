@@ -267,63 +267,183 @@ def stable_bend(skeleton: Skeleton, world_rot: np.ndarray, world_pos: np.ndarray
     return side if float(np.linalg.norm(side)) > 0.05 else forward
 
 
-def avoid(skeleton: Skeleton, frames: np.ndarray, boxes: list, margin: float = 0.01) -> tuple[np.ndarray, dict]:
-    """Tira mãos e pés de dentro dos obstáculos, depois de gerar.
+def _turn(vector: np.ndarray, axis: np.ndarray, angle: float) -> np.ndarray:
+    """Gira um vetor em volta de um eixo unitário (Rodrigues)."""
+    c, sn = float(np.cos(angle)), float(np.sin(angle))
+    return vector * c + np.cross(axis, vector) * sn + axis * float(np.dot(axis, vector)) * (1.0 - c)
 
-    O modelo não enxerga a cena. As poses e o `fixar` resolvem o grosso; o que sobra costuma ser
-    a ponta do pé raspando a quina por poucos centímetros. Aqui, em cada quadro, a ponta de cada
-    membro (tornozelo com os dedos; punho) é empurrada para fora pela face mais próxima, o pé de
-    preferência por cima, e o membro é refeito por IK. O empurrão é suavizado no tempo (nunca
-    menor que o necessário), para não virar um tranco. Não mexe em quadril, joelho nem tronco:
-    isso se corrige na pose. Devolve os quadros e, por membro, o maior desvio e em quantos quadros.
+
+def _leg(skeleton: Skeleton, world_rot: np.ndarray, world_pos: np.ndarray, end: str, target: np.ndarray, swivel: float):
+    """Joelho e tornozelo de uma perna com o tornozelo em `target` e o joelho girado `swivel`
+    radianos para fora, em volta da linha quadril-tornozelo. Devolve (joelho, tornozelo, lado)."""
+    e = skeleton.joint(end)
+    m = skeleton.parents[e]
+    r = skeleton.parents[m]
+    upper = float(np.linalg.norm(world_pos[m] - world_pos[r]))
+    lower = float(np.linalg.norm(world_pos[e] - world_pos[m]))
+    to_target = target - world_pos[r]
+    wanted = max(float(np.linalg.norm(to_target)), 1e-6)
+    axis = to_target / wanted
+    distance = float(np.clip(wanted, abs(upper - lower) + 1e-4, upper + lower - 1e-4))
+    base = world_rot[0] @ skeleton.rest_world_rot[0].T
+    hint = world_pos[m] - world_pos[r]
+    side = hint - axis * float(np.dot(hint, axis))
+    if float(np.linalg.norm(side)) < 0.05:                # perna esticada: o joelho dobra para a frente
+        forward = base @ np.array([0.0, 0.0, 1.0])
+        side = forward - axis * float(np.dot(forward, axis))
+    side /= max(float(np.linalg.norm(side)), 1e-9)
+    if swivel:
+        out = (base @ np.array([1.0, 0.0, 0.0])) * (1.0 if end.startswith("Left") else -1.0)
+        sign = 1.0 if float(np.dot(_turn(side, axis, 0.3) - side, out)) >= 0.0 else -1.0
+        side = _turn(side, axis, sign * swivel)
+    along = (upper ** 2 - lower ** 2 + distance ** 2) / (2 * distance)
+    height = float(np.sqrt(max(upper ** 2 - along ** 2, 0.0)))
+    return world_pos[r] + axis * along + side * height, world_pos[r] + axis * distance, side
+
+
+def avoid(skeleton: Skeleton, frames: np.ndarray, boxes: list, margin: float = 0.01, fps: float = 30.0) -> tuple[np.ndarray, dict]:
+    """Tira braços e pernas de dentro dos obstáculos, depois de gerar.
+
+    O modelo não enxerga a cena. As poses e o `fixar` resolvem o grosso; o que sobra é a ponta do
+    pé raspando a quina, ou a canela cortando a quina enquanto a perna de trás sobe. Em cada
+    quadro em que a perna (coxa, joelho, canela, tornozelo ou dedos) entra numa caixa, procura-se
+    a menor correção que a tira de lá: empurrar o pé para fora pela face mais próxima (de
+    preferência por cima), subir mais o tornozelo e/ou girar o joelho para fora em volta da linha
+    quadril-tornozelo, que é o que uma pessoa faz para passar a perna por cima de uma borda. Pé
+    parado no apoio não é levantado: só o joelho gira. Na mão, só o punho é empurrado para fora.
+    As correções são suavizadas no tempo (nunca menores que o necessário), para não virar tranco.
+    Não mexe em quadril nem tronco: isso se corrige na pose. Devolve os quadros e, por membro, o
+    maior desvio, o maior giro do joelho e em quantos quadros.
     """
     frames = np.asarray(frames, dtype=float).copy()
-    limbs = {"LeftFoot": ("LeftFoot", "LeftToeBase", "LeftToeEnd"), "RightFoot": ("RightFoot", "RightToeBase", "RightToeEnd"),
-             "LeftHand": ("LeftHand",), "RightHand": ("RightHand",)}
     count = len(frames)
-    world = skeleton.world_positions(frames)
     kernel = np.exp(-(np.arange(-4, 5) ** 2) / (2 * 1.5 ** 2))
     kernel /= kernel.sum()
+    up = np.array([0.0, 1.0, 0.0])
+
+    # Nas pontas do clipe a correção some: o primeiro e o último quadro são as poses pedidas e só
+    # mudam se eles mesmos estiverem dentro de uma caixa (senão o pé terminaria no ar).
+    edge = min(6, count // 2)
+    ramp = np.ones(count)
+    if edge:
+        ramp[:edge] = np.arange(edge) / edge
+        ramp[count - edge:] = np.arange(edge)[::-1] / edge
 
     def envelope(values: np.ndarray) -> np.ndarray:
         pad = np.pad(values, 3, mode="edge")
         widest = np.max(np.stack([pad[i:i + count] for i in range(7)]), axis=0)
         smooth = np.convolve(np.pad(widest, 4, mode="edge"), kernel, mode="valid")
-        return np.maximum(smooth, values)
+        return np.maximum(smooth * ramp, values)
 
-    report = {}
-    for end, points in limbs.items():
-        index = [skeleton.index[n] for n in points if n in skeleton.index]
+    def smooth_vectors(push: np.ndarray) -> np.ndarray:
+        return np.stack([envelope(np.maximum(push[:, c], 0.0)) - envelope(np.maximum(-push[:, c], 0.0)) for c in range(3)], axis=1)
+
+    def inside(point, lift=False) -> np.ndarray:
+        best = np.zeros(3)
+        for box in boxes:
+            move = box.exit(point, margin, lift=lift)
+            if float(np.linalg.norm(move)) > float(np.linalg.norm(best)):
+                best = move
+        return best
+
+    def fk_of(f: int):
+        pose = Pose(skeleton)
+        pose.pos, pose.rot = frames[f, :, :3].copy(), quat_to_matrix(frames[f, :, 3:])
+        world_rot, world_pos = skeleton.fk(pose.pos, pose.rot)
+        return pose, world_rot, world_pos
+
+    report: dict = {}
+
+    def note(end: str, push_cm: float, moved: int, swivel_deg: float = 0.0) -> None:
+        old = report.get(end, {"maior_desvio_cm": 0.0, "quadros": 0})
+        new = {"maior_desvio_cm": round(max(old["maior_desvio_cm"], push_cm), 1), "quadros": max(old["quadros"], moved)}
+        swivel_deg = max(swivel_deg, old.get("giro_do_joelho_graus", 0.0))
+        if swivel_deg > 0.5:
+            new["giro_do_joelho_graus"] = round(swivel_deg, 0)
+        report[end] = new
+
+    # ------------------------------------------------------------------ mãos: só o punho
+    world = skeleton.world_positions(frames)
+    for end in ("LeftHand", "RightHand"):
         if end not in skeleton.index:
             continue
-        push = np.zeros((count, 3))
-        for f in range(count):
-            best = np.zeros(3)
-            for box in boxes:
-                for j in index:
-                    move = box.exit(world[f, j], margin, lift=end.endswith("Foot"))
-                    if float(np.linalg.norm(move)) > float(np.linalg.norm(best)):
-                        best = move
-            push[f] = best
+        j = skeleton.joint(end)
+        push = np.stack([inside(world[f, j]) for f in range(count)])
         if not push.any():
             continue
-        smooth = np.stack([envelope(np.maximum(push[:, c], 0.0)) - envelope(np.maximum(-push[:, c], 0.0)) for c in range(3)], axis=1)
-        j = skeleton.joint(end)
+        smooth = smooth_vectors(push)
         moved = np.where(np.linalg.norm(smooth, axis=1) > 0.002)[0]
         for f in moved:
-            pose = Pose(skeleton)
-            pose.pos, pose.rot = frames[f, :, :3].copy(), quat_to_matrix(frames[f, :, 3:])
-            world_rot, world_pos = skeleton.fk(pose.pos, pose.rot)
+            pose, world_rot, world_pos = fk_of(f)
             keep = world_rot[j].copy()
-            pose.reach(end, world_pos[j] + smooth[f], bend=stable_bend(skeleton, world_rot, world_pos, end))
+            pose.reach(end, world_pos[j] + smooth[f])
             world_rot, _ = skeleton.fk(pose.pos, pose.rot)
             pose.rot[j] = world_rot[skeleton.parents[j]].T @ keep
             frames[f] = pose.array()
-        report[end] = {"maior_desvio_cm": round(float(np.linalg.norm(push, axis=1).max()) * 100, 1), "quadros": int(len(moved))}
+        note(end, float(np.linalg.norm(push, axis=1).max()) * 100, int(len(moved)))
+
+    # ------------------------------------------------------------------ pernas: pé, canela, joelho e coxa
+    lifts = (0.0, 0.05, 0.10, 0.18, 0.28, 0.40)
+    swivels = tuple(np.radians(a) for a in (0, 20, 40, 60, 80, 100))
+    legs = {"LeftFoot": ("LeftToeBase", "LeftToeEnd"), "RightFoot": ("RightToeBase", "RightToeEnd")}
+    for end, toes in legs.items():
+        if end not in skeleton.index:
+            continue
+        e = skeleton.joint(end)
+        m = skeleton.parents[e]
+        r = skeleton.parents[m]
+        toe_index = [skeleton.index[n] for n in toes if n in skeleton.index]
+
+        def depth(hip, knee, ankle, foot_offsets) -> float:
+            points = [hip + (knee - hip) * t for t in (0.45, 0.75)]
+            points += [knee + (ankle - knee) * t for t in (0.0, 0.25, 0.5, 0.75)]
+            points += [ankle + o for o in foot_offsets]
+            return max(float(np.linalg.norm(inside(p))) for p in points)
+
+        for _ in range(2):                                # a segunda passada pega o que a suavização deixou
+            world = skeleton.world_positions(frames)
+            push = np.zeros((count, 3))
+            swivel = np.zeros(count)
+            for f in range(count):
+                offsets = [np.zeros(3)] + [world[f, t] - world[f, e] for t in toe_index]
+                if depth(world[f, r], world[f, m], world[f, e], offsets) <= 0.0:
+                    continue
+                _, world_rot, world_pos = fk_of(f)
+                out = np.zeros(3)
+                for o in offsets:
+                    move = inside(world_pos[e] + o, lift=True)
+                    if float(np.linalg.norm(move)) > float(np.linalg.norm(out)):
+                        out = move
+                speed = float(np.linalg.norm(world[f, e] - world[max(f - 1, 0), e])) * fps
+                planted = speed < 0.25 and not out.any()
+                best = None
+                for lift in ((0.0,) if planted else lifts):
+                    for angle in swivels:
+                        knee, ankle, _ = _leg(skeleton, world_rot, world_pos, end, world_pos[e] + out + up * lift, angle)
+                        cost = 100.0 * depth(world_pos[r], knee, ankle, offsets) + 2.0 * lift + 0.15 * angle
+                        if best is None or cost < best[0]:
+                            best = (cost, lift, angle)
+                push[f] = out + up * best[1]
+                swivel[f] = best[2]
+            if not push.any() and not swivel.any():
+                break
+            smooth = smooth_vectors(push)
+            turn = envelope(swivel)
+            moved = np.where((np.linalg.norm(smooth, axis=1) > 0.002) | (turn > 0.01))[0]
+            for f in moved:
+                pose, world_rot, world_pos = fk_of(f)
+                keep = world_rot[e].copy()
+                _, _, side = _leg(skeleton, world_rot, world_pos, end, world_pos[e] + smooth[f], float(turn[f]))
+                pose.reach(end, world_pos[e] + smooth[f], bend=side)
+                world_rot, _ = skeleton.fk(pose.pos, pose.rot)
+                pose.rot[e] = world_rot[skeleton.parents[e]].T @ keep
+                frames[f] = pose.array()
+            note(end, float(np.linalg.norm(push, axis=1).max()) * 100, int(len(moved)), float(np.degrees(swivel.max())))
     return frames, report
 
 
-def pull(skeleton: Skeleton, frames: np.ndarray, joints: list[str], goal: np.ndarray, start: float = 0.5) -> tuple[np.ndarray, dict]:
+def pull(skeleton: Skeleton, frames: np.ndarray, joints: list[str], goal: np.ndarray, start: float = 0.5,
+         hold=(), anchor: np.ndarray | None = None) -> tuple[np.ndarray, dict]:
     """Leva mãos ou pés, aos poucos, ao lugar e à orientação que têm na pose de destino.
 
     frames: (F, J, 7) locais; goal: (J, 7), a pose de destino já colocada no mundo. Da fração
@@ -332,26 +452,33 @@ def pull(skeleton: Skeleton, frames: np.ndarray, joints: list[str], goal: np.nda
     É o pino de IK do runtime do MotionBricks: com a geração cortada antes do fim (transição
     antecipada) o pé ainda não chegou em cima do bloco, e o trecho seguinte, que o fixa, o
     congelaria no lugar errado. Devolve os quadros e, por junta, quanto faltou no último quadro.
+
+    As juntas de `hold` (as que o destino também manda "nivelar") guardam a orientação do
+    primeiro quadro em vez da que o modelo deu, e é dela que partem para a do destino: o pé sobe
+    sem apontar a ponta para baixo e, mesmo assim, pousa como a pose de destino pede.
     """
     frames = np.asarray(frames, dtype=float).copy()
     target = Pose(skeleton)
     target.pos, target.rot = goal[:, :3].copy(), quat_to_matrix(goal[:, 3:])
     goal_rot, goal_pos = skeleton.fk(target.pos, target.rot)
     count = len(frames)
+    origin = frames[0] if anchor is None else np.asarray(anchor, dtype=float)
+    first_rot, _ = skeleton.fk(origin[:, :3], quat_to_matrix(origin[:, 3:]))
     report = {}
     for name in joints:
         j = skeleton.joint(name)
+        held = name in hold
         short = 0.0
         for f in range(1, count):
             u = (f / max(count - 1, 1) - start) / max(1.0 - start, 1e-6)
-            if u <= 0.0:
+            if u <= 0.0 and not held:
                 continue
-            w = min(1.0, u)
+            w = min(1.0, max(u, 0.0))
             w = w * w * (3.0 - 2.0 * w)
             pose = Pose(skeleton)
             pose.pos, pose.rot = frames[f, :, :3].copy(), quat_to_matrix(frames[f, :, 3:])
             world_rot, world_pos = skeleton.fk(pose.pos, pose.rot)
-            now_rot = world_rot[j].copy()
+            now_rot = first_rot[j].copy() if held else world_rot[j].copy()
             short = pose.reach(name, world_pos[j] + w * (goal_pos[j] - world_pos[j]),
                                bend=stable_bend(skeleton, world_rot, world_pos, name))
             # orientação: mistura a do quadro com a do destino (pelos quatérnios, com o mesmo sinal)
@@ -366,7 +493,8 @@ def pull(skeleton: Skeleton, frames: np.ndarray, joints: list[str], goal: np.nda
     return frames, report
 
 
-def pin(skeleton: Skeleton, frames: np.ndarray, joints: list[str], level=()) -> tuple[np.ndarray, dict]:
+def pin(skeleton: Skeleton, frames: np.ndarray, joints: list[str], level=(),
+        anchor: np.ndarray | None = None) -> tuple[np.ndarray, dict]:
     """Segura mãos ou pés parados no mundo ao longo de um trecho de animação.
 
     frames: (F, J, 7) locais. Cada junta de `joints` fica, em todos os quadros, na posição e
@@ -377,10 +505,15 @@ def pin(skeleton: Skeleton, frames: np.ndarray, joints: list[str], level=()) -> 
     quadro: é o pé que sobe e desce sem apontar a ponta para baixo, para não cortar a quina.
     Devolve os quadros corrigidos e, por junta, quanto faltou no pior quadro (o quadril pode
     ter ido longe demais para a perna alcançar) e quanto a junta se mexia antes da correção.
+
+    `anchor` (J, 7) é a pose que dá o ponto de apoio, em vez do primeiro quadro: numa cadeia de
+    gerações é a última pose do trecho anterior. O primeiro quadro que o modelo devolve não é
+    exatamente ela; se o pé acabou de chegar, ele ainda vem no ar e ficaria preso ali.
     """
     frames = np.asarray(frames, dtype=float).copy()
+    origin = frames[0] if anchor is None else np.asarray(anchor, dtype=float)
     first = Pose(skeleton)
-    first.pos, first.rot = frames[0, :, :3].copy(), quat_to_matrix(frames[0, :, 3:])
+    first.pos, first.rot = origin[:, :3].copy(), quat_to_matrix(origin[:, 3:])
     anchor_rot, anchor_pos = skeleton.fk(first.pos, first.rot)
     report = {}
     for name in joints:
@@ -417,6 +550,7 @@ def build_poses(skeleton: Skeleton, specs: dict) -> dict[str, Pose]:
         if base not in built:
             raise ValueError(f"pose {name}: a base \"{base}\" precisa ser definida antes")
         pose = Pose(skeleton, built[base])
+        out_of_reach: dict = {}
         if spec.get("posicoes"):
             pose.fit_positions(spec["posicoes"])
         if "lugar" in spec:
@@ -434,8 +568,11 @@ def build_poses(skeleton: Skeleton, specs: dict) -> dict[str, Pose]:
         for item in spec.get("alcancar", []):
             if len(item) not in (2, 3):
                 raise ValueError(f"pose {name}: cada item de alcancar é [ponta, [x, y, z]] ou com a dobra no fim")
-            pose.reach(item[0], item[1], item[2] if len(item) == 3 else None)
+            short = pose.reach(item[0], item[1], item[2] if len(item) == 3 else None)
+            if short > 0.005:           # o ponto pedido está além do braço ou da perna, com o quadril onde está
+                out_of_reach[item[0]] = round(short * 100, 1)
         for joint in spec.get("pe_plano", []):
             pose.keep_rest_orientation(joint)
+        pose.out_of_reach = out_of_reach
         built[name] = pose
     return built

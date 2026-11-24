@@ -55,10 +55,21 @@ mãos e pés ficaram das superfícies no fim de cada destino. A tira desenha as 
 
 Se atravessou, acrescente uma pose intermediária no destino afetado e gere de novo.
 
-Depois de gerar, mãos e pés que ainda ficaram dentro de um obstáculo são empurrados para fora
-por IK, com o empurrão suavizado no tempo ("desvios" no relatório diz quanto e em quantos
-quadros). Isso fecha raspões de poucos centímetros, como a ponta do pé na quina; desvio grande
-é sinal de pose ruim e se corrige na pose. Para desligar: "desviar": false no plano.
+Depois de gerar, braços e pernas que ainda ficaram dentro de um obstáculo são tirados de lá por
+IK: o pé é empurrado para fora (de preferência por cima), o tornozelo sobe e/ou o joelho gira
+para fora, que é como a perna passa por cima de uma borda; na mão, só o punho. A correção é
+suavizada no tempo ("desvios" no relatório diz quanto, o giro do joelho e em quantos quadros).
+Isso fecha raspões, como a ponta do pé ou a canela na quina; desvio grande é sinal de pose
+ruim e se corrige na pose. Para desligar: "desviar": false no plano.
+
+"fora_de_alcance_cm" (também em --so-poses) lista, por pose, o "alcancar" que não chegou no
+ponto: com o quadril onde a pose o põe, o braço ou a perna não tem comprimento. A ponta fica
+no ar e o "fixar" do trecho seguinte a prende ali; corrija a altura ou o lugar do quadril.
+
+O relatório traz também "pes_no_apoio": no primeiro e no último quadro, quanto cada tornozelo
+está acima do apoio (chão ou topo de caixa) e quanto a ponta do pé está abaixo dele. Pé que
+termina no ar ou torto não aparece na medida de penetração. Animação que começa ou termina fora
+do apoio de propósito (sentado, pendurado) usa "conferir_pes": false no plano.
 
 SEM PARAR EM CADA POSE. Cada destino de uma pose só é uma parada: o modelo chega nela freando,
 e uma cadeia de seis destinos sai lenta e em degraus. Três campos de cada destino evitam isso
@@ -76,6 +87,12 @@ e uma cadeia de seis destinos sai lenta e em degraus. Três campos de cada desti
                             para o ponto e a orientação que tem na pose de destino, e chega lá
                             no último quadro. Com "antecipar" o corpo não termina na pose; sem
                             isto o pé chega baixo e o "fixar" do trecho seguinte o congela ali.
+                            Junta que também está em "nivelar" parte da orientação do primeiro
+                            quadro e chega na da pose de destino (não fica congelada na do começo).
+    "levar_desde": 0.0      de que fração do trecho em diante o "levar" puxa (padrão 0.5). Com 0
+                            a ponta vai quase em linha reta de onde está até o ponto do destino:
+                            use quando o caminho do modelo passa por dentro do obstáculo, como o
+                            pé que avança por baixo do topo do muro antes de subir.
 
 "antecipar" também pode vir no plano, valendo para todos os destinos que não tiverem o seu.
 Com antecipação as emendas são suavizadas (só em volta delas), a menos que o plano traga
@@ -252,7 +269,7 @@ def key_poses(plan, built, boxes, skeleton, names, parents, rest, out_dir: Path,
     summary = write_bvh(out_dir / f"{name}.poses.bvh", names, parents, rest, frames, fps=1.0)
     summary.pop("juntas_com_posicao", None)
     index = {n: i for i, n in enumerate(names)}
-    ends = [n for n in ("Hips", "LeftHand", "RightHand", "LeftFoot", "RightFoot") if n in index]
+    ends = [n for n in ("Hips", "Head", "HeadEnd", "LeftHand", "RightHand", "LeftFoot", "RightFoot") if n in index]
     summary.update({
         "poses": [{"quadro": i, "nome": label, "pose": spec["pose"],
                    "no_mundo_m": {n: [round(float(v), 3) for v in world[i, index[n]]] for n in ends}}
@@ -262,6 +279,10 @@ def key_poses(plan, built, boxes, skeleton, names, parents, rest, out_dir: Path,
                           columns=len(frames), boxes=boxes),
         "esqueleto": "SOMA", "espaco": "Y para cima, +Z para a frente, +X para a esquerda; metros",
     })
+    # "alcancar" que não alcança: a ponta fica no ar em vez de no ponto, e o "fixar" a prende ali.
+    short = {spec["pose"]: built[spec["pose"]].out_of_reach for spec in specs
+             if getattr(built[spec["pose"]], "out_of_reach", None)}
+    summary["fora_de_alcance_cm"] = short
     if boxes:
         summary["obstaculos"] = obstaculo.check(world, names, parents, boxes, marks,
                                                 tolerance=float(plan.get("folga_obstaculo", 0.03)))
@@ -375,12 +396,19 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
                 poses, feet = poses[:used], feet[:used]
                 any_early = True
             pulled = None
+            # O apoio é o do fim do trecho anterior, não o do primeiro quadro que o modelo devolve.
+            previous = np.asarray(context_poses[-1], dtype=np.float64).reshape(-1, 7)
+            level = list(spec.get("nivelar", []))
             if spec.get("levar"):
-                poses, pulled = pull(skeleton, poses, list(spec["levar"]), goal[0])
+                # Junta levada e nivelada: sai da orientação do primeiro quadro e chega na do destino.
+                both = [n for n in spec["levar"] if n in level]
+                poses, pulled = pull(skeleton, poses, list(spec["levar"]), goal[0],
+                                     start=float(spec.get("levar_desde", 0.5)), hold=both, anchor=previous)
+                level = [n for n in level if n not in both]
             pinned = None
-            if spec.get("fixar") or spec.get("nivelar"):
+            if spec.get("fixar") or level:
                 # O contexto da geração seguinte sai dos quadros já corrigidos.
-                poses, pinned = pin(skeleton, poses, list(spec.get("fixar", [])), list(spec.get("nivelar", [])))
+                poses, pinned = pin(skeleton, poses, list(spec.get("fixar", [])), level, anchor=previous)
             # Cada geração começa na última pose do contexto: não repita esse quadro.
             keep = slice(1, None) if segments else slice(None)
             segments.append(poses[keep])
@@ -412,6 +440,9 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
         motion = smooth_seams(motion, [m["inicio"] for m in marks[1:]])
     detours = None
     if boxes and plan.get("desviar", True):
+        if plan.get("guardar_antes_do_desvio"):
+            out_dir.mkdir(parents=True, exist_ok=True)
+            np.save(out_dir / f"{name}.antes_do_desvio.npy", motion)
         motion, detours = avoid(skeleton, motion, boxes)
     world = skeleton.world_positions(motion)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -431,6 +462,9 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
         summary["obstaculos"] = obstaculo.check(world, names, parents, boxes, marks,
                                                 tolerance=float(plan.get("folga_obstaculo", 0.03)))
         summary["desvios"] = detours or {}
+    summary["fora_de_alcance_cm"] = {n: p.out_of_reach for n, p in built.items() if getattr(p, "out_of_reach", None)}
+    if plan.get("conferir_pes", True):
+        summary["pes_no_apoio"] = obstaculo.feet_on_support(world, names, boxes or [], rest_foot)
     summary.pop("juntas_com_posicao", None)
     (out_dir / f"{name}.relatorio.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
