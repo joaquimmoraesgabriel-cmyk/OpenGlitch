@@ -5,6 +5,10 @@ Roda DENTRO do Blender (testado no 5.3), sem janela:
     blender -b -P blender_cena.py -- --plano plano.json --bvh subir.poses.bvh --saida pasta --nome subir
 
 ou, com o Blender aberto, pelo MCP: execute o arquivo com `sys.argv` montado do mesmo jeito.
+Com o Blender aberto nada do que a pessoa tem na sessão é apagado: a conferência é montada numa
+cena separada, "OG_Conferencia" (refeita a cada chamada), a janela passa a mostrar essa cena e o
+.blend é gravado como biblioteca, sem trocar o arquivo aberto. Zerar a sessão, como se faz sem
+janela, apagaria o trabalho aberto e desligaria os add-ons, inclusive o do MCP.
 
 O que faz:
   - importa o BVH (as poses-chave de `gerar.py --so-poses`, um quadro por pose, ou a animação
@@ -32,6 +36,7 @@ import bpy
 from mathutils import Vector
 
 COLLECTION = "Obstaculos"
+SCENE = "OG_Conferencia"
 
 
 def to_blender(p) -> Vector:
@@ -39,12 +44,32 @@ def to_blender(p) -> Vector:
 
 
 def clear_scene() -> None:
-    bpy.ops.wm.read_factory_settings(use_empty=True)
+    """Sem janela: sessão zerada. Com o Blender aberto: uma cena própria, sem tocar no resto."""
+    if bpy.app.background:
+        bpy.ops.wm.read_factory_settings(use_empty=True)
+        return
+    old = bpy.data.scenes.get(SCENE)
+    if old is not None:
+        for obj in list(old.collection.all_objects):
+            bpy.data.objects.remove(obj, do_unlink=True)
+        for child in list(old.collection.children):
+            old.collection.children.unlink(child)
+            if child.users == 0:
+                bpy.data.collections.remove(child)
+        scene = old
+    else:
+        scene = bpy.data.scenes.new(SCENE)
+    for name in (COLLECTION,):
+        stale = bpy.data.collections.get(name)
+        if stale is not None and stale.users == 0:
+            bpy.data.collections.remove(stale)
+    (bpy.context.window or bpy.context.window_manager.windows[0]).scene = scene
 
 
 def add_obstacles(specs: list[dict]) -> list:
     collection = bpy.data.collections.new(COLLECTION)
     bpy.context.scene.collection.children.link(collection)
+    collection.name = COLLECTION    # com o Blender aberto pode ter sobrado outra com o mesmo nome
     material = bpy.data.materials.new("Obstaculo")
     material.diffuse_color = (0.25, 0.7, 0.35, 1.0)
     objects = []
@@ -202,11 +227,15 @@ def main() -> None:
         frames = [int(v) for v in args.quadros.split(",")]
     images = [] if args.sem_render else render_views(armature, frames, args.saida, args.nome)
     blend = args.saida / f"{args.nome}.blend"
-    bpy.ops.wm.save_as_mainfile(filepath=str(blend))
+    if bpy.app.background:
+        bpy.ops.wm.save_as_mainfile(filepath=str(blend))
+    else:   # o arquivo aberto continua sendo o da pessoa; a cena de conferência vai para um .blend à parte
+        bpy.data.libraries.write(str(blend), {scene}, fake_user=True)
     if images:
         sheet(images, args.saida / f"{args.nome}_folha.png", columns=len(frames))
     print("CENA " + json.dumps({"blend": str(blend), "quadros": [first, last], "imagens": len(images),
-                                "obstaculos": [o.name for o in bpy.data.collections[COLLECTION].objects]}))
+                                "obstaculos": [o.name for o in scene.collection.all_objects
+                                               if any(c.name.startswith(COLLECTION) for c in o.users_collection)]}))
 
 
 if __name__ == "__main__":

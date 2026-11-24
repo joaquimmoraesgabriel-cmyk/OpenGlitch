@@ -55,6 +55,32 @@ mãos e pés ficaram das superfícies no fim de cada destino. A tira desenha as 
 
 Se atravessou, acrescente uma pose intermediária no destino afetado e gere de novo.
 
+Depois de gerar, mãos e pés que ainda ficaram dentro de um obstáculo são empurrados para fora
+por IK, com o empurrão suavizado no tempo ("desvios" no relatório diz quanto e em quantos
+quadros). Isso fecha raspões de poucos centímetros, como a ponta do pé na quina; desvio grande
+é sinal de pose ruim e se corrige na pose. Para desligar: "desviar": false no plano.
+
+SEM PARAR EM CADA POSE. Cada destino de uma pose só é uma parada: o modelo chega nela freando,
+e uma cadeia de seis destinos sai lenta e em degraus. Três campos de cada destino evitam isso
+(são os mesmos recursos do runtime do MotionBricks e do gerar_ciclo.py):
+
+    "antecipar": 6          usa os quadros da geração só até 6 antes do fim e a seguinte parte
+                            dali: o trecho final, em que o modelo força a chegada, fica de fora.
+                            A pose vira um ponto de passagem: é quase alcançada, não parada.
+    "tokens": 7             duração da geração: quadros = tokens x 4 - 6 (6 a 16 tokens). Pode
+                            ser uma lista, e o modelo escolhe entre elas.
+    "velocidade": [0, 1.2]  destino em movimento: quatro poses iguais com a raiz andando a essa
+                            velocidade [x, z] em m/s. O personagem chega andando, não parando.
+
+    "levar": ["LeftFoot"]   pino de IK: a mão ou o pé é puxado, da metade do trecho em diante,
+                            para o ponto e a orientação que tem na pose de destino, e chega lá
+                            no último quadro. Com "antecipar" o corpo não termina na pose; sem
+                            isto o pé chega baixo e o "fixar" do trecho seguinte o congela ali.
+
+"antecipar" também pode vir no plano, valendo para todos os destinos que não tiverem o seu.
+Com antecipação as emendas são suavizadas (só em volta delas), a menos que o plano traga
+"suavizar_emendas": false. O relatório traz a duração total e os quadros usados de cada geração.
+
 APOIOS. Num destino, "fixar": ["LeftFoot"] segura o pé (ou a mão) parado no mundo durante
 aquele trecho, onde estava no começo dele, refazendo a perna por IK em cada quadro. Use para
 o pé ou a mão que está apoiado num obstáculo enquanto o corpo se move: o modelo não sabe do
@@ -88,7 +114,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from bvh_writer import write_bvh, write_contacts  # noqa: E402
-from poses import Skeleton, build_poses, pin  # noqa: E402
+from poses import Skeleton, avoid, build_poses, pin, pull  # noqa: E402
 import obstaculo  # noqa: E402
 import tira  # noqa: E402
 
@@ -168,6 +194,31 @@ def place_window(window: np.ndarray, position, turn_degrees: float) -> np.ndarra
         pose[0, 2] = -s * rel[0] + c * rel[2] + anchor[2]
         pose[0, 1] = rel[1]
         pose[0, 3:7] = quat_mul(turn, pose[0, 3:7])
+    return out
+
+
+def smooth_seams(motion: np.ndarray, seams: list[int], sigma: float = 1.5, radius: float = 3.0) -> np.ndarray:
+    """Gaussiana só em volta das emendas entre gerações (rotações de todas as juntas e a raiz)."""
+    if not seams:
+        return motion
+    n = len(motion)
+    k = np.arange(-4, 5)
+    kernel = np.exp(-(k ** 2) / (2 * sigma ** 2))
+    kernel /= kernel.sum()
+    q = motion[:, :, 3:].copy()
+    for f in range(1, n):  # o mesmo sinal ao longo do tempo, para a média fazer sentido
+        flip = np.sum(q[f] * q[f - 1], axis=-1) < 0
+        q[f, flip] *= -1
+    pos = motion[:, 0, :3].copy()
+    idx = np.clip(np.arange(n)[:, None] + k[None], 0, n - 1)
+    sq = np.einsum("k,fkjc->fjc", kernel, q[idx])
+    sp = np.einsum("k,fkc->fc", kernel, pos[idx])
+    dist = np.min(np.abs(np.arange(n)[:, None] - np.array(seams)[None]), axis=1)
+    w = np.exp(-(dist ** 2) / (2 * radius ** 2))
+    out = motion.copy()
+    mixed = q + w[:, None, None] * (sq - q)
+    out[:, :, 3:] = mixed / np.linalg.norm(mixed, axis=-1, keepdims=True)
+    out[:, 0, :3] = pos + w[:, None] * (sp - pos)
     return out
 
 
@@ -285,23 +336,47 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
                 poses = from_clip(spec, ending=as_context)
             else:
                 pose = built[spec["pose"]].array()[None]
-                # Contexto: quatro poses iguais, o personagem parado. Destino: uma pose, onde ele para.
-                poses = np.repeat(pose, MODEL_POSES_PER_TOKEN, axis=0) if as_context else pose
-            return place_window(poses, spec.get("posicao"), float(spec.get("giro", 0.0)))
+                # Contexto: quatro poses iguais, o personagem parado. Destino: uma pose, onde ele para,
+                # ou, com "velocidade", quatro poses iguais com a raiz andando (chega em movimento).
+                moving = (not as_context) and spec.get("velocidade") is not None
+                poses = np.repeat(pose, MODEL_POSES_PER_TOKEN, axis=0) if (as_context or moving) else pose
+            out = place_window(poses, spec.get("posicao"), float(spec.get("giro", 0.0)))
+            if (not as_context) and spec.get("velocidade") is not None and "clipe" not in spec:
+                vx, vz = (float(v) for v in spec["velocidade"])
+                for k in range(len(out)):
+                    out[k, 0, 0] += vx * k / MODEL_SAMPLE_RATE
+                    out[k, 0, 2] += vz * k / MODEL_SAMPLE_RATE
+            return out
 
         def to_device(poses: np.ndarray):
             return wp.array(poses.astype(np.float32), dtype=wp.transform, device=engine.device)
 
         context_poses = window(plan["inicio"], as_context=True)
+        any_early = False
         for number, spec in enumerate(plan["destinos"], 1):
             goal = window(spec, as_context=False)
             context.update_from_poses(to_device(context_poses), stream=engine.stream)
             target.update_from_poses(to_device(goal), stream=engine.stream)
-            engine.generate_animation(context, target, output)
+            tokens = spec.get("tokens")
+            if tokens:
+                from motionbricks.model.config import MotionBricksInferenceConfig
+                allowed = (int(tokens),) if isinstance(tokens, (int, float)) else tuple(int(t) for t in tokens)
+                engine.generate_animation(context, target, output, config=MotionBricksInferenceConfig(allowed_token_counts=allowed))
+            else:
+                engine.generate_animation(context, target, output)
             engine.synchronize()
             frames = int(output.num_frames)
             poses = output.poses.numpy()[:frames].astype(np.float64).reshape(frames, -1, 7)
             feet = output.foot_contacts.numpy()[:frames].astype(np.float64)
+            # Transição antecipada: o fim da geração, onde o modelo força a parada na pose, fica de fora.
+            early = int(spec.get("antecipar", plan.get("antecipar", 0)))
+            if early > 0 and number < len(plan["destinos"]):
+                used = max(8, frames - early)
+                poses, feet = poses[:used], feet[:used]
+                any_early = True
+            pulled = None
+            if spec.get("levar"):
+                poses, pulled = pull(skeleton, poses, list(spec["levar"]), goal[0])
             pinned = None
             if spec.get("fixar") or spec.get("nivelar"):
                 # O contexto da geração seguinte sai dos quadros já corrigidos.
@@ -318,7 +393,7 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
             ends = [n for n in ("Hips", "Head", "LeftHand", "RightHand", "LeftFoot", "RightFoot") if n in skeleton.index]
             report.append({
                 "nome": label, "de": spec.get("pose") or spec.get("clipe"), "quadros": frames,
-                "segundos": round(frames / MODEL_SAMPLE_RATE, 2),
+                "quadros_usados": len(poses), "segundos": round(len(poses) / MODEL_SAMPLE_RATE, 2),
                 "raiz_inicio": [round(float(v), 3) for v in poses[0, 0, :3]],
                 "raiz_fim": [round(float(v), 3) for v in poses[-1, 0, :3]],
                 "distancia_ate_a_pose_pedida_cm": {
@@ -327,10 +402,17 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
             })
             if pinned:
                 report[-1]["fixado"] = pinned
+            if pulled:
+                report[-1]["levado"] = pulled
             context_poses = poses[-MODEL_POSES_PER_TOKEN:]
 
     motion = np.concatenate(segments, axis=0)
     feet = np.concatenate(contacts, axis=0)
+    if any_early and plan.get("suavizar_emendas", True):
+        motion = smooth_seams(motion, [m["inicio"] for m in marks[1:]])
+    detours = None
+    if boxes and plan.get("desviar", True):
+        motion, detours = avoid(skeleton, motion, boxes)
     world = skeleton.world_positions(motion)
     out_dir.mkdir(parents=True, exist_ok=True)
     summary = write_bvh(out_dir / f"{name}.bvh", names, parents, rest, motion, fps=MODEL_SAMPLE_RATE)
@@ -348,6 +430,7 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
     if boxes:
         summary["obstaculos"] = obstaculo.check(world, names, parents, boxes, marks,
                                                 tolerance=float(plan.get("folga_obstaculo", 0.03)))
+        summary["desvios"] = detours or {}
     summary.pop("juntas_com_posicao", None)
     (out_dir / f"{name}.relatorio.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

@@ -53,6 +53,28 @@ class Box:
         outside = np.linalg.norm(np.clip(q, 0.0, None), axis=-1)
         return outside + np.minimum(q.max(axis=-1), 0.0)
 
+    def exit(self, point, margin: float = 0.0, lift: bool = False, lift_bias: float = 0.12) -> np.ndarray:
+        """O menor deslocamento que tira um ponto de dentro da caixa (zero se já está fora).
+
+        Sai pela face mais próxima, nunca por baixo. Com `lift`, sair por cima ganha mesmo
+        custando até `lift_bias` metros a mais: é o pé, que passa por cima da quina em vez de
+        ser empurrado para trás. `margin` é a folga além da superfície.
+        """
+        local = self.local(np.asarray(point, dtype=float))
+        inside = self.half - np.abs(local)
+        if (inside <= 0.0).any():
+            return np.zeros(3)
+        options = []                                     # (distância, eixo, sentido)
+        for axis in (0, 2):
+            options.append((float(inside[axis]), axis, 1.0 if local[axis] >= 0.0 else -1.0))
+        up = float(self.half[1] - local[1])
+        options.append((up - (lift_bias if lift else 0.0), 1, 1.0))
+        _, axis, sign = min(options)
+        distance = up if axis == 1 else float(inside[axis])
+        move = np.zeros(3)
+        move[axis] = sign * (distance + margin)
+        return move @ self.rot.T
+
     def corners(self) -> np.ndarray:
         signs = np.array([[x, y, z] for x in (-1, 1) for y in (-1, 1) for z in (-1, 1)], dtype=float)
         return self.center + (signs * self.half) @ self.rot.T
