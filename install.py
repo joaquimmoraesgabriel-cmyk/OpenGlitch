@@ -279,16 +279,19 @@ def install_motionbricks(dry: bool) -> bool:
                     "clone", MOTIONBRICKS_REPO, str(repo)]])
     steps += [git + ["lfs", "fetch"], git + ["checkout", "-f", "HEAD"], git + ["lfs", "checkout"],
               ["uv", "sync", "--project", str(repo)]]
+    # Um download por vez: em conexão instável os arquivos grandes do TensorRT são cortados
+    # quando vários baixam juntos. O que já baixou fica em cache entre as tentativas.
+    sync_env = {"UV_CONCURRENT_DOWNLOADS": "1", "UV_HTTP_TIMEOUT": "600"}
     for step in steps:
         label = " ".join(s for s in step if not s.startswith("filter.") and s != "-c")
-        for attempt in range(1, 4):
+        for attempt in range(1, 7):
             say(f"  {label[:70]} ... (pode demorar)" + (f" tentativa {attempt}" if attempt > 1 else ""))
-            done = subprocess.run(step, text=True, env={**os.environ, **NET_ENV})
+            done = subprocess.run(step, text=True, env={**os.environ, **NET_ENV, **sync_env})
             if done.returncode == 0:
                 break
             time.sleep(10)
         else:
-            say("  ERRO neste passo depois de 3 tentativas. O OpenGlitch em si está instalado; só o")
+            say("  ERRO neste passo depois de 6 tentativas. O OpenGlitch em si está instalado; só o")
             say("  MotionBricks ficou de fora. Se foi falha de rede, rode o mesmo comando de novo:")
             say("  ele retoma de onde parou.")
             return False

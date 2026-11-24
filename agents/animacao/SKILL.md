@@ -261,8 +261,8 @@ Quando estiver instalado:
   dura de 0,6 a 1,9 s; movimento longo é uma cadeia de destinos.
 - **Leia o método** no documento local `animation-td/motionbricks-gerar-animacao`
   antes de escrever o primeiro plano.
-- **Rode o teste primeiro.** O script de geração foi escrito a partir da
-  documentação e ainda pode precisar de ajuste.
+- **Rode o teste primeiro.** O gerador foi validado numa máquina só; um plano
+  com posições e giros próprios ainda pode revelar ajustes.
 - **Avise sobre a licença.** Animação feita a partir dos clipes de exemplo da
   NVIDIA serve para testar, não para um jogo publicado. Pergunte ao usuário se
   ele tem clipes próprios antes de produzir algo que vá para o jogo.

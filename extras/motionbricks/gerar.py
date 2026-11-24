@@ -30,9 +30,11 @@ Plano (posições em metros no chão, plano XZ; giro em graus em volta de Y):
 raiz da primeira dessas poses fica no chão. `giro` roda o clipe em relação à
 direção que ele já tem.
 
-Este script foi escrito a partir da documentação e dos exemplos oficiais
-(docs/runtime_api.md e docs/examples) e ainda não foi executado contra o
-MotionBricks pelo autor. Rode primeiro com --teste.
+Escrito a partir da documentação e dos exemplos oficiais (docs/runtime_api.md
+e docs/examples). O modo --teste foi executado numa RTX 4050 de notebook com
+6 GB, no Windows: gerou uma caminhada de 3,2 s em duas gerações encadeadas. Um
+plano com posições e giros próprios ainda não foi exercitado: rode --teste
+primeiro e confira o relatório do seu plano.
 """
 
 from __future__ import annotations

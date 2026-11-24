@@ -4,7 +4,7 @@ summary: O que o MotionBricks faz e não faz, como planejar poses de destino, o 
 tipo: referencia
 fonte: https://github.com/NVlabs/motionbricks
 autor: openglitch
-testado_em: documentação do MotionBricks de novembro de 2026; a geração em si não foi executada pelo autor
+testado_em: MotionBricks de novembro de 2026, RTX 4050 de notebook (6 GB), Windows, Blender 5.3
 ---
 
 O MotionBricks é um modelo da NVIDIA que gera o movimento entre poses. No
@@ -12,9 +12,11 @@ OpenGlitch ele é um componente opcional: só existe se a pessoa instalou com
 `python install.py --motionbricks`, e só roda em GPU NVIDIA. Chame
 `motionbricks_info` para saber se está instalado e com que comandos.
 
-O que está aqui vem da documentação oficial. O gravador de BVH e a conversão
-para FBX foram testados; a chamada ao modelo foi escrita a partir dos exemplos
-oficiais e ainda não foi executada pelo autor. Rode o teste primeiro.
+O que está aqui vem da documentação oficial. O teste do gerador foi executado
+numa máquina: uma caminhada de 3,2 s em duas gerações encadeadas, gravada em
+BVH e convertida para FBX, com o esqueleto em pé, os pés no chão e o contato
+dos pés alternando. Um plano com posições e giros próprios e a importação na
+Unity ainda não foram testados. Rode o teste primeiro.
 
 ## O que ele é e o que não é
 
@@ -101,7 +103,7 @@ orientação jurídica: diga ao usuário para ler as licenças.
 ## Como conferir
 
 - Rode `gerar.py --teste` antes do plano real. Se falhar, registre o erro com
-  `report_problem`: o script ainda não foi validado contra o modelo.
+  `report_problem`: o script só foi validado numa máquina.
 - Leia o relatório: quadros por geração e posição da raiz no começo e no fim.
 - No Blender, capture o esqueleto no primeiro e no último quadro e veja se
   está em pé e no lugar esperado.
@@ -112,6 +114,10 @@ orientação jurídica: diga ao usuário para ler as licenças.
 
 - A primeira execução de cada modelo monta o plano do TensorRT e leva alguns
   minutos; depois fica em cache.
-- Os exemplos oficiais foram testados numa RTX 4090. O desempenho e a memória
-  em placas menores não estão documentados.
+- Os exemplos oficiais foram testados numa RTX 4090. O teste do OpenGlitch
+  rodou numa RTX 4050 de notebook com 6 GB.
+- Ocupa disco: cerca de 4,7 GB do repositório, 3,1 GB do ambiente e 0,7 GB do
+  cache do TensorRT.
+- O esqueleto SOMA carregado tem 77 juntas, com os dedos; o modelo prevê 30
+  delas. No BVH, 32 juntas saem com canais de posição além dos de rotação.
 - O modelo usa as proporções do esqueleto SOMA.

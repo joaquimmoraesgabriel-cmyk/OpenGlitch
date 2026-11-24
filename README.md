@@ -288,11 +288,16 @@ personagem em vez de só usar clipes prontos ou animar por script.
   não pode entrar num jogo publicado. Para produção, as poses precisam vir de
   clipes seus. Leia as [licenças](https://github.com/NVlabs/motionbricks#license).
 
-Estado atual: a gravação do BVH e a conversão para FBX no Blender estão
-testadas. A chamada ao modelo foi escrita a partir da documentação oficial e
-ainda não foi executada pelos mantenedores; rode o teste que o instalador
-mostra e, se falhar, abra uma issue com o erro. Os arquivos ficam em
+Estado atual: testado numa máquina, uma RTX 4050 de notebook com 6 GB, no
+Windows. O teste gera uma caminhada de 3,2 s, grava o BVH e converte para FBX
+no Blender. Ainda não foram testados um plano com posições e giros próprios,
+a importação na Unity e outros sistemas. Rode o teste que o instalador mostra
+e, se falhar, abra uma issue com o erro. Os arquivos ficam em
 `extras/motionbricks/`.
+
+Ocupa cerca de 8,5 GB de disco e depende de downloads grandes: numa conexão
+instável o instalador pode precisar ser rodado mais de uma vez, e ele retoma
+de onde parou.
 
 Para instalar depois, numa instalação que já existe: `python install.py
 --motionbricks`. O agente consulta `motionbricks_info` para saber se o
