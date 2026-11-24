@@ -48,6 +48,11 @@ linha, com o que você está trabalhando.
   operador ou de um parâmetro, em vez de tentar de memória.
 - **Ajuste feito à mão na cena volta para o script** antes de você encerrar.
   O que só existe na cena aberta se perde quando o programa fecha.
+- **Tarefa longa não roda na cena aberta.** Bake, render e geração grande
+  bloqueiam o programa: a ponte para de responder e o Blender pode fechar,
+  levando o que o usuário não salvou. Rode em segundo plano, num processo
+  separado, e use a cena aberta para inspecionar e conferir. Antes de qualquer
+  trabalho pesado na cena aberta, peça ao usuário para salvar o arquivo dele.
 - **Não destrua o que é do usuário.** A cena aberta pode ter trabalho dele:
   não apague, não renomeie e não salve por cima sem perguntar. Trabalhe numa
   coleção própria e diga qual.

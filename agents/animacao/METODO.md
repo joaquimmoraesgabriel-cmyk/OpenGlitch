@@ -51,6 +51,11 @@ use-a. Diga ao usuário, em uma linha, com o que você está trabalhando.
 - **Leia o console da engine** depois de importar e de montar o controlador de
   animação: clipe sem curva, osso não encontrado e avatar inválido aparecem lá.
 - **Ajuste feito à mão volta para o script** antes de encerrar.
+- **Tarefa longa não roda na cena aberta.** Bake, render e geração grande
+  bloqueiam o programa: a ponte para de responder e o Blender pode fechar,
+  levando o que o usuário não salvou. Rode em segundo plano, num processo
+  separado, e use a cena aberta para inspecionar e conferir. Antes de qualquer
+  trabalho pesado na cena aberta, peça ao usuário para salvar o arquivo dele.
 - **Não destrua o que é do usuário.** Não apague ações, não renomeie ossos e
   não salve por cima de um arquivo existente sem perguntar.
 

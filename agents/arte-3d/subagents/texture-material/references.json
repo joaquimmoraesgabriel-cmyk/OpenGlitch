@@ -9,9 +9,9 @@
       "type": "documentacao",
       "url": "https://www.adobe.com/learn/substance-3d-designer/web/the-pbr-guide-part-2",
       "url_origem": "pdf",
-      "pesquisavel": true,
+      "pesquisavel": false,
       "uso": "Guia gratuito desde 2014: a parte 1 é teoria e a parte 2 é prática, e vale para qualquer software. Fonte principal de teoria PBR.",
-      "nota": "O hiperlink do guia leva à parte 2. A parte 1 pode ser encontrada pelos links da própria página."
+      "nota": "O hiperlink do guia leva à parte 2. A parte 1 pode ser encontrada pelos links da própria página. A página é montada por JavaScript e as ferramentas de pesquisa não leem o texto (conferido em novembro de 2026): fica como leitura recomendada."
     },
     {
       "id": "substance-documentation",
@@ -97,6 +97,39 @@
       "pesquisavel": true,
       "uso": "Lista de leituras sobre bake, com foco em Unity.",
       "nota": "O hiperlink do guia usa o subdomínio com sublinhado, que não conecta; corrigido para o endereço equivalente em www.artstation.com."
+    },
+    {
+      "id": "marmoset-pbr-theory",
+      "title": "Basic Theory of Physically-Based Rendering",
+      "author": "Marmoset",
+      "type": "artigo",
+      "url": "https://marmoset.co/posts/basic-theory-of-physically-based-rendering/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Teoria do PBR em texto legível: difusão e reflexão, conservação de energia, Fresnel, microsuperfície. Substitui a parte 1 do PBR Guide, que as ferramentas não conseguem ler.",
+      "nota": "Não vem do guia original. Acrescentada porque o PBR Guide da Adobe não entrega texto às ferramentas."
+    },
+    {
+      "id": "marmoset-pbr-practice",
+      "title": "Physically-Based Rendering, And You Can Too!",
+      "author": "Marmoset",
+      "type": "artigo",
+      "url": "https://marmoset.co/posts/physically-based-rendering-and-you-can-too/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Prática do PBR: como autorar albedo, roughness e metalness, com faixas de valores e erros comuns. Substitui a parte 2 do PBR Guide.",
+      "nota": "Não vem do guia original."
+    },
+    {
+      "id": "physicallybased-info",
+      "title": "Physically Based: banco de valores de materiais",
+      "author": "Anton Palmqvist",
+      "type": "banco-de-dados",
+      "url": "https://physicallybased.info/",
+      "url_origem": "inferida",
+      "pesquisavel": true,
+      "uso": "Valores medidos de cor base, índice de refração e outros parâmetros para materiais reais. Use quando a tarefa pedir números de um material específico.",
+      "nota": "Não vem do guia original. O conteúdo é uma tabela: use research_tables."
     }
   ]
 }

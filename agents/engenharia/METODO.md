@@ -46,6 +46,14 @@ trabalhando.
 - **Meça com as ferramentas da engine** (tempo de quadro, triângulos, chamadas
   de desenho) antes e depois de otimizar, desligando uma coisa de cada vez
   para achar o que pesa.
+- **Antes de cada rodada de medidas, confira as condições**: a resolução real
+  da tela de jogo (leia o tamanho em pixels da câmera), o nível de qualidade
+  ativo, e se a entrada do usuário está travada. Meça a base e a mudança na
+  mesma sessão, nos mesmos pontos, e grave junto de cada número a resolução e
+  o nível. Grave no projeto a posição e a direção de cada ponto de medida. Uma
+  base que não bate com a rodada anterior é erro de medição, não custo novo.
+- **O número final vem do executável**, não do editor. Gere o build, rode a
+  mesma medição nele e leia o log: há erros que só aparecem lá.
 - **O que você monta por ferramenta fica em arquivo.** Cena, prefab e
   configuração criados pelo editor precisam de um script de montagem ou de um
   asset salvo no projeto, para poderem ser refeitos.

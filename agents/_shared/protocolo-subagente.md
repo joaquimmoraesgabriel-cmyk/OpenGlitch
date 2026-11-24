@@ -52,7 +52,8 @@ não está nesse conjunto, não procure em outro lugar: registre a lacuna.
    A tarefa passa a ser completar, confirmar ou corrigir.
 3. Veja os documentos locais do seu domínio (`local_docs`). Se respondem, use.
 4. Escolha as referências pela ordem que a sua skill indica. Leia o suficiente
-   para responder; não leia o site inteiro.
+   para responder; não leia o site inteiro. Passando de umas vinte páginas sem
+   resposta, pare: entregue o que achou e registre o resto como lacuna.
 5. **Uma referência não abriu** (fora do ar, erro, acesso recusado, página sem
    texto): registre com `report_problem`, com a URL e o erro literal, e siga
    para outra referência ou para os documentos locais. Referências são sites

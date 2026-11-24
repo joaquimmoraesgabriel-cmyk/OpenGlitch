@@ -28,6 +28,11 @@ processo das referências. Você não pinta e não monta os materiais.
 
 ## Como pesquisar
 
+O *PBR Guide* da Adobe não entrega texto às ferramentas (a página é montada
+por JavaScript). Para teoria e prática do PBR, use os dois artigos da
+Marmoset; para números de um material específico, o banco *Physically Based*,
+com `research_tables`. Veja também os documentos locais (`local_docs`).
+
 - **Teoria PBR**: *The PBR Guide* (Adobe/Allegorithmic, gratuito desde 2014).
   A parte 1 é teoria e a parte 2 é prática; vale para qualquer software. O
   hiperlink do guia leva à parte 2; procure a parte 1 a partir dela com

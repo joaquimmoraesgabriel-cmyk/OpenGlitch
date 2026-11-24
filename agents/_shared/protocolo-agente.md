@@ -81,7 +81,9 @@ isso que o método evita.
    subagentes e a sua memória de trabalho. Se o que você precisa já está lá e
    está completo, use e não delegue.
 4. **Faltou algo: delegue** com `delegate_research`. Uma tarefa é para um
-   subagente e faz uma pergunta clara. Diga o assunto, o que você vai fazer com
+   subagente e faz uma pergunta clara. Três perguntas diferentes são três
+   tarefas: tarefa com várias perguntas custa dezenas de páginas e demora a
+   voltar. Peça o tamanho de resposta que a decisão exige, não um estudo. Diga o assunto, o que você vai fazer com
    a resposta, o nível de detalhe e o que já existe na memória. Pode escolher
    quais referências ele usa (`reference_ids`) e somar URLs (`extra_urls`).
 5. **Decida o acesso à memória** em cada delegação (`memory_access`):
