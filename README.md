@@ -283,16 +283,23 @@ personagem em vez de só usar clipes prontos ou animar por script.
 - **Como chega ao jogo**: o gerador grava um BVH no esqueleto SOMA, o Blender
   converte para FBX e a engine faz o retargeting para o seu personagem. Tudo
   acontece na sua máquina; o jogo recebe os arquivos de animação prontos.
+- **Poses próprias**: o caminho padrão. A IA escreve as poses-chave do
+  movimento (em pé, agachado, braço erguido) como direções dos ossos, e o
+  modelo gera o caminho entre elas. Nada vem de clipe de terceiros.
+- **Conferência**: junto do BVH saem uma tira de quadros do esqueleto, de lado
+  e de frente, e medidas como pé afundando e pé deslizando. É como a IA confere
+  o resultado sem assistir.
 - **Licença, importante**: os clipes de exemplo que acompanham o MotionBricks
-  só podem ser usados para avaliar e testar. Animação gerada a partir deles
-  não pode entrar num jogo publicado. Para produção, as poses precisam vir de
-  clipes seus. Leia as [licenças](https://github.com/NVlabs/motionbricks#license).
+  só podem ser usados para avaliar e testar, e animação gerada a partir deles
+  não pode entrar num jogo publicado. Com poses próprias esse limite não se
+  aplica, mas leia o acordo dos modelos antes de vender o resultado:
+  [licenças](https://github.com/NVlabs/motionbricks#license).
 
 Estado atual: testado numa máquina, uma RTX 4050 de notebook com 6 GB, no
-Windows. O teste gera uma caminhada de 3,2 s, grava o BVH, converte para FBX
-no Blender e a Unity 6 importa como Humanoid válido. Ainda não foram testados
-um plano com posições e giros próprios, o retargeting para outro personagem e
-outros sistemas. Rode o teste que o instalador mostra
+Windows. Com poses próprias, gerou agachar, levantar, erguer os braços e
+andar 1 m; o BVH foi convertido para FBX no Blender e a Unity 6 importou como
+Humanoid válido. Ainda não foram testados o uso num personagem com malha,
+movimentos difíceis (golpe, salto, queda) e outros sistemas. Rode o teste que o instalador mostra
 e, se falhar, abra uma issue com o erro. Os arquivos ficam em
 `extras/motionbricks/`.
 

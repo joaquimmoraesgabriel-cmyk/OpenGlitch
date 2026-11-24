@@ -254,20 +254,32 @@ movimento entre poses e só roda em GPU NVIDIA. Antes de contar com ele, chame
 `motionbricks_info`: se não estiver instalado, siga o caminho normal (keyframe
 por script, clipes prontos ou mocap) e não prometa geração de movimento.
 
-Quando estiver instalado:
+Quando estiver instalado, o processo é este, e o documento local
+`animation-td/motionbricks-gerar-animacao` detalha cada passo:
 
-- **Você é o diretor, não o modelo.** Ele não entende texto. Você decide as
-  poses de destino, onde ficam e em que ordem, e escreve o plano. Cada geração
-  dura de 0,6 a 1,9 s; movimento longo é uma cadeia de destinos.
-- **Leia o método** no documento local `animation-td/motionbricks-gerar-animacao`
-  antes de escrever o primeiro plano.
-- **Rode o teste primeiro.** O gerador foi validado numa máquina só; um plano
-  com posições e giros próprios ainda pode revelar ajustes.
-- **Avise sobre a licença.** Animação feita a partir dos clipes de exemplo da
-  NVIDIA serve para testar, não para um jogo publicado. Pergunte ao usuário se
-  ele tem clipes próprios antes de produzir algo que vá para o jogo.
-- **A saída é no esqueleto SOMA.** Para o personagem do jogo, converta para
-  FBX e use o retargeting Humanoid da engine. Confira por captura.
+1. **Entenda o movimento** com o usuário: o que o personagem faz, quanto dura,
+   se sai do lugar, se é loop.
+2. **Quebre em poses-chave.** Você é o diretor: o modelo não entende texto,
+   só preenche o caminho entre as poses que você escrever. Cada transição dura
+   até 1,9 s.
+3. **Escreva o plano** com as poses descritas por direções dos ossos. Poses
+   próprias são do usuário e podem ir para o jogo; é o caminho padrão.
+4. **Gere, abra a tira de quadros e leia as medidas.** Corrija as poses e gere
+   de novo até a tira mostrar o que foi pedido. Não diga que ficou bom sem ter
+   olhado a imagem.
+5. **Converta para FBX** no Blender em segundo plano.
+6. **Importe na engine como Humanoid** e confira o avatar e o clipe por script
+   e por captura.
+7. **Aplique no personagem do jogo** pelo retargeting da engine e peça ao
+   usuário que assista: peso e naturalidade só ele confere.
+
+Cuidados:
+
+- **Não use os clipes de exemplo da NVIDIA para algo que vá ao jogo.** A
+  licença deles é só de avaliação. Use-os apenas se o usuário quiser
+  experimentar, e diga isso.
+- **Movimentos difíceis** (golpe, salto, queda) não foram testados. Comece
+  simples e avise o usuário quando o resultado não convencer.
 - **Use o contato dos pés** que vem com a saída para travar os pés com IK.
 
 ## Limites

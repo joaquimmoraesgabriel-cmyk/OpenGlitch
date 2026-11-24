@@ -10,3 +10,6 @@ __pycache__/
 
 # O guia original em PDF fica só na máquina do autor
 /*.pdf
+
+# Imagens de testes manuais
+/teste_*.png

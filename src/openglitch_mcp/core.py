@@ -1252,23 +1252,29 @@ class App:
             f"GPU registrada na instalação: {marker.get('gpu', 'não registrada')}",
             "",
             "## Comandos",
-            "Teste (rode primeiro; a primeira execução monta o plano do TensorRT e leva minutos):",
-            f"  uv run --project \"{repo}\" python \"{extras / 'gerar.py'}\" --teste --saida <pasta>",
+            "Ver as juntas do esqueleto (nomes e posição de repouso):",
+            f"  uv run --project \"{repo}\" python \"{extras / 'gerar.py'}\" --listar-juntas",
+            "Teste com poses próprias (rode primeiro; a primeira execução monta o plano do "
+            "TensorRT e leva minutos):",
+            f"  uv run --project \"{repo}\" python \"{extras / 'gerar.py'}\" --teste-poses --saida <pasta>",
             "Gerar a partir de um plano:",
             f"  uv run --project \"{repo}\" python \"{extras / 'gerar.py'}\" plano.json --saida <pasta> --nome <nome>",
             "Converter o BVH em FBX (Blender em segundo plano):",
             f"  blender -b --factory-startup --python \"{extras / 'bvh_para_fbx.py'}\" -- <entrada.bvh> <saida.fbx>",
             "",
             "## O que saber antes de usar",
-            "- Não é texto para movimento: você escolhe as poses de destino, a posição e a ordem.",
+            "- Não é texto para movimento: você escreve as poses-chave, a posição e a ordem.",
+            "- O plano descreve cada pose por direções dos ossos (formato no cabeçalho de "
+            "gerar.py e no documento local). Poses próprias são do usuário e podem ir para o jogo.",
             "- Cada geração dura de 0,6 a 1,9 s; movimento longo é uma cadeia de destinos.",
+            "- A saída traz a tira de quadros (<nome>.tira.png) e as medidas: abra a imagem e "
+            "leia o relatório antes de dizer que ficou bom.",
             "- A saída é no esqueleto SOMA; outro personagem precisa de retargeting (Humanoid na Unity).",
-            "- Os clipes de exemplo têm licença só de avaliação interna: animação feita a partir "
-            "deles não entra em jogo publicado. Para produção, use clipes do usuário (--clipes).",
-            "- O teste foi validado numa máquina (RTX 4050, Windows) até a importação Humanoid "
-            "na Unity. Plano com posições e giros próprios e o retargeting para outro "
-            "personagem ainda não foram testados: se "
-            "algo falhar, registre com report_problem e mostre o erro ao usuário.",
+            "- Um plano que usa os clipes de exemplo do MotionBricks não pode ir para um jogo "
+            "publicado: a licença deles é só de avaliação. O gerador avisa quando isso acontece.",
+            "- Testado numa máquina (RTX 4050, Windows) até a importação Humanoid na Unity. "
+            "Personagem com malha e movimentos difíceis (golpe, salto, queda) não foram "
+            "testados: se algo falhar, registre com report_problem e mostre ao usuário.",
             "",
             "Leia o método completo: local_doc_read(token, \"animation-td/motionbricks-gerar-animacao\").",
         ]
