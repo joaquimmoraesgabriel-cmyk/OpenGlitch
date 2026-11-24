@@ -25,12 +25,16 @@ import re
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 NAME = "openglitch"
 MIN_PYTHON = (3, 11)
 IS_WINDOWS = sys.platform == "win32"
+# Conexão lenta com o pypi.org é comum. As variáveis valem também para o pip que roda por
+# dentro, ao montar o pacote; as opções de linha de comando não chegam até ele.
+NET_ENV = {"PIP_DEFAULT_TIMEOUT": "120", "PIP_RETRIES": "10", "UV_HTTP_TIMEOUT": "300"}
 HOME = Path.home()
 
 
@@ -43,6 +47,7 @@ def venv_python() -> Path:
 
 
 def run(cmd: list[str], **kwargs) -> subprocess.CompletedProcess:
+    kwargs["env"] = {**os.environ, **NET_ENV, **(kwargs.get("env") or {})}
     return subprocess.run(cmd, text=True, capture_output=True, **kwargs)
 
 
@@ -64,8 +69,18 @@ def install_server(dry: bool) -> bool:
     run([str(py), "-m", "pip", "install", "--quiet", "--upgrade", "pip"])
     done = run([str(py), "-m", "pip", "install", "--quiet", "-e", str(ROOT)])
     if done.returncode != 0:
-        say(f"  ERRO na instalação:\n{done.stderr.strip()[-1500:]}")
-        return False
+        offline = "timed out" in done.stderr or "Could not find a version" in done.stderr
+        already = run([str(py), "-c", "import openglitch_mcp, mcp, trafilatura, pandas"]).returncode == 0
+        if offline and already:
+            # Reinstalação sem rede: o servidor já está instalado e funciona; só não foi atualizado.
+            say("  Sem conexão com o pypi.org agora. O servidor já estava instalado e segue como "
+                "está; rode o instalador de novo mais tarde para atualizar as dependências.")
+        else:
+            say(f"  ERRO na instalação:\n{done.stderr.strip()[-1500:]}")
+            if offline:
+                say("  Parece falha de conexão com o pypi.org. Rode o instalador de novo: ele "
+                    "continua de onde parou.")
+            return False
     env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
     check = run([str(py), "-m", "openglitch_mcp.cli", "validate"], env=env, encoding="utf-8")
     last = (check.stdout or "").strip().splitlines()
@@ -256,14 +271,26 @@ def install_motionbricks(dry: bool) -> bool:
         say(f"  baixaria {MOTIONBRICKS_REPO} para {repo} (alguns GB) e rodaria git lfs pull e uv sync")
         return True
     base.mkdir(parents=True, exist_ok=True)
-    steps = ([["git", "-C", str(repo), "pull", "--ff-only"]] if (repo / ".git").is_dir()
-             else [["git", "clone", MOTIONBRICKS_REPO, str(repo)]])
-    steps += [["git", "-C", str(repo), "lfs", "pull"], ["uv", "sync", "--project", str(repo)]]
+    git = ["git", "-C", str(repo)]
+    # Se uma tentativa anterior parou no meio, o repositório existe mas está incompleto:
+    # os passos abaixo retomam de onde parou em vez de baixar tudo de novo.
+    steps = ([git + ["fetch", "origin"]] if (repo / ".git").is_dir()
+             else [["git", "-c", "filter.lfs.smudge=", "-c", "filter.lfs.required=false",
+                    "clone", MOTIONBRICKS_REPO, str(repo)]])
+    steps += [git + ["lfs", "fetch"], git + ["checkout", "-f", "HEAD"], git + ["lfs", "checkout"],
+              ["uv", "sync", "--project", str(repo)]]
     for step in steps:
-        say("  " + " ".join(step[:4]) + " ... (pode demorar)")
-        done = subprocess.run(step, text=True)
-        if done.returncode != 0:
-            say("  ERRO neste passo. O OpenGlitch em si está instalado; só o MotionBricks ficou de fora.")
+        label = " ".join(s for s in step if not s.startswith("filter.") and s != "-c")
+        for attempt in range(1, 4):
+            say(f"  {label[:70]} ... (pode demorar)" + (f" tentativa {attempt}" if attempt > 1 else ""))
+            done = subprocess.run(step, text=True, env={**os.environ, **NET_ENV})
+            if done.returncode == 0:
+                break
+            time.sleep(10)
+        else:
+            say("  ERRO neste passo depois de 3 tentativas. O OpenGlitch em si está instalado; só o")
+            say("  MotionBricks ficou de fora. Se foi falha de rede, rode o mesmo comando de novo:")
+            say("  ele retoma de onde parou.")
             return False
     (base / "instalado.json").write_text(
         json.dumps({"repo": str(repo), "gpu": gpu}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
