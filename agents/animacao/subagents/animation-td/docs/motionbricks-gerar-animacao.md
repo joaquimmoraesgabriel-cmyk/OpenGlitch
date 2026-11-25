@@ -254,6 +254,45 @@ de avaliação: servem para ver o teto de qualidade, não para um jogo.
    e `--quadros` escolhidos. Número sozinho não mostra pose feia: foi olhando a imagem que
    apareceu o pé terminando 10 cm acima do bloco, com penetração 0,0 cm no relatório.
 
+## Rascunho pelo Kimodo: texto, depois Blender, depois MotionBricks
+
+O Kimodo (NVIDIA, código Apache-2.0, modelos sob NVIDIA Open Model License) gera movimento a
+partir de texto nas mesmas 77 juntas SOMA. Ele entra como **rascunho**: dá as poses-chave que
+antes eram montadas à mão, e o MotionBricks gera a animação final entre elas. A ordem é
+Kimodo, conferência (números e Blender), e só então MotionBricks.
+
+Testado uma vez, numa máquina (RTX 4050 de 6 GB, 15,7 GB de RAM), com "anda, sobe num bloco
+baixo e fica parado em cima": três amostras, as três subiram 0,6 m.
+
+1. **Gere o rascunho**, no ambiente do Kimodo, com `TEXT_ENCODER_DEVICE=cpu`:
+   `kimodo_gen "texto em inglês" --duration 5 --bvh --num_samples 3 --output rascunho`.
+   Peça mais de uma amostra: custam uns 10 s cada, e nem toda amostra faz o pedido (num
+   teste, "pula duas vezes e senta" sentou e não pulou).
+2. **Confira o rascunho**: `kimodo_para_plano.py --npz x.npz --bvh x.bvh --saida plano.json`,
+   com `--plano-base` trazendo os `"obstaculos"`. O relatório (`plano.rascunho.json`) diz
+   quanto o quadril andou e subiu, pés abaixo do apoio, pés escorregando e a penetração em
+   cada obstáculo. O Kimodo também não enxerga a cena: no teste, o rascunho entrava 11 cm no
+   bloco durante o passo. Se o rascunho não fez o pedido, gere outro; não conserte.
+3. **Veja no Blender** com `blender_cena.py --plano plano.json --bvh x.bvh`. O BVH do Kimodo
+   traz uma junta `Root` acima do quadril, que aparece como uma haste em pé na origem: ignore.
+   Se ajustar poses lá, exporte com `blender_exportar.py --ignorar Root`.
+4. **Escolha os quadros-chave** (`--quadros 0,22,44,68,100` ou `auto`). Cada trecho precisa
+   ter de 18 a 58 quadros, que é o que o MotionBricks gera de uma vez. Corte o fim parado.
+5. **Gere com o `gerar.py`** e siga o ciclo de obstáculos normal.
+
+O que o teste mostrou: a animação final passou nas conferências (0,0 cm de penetração, pés no
+apoio no começo e no fim, 3,4 s), mas o desvio automático precisou mexer até 27 cm nos pés e
+girar o joelho 80 graus no trecho do passo, e ali a perna abre para o lado e os braços
+levantam. O rascunho do Kimodo, sozinho, tem o passo mais natural que o resultado. Não foi
+testado: prender os pés com `levar`/`fixar` nesse fluxo, outros movimentos, malha, Unity.
+
+Custo na máquina de teste: cada comando `kimodo_gen` leva cerca de 2 min e meio, quase tudo
+carregando o codificador de texto (Llama-3, 16 GB) numa RAM em que ele não cabe; a geração em
+si leva 10 s e usa 2,4 GB de placa de vídeo. Deixar o codificador ligado como serviço
+(`kimodo_textencoder`) foi pior, 288 s, porque o modelo vai para o arquivo de paginação. Com
+32 GB de RAM isso deve mudar; não foi medido. O Llama-3 exige aceitar a licença da Meta no
+Hugging Face, e isso é do usuário.
+
 ## Obstáculos: o que ler no relatório
 
 | Campo | O que diz | Quando é defeito |

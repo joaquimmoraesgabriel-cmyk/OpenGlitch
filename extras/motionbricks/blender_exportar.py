@@ -74,6 +74,8 @@ def main() -> None:
     parser.add_argument("--esqueleto", help="nome do objeto, se houver mais de um")
     parser.add_argument("--quadros", default="todos", help="\"todos\" ou uma lista 1,2,5")
     parser.add_argument("--plano-base", type=Path, help="plano de onde manter os demais campos")
+    parser.add_argument("--ignorar", default="", help="ossos a deixar de fora, separados por vírgula "
+                        "(\"Root\" num esqueleto vindo do Kimodo)")
     args = parser.parse_args(argv)
 
     armature = find_armature(args.esqueleto)
@@ -85,13 +87,14 @@ def main() -> None:
     old_names = [plan["inicio"].get("nome", "inicio")] + [d.get("nome") for d in plan.get("destinos", [])] \
         if plan.get("inicio") else []
 
+    skip = {name.strip() for name in args.ignorar.split(",") if name.strip()}
     poses, order = {}, []
     for number, frame in enumerate(frames):
         scene.frame_set(frame)
         bpy.context.view_layer.update()
         label = markers.get(frame) or (old_names[number] if number < len(old_names) and old_names[number] else f"pose_{frame}")
         poses[label] = {"posicoes": {bone.name: to_plan(armature.matrix_world @ bone.head)
-                                     for bone in armature.pose.bones}}
+                                     for bone in armature.pose.bones if bone.name not in skip}}
         order.append(label)
     if len(set(order)) != len(order):
         raise SystemExit("há poses com o mesmo nome: confira os marcadores")
