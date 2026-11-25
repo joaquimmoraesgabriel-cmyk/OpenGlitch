@@ -84,10 +84,28 @@ def test_script_escreve_plano_e_relatorio(tmp_path):
     subprocess.run([sys.executable, str(SCRIPTS / "kimodo_para_plano.py"), "--npz", str(npz), "--bvh", str(bvh),
                     "--saida", str(out), "--plano-base", str(base), "--quadros", "0,30,60,90"], check=True)
     plan = json.loads(out.read_text(encoding="utf-8"))
-    assert plan["inicio"] == {"pose": "q000"}
-    assert [d["pose"] for d in plan["destinos"]] == ["q030", "q060", "q090"]
-    assert set(plan["poses"]["q030"]["posicoes"]) == set(NAMES)
+    assert plan["inicio"] == {"quadro_guia": 0}
+    assert [d["quadro_guia"] for d in plan["destinos"]] == [30, 60, 90]
+    assert plan["guia"]["modo"] == "inteiro" and "tokens" not in plan["destinos"][0]
+    guide = np.load(plan["guia"]["arquivo"])
+    assert [str(n) for n in guide["juntas"]] == NAMES and guide["posicoes"].shape == (91, 5, 3)
     assert plan["obstaculos"][0]["nome"] == "muro"
     report = json.loads(out.with_suffix(".rascunho.json").read_text(encoding="utf-8"))
     assert report["quadril_deslocamento_m"][2] == 1.5
     assert report["obstaculos"]["passou"] is False                     # o rascunho atravessa o muro
+
+
+def test_refazer_entrega_o_trecho_ao_motionbricks(tmp_path):
+    world, names, _ = kp.load(*draft(tmp_path))
+    plan = kp.build_plan(world, names, [0, 30, 60, 90], {}, None, tmp_path / "g.npz", "inteiro", {2})
+    assert [d.get("guia") for d in plan["destinos"]] == [None, "nao", None]
+    assert plan["destinos"][1]["tokens"] == 9 and "tokens" not in plan["destinos"][0]
+
+
+def test_encaixe_tira_o_rascunho_de_dentro_do_muro(tmp_path):
+    world, names, parents = kp.load(*draft(tmp_path))
+    world = world[:1].repeat(20, axis=0)                               # parado, com a ponta dos pés dentro do muro
+    boxes = kp.obstaculo.load([{"nome": "muro", "centro": [0, 0.5, 0.2], "tamanho": [1, 1, 0.2]}])
+    moved, report = kp.fit(world, names, parents, boxes, 0.3, 0.03)
+    assert report["penetracao_maxima_cm"]["antes"] > 1 and report["penetracao_maxima_cm"]["depois"] == 0
+    assert kp.obstaculo.check(moved, names, parents, boxes)["passou"]

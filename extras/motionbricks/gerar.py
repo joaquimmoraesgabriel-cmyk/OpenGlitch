@@ -133,6 +133,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from bvh_writer import write_bvh, write_contacts  # noqa: E402
 from poses import Skeleton, avoid, build_poses, pin, pull  # noqa: E402
 import obstaculo  # noqa: E402
+import guia  # noqa: E402
 import tira  # noqa: E402
 
 AVISO_LICENCA = (
@@ -243,8 +244,12 @@ def check_plan(plan: dict) -> None:
     if not plan.get("inicio") or not plan.get("destinos"):
         raise SystemExit("o plano precisa de \"inicio\" e de pelo menos um item em \"destinos\"")
     for where, spec in [("inicio", plan["inicio"])] + [(f"destino {i}", d) for i, d in enumerate(plan["destinos"], 1)]:
-        if ("pose" in spec) == ("clipe" in spec):
-            raise SystemExit(f"{where}: informe \"pose\" ou \"clipe\", um dos dois")
+        if sum(k in spec for k in ("pose", "clipe", "quadro_guia")) != 1:
+            raise SystemExit(f"{where}: informe \"pose\", \"clipe\" ou \"quadro_guia\", um só")
+        if "quadro_guia" in spec and not plan.get("guia"):
+            raise SystemExit(f"{where}: \"quadro_guia\" precisa de \"guia\" no plano")
+        if spec.get("guia", "nao") not in ("inteiro", "pontas", "nao"):
+            raise SystemExit(f"{where}: \"guia\" é \"inteiro\", \"pontas\" ou \"nao\"")
         if "pose" in spec and spec["pose"] != "repouso" and spec["pose"] not in plan.get("poses", {}):
             raise SystemExit(f"{where}: a pose \"{spec['pose']}\" não está em \"poses\"")
 
@@ -319,7 +324,26 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
     check_plan(plan)
     built = build_poses(skeleton, plan.get("poses", {}))
     boxes = obstaculo.load(plan.get("obstaculos"))
+    guide = guide_report = None
+    guide_poses: dict[int, np.ndarray] = {}
+    if plan.get("guia"):
+        settings = plan["guia"] if isinstance(plan["guia"], dict) else {"arquivo": plan["guia"]}
+        guide = guia.load(Path(settings["arquivo"]), skeleton)
+        if settings.get("plantar_pes", True):
+            guide, guide_report = guia.plant(guide, names, boxes)
+        guide_mode = settings.get("modo", "inteiro")
+        for spec in [plan["inicio"], *plan["destinos"]]:
+            if "quadro_guia" in spec and not 0 <= int(spec["quadro_guia"]) < len(guide):
+                raise SystemExit(f"quadro_guia {spec['quadro_guia']} fora do guia, que tem {len(guide)} quadros")
+
+    def guide_pose(frame: int) -> np.ndarray:
+        if frame not in guide_poses:
+            guide_poses[frame] = guia.retarget(skeleton, guide[frame:frame + 1])[0]
+        return guide_poses[frame]
+
     if only_poses:
+        if guide is not None:
+            raise SystemExit("--so-poses não vale para plano com guia: confira o guia com o kimodo_para_plano.py")
         return key_poses(plan, built, boxes, skeleton, names, parents, rest, out_dir, name)
     repo = Path(motionbricks.__file__).resolve().parents[1]
     base = Path(clips_dir) if clips_dir else repo / "assets" / "motions" / "soma"
@@ -356,12 +380,14 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
             if "clipe" in spec:
                 poses = from_clip(spec, ending=as_context)
             else:
-                pose = built[spec["pose"]].array()[None]
+                pose = (guide_pose(int(spec["quadro_guia"])) if "quadro_guia" in spec else built[spec["pose"]].array())[None]
                 # Contexto: quatro poses iguais, o personagem parado. Destino: uma pose, onde ele para,
                 # ou, com "velocidade", quatro poses iguais com a raiz andando (chega em movimento).
                 moving = (not as_context) and spec.get("velocidade") is not None
                 poses = np.repeat(pose, MODEL_POSES_PER_TOKEN, axis=0) if (as_context or moving) else pose
             out = place_window(poses, spec.get("posicao"), float(spec.get("giro", 0.0)))
+            if "quadro_guia" in spec:
+                out = poses                                   # o guia já tem lugar na cena
             if (not as_context) and spec.get("velocidade") is not None and "clipe" not in spec:
                 vx, vz = (float(v) for v in spec["velocidade"])
                 for k in range(len(out)):
@@ -374,8 +400,32 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
 
         context_poses = window(plan["inicio"], as_context=True)
         any_early = False
+        previous_spec = plan["inicio"]
         for number, spec in enumerate(plan["destinos"], 1):
             goal = window(spec, as_context=False)
+            # Trecho do guia que corresponde a este destino, e o que fazer com ele.
+            span = mode = None
+            if guide is not None and "quadro_guia" in spec and "quadro_guia" in previous_spec:
+                first, last = int(previous_spec["quadro_guia"]), int(spec["quadro_guia"])
+                if last - first < MODEL_POSES_PER_TOKEN:
+                    raise SystemExit(f"destino {number}: quadro_guia tem de crescer pelo menos {MODEL_POSES_PER_TOKEN} quadros")
+                span, mode = guide[first:last + 1], spec.get("guia", guide_mode)
+            previous_spec = spec
+            if mode == "inteiro":
+                poses = guia.retarget(skeleton, span)
+                feet = guia.contact_table(span, names, boxes)
+                keep = slice(1, None) if segments else slice(None)
+                segments.append(poses[keep])
+                contacts.append(feet[keep])
+                label = spec.get("nome") or f"destino_{number}"
+                begin, total = total, total + len(poses[keep])
+                marks.append({"nome": label, "inicio": begin, "fim": total - 1})
+                report.append({"nome": label, "de": f"guia {first}-{last}", "guia": "inteiro", "quadros": len(poses),
+                               "quadros_usados": len(poses), "segundos": round(len(poses) / MODEL_SAMPLE_RATE, 2),
+                               "raiz_inicio": [round(float(v), 3) for v in poses[0, 0, :3]],
+                               "raiz_fim": [round(float(v), 3) for v in poses[-1, 0, :3]]})
+                context_poses = poses[-MODEL_POSES_PER_TOKEN:]
+                continue
             context.update_from_poses(to_device(context_poses), stream=engine.stream)
             target.update_from_poses(to_device(goal), stream=engine.stream)
             tokens = spec.get("tokens")
@@ -395,6 +445,11 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
                 used = max(8, frames - early)
                 poses, feet = poses[:used], feet[:used]
                 any_early = True
+            followed = None
+            if mode == "pontas":
+                stretched = guia.resample(span, len(poses))
+                poses, followed = guia.follow(skeleton, poses, stretched)
+                feet = guia.contact_table(stretched, names, boxes)    # os pés agora são os do guia
             pulled = None
             # O apoio é o do fim do trecho anterior, não o do primeiro quadro que o modelo devolve.
             previous = np.asarray(context_poses[-1], dtype=np.float64).reshape(-1, 7)
@@ -420,7 +475,8 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
             goal_world = skeleton.world_positions(goal[0])
             ends = [n for n in ("Hips", "Head", "LeftHand", "RightHand", "LeftFoot", "RightFoot") if n in skeleton.index]
             report.append({
-                "nome": label, "de": spec.get("pose") or spec.get("clipe"), "quadros": frames,
+                "nome": label, "de": spec.get("pose") or spec.get("clipe") or f"guia {spec.get('quadro_guia')}",
+                "guia": mode or "nao", "quadros": frames,
                 "quadros_usados": len(poses), "segundos": round(len(poses) / MODEL_SAMPLE_RATE, 2),
                 "raiz_inicio": [round(float(v), 3) for v in poses[0, 0, :3]],
                 "raiz_fim": [round(float(v), 3) for v in poses[-1, 0, :3]],
@@ -428,6 +484,8 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
                     n: round(float(np.linalg.norm(end_world[skeleton.index[n]] - goal_world[skeleton.index[n]])) * 100, 1)
                     for n in ends},
             })
+            if followed:
+                report[-1].update(followed)
             if pinned:
                 report[-1]["fixado"] = pinned
             if pulled:
@@ -463,6 +521,8 @@ def run(plan: dict, out_dir: Path, clips_dir: Path | None, name: str, list_joint
                                                 tolerance=float(plan.get("folga_obstaculo", 0.03)))
         summary["desvios"] = detours or {}
     summary["fora_de_alcance_cm"] = {n: p.out_of_reach for n, p in built.items() if getattr(p, "out_of_reach", None)}
+    if guide_report is not None:
+        summary["guia_pes_presos"] = guide_report
     if plan.get("conferir_pes", True):
         summary["pes_no_apoio"] = obstaculo.feet_on_support(world, names, boxes or [], rest_foot)
     summary.pop("juntas_com_posicao", None)

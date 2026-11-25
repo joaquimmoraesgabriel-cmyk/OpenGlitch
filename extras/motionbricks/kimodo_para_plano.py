@@ -11,24 +11,27 @@ final entre elas é o MotionBricks (gerar.py), com as conferências e correçõe
 
 O caminho inteiro:
 
-    1. kimodo_gen "texto" --duration 5 --bvh --output rascunho      (ambiente do Kimodo)
-    2. este script, com --plano-base se houver obstáculos: lê o relatório. Se o rascunho não
-       presta (não fez o pedido, pé escorregando, corpo dentro do obstáculo), gere outro.
-    3. blender_cena.py --plano plano.json --bvh rascunho.bvh: olhar o rascunho na cena. Se
-       alguma pose precisar de ajuste, ajuste no Blender e use blender_exportar.py
-       (--ignorar Root) no lugar do plano deste script.
-    4. gerar.py plano.json: o MotionBricks gera entre as poses-chave.
+    1. kimodo_gen "texto" --duration 5 --bvh --num_samples 3 --output rascunho   (ambiente do Kimodo)
+    2. este script, com --plano-base (obstáculos) e --encaixar: lê o relatório. Se o rascunho
+       não fez o pedido, gere outro; não conserte.
+    3. blender_cena.py --plano plano.json --bvh rascunho.bvh: olhar o rascunho na cena.
+    4. gerar.py plano.json: encaixado, com os pés presos e fora dos obstáculos.
 
-O que se usa do .npz do Kimodo é "posed_joints", a posição no mundo de cada junta em cada
-quadro (metros, +Y para cima, +Z para a frente, +X para a esquerda: o mesmo espaço do plano).
-Não se usa rotação: as proporções do esqueleto do Kimodo diferem um pouco das do MotionBricks,
-e o gerar.py remonta as rotações pelas posições (poses.fit_positions). O .bvh só dá os nomes e
-a hierarquia das juntas; a junta "Root" que o Kimodo põe acima do quadril é descartada.
+O plano sai com "guia" (veja guia.py): o rascunho inteiro, quadro a quadro, que a animação
+segue. O que se usa do .npz do Kimodo é "posed_joints", a posição no mundo de cada junta
+(metros, +Y para cima, +Z para a frente, +X para a esquerda: o mesmo espaço do plano). Não se
+usa rotação: as proporções do esqueleto do Kimodo diferem um pouco, e as rotações são
+remontadas pelas posições. O .bvh só dá os nomes e a hierarquia; a junta "Root" que o Kimodo
+põe acima do quadril é descartada.
 
-Quadros-chave: com --quadros auto, um a cada --intervalo segundos, puxado para o instante mais
-parado ali perto (pose de passagem lenta é melhor destino que pose no meio de um balanço). O
-primeiro quadro é o início e o último é sempre destino. Cada destino recebe "tokens" para a
-geração do MotionBricks durar o mesmo que o trecho do rascunho (o modelo aceita de 0,6 a 1,9 s).
+--modo inteiro (padrão): a animação é o rascunho corrigido. --refazer 2,3 entrega esses trechos
+ao MotionBricks, que gera entre a pose do começo e a do fim deles: é para o pedaço ruim do
+rascunho. Os trechos são definidos por --quadros: "auto" põe um corte a cada --intervalo
+segundos, no instante mais parado ali perto; um trecho refeito precisa ter de 18 a 58 quadros.
+
+--encaixar 0.4 procura, até 0,4 m em X e Z, o lugar do rascunho na cena que menos atravessa os
+obstáculos e deixa os pés apoiados no começo e no fim. --apoio Hips:cadeira acrescenta um
+apoio que não é pé (quem termina sentado).
 """
 
 from __future__ import annotations
@@ -104,6 +107,8 @@ def check(world: np.ndarray, names: list[str], parents: list[int], boxes: list, 
                              "minima": round(float(hips[:, 1].min()), 2), "maxima": round(float(hips[:, 1].max()), 2)},
     }
     feet = {}
+    report_feet = obstaculo.feet_on_support(world, names, boxes, float(min(world[0, names.index(f"{s}Foot"), 1] for s in ("Left", "Right"))), tolerance=0.05)
+    out["pes_no_apoio_comeco_e_fim"] = report_feet["passou"]
     for side in ("Left", "Right"):
         toe, ankle = world[:, names.index(f"{side}ToeBase")], world[:, names.index(f"{side}Foot")]
         floor = np.array([obstaculo.support_height(boxes, p) for p in toe])
@@ -121,6 +126,58 @@ def check(world: np.ndarray, names: list[str], parents: list[int], boxes: list, 
     if boxes:
         out["obstaculos"] = obstaculo.check(world, names, parents, boxes, tolerance=tolerance)
     return out
+
+
+def fit(world: np.ndarray, names: list[str], parents: list[int], boxes: list, reach: float, tolerance: float,
+        rests: list[tuple[str, str, int]] = ()) -> tuple[np.ndarray, dict]:
+    """Encaixa o rascunho na cena: procura o deslocamento [x, z], até `reach` metros, em que o
+    corpo menos atravessa os obstáculos e os pés começam e terminam apoiados.
+
+    O modelo imagina o obstáculo do texto ("sobe numa caixa") num lugar que ninguém sabe qual é.
+    Posto a olho, um erro de 10 cm põe o joelho da perna de apoio dentro da face da caixa, e a
+    correção automática abre a perna para o lado. Aqui a posição é medida: para cada
+    deslocamento soma-se, quadro a quadro, a penetração mais funda, com multa se algum pé
+    começa ou termina fora do apoio (no ar, ou com a ponta enterrada).
+
+    `rests` são apoios que o movimento tem de ter além dos pés: (junta, caixa, quadro), por
+    exemplo ("Hips", "cadeira", -1) para quem termina sentado. Sem isso, o lugar que menos
+    atravessa a cadeira é longe dela. A junta tem de ficar a até 15 cm da superfície da caixa.
+    """
+    by_name = {box.name: box for box in boxes}
+    for joint, box, _ in rests:
+        if joint not in names or box not in by_name:
+            raise SystemExit(f"apoio {joint}:{box}: junta ou obstáculo desconhecido")
+    main = [i for i, n in enumerate(names) if not any(h in n for h in obstaculo.HIDE)]
+    bones = [(i, parents[i]) for i in main if parents[i] >= 0]
+    child, parent = np.array([b[0] for b in bones]), np.array([b[1] for b in bones])
+    weights = np.linspace(0.0, 1.0, 4)[:, None]
+    points = world[:, parent, None, :] + (world[:, child, None, :] - world[:, parent, None, :]) * weights
+    rest_ankle = float(min(world[0, names.index(f"{s}Foot"), 1] for s in ("Left", "Right")))
+
+    def score(shift: np.ndarray) -> tuple[float, float, bool]:
+        moved = points + shift
+        depth = np.max([box.depth(moved) for box in boxes], axis=0).max(axis=(1, 2))       # por quadro
+        feet = obstaculo.feet_on_support(world + shift, names, boxes, rest_ankle, tolerance=0.05)["passou"]
+        far = sum(max(0.0, abs(float(by_name[box].distance(world[frame, names.index(joint)] + shift))) - 0.15)
+                  for joint, box, frame in rests)
+        return float(depth.sum()) + (0.0 if feet else 1000.0) + 1000.0 * far, float(depth.max()), feet and far == 0.0
+
+    best = None
+    for step, span, centre in ((0.05, reach, np.zeros(3)), (0.01, 0.05, None)):
+        centre = best[1] if centre is None else centre
+        for dx in np.arange(-span, span + 1e-9, step):
+            for dz in np.arange(-span, span + 1e-9, step):
+                shift = centre + np.array([dx, 0.0, dz])
+                total, deepest, feet = score(shift)
+                # empate: o menor deslocamento
+                key = (round(total, 4), float(np.linalg.norm(shift)))
+                if best is None or key < best[0]:
+                    best = (key, shift, deepest, feet)
+    before = score(np.zeros(3))
+    report = {"deslocamento_m": [round(float(best[1][0]), 2), round(float(best[1][2]), 2)],
+              "penetracao_maxima_cm": {"antes": round(before[1] * 100, 1), "depois": round(best[2] * 100, 1)},
+              "apoios_certos": {"antes": before[2], "depois": best[3]}}
+    return world + best[1], report
 
 
 def pick_frames(world: np.ndarray, names: list[str], interval: float, window: float = 0.25) -> list[int]:
@@ -147,14 +204,23 @@ def tokens_for(frames: int) -> int:
     return int(min(16, max(6, round((frames + 6) / 4))))
 
 
-def build_plan(world: np.ndarray, names: list[str], frames: list[int], base: dict, anticipate: int | None) -> dict:
+def build_plan(world: np.ndarray, names: list[str], frames: list[int], base: dict, anticipate: int | None,
+               guide_file: Path, mode: str, free: set[int]) -> dict:
+    """Plano com guia: cada destino aponta um quadro do rascunho, e o trecho até ele segue o
+    rascunho (`mode`) ou, se estiver em `free`, é refeito pelo MotionBricks entre as duas poses."""
+    import guia
+    guia.save(guide_file, world, names)
     plan = dict(base)
-    labels = [f"q{f:03d}" for f in frames]
-    plan["poses"] = {label: {"posicoes": {n: [round(float(v), 4) for v in world[f, i]] for i, n in enumerate(names)}}
-                     for label, f in zip(labels, frames)}
-    plan["inicio"] = {"pose": labels[0]}
-    plan["destinos"] = [{"nome": label, "pose": label, "tokens": tokens_for(f - previous)}
-                        for label, f, previous in zip(labels[1:], frames[1:], frames[:-1])]
+    plan["guia"] = {"arquivo": str(guide_file), "modo": mode}
+    plan["inicio"] = {"quadro_guia": frames[0]}
+    plan["destinos"] = []
+    for number, (f, previous) in enumerate(zip(frames[1:], frames[:-1]), 1):
+        spec = {"nome": f"q{f:03d}", "quadro_guia": f}
+        if number in free:
+            spec["guia"] = "nao"
+        if number in free or mode == "pontas":
+            spec["tokens"] = tokens_for(f - previous)
+        plan["destinos"].append(spec)
     if anticipate is not None:
         plan["antecipar"] = anticipate
     return plan
@@ -169,23 +235,44 @@ def main() -> None:
     parser.add_argument("--intervalo", type=float, default=1.0, help="segundos entre poses-chave no modo auto")
     parser.add_argument("--plano-base", type=Path, help="plano de onde vêm os obstáculos e os demais campos")
     parser.add_argument("--antecipar", type=int, help="grava \"antecipar\" no plano (poses viram pontos de passagem)")
+    parser.add_argument("--modo", choices=("inteiro", "pontas"), default="inteiro",
+                        help="inteiro: a animação é o rascunho, corrigido; pontas: o MotionBricks gera e "
+                             "quadril, mãos e pés seguem o rascunho")
+    parser.add_argument("--refazer", default="", help="trechos (1 = até o primeiro destino) que o MotionBricks "
+                                                      "refaz sozinho, por exemplo 2,3: o pedaço ruim do rascunho")
+    parser.add_argument("--encaixar", type=float, default=0.0,
+                        help="procura, até tantos metros, o lugar do rascunho na cena que menos atravessa os "
+                             "obstáculos e deixa os pés apoiados (0 = não mexe)")
+    parser.add_argument("--apoio", default="", help="com --encaixar: apoios além dos pés, JUNTA:caixa[:quadro], "
+                                                    "por exemplo Hips:cadeira para quem termina sentado")
     parser.add_argument("--folga", type=float, default=0.03, help="penetração aceita, em metros")
     args = parser.parse_args()
 
     world, names, parents = load(args.npz, args.bvh)
     base = json.loads(args.plano_base.read_text(encoding="utf-8")) if args.plano_base else {}
     boxes = obstaculo.load(base.get("obstaculos"))
+    fitted = None
+    if args.encaixar > 0 and boxes:
+        rests = []
+        for item in filter(None, args.apoio.split(",")):
+            part = item.split(":")
+            rests.append((part[0], part[1], int(part[2]) if len(part) > 2 else -1))
+        world, fitted = fit(world, names, parents, boxes, args.encaixar, args.folga, rests)
     report = check(world, names, parents, boxes, args.folga)
+    if fitted:
+        report["encaixe"] = fitted
 
     frames = pick_frames(world, names, args.intervalo) if args.quadros == "auto" else [int(v) for v in args.quadros.split(",")]
     if len(frames) < 2 or frames != sorted(set(frames)) or frames[-1] >= len(world):
         raise SystemExit(f"quadros inválidos: {frames} (a animação tem {len(world)})")
     gaps = [b - a for a, b in zip(frames[:-1], frames[1:])]
     report["quadros_chave"] = frames
-    report["trechos_fora_do_alcance"] = [[a, b] for a, b in zip(frames[:-1], frames[1:]) if not 18 <= b - a <= 58]
-    plan = build_plan(world, names, frames, base, args.antecipar)
+    free = {int(v) for v in args.refazer.split(",") if v.strip()}
+    report["trechos_fora_do_alcance"] = [[a, b] for n, (a, b) in enumerate(zip(frames[:-1], frames[1:]), 1)
+                                         if (n in free or args.modo == "pontas") and not 18 <= b - a <= 58]
+    plan = build_plan(world, names, frames, base, args.antecipar, args.saida.with_suffix(".guia.npz"), args.modo, free)
     args.saida.parent.mkdir(parents=True, exist_ok=True)
-    args.saida.write_text(json.dumps(plan, ensure_ascii=False) + "\n", encoding="utf-8")
+    args.saida.write_text(json.dumps(plan, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     report["plano"] = str(args.saida)
     report["trechos_quadros"] = gaps
     args.saida.with_suffix(".rascunho.json").write_text(json.dumps(report, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")

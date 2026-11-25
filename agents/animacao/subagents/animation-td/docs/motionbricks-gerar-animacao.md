@@ -257,41 +257,91 @@ de avaliação: servem para ver o teto de qualidade, não para um jogo.
 ## Rascunho pelo Kimodo: texto, depois Blender, depois MotionBricks
 
 O Kimodo (NVIDIA, código Apache-2.0, modelos sob NVIDIA Open Model License) gera movimento a
-partir de texto nas mesmas 77 juntas SOMA. Ele entra como **rascunho**: dá as poses-chave que
-antes eram montadas à mão, e o MotionBricks gera a animação final entre elas. A ordem é
-Kimodo, conferência (números e Blender), e só então MotionBricks.
+partir de texto nas mesmas 77 juntas SOMA. Ele dá o **rascunho**; a animação final sai do
+`gerar.py`, que a encaixa na cena, prende os pés, tira o corpo dos obstáculos e confere. A
+ordem é Kimodo, conferência (números e Blender), e só então `gerar.py`.
 
-Testado uma vez, numa máquina (RTX 4050 de 6 GB, 15,7 GB de RAM), com "anda, sobe num bloco
-baixo e fica parado em cima": três amostras, as três subiram 0,6 m.
+Testado numa máquina (RTX 4050 de 6 GB, 15,7 GB de RAM) com quatro rascunhos: subir num bloco
+de 0,6 m, andar, virar e sentar numa caixa de 0,5 m, passar abaixado sob uma barra a 1,2 m, e
+andar em linha reta. Só esqueleto: não foi visto com malha nem na Unity.
 
 1. **Gere o rascunho**, no ambiente do Kimodo, com `TEXT_ENCODER_DEVICE=cpu`:
    `kimodo_gen "texto em inglês" --duration 5 --bvh --num_samples 3 --output rascunho`.
-   Peça mais de uma amostra: custam uns 10 s cada, e nem toda amostra faz o pedido (num
-   teste, "pula duas vezes e senta" sentou e não pulou).
-2. **Confira o rascunho**: `kimodo_para_plano.py --npz x.npz --bvh x.bvh --saida plano.json`,
-   com `--plano-base` trazendo os `"obstaculos"`. O relatório (`plano.rascunho.json`) diz
-   quanto o quadril andou e subiu, pés abaixo do apoio, pés escorregando e a penetração em
-   cada obstáculo. O Kimodo também não enxerga a cena: no teste, o rascunho entrava 11 cm no
-   bloco durante o passo. Se o rascunho não fez o pedido, gere outro; não conserte.
+   Peça mais de uma amostra: custam uns 10 s cada, e nem toda amostra faz o pedido. Em dois
+   testes o texto foi ignorado em parte: "pula duas vezes e senta" sentou e não pulou; "passa
+   por cima de um obstáculo baixo" andou sem levantar o pé. Rascunho assim se descarta.
+2. **Confira e encaixe**: `kimodo_para_plano.py --npz x.npz --bvh x.bvh --saida plano.json
+   --plano-base base.json --encaixar 0.4`, com os `"obstaculos"` em `base.json`. O relatório
+   (`plano.rascunho.json`) diz quanto o quadril andou e subiu, pés abaixo do apoio, pés
+   escorregando, a penetração em cada obstáculo e, em `"encaixe"`, para onde o rascunho foi
+   levado. Quem termina apoiado em outra coisa que não os pés declara: `--apoio Hips:cadeira`.
 3. **Veja no Blender** com `blender_cena.py --plano plano.json --bvh x.bvh`. O BVH do Kimodo
    traz uma junta `Root` acima do quadril, que aparece como uma haste em pé na origem: ignore.
    Se ajustar poses lá, exporte com `blender_exportar.py --ignorar Root`.
-4. **Escolha os quadros-chave** (`--quadros 0,22,44,68,100` ou `auto`). Cada trecho precisa
-   ter de 18 a 58 quadros, que é o que o MotionBricks gera de uma vez. Corte o fim parado.
-5. **Gere com o `gerar.py`** e siga o ciclo de obstáculos normal.
+4. **Gere com o `gerar.py plano.json`** e confira o resultado no Blender, como em qualquer
+   animação de obstáculo.
 
-O que o teste mostrou: a animação final passou nas conferências (0,0 cm de penetração, pés no
-apoio no começo e no fim, 3,4 s), mas o desvio automático precisou mexer até 27 cm nos pés e
-girar o joelho 80 graus no trecho do passo, e ali a perna abre para o lado e os braços
-levantam. O rascunho do Kimodo, sozinho, tem o passo mais natural que o resultado. Não foi
-testado: prender os pés com `levar`/`fixar` nesse fluxo, outros movimentos, malha, Unity.
+### O guia: a animação segue o rascunho
 
-Custo na máquina de teste: cada comando `kimodo_gen` leva cerca de 2 min e meio, quase tudo
-carregando o codificador de texto (Llama-3, 16 GB) numa RAM em que ele não cabe; a geração em
-si leva 10 s e usa 2,4 GB de placa de vídeo. Deixar o codificador ligado como serviço
-(`kimodo_textencoder`) foi pior, 288 s, porque o modelo vai para o arquivo de paginação. Com
-32 GB de RAM isso deve mudar; não foi medido. O Llama-3 exige aceitar a licença da Meta no
-Hugging Face, e isso é do usuário.
+O plano que sai do passo 2 tem `"guia"`: o rascunho inteiro, quadro a quadro (posição de cada
+junta), num `.npz` ao lado do plano. Cada destino aponta um `"quadro_guia"` em vez de uma pose.
+Serve para qualquer movimento de referência com as juntas SOMA, não só o Kimodo (`guia.py`).
+
+Por que existe: com poses soltas, o caminho entre elas é o MotionBricks que inventa, e ele não
+vê a cena. No teste do bloco isso dava o pé apoiado escorregando 35 cm/s e, depois do desvio
+automático, a perna aberta para o lado. O rascunho já tem o caminho.
+
+O que fazer com cada trecho (`"modo"` do guia, ou `"guia"` em cada destino):
+
+| Valor | O trecho é | Use quando |
+|---|---|---|
+| `"inteiro"` (padrão) | o rascunho, passado para o esqueleto; o MotionBricks não gera nada ali | o rascunho está bom |
+| `"nao"` | gerado pelo MotionBricks entre a pose do começo e a do fim do trecho | aquele pedaço do rascunho saiu ruim (`--refazer 2,3`); o trecho precisa ter de 18 a 58 quadros |
+| `"pontas"` | gerado pelo MotionBricks, com quadril, mãos e pés levados ao rascunho por IK | quer o tronco do MotionBricks; no teste do bloco não ganhou do `"inteiro"` em nada |
+
+Três correções valem para todo plano com guia, seja qual for o movimento:
+
+- **Encaixe na cena** (`--encaixar`). O modelo imagina a caixa do texto num lugar que ninguém
+  sabe. Posto a olho, o bloco ficou 45 cm fora do lugar: o joelho da perna de apoio entrava na
+  face da frente, e era isso que abria a perna. O encaixe procura o deslocamento que menos
+  atravessa e deixa os apoios certos. No bloco: penetração de 11,0 para 4,1 cm, e o desvio
+  automático de 27 cm com 80 graus de joelho para menos de 3 cm sem giro.
+- **Pé apoiado preso** (`guia.plant`, sempre ligado; `"plantar_pes": false` desliga). Pé com a
+  ponta baixa e quase parada fica parado no mundo; o calcanhar ainda levanta. O relatório traz
+  `"guia_pes_presos"` com os apoios achados e quanto cada pé escorregava.
+- **Pés e mãos exatos.** As proporções do esqueleto do Kimodo diferem em 1 a 3 cm; depois de
+  remontar as rotações, mãos e pés vão por IK aos pontos do rascunho.
+
+Medido, MotionBricks entre poses soltas contra guia inteiro (mesmo rascunho, mesma cena):
+
+| Animação | Deslize do pé apoiado, esq./dir. (cm/s) | Pé afunda (cm) |
+|---|---|---|
+| Subir no bloco | 34,1 / 11,1 para 3,2 / 2,4 | 1,2 para 0,4 |
+| Sentar | 9,7 / 15,8 para 5,6 / 3,9 | 2,8 para 0,8 |
+| Passar abaixado | 10,0 / 15,7 para 7,3 / 6,4 | 3,2 para 1,7 |
+| Andar | 9,0 / 15,9 para 10,1 / 9,7 | 4,0 para 0,8 |
+
+Limites: no andar, o deslize quase não mudou num dos pés. O guia inteiro herda o que o rascunho
+tem de errado em tronco, braços e ritmo; só pés, apoios e obstáculos são corrigidos. A animação
+começa e termina onde o rascunho começa e termina (no andar, no meio de um passo): para emendar
+com outra animação, acrescente um destino com `"pose"` no fim, gerado pelo MotionBricks (não
+testado). O encaixe só desloca em X e Z; não gira nem muda a altura do obstáculo.
+
+### Desvio automático mais contido
+
+O desvio (`poses.avoid`) aceitava qualquer giro de joelho para tirar um milímetro de dentro da
+caixa. Agora penetração de até 1,5 cm não conta (a conferência aceita 3 cm) e o giro do joelho
+custa cada vez mais caro: 20 graus é normal, 80 só quando subir o pé não resolve. As oito
+animações de `planos/obstaculos/` foram geradas de novo com essa regra e todas passam, com no
+máximo 1,4 cm de penetração.
+
+### Custo do Kimodo na máquina de teste
+
+Cada comando `kimodo_gen` leva cerca de 2 min e meio, quase tudo carregando o codificador de
+texto (Llama-3, 16 GB) numa RAM em que ele não cabe; a geração em si leva 10 s por amostra e usa
+2,4 GB de placa de vídeo. Deixar o codificador ligado como serviço (`kimodo_textencoder`) foi
+pior, 288 s, porque o modelo vai para o arquivo de paginação. Com 32 GB de RAM isso deve mudar;
+não foi medido. O Llama-3 exige aceitar a licença da Meta no Hugging Face, e isso é do usuário.
 
 ## Obstáculos: o que ler no relatório
 

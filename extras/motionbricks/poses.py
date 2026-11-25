@@ -301,7 +301,8 @@ def _leg(skeleton: Skeleton, world_rot: np.ndarray, world_pos: np.ndarray, end: 
     return world_pos[r] + axis * along + side * height, world_pos[r] + axis * distance, side
 
 
-def avoid(skeleton: Skeleton, frames: np.ndarray, boxes: list, margin: float = 0.01, fps: float = 30.0) -> tuple[np.ndarray, dict]:
+def avoid(skeleton: Skeleton, frames: np.ndarray, boxes: list, margin: float = 0.01, fps: float = 30.0,
+          slack: float = 0.015) -> tuple[np.ndarray, dict]:
     """Tira braços e pernas de dentro dos obstáculos, depois de gerar.
 
     O modelo não enxerga a cena. As poses e o `fixar` resolvem o grosso; o que sobra é a ponta do
@@ -420,7 +421,12 @@ def avoid(skeleton: Skeleton, frames: np.ndarray, boxes: list, margin: float = 0
                 for lift in ((0.0,) if planted else lifts):
                     for angle in swivels:
                         knee, ankle, _ = _leg(skeleton, world_rot, world_pos, end, world_pos[e] + out + up * lift, angle)
-                        cost = 100.0 * depth(world_pos[r], knee, ankle, offsets) + 2.0 * lift + 0.15 * angle
+                        # Penetração abaixo de `slack` não paga: o esqueleto não tem espessura e a
+                        # conferência aceita 3 cm. O giro do joelho custa cada vez mais caro: 20 graus
+                        # é um gesto normal, 80 é a perna aberta para o lado, e só vale quando subir o
+                        # pé não resolve (pé apoiado, canela contra a quina).
+                        left = max(depth(world_pos[r], knee, ankle, offsets) - slack, 0.0)
+                        cost = 100.0 * left + 2.0 * lift + 0.15 * angle + 0.5 * angle * angle
                         if best is None or cost < best[0]:
                             best = (cost, lift, angle)
                 push[f] = out + up * best[1]
