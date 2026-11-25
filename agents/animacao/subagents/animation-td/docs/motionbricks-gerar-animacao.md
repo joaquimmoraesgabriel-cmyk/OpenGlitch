@@ -281,7 +281,7 @@ andar em linha reta. Só esqueleto: não foi visto com malha nem na Unity.
 4. **Gere com o `gerar.py plano.json`** e confira o resultado no Blender, como em qualquer
    animação de obstáculo.
 
-### O guia: a animação segue o rascunho
+## Kimodo: o guia, a animação segue o rascunho
 
 O plano que sai do passo 2 tem `"guia"`: o rascunho inteiro, quadro a quadro (posição de cada
 junta), num `.npz` ao lado do plano. Cada destino aponta um `"quadro_guia"` em vez de uma pose.
@@ -327,7 +327,7 @@ começa e termina onde o rascunho começa e termina (no andar, no meio de um pas
 com outra animação, acrescente um destino com `"pose"` no fim, gerado pelo MotionBricks (não
 testado). O encaixe só desloca em X e Z; não gira nem muda a altura do obstáculo.
 
-### Desvio automático mais contido
+## Kimodo: desvio automático mais contido
 
 O desvio (`poses.avoid`) aceitava qualquer giro de joelho para tirar um milímetro de dentro da
 caixa. Agora penetração de até 1,5 cm não conta (a conferência aceita 3 cm) e o giro do joelho
@@ -335,7 +335,7 @@ custa cada vez mais caro: 20 graus é normal, 80 só quando subir o pé não res
 animações de `planos/obstaculos/` foram geradas de novo com essa regra e todas passam, com no
 máximo 1,4 cm de penetração.
 
-### Custo do Kimodo na máquina de teste
+## Kimodo: custo na máquina de teste
 
 Cada comando `kimodo_gen` leva cerca de 2 min e meio, quase tudo carregando o codificador de
 texto (Llama-3, 16 GB) numa RAM em que ele não cabe; a geração em si leva 10 s por amostra e usa
